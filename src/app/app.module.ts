@@ -3,18 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WaiterComponent } from './waiter/waiter.component';
+import { WaiterModule } from './waiter/waiter.module';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WaiterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, WaiterModule,SharedModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
