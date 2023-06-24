@@ -10,6 +10,8 @@ export class GetDataService implements OnInit {
   }
 
   displayProduct() {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get(
+      'https://forkify-api.herokuapp.com/api/search?q=salad'
+    );
   }
 }

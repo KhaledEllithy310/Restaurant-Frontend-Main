@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { GetDataService } from 'src/app/services/get-data.service';
 
 @Component({
   selector: 'app-waiter-product-item',
@@ -7,4 +8,25 @@ import { Component, Input } from '@angular/core';
 })
 export class WaiterProductItemComponent {
   @Input() item: any = {};
+  // productSelected: any = {};
+  products!: any;
+  @Output() productSelected = new EventEmitter<any>();
+
+  constructor(private displayProductService: GetDataService) {}
+  ngOnInit(): void {
+    // console.log('Product:', this.item);
+    // this.displayProduct();
+  }
+
+  // displayProduct() {
+  //   this.displayProductService
+  //     .displayProduct()
+  //     .subscribe((res) => (this.products = res));
+  // }
+
+
+  getProductDetail(item: any) {
+    this.productSelected.emit(item);
+    console.log(item);
+  }
 }

@@ -1,0 +1,67 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          Product Detail No {{ productSelected?.recipe_id }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div
+          class="card item_product"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          <img
+            src="{{ productSelected.image_url }}"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-publisher item_product_publisher">
+              {{ productSelected.publisher }}
+            </h5>
+            <h5 class="card-title item_product_title">
+              {{ productSelected.title | textMuted }}
+            </h5>
+            <p class="card-text">
+              {{ productSelected.social_rank }}
+            </p>
+            <a href="#" class="btn btn-primary">add to cart</a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal-body">
+  <h5 class="modal-title">ID:{{ productSelected.id }}</h5>
+  <p>title:{{ productSelected.title }}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="onClose()">
+    Close
+  </button>
+</div> -->

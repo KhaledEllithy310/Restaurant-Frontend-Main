@@ -1,9 +1,16 @@
-<div class="card" style="width: 18rem">
-  <!-- <img src=".." class="card-img-top" alt="..." /> -->
+<div
+  class="card item_product my-2"
+  style="width: 18rem"
+  data-bs-toggle="modal"
+  data-bs-target="#staticBackdrop"
+  (click)="getProductDetail(item)"
+>
+  <img src="{{ item.image_url }}" class="card-img-top" alt="..." />
   <div class="card-body">
-    <h5 class="card-title">{{ item.title }}</h5>
+    <h5 class="card-title item_product_publisher">{{ item.publisher }}</h5>
+    <h5 class="card-title item_product_title">{{ item.title | textMuted:20 }}</h5>
     <p class="card-text">
-      {{ item.body }}
+      {{ item.social_rank }}
     </p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>

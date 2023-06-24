@@ -6,6 +6,10 @@ import { WaiterProductDetailComponent } from './waiter-product-list/waiter-produ
 import { RouterModule, Routes } from '@angular/router';
 import { GetDataService } from '../services/get-data.service';
 import { WaiterComponent } from './waiter.component';
+import { WaiterCartComponent } from './waiter-cart/waiter-cart.component';
+import { ModalComponent } from './modal/modal.component';
+import { TextMutedPipe } from '../pipes/text-muted.pipe';
+// import { TextMutedPipe } from './pipes/text-muted.pipe';
 
 const routes: Routes = [
   {
@@ -25,9 +29,14 @@ const routes: Routes = [
   declarations: [
     WaiterProductListComponent,
     WaiterProductItemComponent,
-    WaiterProductDetailComponent,WaiterComponent
+    WaiterProductDetailComponent,
+    WaiterComponent,
+    WaiterCartComponent,
+    ModalComponent,
+    TextMutedPipe,
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
   providers: [GetDataService],
+  exports: [ModalComponent],
 })
 export class WaiterModule {}

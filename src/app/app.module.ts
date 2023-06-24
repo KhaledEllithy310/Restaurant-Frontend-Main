@@ -7,9 +7,10 @@ import { WaiterModule } from './waiter/waiter.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TextMutedPipe } from './pipes/text-muted.pipe';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent ],
   imports: [BrowserModule, AppRoutingModule, WaiterModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
