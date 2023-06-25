@@ -27,6 +27,6 @@ export class WaiterProductItemComponent {
 
   getProductDetail(item: any) {
     this.productSelected.emit(item);
-    console.log(item);
+    // console.log(item);
   }
 }

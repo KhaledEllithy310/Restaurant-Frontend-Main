@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 import { GetDataService } from 'src/app/services/get-data.service';
 // import { Product } from '../../interfaces';
 @Component({
@@ -10,7 +11,10 @@ export class WaiterProductListComponent {
   products!: Array<any>;
   selectedProduct: any = null;
 
-  constructor(private displayProductService: GetDataService) {}
+  constructor(
+    private displayProductService: GetDataService,
+    private cartservice: CartService
+  ) {}
   ngOnInit() {
     this.displayProduct();
   }
@@ -19,15 +23,20 @@ export class WaiterProductListComponent {
     this.displayProductService
       .displayProduct()
       .subscribe((res: any) => (this.products = res.recipes));
-      // .subscribe((res: any) => console.log(res.recipes));
+    // .subscribe((res: any) => console.log(res.recipes));
   }
 
   onProductSelected(product: any) {
     this.selectedProduct = product;
-    console.log(this.selectedProduct);
+    // console.log(this.selectedProduct);
   }
 
   resetSelectedProduct() {
     this.selectedProduct = null;
+  }
+
+  addToCart(event: any) {
+    this.cartservice.addToCart(event);
+
   }
 }

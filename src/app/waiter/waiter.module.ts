@@ -5,6 +5,7 @@ import { WaiterProductItemComponent } from './waiter-product-list/waiter-product
 import { WaiterProductDetailComponent } from './waiter-product-list/waiter-product-item/waiter-product-detail/waiter-product-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { GetDataService } from '../services/get-data.service';
+import { CartService } from '../services/cart.service';
 import { WaiterComponent } from './waiter.component';
 import { WaiterCartComponent } from './waiter-cart/waiter-cart.component';
 import { ModalComponent } from './modal/modal.component';
@@ -36,7 +37,7 @@ const routes: Routes = [
     TextMutedPipe,
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
-  providers: [GetDataService],
+  providers: [GetDataService, CartService],
   exports: [ModalComponent],
 })
 export class WaiterModule {}

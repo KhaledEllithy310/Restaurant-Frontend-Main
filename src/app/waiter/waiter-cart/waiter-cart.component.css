@@ -1,4 +1,34 @@
 .cart {
-  background-color: blueviolet;
-  height: 100%;
+  background-color: #eee;
+  /* height: 100%; */
+  /* height: 100vh; */
+  /* overflow-y: auto; */
+  /* display: inline-flex; */
+  /* width: 30%; */
+}
+
+.cart img {
+  height: 100px;
+}
+
+.card_product_container {
+  /* background-color: cadetblue; */
+  /* padding: 20px; */
+}
+
+.card_product {
+  margin-top: 30px;
+  background-color: rgb(230, 241, 122);
+}
+
+.cart_btn {
+  position: fixed;
+  /* position: absolute; */
+  right: 0;
+  top: 300px;
+  z-index: 10;
+}
+
+.offcanvas.offcanvas-end {
+  top: 56px;
 }
