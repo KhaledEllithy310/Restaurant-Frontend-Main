@@ -8,6 +8,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TextMutedPipe } from './pipes/text-muted.pipe';
+import { RegisterModule } from './register/register.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +18,7 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
     AppRoutingModule,
     WaiterModule,
     HttpClientModule,
-    SharedModule,
+    SharedModule,RegisterModule, NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

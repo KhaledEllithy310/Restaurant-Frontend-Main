@@ -18,7 +18,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/Waiter'">Waiter</a>
+          <a class="nav-link" [routerLink]="'/register'">register</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -45,6 +45,31 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            register
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="'/register/login'"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="'/register/signup'"
+                >Sign Up</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
@@ -57,7 +82,7 @@
           aria-label="Search"
         />
         <button class="btn btn-outline-success" type="submit">Search</button>
-        <button
+        <!-- <button
           class="btn btn-primary cart_btn"
           type="button"
           data-bs-toggle="offcanvas"
@@ -66,7 +91,7 @@
         >
           <i class="fa-solid fa-cart-shopping"></i>
           cart
-        </button>
+        </button> -->
       </form>
     </div>
   </div>

@@ -13,7 +13,7 @@
     </div>
   </div>
 </div> -->
-<button
+<!-- <button
   class="btn btn-primary cart_btn"
   id="cart_btn"
   type="button"
@@ -64,4 +64,83 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<button
+  class="btn btn-primary cart_btn"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#offcanvasWithBothOptions"
+  aria-controls="offcanvasWithBothOptions"
+>
+  <i class="fa-solid fa-cart-shopping"></i>
+</button>
+
+<div
+  class="offcanvas offcanvas-start"
+  data-bs-scroll="true"
+  tabindex="-1"
+  id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+      Backdrop with scrolling
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="cart text-center">
+      <h1 class="pt-3">Cart</h1>
+      <div class="container">
+        <div class="row">
+          <div class="card_product_container">
+            <div
+              class="col-12 card_product"
+              *ngFor="let product of CartProducts"
+            >
+              <img
+                src="{{ product.image_url }}"
+                class="card-img-top"
+                alt="..."
+              />
+              <h5 class="card-publisher item_product_publisher">
+                {{ product.publisher }}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- <p>You can pass an existing component as content of the offcanvas panel.</p>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open()">
+  Launch demo offcanvas
+</button>
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title">Offcanvas</h5>
+  <button
+    type="button"
+    class="btn-close text-reset"
+    aria-label="Close"
+    (click)="activeOffcanvas.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="offcanvas-body">
+  <div>Hello</div>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeOffcanvas.close('Close click')"
+  >
+    Close
+  </button>
+</div> -->

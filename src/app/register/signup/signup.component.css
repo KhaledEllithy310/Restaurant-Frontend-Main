@@ -1,0 +1,35 @@
+.gradient-custom-3 {
+    background: linear-gradient(to right, rgb(34 47 39 / 50%), rgb(96 100 101 / 50%));
+    /* fallback for old browsers */
+    /* background: #84fab0; */
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    /* background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5)); */
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5)) */
+    }
+    .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
+.register-btn {
+    border: 0;
+    width: 100%;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 9px -4px #14a44d;
+}
+.btn-div:hover {
+    box-shadow: 0 8px 9px -4px rgba(20,164,77,0.3),0 4px 18px 0 rgba(20,164,77,0.2);
+    transition: 0.5s;
+}
+.card {
+    box-shadow: 0 0 10px 0px #87f1c1bf;
+    background: rgb(255 255 255 / 80%);
+}

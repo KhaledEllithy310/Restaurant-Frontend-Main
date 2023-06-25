@@ -26,19 +26,9 @@
   /* position: absolute; */
   right: 0;
   top: 300px;
-  z-index: 10;
+  z-index: 1050;
 }
 
-.offcanvas.offcanvas-end {
+/* .offcanvas.offcanvas-end {
   top: 56px;
-}
-/*
-.offcanvas-backdrop {
-  position: static !important;
-  top: 0;
-  left: 0;
-  z-index: 1040;
-  width: 100vw;
-  height: 100vh;
-  background-color: red !important;
 } */
