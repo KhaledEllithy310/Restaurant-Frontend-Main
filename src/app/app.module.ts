@@ -12,7 +12,7 @@ import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,
