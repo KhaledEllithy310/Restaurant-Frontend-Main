@@ -1,26 +1,42 @@
 import { Component, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { NgbActiveOffcanvas, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  NgbActiveOffcanvas,
+  NgbOffcanvas,
+  NgbOffcanvasRef,
+} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-waiter-cart',
+  // standalone: true,
   templateUrl: './waiter-cart.component.html',
   styleUrls: ['./waiter-cart.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-// export class NgbdOffcanvasContent {
-//   constructor(public activeOffcanvas: NgbActiveOffcanvas) {}
-// }
 export class WaiterCartComponent {
   CartProducts!: any[];
   @Input() product: any;
+
   constructor(
     private cartservice: CartService,
     private offcanvasService: NgbOffcanvas
   ) {}
+  //*Start offcanvas ng-bootstrap*//
+  isOffcanvasOpen = false;
+  offcanvasRef!: NgbOffcanvasRef;
 
-  // open() {
-  //   const offcanvasRef = this.offcanvasService.open(NgbdOffcanvasContent);
-  //   offcanvasRef.componentInstance.name = 'World';
-  // }
+  openEnd(content: TemplateRef<any>) {
+    if (!this.isOffcanvasOpen) {
+      this.offcanvasRef = this.offcanvasService.open(content, {
+        position: 'end',
+      });
+    } else {
+      this.offcanvasRef.close();
+    }
+    this.isOffcanvasOpen = !this.isOffcanvasOpen;
+  }
+  //*End offcanvas ng-bootstrap*//
+
   ngOnInit(): void {
     //GET PRODUCT THAT STORED IN CART
     this.cartservice

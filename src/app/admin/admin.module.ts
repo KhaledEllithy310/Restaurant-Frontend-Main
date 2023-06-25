@@ -3,15 +3,30 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-const routes: Routes = [{
-  path: 'dashboard',
-  component: DashboardComponent
-}];
+const routes: Routes = [
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'Categories',
+        component: CategoriesComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
-  declarations: [AdminComponent, DashboardComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  declarations: [AdminComponent, DashboardComponent, CategoriesComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [AdminComponent],
 })
 export class AdminModule {}

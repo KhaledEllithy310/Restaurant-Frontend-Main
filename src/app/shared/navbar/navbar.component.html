@@ -15,7 +15,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="'/register'"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="'/admin/dashboard'"
+            >dashboard</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/register'">register</a>
@@ -83,14 +96,10 @@
         />
         <button class="btn btn-outline-success" type="submit">Search</button>
         <!-- <button
-          class="btn btn-primary cart_btn"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
+          class="btn btn-lg btn-outline-primary mb-2 me-2 cart_btn"
+          (click)="openEnd(content)"
         >
           <i class="fa-solid fa-cart-shopping"></i>
-          cart
         </button> -->
       </form>
     </div>
