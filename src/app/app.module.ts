@@ -10,8 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { TextMutedPipe } from './pipes/text-muted.pipe';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent ],
-  imports: [BrowserModule, AppRoutingModule, WaiterModule, HttpClientModule],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    WaiterModule,
+    HttpClientModule,
+    SharedModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

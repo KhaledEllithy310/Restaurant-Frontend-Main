@@ -18,7 +18,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/Waiter">Waiter</a>
+          <a class="nav-link" [routerLink]="'/Waiter'">Waiter</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -32,12 +32,12 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" routerLink="/Waiter/ProductDetail"
+              <a class="dropdown-item" [routerLink]="'/Waiter/ProductDetail'"
                 >ProductDetail</a
               >
             </li>
             <li>
-              <a class="dropdown-item" routerLink="/Waiter/ProductList"
+              <a class="dropdown-item" [routerLink]="'/Waiter/ProductList'"
                 >ProductList</a
               >
             </li>

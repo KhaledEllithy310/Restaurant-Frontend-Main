@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GetDataService } from 'src/app/services/get-data.service';
+import { GetDataService } from './../../../services/get-data.service';
 
 @Component({
   selector: 'app-waiter-product-item',
