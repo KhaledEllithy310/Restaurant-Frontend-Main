@@ -26,6 +26,7 @@ const routes: Routes = [
     component: WaiterProductItemComponent,
   },
 ];
+
 @NgModule({
   declarations: [
     WaiterProductListComponent,
