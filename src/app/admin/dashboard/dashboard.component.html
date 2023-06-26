@@ -1,33 +1,52 @@
-<!-- <p>dashboard works!</p> -->
-
-<div id="viewport">
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <header>
-      <a href="#">Jchef</a>
-    </header>
-    <ul class="nav">
-      <li>
-        <a
-          routerLink="categories"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          Users
-        </a>
-      </li>
-      <li>
-        <a routerLink="/admin/dashboard/Categories" routerLinkActive="active"> Categories </a>
-      </li>
-      <li>
-        <a routerLink="books" routerLinkActive="active"> Books </a>
-      </li>
-    </ul>
-  </div>
-  <!-- Content -->
-  <div id="content">
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
+<div class="dashboard">
+  <div id="viewport">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <header>
+        <a href="#">Jchef</a>
+      </header>
+      <ul class="nav">
+        <li>
+          <a
+            routerLink="categories"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Tables
+          </a>
+        </li>
+        <ul class="nav">
+          <li
+            class="nav-item position-static"
+            ngbDropdown
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <button
+              class="nav-link dropdown-toggle btn w-100"
+              ngbDropdownToggle
+            >
+              Toggle dropdown
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem routerLink="/admin/dashboard/Categories">
+                Categories
+              </button>
+              <button ngbDropdownItem>Another Action</button>
+              <button ngbDropdownItem>Something else is here</button>
+            </div>
+          </li>
+        </ul>
+        <li>
+          <a routerLink="books" routerLinkActive="active">Books</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Content -->
+    <div id="content">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>

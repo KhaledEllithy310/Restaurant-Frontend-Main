@@ -1,3 +1,35 @@
+.dashbord .dropdown-toggle {
+  position: relative;
+}
+
+/* Dropdown menu
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #ff0000;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+/* Show dropdown menu when the parent link is clicked */
+/* .dropdown-toggle:focus + .dropdown-menu,
+.dropdown-toggle:hover + .dropdown-menu {
+  display: block;
+}  */
+
 #good_reads .nav-pills {
   box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important;
   color: #9baacf;
