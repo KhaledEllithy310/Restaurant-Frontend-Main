@@ -1,5 +1,6 @@
 <!-- <app-admin-navbar></app-admin-navbar> -->
 
+<!-- HTML template -->
 <div class="container good">
   <div
     class="btn__gen mt-3 btn__primary"
@@ -13,21 +14,31 @@
   >
     <thead>
       <tr>
-        <th scope="col" class="w-25">ID</th>
+        <th scope="col" class="w-25">No</th>
         <th scope="col" class="w-25">guest_numbers</th>
         <th scope="col" class="w-25">status</th>
         <th scope="col" class="btn_container">ACTION</th>
       </tr>
     </thead>
     <tbody>
-      <!-- *ngFor="let category of categories; let i = index" id="cate{{ i }}" -->
       <tr>
         <th>1</th>
         <td>4</td>
-        <td>available</td>
+        <td class="text-center">
+          <div class="switch">
+            <div class="switch__2">
+              <input
+                id="switch-2"
+                type="checkbox"
+                checked
+                formControlName="status"
+              />
+              <label for="switch-2"></label>
+            </div>
+          </div>
+        </td>
         <td class="btn_container">
           <div class="btn btn__gen btn-danger btn_actions">Delete</div>
-          <!-- Button modal for update -->
           <div
             class="btn btn__gen btn_actions btn-warning"
             data-bs-toggle="modal"
@@ -39,8 +50,7 @@
       </tr>
     </tbody>
   </table>
-
-  <!-- Modal for Add Category -->
+  <!-- Modal for Add Table -->
   <div
     class="modal fade"
     id="exampleModal1"
@@ -51,7 +61,7 @@
     <div class="modal-dialog bgGreyLight_1">
       <div class="modal-content bgGreyLight_1">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Table</h1>
           <button
             type="button"
             class="btn-close"
@@ -59,42 +69,84 @@
             aria-label="Close"
           ></button>
         </div>
-        <form [formGroup]="categoryForm">
+        <form [formGroup]="tableForm" (ngSubmit)="createTable()">
           <div class="modal-body bgGreyLight_1 vertical_align_center">
+            <!--Start Table No  Input -->
             <div class="mb-2">
               <input
-                type="text"
+                type="number"
                 class="input__form"
-                [(ngModel)]="name"
-                formControlName="name"
-                placeholder="Category Name"
+                formControlName="TableNo"
+                placeholder="Table No."
+                [(ngModel)]="TableNo"
               />
+              <!-- Start Validation For Table No  -->
+
               <div
-                *ngIf="nameControl.invalid && nameControl.touched"
+                *ngIf="TableNo_Control.invalid && TableNo_Control.touched"
                 class="text-danger"
               >
-                <div *ngIf="nameControl.errors?.['required']">
-                  <p class="alert alert-danger">Name is required</p>
+                <div *ngIf="TableNo_Control.errors?.['required']">
+                  <p class="alert alert-danger">TableNo is required</p>
                 </div>
-                <div *ngIf="nameControl.errors?.['minlength']">
+                <div *ngIf="TableNo_Control.errors?.['minlength']">
                   <p class="alert alert-danger">
                     Name must be at least
-                    {{ nameControl.errors?.['minlength'].requiredLength }}
+                    {{ TableNo_Control.errors?.['minlength'].requiredLength }}
                     characters long
                   </p>
                 </div>
               </div>
+              <!-- End Validation For Table No -->
             </div>
+            <!--End Table No Input -->
+            <!--Start guest_numbers  Input -->
             <div class="mb-2">
-              <label for="" class="px-2">Upload Image</label>
               <input
-                #addfileInput
-                type="file"
+                type="number"
                 class="input__form"
-                formControlName="image"
-                name="image"
+                formControlName="guest_numbers"
+                placeholder="guest numbers"
+                [(ngModel)]="guest_numbers"
               />
+              <!-- Start Validation For guest_numbers -->
+              <div
+                *ngIf="
+                  guest_numbers_Control.invalid && guest_numbers_Control.touched
+                "
+                class="text-danger"
+              >
+                <div *ngIf="guest_numbers_Control.errors?.['required']">
+                  <p class="alert alert-danger">guest numbers is required</p>
+                </div>
+                <div *ngIf="guest_numbers_Control.errors?.['minlength']">
+                  <p class="alert alert-danger">
+                    Name must be at least
+                    {{ guest_numbers_Control.errors?.['minlength'].requiredLength }}
+                    characters long
+                  </p>
+                </div>
+              </div>
+              <!-- End Validation For guest_numbers -->
             </div>
+            <!--End guest_numbers  Input -->
+            <!--Start Status Input -->
+            <div class="mb-2 align-items-center d-flex justify-content-center">
+              <label>Status</label>
+              <div class="switch">
+                <div class="switch__2">
+                  <input
+                    id="switch-2T1"
+                    type="checkbox"
+                    formControlName="status"
+                    checked
+                    [(ngModel)]="status"
+                  />
+                  <label for="switch-2T1"></label>
+                </div>
+              </div>
+            </div>
+            <!--End Status Input -->
           </div>
           <div class="modal-footer">
             <button
@@ -107,79 +159,12 @@
             <button
               type="submit"
               class="btn__gen btn__primary btn_actions_form"
-              [disabled]="!categoryForm.valid"
+              [disabled]="!tableForm.valid"
               data-bs-dismiss="modal"
               aria-label="Close"
-              (click)="createCategory()"
+              (click)="createTable1()"
             >
-              Add Category
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for update Category -->
-  <div
-    class="modal fade"
-    id="exampleModal2"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabe2"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog bgGreyLight_1">
-      <div class="modal-content bgGreyLight_1">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabe2">
-            Update Category
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <form #UpdatedcategoryData="ngForm">
-          <div class="modal-body bgGreyLight_1 vertical_align_center">
-            <!-- <label for="" class="">Category Name</label> -->
-            <div class="mb-2">
-              <input
-                type="text"
-                class="input__form"
-                [(ngModel)]="name_updated"
-                name="name_updated"
-                placeholder="Category Name"
-              />
-            </div>
-            <div class="mb-2">
-              <label for="" class="px-2">Upload Image</label>
-              <input
-                #updatefileInput
-                type="file"
-                class="input__form"
-                ngModel
-                name="image_updated"
-              />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn__gen btn__secondary btn_actions_form"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              type="submit"
-              class="btn__gen btn__primary btn_actions_form"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              (click)="updateCategory()"
-            >
-              Update Category
+              Add Table
             </button>
           </div>
         </form>
@@ -187,3 +172,58 @@
     </div>
   </div>
 </div>
+<!-- Modal for update Table -->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabe2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog bgGreyLight_1">
+    <div class="modal-content bgGreyLight_1">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabe2">Update Table</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form #UpdatedcategoryData="ngForm">
+        <div class="modal-body bgGreyLight_1 vertical_align_center">
+          <!-- <label for="" class="">Category Name</label> -->
+          <div class="mb-2">
+            <input
+              type="text"
+              class="input__form"
+              [(ngModel)]="name_updated"
+              name="name_updated"
+              placeholder="Category Name"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn__gen btn__secondary btn_actions_form"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn__gen btn__primary btn_actions_form"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="updateTable()"
+          >
+            Update Table
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

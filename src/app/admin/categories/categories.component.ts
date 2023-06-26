@@ -27,6 +27,9 @@ export class CategoriesComponent {
     });
   }
 
+
+
+
   //GET ALL CATEGORIES
   getAllCategory() {
     // this.getdataService

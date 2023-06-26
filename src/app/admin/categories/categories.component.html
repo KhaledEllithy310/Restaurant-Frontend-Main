@@ -61,6 +61,7 @@
         </div>
         <form [formGroup]="categoryForm">
           <div class="modal-body bgGreyLight_1 vertical_align_center">
+            <!--Start Category Name Input -->
             <div class="mb-2">
               <input
                 type="text"
@@ -69,6 +70,7 @@
                 formControlName="name"
                 placeholder="Category Name"
               />
+              <!-- Start Validation For Name Of Category -->
               <div
                 *ngIf="nameControl.invalid && nameControl.touched"
                 class="text-danger"
@@ -84,7 +86,10 @@
                   </p>
                 </div>
               </div>
+              <!-- End Validation For Name Of Category -->
             </div>
+            <!--End Category Name Input -->
+            <!--Start Upload Image Input -->
             <div class="mb-2">
               <label for="" class="px-2">Upload Image</label>
               <input
@@ -95,6 +100,7 @@
                 name="image"
               />
             </div>
+            <!--End Upload Image Input -->
           </div>
           <div class="modal-footer">
             <button

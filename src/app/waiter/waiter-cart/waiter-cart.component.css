@@ -24,8 +24,8 @@
 .cart_btn {
   position: fixed;
   /* position: absolute; */
-  right: 0;
-  top: 300px;
+  right: 10px;
+  top: 100px;
   z-index: 1050;
 }
 
