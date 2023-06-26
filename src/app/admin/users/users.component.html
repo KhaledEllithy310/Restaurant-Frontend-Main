@@ -1,0 +1,30 @@
+<div class="container my-5">
+    <div class="d-flex mb-2">
+        <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn">Add User <i class="fas fa-user-plus"></i></a>
+    </div>
+    <table class="table shadow text-center">
+        <thead class="shadow">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <th>{{user.id}}</th>
+            <th><img src="https://www.pngarts.com/files/5/Avatar-Face-Transparent-Background-PNG.png" alt="avatar" width="40"></th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td>
+                <button (click)="editUser(user.id)" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
+                <button (click)="deleteUser(user.id)" class="btn btn-danger delete-btn">Delete <i class="fas fa-xmark"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -9,13 +9,22 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  signup(body: any, headers: any): Observable<any> {
-        return this.http.post('http://localhost:4000/register', body, headers)
-        .pipe(
-          catchError((err) => {
-            console.log('Error: ', err);
-            return throwError(err);
-          })
-        )
-      }
+
+  listUsers() {
+    return this.http.get(`https://jsonplaceholder.typicode.com/users`)
+  }
+  getUserByID(id: any) {
+    return this.http.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+  }
+
+
+  // signup(body: any, headers: any): Observable<any> {
+  //       return this.http.post('http://localhost:4000/register', body, headers)
+  //       .pipe(
+  //         catchError((err) => {
+  //           console.log('Error: ', err);
+  //           return throwError(err);
+  //         })
+  //       )
+  //     }
 }
