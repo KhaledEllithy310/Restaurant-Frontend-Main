@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TablesComponent } from './tables/tables.component';
 
 const routes: Routes = [
   {
@@ -15,13 +16,16 @@ const routes: Routes = [
       {
         path: 'Categories',
         component: CategoriesComponent,
+      },     {
+        path: 'tables',
+        component: TablesComponent,
       },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [AdminComponent, DashboardComponent, CategoriesComponent],
+  declarations: [AdminComponent, DashboardComponent, CategoriesComponent, TablesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
