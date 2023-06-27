@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TextMutedPipe } from './pipes/text-muted.pipe';
 import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent, ],
@@ -17,9 +18,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule, 
+    SharedModule,
+    WaiterModule,
     RegisterModule, 
-    NgbModule
+    NgbModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent],

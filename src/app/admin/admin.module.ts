@@ -6,7 +6,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { AddUsersComponent } from './users/add-users/add-users.component';
 import { EditUsersComponent } from './users/edit-users/edit-users.component';
-import { TextMutedPipe } from '../pipes/text-muted.pipe';
+import { IngridentsComponent } from './ingridents/ingridents.component';
+import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
+import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent},
@@ -14,6 +16,9 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'users/add', component: AddUsersComponent},
   {path: 'users/edit/:id', component: EditUsersComponent},
+  {path: 'ingridents', component: IngridentsComponent},
+  {path: 'ingridents/add', component: AddIngridentsComponent},
+  {path: 'ingridents/edit/:id', component: EditIngridentsComponent},
 ];
 
 @NgModule({
@@ -23,7 +28,9 @@ const routes: Routes = [
     UsersComponent, 
     AddUsersComponent, 
     EditUsersComponent,
-    TextMutedPipe
+    IngridentsComponent,
+    AddIngridentsComponent,
+    EditIngridentsComponent
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [AdminComponent],
