@@ -26,6 +26,16 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsComponent,
+        children: [
+          // {
+          //   path: 'addProduct',
+          //   component: AddProductComponent,
+          // },
+        ],
+      },
+      {
+        path: 'addProduct',
+        component: AddProductComponent,
       },
     ],
   },
