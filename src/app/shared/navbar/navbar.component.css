@@ -1,0 +1,25 @@
+.mynav {
+    background-color: #090d10;
+    color: #eee;
+}
+.mynav .navbar-brand {
+    color: #eee;
+    font-size: 25px;
+}
+.mynav .nav-link.active {
+    color: #deac80 !important;
+}
+.mynav .nav-link {
+    color: #eee !important;
+    font-weight: 300;
+    font-size: 20px;
+}
+.mynav .nav-link:hover {
+    color: #deac80 !important;
+}
+.mynav .logo-image {
+    width: 20px;
+    position: relative;
+    top: -17px;
+    right: -9px;
+}

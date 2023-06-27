@@ -9,6 +9,7 @@ import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
+import { KitchenComponent } from './kitchen/kitchen.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'ingridents', component: IngridentsComponent},
   {path: 'ingridents/add', component: AddIngridentsComponent},
   {path: 'ingridents/edit/:id', component: EditIngridentsComponent},
+  {path: 'kitchen', component: KitchenComponent},
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const routes: Routes = [
     EditUsersComponent,
     IngridentsComponent,
     AddIngridentsComponent,
-    EditIngridentsComponent
+    EditIngridentsComponent,
+    KitchenComponent
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [AdminComponent],
