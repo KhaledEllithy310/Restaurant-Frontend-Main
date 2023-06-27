@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TablesComponent } from './tables/tables.component';
 import { ProductsComponent } from './products/products.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 
 const routes: Routes = [
   {
@@ -17,16 +18,28 @@ const routes: Routes = [
       {
         path: 'Categories',
         component: CategoriesComponent,
-      },     {
+      },
+      {
         path: 'tables',
         component: TablesComponent,
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
       },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [AdminComponent, DashboardComponent, CategoriesComponent, TablesComponent, ProductsComponent],
+  declarations: [
+    AdminComponent,
+    DashboardComponent,
+    CategoriesComponent,
+    TablesComponent,
+    ProductsComponent,
+    AddProductComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
