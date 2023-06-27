@@ -1,0 +1,28 @@
+.add-btn {
+    background: none;
+    color: blue;
+}
+.add-btn:hover {
+    background-color: blue;
+    color: white;
+}
+.edit-btn {
+    background: none;
+    color: #0091ae;
+}
+.edit-btn:hover {
+    background-color: #0dcaf0;
+    color: black;
+}
+.delete-btn {
+    background: none;
+    color: red;
+}
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+tr:hover {
+    box-shadow: 2px 0px 0px #000;
+    transition: 0.5s;
+}

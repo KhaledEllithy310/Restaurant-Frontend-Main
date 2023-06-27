@@ -1,0 +1,43 @@
+<div class="container my-5">
+    <div class="d-flex mb-2">
+        <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn">Add Ingridents <i class="fab fa-buffer"></i></a>
+    </div>
+    <table class="table shadow text-center">
+        <thead class="shadow">
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">QTY(stock)</th>
+            <th scope="col">Price</th>
+            <th scope="col">Profit</th>
+            <th scope="col">Status</th>
+            <th scope="col">Unit_id</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>15</td>
+            <td>88$</td>
+            <td>554.5$</td>
+            <td>availble</td>
+            <td>5</td>
+            <td>
+                <button (click)="''" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
+                <button (click)="''" class="btn btn-danger delete-btn">Delete <i class="fas fa-xmark"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>88$</td>
+            <td>554.5$</td>
+            <td>availble</td>
+            <td>5</td>
+            <td>
+                <button (click)="''" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
+                <button (click)="''" class="btn btn-danger delete-btn">Delete <i class="fas fa-xmark"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

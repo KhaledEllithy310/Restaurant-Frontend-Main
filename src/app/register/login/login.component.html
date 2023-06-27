@@ -33,6 +33,9 @@
                       <span *ngIf="loginForm.controls['email'].errors?.['email']">
                           <div class="alert alert-danger">Type a Valid Email</div>
                       </span>
+                      <span *ngIf="loginForm.controls['email'].errors?.['cantSpace']">
+                          <div class="alert alert-danger">Cant Space</div>
+                      </span>
                     </div>
                   </div>
   
@@ -61,7 +64,7 @@
                   </div>
                   <div class="d-flex justify-content-center btn-div">
                     <button type="submit"
-                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body register-btn">Login</button>
+                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body register-btn" [disabled]="loginForm.invalid">Login</button>
                   </div>
                   <p class="text-center text-muted mt-5 mb-0">Want to Create an account? <a [routerLink]="'../signup'"
                       class="fw-bold text-body"><u>Signup here</u></a></p>
