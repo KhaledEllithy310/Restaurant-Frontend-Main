@@ -7,6 +7,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TablesComponent } from './tables/tables.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminComponent, DashboardComponent, CategoriesComponent, TablesComponent],
+  declarations: [AdminComponent, DashboardComponent, CategoriesComponent, TablesComponent, ProductsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
