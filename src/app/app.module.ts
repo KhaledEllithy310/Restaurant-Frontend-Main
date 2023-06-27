@@ -12,13 +12,15 @@ import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     WaiterModule,
     HttpClientModule,
-    SharedModule,RegisterModule, NgbModule,
+    SharedModule,
+    RegisterModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
