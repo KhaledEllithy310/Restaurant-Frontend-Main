@@ -16,6 +16,7 @@ import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 
+
 const routes: Routes = [
   { path: '', component: AdminComponent },
   {

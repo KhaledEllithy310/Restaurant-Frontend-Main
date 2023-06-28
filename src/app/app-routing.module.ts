@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { WaiterComponent } from './waiter/waiter.component';
 import { LoginComponent } from './register/login/login.component';
 import { SignupComponent } from './register/signup/signup.component';
+import { HomePageComponent } from './home-page/home-page.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'Waiter',
+    redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: HomePageComponent,
   },
   {
     path: 'Waiter',

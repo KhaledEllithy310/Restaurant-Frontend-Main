@@ -20,7 +20,8 @@
 
 body {
   /* background-color: #212121; */
-  background-color: #eee;
+  /* background-color: #eee; */
+  background-color: var(--main-background-color);
   /* color: white; */
   color: black;
 }
@@ -28,6 +29,10 @@ body {
   --primary-light: #8abdff;
   --primary: #222b3d;
   --primary-dark: #b99ed5;
+  --main-background-color: #0e1317;
+  --sec-background-color: #090d10;
+  --main-color: #222b3d;
+  --sec-color: #c39c6e;
 
   --grey: #ffffff6c;
   --white1: #ffffff;

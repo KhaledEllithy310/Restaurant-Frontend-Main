@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Rancho&family=Rokkitt:wght@400;500;600;700&family=Ysabeau:wght@300;400;500;700;800&display=swap');
+:root {
+  --main-background-color: #0e1317;
+  --sec-background-color: #090d10;
+  --main-color: #222b3d;
+  --sec-color: #c39c6e;
+
+  /* --shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  --inner-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2),
+    inset -0.2rem -0.2rem 0.5rem var(--white); */
+}
+
+.p-60 {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.features {
+  color: white;
+  background-color: var(--sec-background-color) !important;
+  text-align: center;
+  /* transition: all 0.3s; */
+}
+
+.features__icon {
+  color: var(--sec-color);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-background-color);
+  margin-inline: auto;
+  font-size: 40px;
+  transition: all 0.5s;
+  outline-offset: 4px;
+}
+
+.features__card:hover .features__icon {
+  outline: 2px solid var(--sec-color);
+  /* background-color: aqua; */
+}
+
+.features__card:hover .two__square::after,
+.features__card:hover .two__square::before {
+  display: none;
+}
+.features__title {
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Rokkitt', serif;
+
+  text-transform: capitalize;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.features__description {
+  font-size: 13px;
+  color: #626669;
+  font-family: 'Rokkitt', serif;
+  width: 80%;
+  margin-inline: auto;
+  margin-bottom: 10px;
+}
+
+.features__discover {
+  color: var(--sec-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  font-family: 'Rokkitt', serif;
+}
+
+.two__square::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background-color: var(--sec-color);
+  position: absolute;
+  right: -15px;
+  top: 40%;
+  transform: rotateZ(220deg);
+}
+
+.two__square::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background-color: var(--sec-color);
+  position: absolute;
+  left: -15px;
+  top: 40%;
+  transform: rotateZ(220deg);
+}

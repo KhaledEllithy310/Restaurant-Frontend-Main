@@ -11,9 +11,10 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
 import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
+import { HomePageModule } from './home-page/home-page.module';
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +26,7 @@ import { AdminModule } from './admin/admin.module';
     RegisterModule,
     NgbModule,
     AdminModule,
+    HomePageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
