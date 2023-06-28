@@ -1,0 +1,65 @@
+/* *{
+    background-image: url("/src/assets/vegetables-set-left-black-slate.jpg");
+    width:100%; 
+} */
+/* .container {
+    position: relative;
+    text-align: center;
+    color: white;
+  } */
+  @media screen and (min-width: 601px) {
+    div.example {
+      font-size: 50px;
+      position: absolute;
+      top: 50%;
+      left: 40%;
+      transform: translate(-50%, -50%);
+      color: aliceblue;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    div.example {
+      font-size: 20px;
+      position: absolute;
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    color: aliceblue;
+    }
+  }
+  /* .wavy {
+    font-size: 23px;
+    
+    transform: translateY(3px);
+    animation: wavyText 1.3s alternate steps(2, end) infinite;
+  }
+  
+  .w {
+    animation-delay: 0;
+  }
+  
+  .a {
+    animation-delay: 0.25s;
+  }
+  
+  .v {
+    animation-delay: 0.15s;
+  }
+  
+  .y {
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes wavyText {
+    20%,
+    100% {
+      transform: translate(0, 3px);
+    }
+  
+    0% {
+      transform: translate(0, 0px);
+    }
+    10% {
+      transform: translate(0, 3px);
+    }
+  } */
