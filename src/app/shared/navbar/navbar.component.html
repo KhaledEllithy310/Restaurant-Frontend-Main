@@ -71,25 +71,13 @@
           </ul>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-        <!-- <button
-          class="btn btn-primary cart_btn"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          <i class="fa-solid fa-cart-shopping"></i>
-          cart
-        </button> -->
-      </form>
+      <div class="search-container">
+        <form action="/search" method="get">
+          <input class="search expandright" id="searchright" type="search" name="q" placeholder="Search">
+          <label class="button-search searchbutton" for="searchright"><i class="fa-solid fa-magnifying-glass"></i></label>
+        </form>
+        </div>
+        <button class="btn btn-outline-success book-btn ms-3" type="submit">BOOK A TABLE</button>
     </div>
   </div>
 </nav>
