@@ -1,0 +1,64 @@
+<!-- <app-admin-navbar></app-admin-navbar> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- HTML template -->
+<div class="container good">
+  <a
+    class="btn__gen mt-3 btn__primary"
+    [routerLink]="'admin/dashboard/addProduct'"
+  >
+    Addproduct
+  </a>
+  <table
+    class="table table-secondary table-striped table-hover table-bordered text-center mt-3"
+  >
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">#ID</th>
+        <th scope="col" class="w-25">Name</th>
+        <th scope="col" class="w-25">Description</th>
+        <th scope="col" class="w-25">image</th>
+        <th scope="col" class="w-25">discount</th>
+        <th scope="col" class="w-25">status</th>
+        <th scope="col" class="w-25">category_id</th>
+        <th scope="col" class="w-25">Ingredients</th>
+        <th scope="col" class="w-25">extra</th>
+        <th scope="col" class="btn_container">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>1</th>
+        <td>hot dog</td>
+        <td>Good</td>
+        <td><img src="" alt="image" /></td>
+        <td>50%</td>
+        <td class="text-center">
+          <div class="switch">
+            <div class="switch__2">
+              <input
+                id="switch-2"
+                type="checkbox"
+                checked
+                formControlName="status"
+              />
+              <label for="switch-2"></label>
+            </div>
+          </div>
+        </td>
+        <td>ay 7aga</td>
+        <td>meat , rice</td>
+        <td>cheese</td>
+        <td class="btn_container">
+          <div class="btn btn__gen btn-danger btn_actions">Delete</div>
+          <div
+            class="btn btn__gen btn_actions btn-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal2"
+          >
+            Update
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

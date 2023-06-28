@@ -27,39 +27,8 @@
     color: aliceblue;
     }
   }
-  /* .wavy {
-    font-size: 23px;
-    
-    transform: translateY(3px);
-    animation: wavyText 1.3s alternate steps(2, end) infinite;
+  button{
+    margin-bottom: 500px;
+    margin-left: 250px;
   }
   
-  .w {
-    animation-delay: 0;
-  }
-  
-  .a {
-    animation-delay: 0.25s;
-  }
-  
-  .v {
-    animation-delay: 0.15s;
-  }
-  
-  .y {
-    animation-delay: 0.2s;
-  }
-  
-  @keyframes wavyText {
-    20%,
-    100% {
-      transform: translate(0, 3px);
-    }
-  
-    0% {
-      transform: translate(0, 0px);
-    }
-    10% {
-      transform: translate(0, 3px);
-    }
-  } */

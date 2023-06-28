@@ -8,3 +8,4 @@ import { Component } from '@angular/core';
 export class HomeSection1Component {
 
 }
+

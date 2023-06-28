@@ -1,0 +1,195 @@
+<!-- <app-admin-navbar></app-admin-navbar> -->
+
+<div class="container good">
+  <div
+    class="btn__gen mt-3 btn__primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal1"
+  >
+    Add
+  </div>
+  <table
+    class="table table-secondary table-striped table-hover table-bordered text-center mt-3"
+  >
+    <thead>
+      <tr>
+        <th scope="col" class="w-25">ID</th>
+        <th scope="col" class="w-25">NAME</th>
+        <th scope="col" class="w-25">Image</th>
+        <th scope="col" class="btn_container">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- *ngFor="let category of categories; let i = index" id="cate{{ i }}" -->
+      <tr>
+        <th>1</th>
+        <td>category 1</td>
+        <td>IMAGE 1</td>
+        <td class="btn_container">
+          <div class="btn btn__gen btn-danger btn_actions">Delete</div>
+          <!-- Button modal for update -->
+          <div
+            class="btn btn__gen btn_actions btn-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal2"
+          >
+            Update
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal for Add Category -->
+  <div
+    class="modal fade"
+    id="exampleModal1"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog bgGreyLight_1">
+      <div class="modal-content bgGreyLight_1">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form [formGroup]="categoryForm">
+          <div class="modal-body bgGreyLight_1 vertical_align_center">
+            <!--Start Category Name Input -->
+            <div class="mb-2">
+              <input
+                type="text"
+                class="input__form"
+                [(ngModel)]="name"
+                formControlName="name"
+                placeholder="Category Name"
+              />
+              <!-- Start Validation For Name Of Category -->
+              <div
+                *ngIf="nameControl.invalid && nameControl.touched"
+                class="text-danger"
+              >
+                <div *ngIf="nameControl.errors?.['required']">
+                  <p class="alert alert-danger">Name is required</p>
+                </div>
+                <div *ngIf="nameControl.errors?.['minlength']">
+                  <p class="alert alert-danger">
+                    Name must be at least
+                    {{ nameControl.errors?.['minlength'].requiredLength }}
+                    characters long
+                  </p>
+                </div>
+              </div>
+              <!-- End Validation For Name Of Category -->
+            </div>
+            <!--End Category Name Input -->
+            <!--Start Upload Image Input -->
+            <div class="mb-2">
+              <label for="" class="px-2">Upload Image</label>
+              <input
+                #addfileInput
+                type="file"
+                class="input__form"
+                formControlName="image"
+                name="image"
+              />
+            </div>
+            <!--End Upload Image Input -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn__gen btn__secondary btn_actions_form"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn__gen btn__primary btn_actions_form"
+              [disabled]="!categoryForm.valid"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              (click)="createCategory()"
+            >
+              Add Category
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for update Category -->
+  <div
+    class="modal fade"
+    id="exampleModal2"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabe2"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog bgGreyLight_1">
+      <div class="modal-content bgGreyLight_1">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabe2">
+            Update Category
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form #UpdatedcategoryData="ngForm">
+          <div class="modal-body bgGreyLight_1 vertical_align_center">
+            <!-- <label for="" class="">Category Name</label> -->
+            <div class="mb-2">
+              <input
+                type="text"
+                class="input__form"
+                [(ngModel)]="name_updated"
+                name="name_updated"
+                placeholder="Category Name"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="" class="px-2">Upload Image</label>
+              <input
+                #updatefileInput
+                type="file"
+                class="input__form"
+                ngModel
+                name="image_updated"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn__gen btn__secondary btn_actions_form"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn__gen btn__primary btn_actions_form"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              (click)="updateCategory()"
+            >
+              Update Category
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
