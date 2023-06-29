@@ -12,9 +12,10 @@ import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
-
+import { VerticalSliderComponent } from './vertical-slider/vertical-slider.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
-  declarations: [AppComponent,  ],
+  declarations: [AppComponent, VerticalSliderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,7 +27,8 @@ import { HomeModule } from './home/home.module';
     RegisterModule,
     NgbModule,
     AdminModule,
-    HomeModule
+    HomeModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
