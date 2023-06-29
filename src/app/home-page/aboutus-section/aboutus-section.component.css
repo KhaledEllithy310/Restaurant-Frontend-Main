@@ -1,8 +1,11 @@
 :root {
-  --main-background-color: #0e1317;
-  --sec-background-color: #090d10;
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
   --main-color: #222b3d;
-  --sec-color: #c39c6e;
+  /* Last Change */
 }
 
 .AboutUs {
@@ -20,7 +23,7 @@
 }
 
 .AboutUs__text__header {
-  color: var(--sec-color);
+  color: var(--special-text-color);
   font-family: 'Tangerine', cursive;
   /* font-family: 'Rancho', cursive; */
 
@@ -46,12 +49,12 @@
   content: '';
   width: 5px;
   height: 5px;
-  background-color: var(--sec-color);
+  background-color: var(--special-button-color);
   position: absolute;
   left: 5px;
   top: 100%;
   transform: rotateZ(220deg);
-  outline: 1px solid var(--sec-color);
+  outline: 1px solid var(--special-text-color);
   outline-offset: 2px;
 }
 
@@ -59,7 +62,7 @@
   content: '';
   width: 100px;
   height: 1px;
-  background-color: var(--sec-color);
+  background-color: var(--special-button-color);
   position: absolute;
   left: 13px;
   top: 102%;
@@ -82,7 +85,7 @@
 .main__btn {
   color: white;
   background-color: var(--main-color);
-  outline: 1px solid var(--sec-color);
+  outline: 1px solid var(--special-text-color);
   outline-offset: 3px;
   padding: 10px 20px;
   text-transform: uppercase;
@@ -95,8 +98,8 @@
 }
 
 .main__btn:hover {
-  background-color: var(--sec-color);
-  color: var(--sec-background-color);
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
   font-weight: 600;
 }
 

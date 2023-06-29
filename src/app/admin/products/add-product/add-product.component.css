@@ -1,13 +1,11 @@
-#171e25 :root {
-  /* --main-background-color: #0e1317; */
-  --main-background-color: #171e25;
-  --sec-background-color: #090d10;
-  --main-color: #222b3d;
-  --sec-color: #c39c6e;
-
+:root {
+  /* Last Change */
   --background-color-of-body: #0e1317;
-  --background-color-of-sections: #161b21;
-  --special-text-color: #deac80;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
 }
 
 .container_forms {
@@ -18,13 +16,13 @@
   gap: 40px;
 }
 .form_admin {
-  background-color: var(--sec-background-color);
+  background-color: var(--background-color-of-sections);
   /* background-color: #090d10; */
   padding: 20px;
   color: white;
   width: 60%;
   border-radius: 20px;
-  outline: 1px solid var(--sec-color);
+  outline: 1px solid var(--special-text-color);
   outline-offset: 4px;
 }
 
@@ -46,7 +44,7 @@
 .inputs__container input,
 .inputs__container select,
 .inputs__container textarea {
-  background-color: var(--main-background-color);
+  background-color: var(--background-color-of-body);
   box-shadow: 0 0 2px white;
 }
 
@@ -70,7 +68,7 @@
 }
 
 .input__form:focus {
-  outline: 1px solid var(--sec-color);
+  outline: 1px solid var(--special-text-color);
   outline-offset: 3px;
 }
 
@@ -156,7 +154,7 @@
 .main__btn__form {
   color: white;
   background-color: var(--main-color);
-  outline: 1px solid var(--sec-color);
+  outline: 1px solid var(--special-text-color);
   outline-offset: 3px;
   padding: 5px 10px;
   text-transform: capitalize;
@@ -174,13 +172,13 @@
 }
 
 .main__btn__form:hover {
-  background-color: var(--sec-color);
-  color: var(--sec-background-color);
+  background-color: var(--special-text-color);
+  color: var(--background-color-of-sections);
   font-weight: 600;
 }
 
 .main__btn__form i {
-  color: var(--sec-color);
+  color: var(--special-text-color);
 }
 
 .main__btn__form:hover i {
@@ -204,11 +202,9 @@
 }
 
 .container__Ingredients__Extra {
-  /* outline: 1px solid var(--sec-color); */
-  border-left: 1px solid var(--sec-color);
-  /* padding-top: 20px; */
+  border-left: 1px solid var(--special-text-color);
   margin-left: 10px;
-  color: var(--sec-color);
+  color: var(--special-text-color);
   overflow: auto;
   max-height: 400px;
 }
@@ -232,7 +228,7 @@
   font-family: 'Rokkitt', serif;
   font-weight: 600;
   background-color: #00dc94;
-  color: var(--main-background-color);
+  color: var(--background-color-of-body);
   padding: 0px 10px;
   border-radius: 10px;
 }
