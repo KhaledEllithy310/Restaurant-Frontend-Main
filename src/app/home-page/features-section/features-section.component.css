@@ -11,10 +11,6 @@
     inset -0.2rem -0.2rem 0.5rem var(--white); */
 }
 
-.p-60 {
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
 .features {
   color: white;
   background-color: var(--sec-background-color) !important;
@@ -36,7 +32,10 @@
   transition: all 0.5s;
   outline-offset: 4px;
 }
-
+.features__card {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 .features__card:hover .features__icon {
   outline: 2px solid var(--sec-color);
   /* background-color: aqua; */
@@ -58,7 +57,7 @@
 }
 .features__description {
   font-size: 13px;
-  color: #626669;
+  color: #959a9e;
   font-family: 'Rokkitt', serif;
   width: 80%;
   margin-inline: auto;

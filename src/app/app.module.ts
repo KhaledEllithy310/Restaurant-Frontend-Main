@@ -14,7 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { HomePageModule } from './home-page/home-page.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,

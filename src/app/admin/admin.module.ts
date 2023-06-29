@@ -16,35 +16,16 @@ import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 
-
 const routes: Routes = [
   { path: '', component: AdminComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      {
-        path: 'Categories',
-        component: CategoriesComponent,
-      },
-      {
-        path: 'tables',
-        component: TablesComponent,
-      },
-      {
-        path: 'products',
-        component: ProductsComponent,
-        children: [
-          // {
-          //   path: 'addProduct',
-          //   component: AddProductComponent,
-          // },
-        ],
-      },
-      {
-        path: 'addProduct',
-        component: AddProductComponent,
-      },
+      { path: 'Categories', component: CategoriesComponent },
+      { path: 'tables', component: TablesComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'products/add', component: AddProductComponent },
       { path: 'users', component: UsersComponent },
       { path: 'users/add', component: AddUsersComponent },
       { path: 'users/edit/:id', component: EditUsersComponent },

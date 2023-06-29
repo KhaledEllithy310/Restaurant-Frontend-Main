@@ -1,0 +1,244 @@
+#171e25 :root {
+  /* --main-background-color: #0e1317; */
+  --main-background-color: #171e25;
+  --sec-background-color: #090d10;
+  --main-color: #222b3d;
+  --sec-color: #c39c6e;
+
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #161b21;
+  --special-text-color: #deac80;
+}
+
+.container_forms {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  justify-content: center;
+  gap: 40px;
+}
+.form_admin {
+  background-color: var(--sec-background-color);
+  /* background-color: #090d10; */
+  padding: 20px;
+  color: white;
+  width: 60%;
+  border-radius: 20px;
+  outline: 1px solid var(--sec-color);
+  outline-offset: 4px;
+}
+
+.form__admin__special {
+  width: 80%;
+}
+
+.form_title {
+  color: var(--special-text-color);
+  font-family: 'Dosis', sans-serif;
+  /* font-family: 'Rokkitt', serif; */
+}
+
+.inputs__container {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.inputs__container input,
+.inputs__container select,
+.inputs__container textarea {
+  background-color: var(--main-background-color);
+  box-shadow: 0 0 5px white;
+}
+
+.inputs__container select {
+  padding: 7.2px;
+}
+
+.input__form {
+  width: 100%;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  font-family: inherit;
+  margin: 8px 0;
+  padding: 0.3rem;
+  padding-left: 1rem;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #171717b0;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input__form:focus {
+  outline: 1px solid var(--sec-color);
+  outline-offset: 3px;
+}
+
+/*  SWITCH  */
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch__2 {
+  width: 4rem;
+  height: 1.5rem;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch__2 label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgb(117, 115, 115);
+  position: relative;
+  cursor: pointer;
+  border-radius: 1.9rem;
+}
+
+.switch__2 label::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: calc(50% - 20px / 2 - 15px);
+  top: calc(50% - 20px / 2);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.switch__2 label::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #34c759;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.switch input:checked + label::before {
+  opacity: 1;
+}
+
+.switch input:checked + label::after {
+  left: 57%;
+}
+
+.status_input {
+  display: flex;
+  justify-content: start;
+  gap: 50px;
+  /* margin-bottom: 20px !important; */
+  box-shadow: 0 0 5px white;
+  padding: 4px;
+  padding-left: 1rem;
+  /* height: 37.8px; */
+  border-radius: 0.7rem;
+  margin-top: 10px;
+}
+
+@media (max-width: 1200px) {
+  .status_input {
+    width: fit-content;
+    padding-right: 10px;
+  }
+}
+
+.main__btn__form {
+  color: white;
+  background-color: var(--main-color);
+  outline: 1px solid var(--sec-color);
+  outline-offset: 3px;
+  padding: 5px 10px;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-family: 'Rokkitt', serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-weight: 600;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.main__btn__form:hover {
+  background-color: var(--sec-color);
+  color: var(--sec-background-color);
+  font-weight: 600;
+}
+
+.main__btn__form i {
+  color: var(--sec-color);
+}
+
+.main__btn__form:hover i {
+  color: var(--main-color);
+}
+
+.p-100 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.btn_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn_extra_form {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.container__Ingredients__Extra {
+  /* outline: 1px solid var(--sec-color); */
+  border-left: 1px solid var(--sec-color);
+  /* padding-top: 20px; */
+  margin-left: 10px;
+  color: var(--sec-color);
+  overflow: auto;
+  max-height: 400px;
+}
+
+.container__Ingredients {
+  min-height: 200px;
+}
+
+.list__Ingredients li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background-color: var(--main-color);
+  background-color: #2b2b33;
+  padding: 7px 10px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+
+.list__Ingredients li span {
+  font-family: 'Rokkitt', serif;
+  font-weight: 600;
+  background-color: #00dc94;
+  color: var(--main-background-color);
+  padding: 0px 10px;
+  border-radius: 10px;
+}
+
+.list__Ingredients .list__Ingredients__price {
+  background-color: transparent !important;
+  color: white !important;
+  border: 1px solid #00dc94;
+}
