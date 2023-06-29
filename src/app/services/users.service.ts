@@ -11,20 +11,19 @@ export class UsersService {
 
 
   listUsers() {
-    return this.http.get(`https://jsonplaceholder.typicode.com/users`)
+    return this.http.get(`http://127.0.0.1:8000/api/users`)
   }
+
+  addUser(body: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/users`, body);
+  }
+
   getUserByID(id: any) {
-    return this.http.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+    return this.http.get(`http://127.0.0.1:8000/api/users/${id}`)
   }
-
-
-  // signup(body: any, headers: any): Observable<any> {
-  //       return this.http.post('http://localhost:4000/register', body, headers)
-  //       .pipe(
-  //         catchError((err) => {
-  //           console.log('Error: ', err);
-  //           return throwError(err);
-  //         })
-  //       )
-  //     }
+  
+  editUserByID(id: any, body: any) {
+    return this.http.put(`http://127.0.0.1:8000/api/users/${id}`, body);
+  }
+  
 }

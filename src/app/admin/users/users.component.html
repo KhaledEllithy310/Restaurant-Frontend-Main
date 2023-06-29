@@ -2,12 +2,13 @@
     <div class="d-flex mb-2">
         <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn">Add User <i class="fas fa-user-plus"></i></a>
     </div>
-    <table class="table shadow text-center">
+    <table class="table table-dark shadow text-center">
         <thead class="shadow">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Image</th>
             <th scope="col">Username</th>
+            <th scope="col">Role</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
             <th scope="col">Options</th>
@@ -16,8 +17,9 @@
         <tbody>
           <tr *ngFor="let user of users">
             <th>{{user.id}}</th>
-            <th><img src="https://www.pngarts.com/files/5/Avatar-Face-Transparent-Background-PNG.png" alt="avatar" width="40"></th>
+            <th><img [src]='"http://127.0.0.1:8000"+user.image' alt="avatar" width="40"></th>
             <td>{{user.name}}</td>
+            <td>{{user.role}}</td>
             <td>{{user.email}}</td>
             <td>{{user.phone}}</td>
             <td>

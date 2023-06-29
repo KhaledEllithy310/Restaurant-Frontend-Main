@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { GetDataService } from 'src/app/services/get-data.service';
 
 @Component({
   selector: 'app-categories',
@@ -9,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CategoriesComponent {
   categories!: any[];
+  getcategories!: any;
   data!: any[];
   idCategory!: number;
   categoryForm: FormGroup;
@@ -16,7 +18,7 @@ export class CategoriesComponent {
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('updatefileInput', { static: false }) updatefileInput!: ElementRef;
 
-  constructor() {
+  constructor(private getCatService: GetDataService) {
     this.nameControl = new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -27,7 +29,9 @@ export class CategoriesComponent {
     });
   }
 
-
+  ngOnInit() {
+    this.getCatService.getCategory().subscribe((res: any) => this.getcategories = res.data);
+  }
 
 
   //GET ALL CATEGORIES

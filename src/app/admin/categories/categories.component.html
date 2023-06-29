@@ -21,10 +21,10 @@
     </thead>
     <tbody>
       <!-- *ngFor="let category of categories; let i = index" id="cate{{ i }}" -->
-      <tr>
+      <tr *ngFor="let getcategory of getcategories">
         <th>1</th>
-        <td>category 1</td>
-        <td>IMAGE 1</td>
+        <td>{{getcategory.name}}</td>
+        <td><img [src]='"http://127.0.0.1:8000"+getcategory.image' alt=""></td>
         <td class="btn_container">
           <div class="btn btn__gen btn-danger btn_actions">Delete</div>
           <!-- Button modal for update -->

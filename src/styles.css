@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import '~@fortawesome/fontawesome-free/css/all.css'; */
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500&family=Oswald:wght@200;300;400;500;600;700&family=Rancho&family=Rokkitt:wght@400;500;600;700&family=Tangerine:wght@400;700&family=Ysabeau:wght@300;400;500;700;800&display=swap');
+/* body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #0e1317;
+} */
+
 /* :root {
   --primary-light: #8abdff;
   --primary: #6d5dfc;

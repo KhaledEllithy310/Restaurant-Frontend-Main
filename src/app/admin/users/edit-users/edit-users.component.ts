@@ -16,7 +16,7 @@ export class EditUsersComponent {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.getUsers.getUserByID(this.id).subscribe((res: any) => this.user = res)
+    this.getUsers.getUserByID(this.id).subscribe((res: any) => this.user = res.data)
   }
 
 }

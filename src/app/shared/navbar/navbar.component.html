@@ -1,6 +1,6 @@
-<nav class="navbar sticky-top navbar-expand-lg bg-light shadow">
+<nav class="navbar sticky-top navbar-expand-lg mynav shadow">
   <div class="container-fluid">
-    <a class="navbar-brand display-10" href="#">Jchef</a>
+    <a class="navbar-brand display-10" href="#"><img class="logo-image" src="assets/mylogo.png" alt="" width="25">Jchef</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -13,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav m-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
             class="nav-link active"
@@ -83,20 +83,14 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
       </ul>
-      <!-- <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-
-      </form> -->
+      <div class="search-container">
+        <form action="/search" method="get">
+          <input class="search expandright" id="searchright" type="search" name="q" placeholder="Search">
+          <label class="button-search searchbutton" for="searchright"><i class="fa-solid fa-magnifying-glass"></i></label>
+        </form>
+        </div>
+        <button class="btn btn-outline-success book-btn ms-3" type="submit">BOOK A TABLE</button>
     </div>
   </div>
 </nav>

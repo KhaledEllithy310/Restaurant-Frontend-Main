@@ -15,7 +15,7 @@ export class UsersComponent {
 
 
   ngOnInit() {
-    this.listusersService.listUsers().subscribe((res: any) => this.users = res)
+    this.listusersService.listUsers().subscribe((res: any) => this.users = res.data)
   }
 
 
