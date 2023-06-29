@@ -1,21 +1,20 @@
-<div class="product_list text-center">
-  <h1 class="py-3">Product_list</h1>
-  <div class="row">
-    <div class="col-lg-3" *ngFor="let item of products; let i = index">
-      <!-- <app-waiter-product-item [item]="item"></app-waiter-product-item> -->
-      <app-waiter-product-item
-        [item]="item"
-        [id]="i"
-        (productSelected)="onProductSelected($event)"
-      ></app-waiter-product-item>
-      <!-- <app-modal [productSelected]="item"></app-modal> -->
 
-      <app-modal
-        *ngIf="selectedProduct !== null"
-        [productSelected]="selectedProduct"
-        (close)="resetSelectedProduct()"
-        (item)="addToCart($event)"
-      ></app-modal>
+    <h1 class="py-3">Product_list</h1>
+    <div class="row">
+      <div class="col-lg-3" *ngFor="let item of products; let i = index">
+        <!-- <app-waiter-product-item [item]="item"></app-waiter-product-item> -->
+        <app-waiter-product-item
+          [item]="item"
+          [id]="i"
+          (productSelected)="onProductSelected($event)"
+        ></app-waiter-product-item>
+        <!-- <app-modal [productSelected]="item"></app-modal> -->
+
+        <app-modal
+          *ngIf="selectedProduct !== null"
+          [productSelected]="selectedProduct"
+          (close)="resetSelectedProduct()"
+          (item)="addToCart($event)"
+        ></app-modal>
+      </div>
     </div>
-  </div>
-</div>

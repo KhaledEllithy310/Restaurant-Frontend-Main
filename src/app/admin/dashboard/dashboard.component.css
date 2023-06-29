@@ -1,0 +1,178 @@
+.dashbord .dropdown-toggle {
+  position: relative;
+}
+
+/* Dropdown menu
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #ff0000;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+/* Show dropdown menu when the parent link is clicked */
+/* .dropdown-toggle:focus + .dropdown-menu,
+.dropdown-toggle:hover + .dropdown-menu {
+  display: block;
+}  */
+
+#good_reads .nav-pills {
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important;
+  color: #9baacf;
+  color: #6d5dfc;
+  border-radius: 0.8rem;
+  background-color: #e4ebf5;
+  padding: 20px;
+}
+
+#good_reads .nav-pills .nav-link {
+  /* box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important; */
+  color: #9baacf;
+  /* color: #6d5dfc; */
+  border-radius: 0.8rem;
+  font-weight: 600;
+  font-size: 22px;
+  font-family: 'Sawarabi Gothic', sans-serif;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #e4ebf5;
+}
+
+#good_reads .nav-pills .active {
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #ffffff;
+  color: #6d5dfc;
+  border-radius: 0.8rem;
+}
+
+/* ************************************************************************************************************** */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+/* body {
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+} */
+
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  /* margin-top: 100px; */
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+/* Sidebar Styles */
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background-color: #e4ebf5;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important;
+}
+
+#sidebar header {
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
+}
+
+#sidebar header a {
+  color: #6d5dfc;
+  display: block;
+  text-decoration: none;
+  font-size: 25px;
+  padding: 20px 0;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#sidebar header a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px royalblue;
+  text-shadow: 0px 22px 6px royalblue;
+}
+
+/* #sidebar .nav {
+} */
+#sidebar .nav {
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important;
+}
+#sidebar .nav a {
+  color: #6d5dfc;
+  font-size: 16px;
+  padding: 16px 24px;
+  display: block;
+  text-decoration: none;
+  border-radius: 0.8rem;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-color: #e4ebf5;
+
+  /* box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff !important; */
+}
+#sidebar .nav li {
+  display: block;
+  width: 100%;
+  border-radius: 0.8rem;
+  margin: 5px 10px;
+}
+
+#sidebar .nav a:hover {
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #ffffff;
+  color: #6d5dfc;
+  border-radius: 0.8rem;
+  padding-left: 40px;
+  letter-spacing: 1px;
+  font-family: 600;
+  border: 1px solid #455a64;
+}
+
+#sidebar .nav .active {
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #ffffff;
+  color: #6d5dfc;
+  border-radius: 0.8rem;
+  letter-spacing: 1px;
+  font-family: 600;
+  font-size: 20px;
+  text-shadow: 0 0 10px rgba(43, 105, 181, 0.715);
+}
+#sidebar .nav a i {
+  margin-right: 16px;
+}
