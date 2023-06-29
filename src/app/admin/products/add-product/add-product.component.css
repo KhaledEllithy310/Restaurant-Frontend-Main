@@ -47,7 +47,7 @@
 .inputs__container select,
 .inputs__container textarea {
   background-color: var(--main-background-color);
-  box-shadow: 0 0 5px white;
+  box-shadow: 0 0 2px white;
 }
 
 .inputs__container select {
@@ -56,7 +56,7 @@
 
 .input__form {
   width: 100%;
-  border-radius: 0.7rem;
+  /* border-radius: 0.7rem; */
   font-size: 1rem;
   font-family: inherit;
   margin: 8px 0;
@@ -64,9 +64,9 @@
   padding-left: 1rem;
   border: none;
   outline: none;
-  color: white;
+  color: #eee;
   background-color: #171717b0;
-  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  /* box-shadow: inset 2px 5px 10px rgb(5, 5, 5); */
 }
 
 .input__form:focus {
