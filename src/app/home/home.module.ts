@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FeaturesSectionComponent } from '../home-page/features-section/features-section.component';
 import { AboutusSectionComponent } from '../home-page/aboutus-section/aboutus-section.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { CountnumberComponent } from './countnumber/CountnumberComponent';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { ReservationComponent } from './reservation/reservation.component';
     FooterComponent,
     FeaturesSectionComponent,
     AboutusSectionComponent,
-    ReservationComponent
+    ReservationComponent,
+    CountnumberComponent 
+    
 
   ],
   imports: [CommonModule],
@@ -27,7 +30,9 @@ import { ReservationComponent } from './reservation/reservation.component';
     MeetOurTeamComponent,
     GuestbookComponent,
     FooterComponent,
-    ReservationComponent
+    ReservationComponent,
+    CountnumberComponent 
+    
   ],
 })
 export class HomeModule {}

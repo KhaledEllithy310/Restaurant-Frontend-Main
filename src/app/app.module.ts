@@ -12,6 +12,7 @@ import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
+import { CountnumberComponent } from './home/countnumber/CountnumberComponent';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,9 @@ import { HomeModule } from './home/home.module';
     RegisterModule,
     NgbModule,
     AdminModule,
-    HomeModule
+    HomeModule,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent],

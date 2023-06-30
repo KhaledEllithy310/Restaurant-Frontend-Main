@@ -65,22 +65,32 @@ button[type="submit"]:hover {
    /* background-color: black;
    opacity: 50%; */
 }
-svg{
-  /* background-color: aquamarine; */
-}
+
 p{
     color: white;
     font-size: 15px;
 }
-.counter {
+/* .counter {
   font-size: 36px;
   font-weight: bold;
   display: flex;
   animation: count-up 2s ease-in-out forwards;
-}
+} */
 
-.counter {
+/* .counter {
   font-size: 36px;
   font-weight: bold;
   text-align: center;
 }
+.counter-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  padding: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 10px;
+} */

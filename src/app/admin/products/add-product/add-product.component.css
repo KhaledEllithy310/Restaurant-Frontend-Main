@@ -133,7 +133,7 @@
 
 .status_input {
   display: flex;
-  justify-content: start;
+  justify-content:flex-start;
   gap: 50px;
   /* margin-bottom: 20px !important; */
   box-shadow: 0 0 5px white;
