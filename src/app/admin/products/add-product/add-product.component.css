@@ -26,6 +26,9 @@
   outline-offset: 4px;
 }
 
+
+
+
 .form__admin__special {
   width: 80%;
 }
@@ -151,7 +154,7 @@
   }
 }
 
-.main__btn__form {
+.admin__main__btn__form {
   color: white;
   background-color: var(--main-color);
   outline: 1px solid var(--special-text-color);
@@ -171,17 +174,17 @@
   gap: 5px;
 }
 
-.main__btn__form:hover {
-  background-color: var(--special-text-color);
+.admin__main__btn__form:hover {
+  background-color: var(--special-button-color);
   color: var(--background-color-of-sections);
   font-weight: 600;
 }
 
-.main__btn__form i {
+.admin__main__btn__form i {
   color: var(--special-text-color);
 }
 
-.main__btn__form:hover i {
+.admin__main__btn__form:hover i {
   color: var(--main-color);
 }
 

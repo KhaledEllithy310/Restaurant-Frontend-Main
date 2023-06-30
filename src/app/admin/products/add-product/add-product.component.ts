@@ -57,11 +57,13 @@ export class AddProductComponent {
   showExtraForm = false;
   isIngredientsListEmpty: boolean = true;
   isExtraListEmpty: boolean = true;
+  statusText!: string;
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('updatefileInput', { static: false }) updatefileInput!: ElementRef;
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    // this.checkStatusAvailable();
     this.tableForm = this.fb.group({
       productName: ['', [Validators.required, Validators.minLength(2)]],
       productDescription: [''],
@@ -95,6 +97,27 @@ export class AddProductComponent {
   get status_Control() {
     return this.tableForm.controls['status'];
   }
+
+  //check if the status is available or unavailable
+  // checkStatusAvailable() {
+  //   this.tableForm.get('status')?.valueChanges.subscribe((value) => {
+  //     this.statusText = value ? 'Available' : 'Unavailable';
+  //   });
+  // }
+
+  // const statusControl = this.tableForm.get('status');
+  // if (statusControl) {
+  //   const statusValue = statusControl.value;
+  //   console.log(statusControl.value);
+
+  //   if (statusValue === true) {
+  //     this.isUnAvailable = false;
+  //     this.isAvailable = true;
+  //   } else {
+  //     this.isAvailable = false;
+  //     this.isUnAvailable = true;
+  //   }
+  // }
 
   createProduct() {
     let image = this.addfileInput.nativeElement.files[0];
@@ -149,18 +172,27 @@ export class AddProductComponent {
   }
 
   addExtraForProduct() {
-    let ingredientPrice = document.getElementById('ingredientPrice') as HTMLInputElement;
-    let ingredientProfit = document.getElementById(  'ingredientProfit') as HTMLInputElement;
-    let Ingredient_Price =this.ExtraForm.value.ingredientPrice || ingredientPrice.value;
+    let ingredientPrice = document.getElementById(
+      'ingredientPrice'
+    ) as HTMLInputElement;
+    let ingredientProfit = document.getElementById(
+      'ingredientProfit'
+    ) as HTMLInputElement;
+    let Ingredient_Price =
+      this.ExtraForm.value.ingredientPrice || ingredientPrice.value;
     console.log('Ingredient_Price', Ingredient_Price);
 
-    let Ingredient_Profit =this.ExtraForm.value.ingredientProfit || ingredientProfit.value;
+    let Ingredient_Profit =
+      this.ExtraForm.value.ingredientProfit || ingredientProfit.value;
     console.log('Ingredient_Profit', Ingredient_Profit);
     let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
 
     console.log('Ingredient_Quantity', Ingredient_Quantity);
-    let finalPrice =Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
-    let Ingredient_name = this.ingredients.find(  (elem) => elem.id == this.ExtraForm.value.Ingredient_id).name;
+    let finalPrice =
+      Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
+    let Ingredient_name = this.ingredients.find(
+      (elem) => elem.id == this.ExtraForm.value.Ingredient_id
+    ).name;
 
     console.log(Ingredient_name);
 

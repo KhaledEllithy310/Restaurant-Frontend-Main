@@ -15,7 +15,5 @@ export class GetDataService implements OnInit {
     );
   }
 
-  getCategory() {
-    return this.http.get('http://127.0.0.1:8000/api/category');
-  }
+
 }
