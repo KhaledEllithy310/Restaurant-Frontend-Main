@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Rancho&family=Rokkitt:wght@400;500;600;700&family=Ysabeau:wght@300;400;500;700;800&display=swap');
+:root {
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+.features {
+  color: white;
+  background-color: var(--background-color-of-sections) !important;
+  text-align: center;
+  /* transition: all 0.3s; */
+}
+
+.features__icon {
+  color: var(--special-text-color);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color-of-body);
+  margin-inline: auto;
+  font-size: 40px;
+  transition: all 0.5s;
+  outline-offset: 4px;
+}
+.features__card {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.features__card:hover .features__icon {
+  outline: 2px solid var(--special-text-color);
+  /* background-color: aqua; */
+}
+
+.features__card:hover .two__square::after,
+.features__card:hover .two__square::before {
+  display: none;
+}
+.features__title {
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Rokkitt', serif;
+
+  text-transform: capitalize;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.features__description {
+  font-size: 13px;
+  color: #959a9e;
+  font-family: 'Rokkitt', serif;
+  width: 80%;
+  margin-inline: auto;
+  margin-bottom: 10px;
+}
+
+.features__discover {
+  color: var(--special-text-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  font-family: 'Rokkitt', serif;
+}
+
+.two__square::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background-color: var(--special-text-color);
+  position: absolute;
+  right: -15px;
+  top: 40%;
+  transform: rotateZ(220deg);
+}
+
+.two__square::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background-color: var(--special-text-color);
+  position: absolute;
+  left: -15px;
+  top: 40%;
+  transform: rotateZ(220deg);
+}

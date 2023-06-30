@@ -1,0 +1,226 @@
+:root {
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
+.AboutUs {
+  color: white;
+}
+
+.AboutUs__container {
+  justify-content: end;
+  gap: 50px;
+}
+
+.AboutUs__text {
+  width: 70%;
+  padding-left: 30px;
+}
+
+.AboutUs__text__header {
+  color: var(--special-text-color);
+  font-family: 'Tangerine', cursive;
+  /* font-family: 'Rancho', cursive; */
+
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.AboutUs__text__title {
+  font-family: 'Dosis', sans-serif;
+  text-transform: capitalize;
+  font-weight: 200;
+  font-size: 40px;
+}
+
+.square_line {
+  position: relative;
+  padding-bottom: 10px;
+  margin: 20px 0;
+}
+
+.square_line::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background-color: var(--special-button-color);
+  position: absolute;
+  left: 5px;
+  top: 100%;
+  transform: rotateZ(220deg);
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 2px;
+}
+
+.square_line::before {
+  content: '';
+  width: 100px;
+  height: 1px;
+  background-color: var(--special-button-color);
+  position: absolute;
+  left: 13px;
+  top: 102%;
+}
+
+.AboutUs__text__pragraph {
+  font-size: 15px;
+  color: #959a9e;
+  font-family: 'Rokkitt', serif;
+  margin-bottom: 10px;
+}
+
+.AboutUs__text__bottom {
+  font-family: 'Rancho', cursive;
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 60px;
+}
+
+.main__btn {
+  color: white;
+  background-color: var(--main-color);
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 3px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: 'Rokkitt', serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.5s;
+  font-weight: 600;
+}
+
+.main__btn:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+  font-weight: 600;
+}
+
+.AboutUs__img {
+  /* margin-inline: auto; */
+  text-align: right;
+  /* width: 70%; */
+  position: relative;
+}
+.AboutUs__img img {
+  height: 400px;
+  margin-inline: auto;
+}
+
+.AboutUs__img .AboutUs__img__sec {
+  height: 280px;
+  width: 220px;
+  position: absolute;
+  z-index: 1;
+  bottom: -80px;
+  left: -80px;
+}
+
+/* .AboutUs__img .AboutUs__img__sec::after {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.325);
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  z-index: 2;
+  position: absolute;
+} */
+
+/* @media only screen and (max-width: 380px) {
+  .AboutUs__img {
+    margin-inline: auto;
+  }
+  .AboutUs__img img {
+    width: 200px;
+  }
+
+  .AboutUs__text {
+    width: 70%;
+  }
+} */
+
+@media only screen and (max-width: 420px) {
+  .AboutUs__img {
+    margin-inline: auto;
+  }
+  .AboutUs__img img {
+    width: 330px;
+  }
+
+  .AboutUs__text {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .AboutUs__img .AboutUs__img__sec {
+    display: none;
+  }
+  .AboutUs__img {
+    /* margin-inline: auto; */
+    text-align: center;
+    /* width: 70%; */
+  }
+
+  .AboutUs__text {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 701px) and (max-width: 1030px) {
+  .AboutUs__img .AboutUs__img__sec {
+    display: none;
+  }
+  .AboutUs__img {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .AboutUs__img img {
+    width: 400px;
+  }
+
+  .AboutUs__container {
+    justify-content: end;
+    gap: 100px;
+  }
+  .AboutUs__img {
+    /* margin-inline: auto; */
+    text-align: center;
+    /* width: 70%; */
+  }
+
+  .AboutUs__text {
+    width: 90%;
+    margin-inline: auto;
+  }
+}
+
+@media only screen and (min-width: 1031px) and (max-width: 1290px) {
+  .AboutUs__img {
+    margin-inline: auto;
+  }
+  .AboutUs__img img {
+    width: 400px;
+  }
+
+  .AboutUs__container {
+    justify-content: end;
+    gap: 100px;
+  }
+  .AboutUs__img {
+    /* margin-inline: auto; */
+    text-align: center;
+    /* width: 70%; */
+  }
+
+  .AboutUs__text {
+    width: 75%;
+  }
+}

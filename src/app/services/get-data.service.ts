@@ -14,7 +14,8 @@ export class GetDataService implements OnInit {
       'https://forkify-api.herokuapp.com/api/search?q=salad'
     );
   }
-  getCategory(){
+
+  getCategory() {
     return this.http.get('http://127.0.0.1:8000/api/category');
   }
 }

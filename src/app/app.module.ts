@@ -11,6 +11,7 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
 import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent, ],
@@ -25,6 +26,7 @@ import { AdminModule } from './admin/admin.module';
     RegisterModule,
     NgbModule,
     AdminModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

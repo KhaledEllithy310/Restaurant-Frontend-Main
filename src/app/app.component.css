@@ -1,0 +1,10 @@
+  @import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
+
+:root {
+    --main-background-color: #0e1317;
+    --sec-background-color: #090d10;
+    --main-color: #222b3d;
+    --sec-color: #c39c6e;
+  }
