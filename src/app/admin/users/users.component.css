@@ -26,6 +26,6 @@ table {
     color: white;
 }
 tr:hover {
-    box-shadow: 2px 0px 0px #000;
+    box-shadow: 2px 0px 0px #9c9c9c;
     transition: 0.5s;
 }

@@ -13,12 +13,11 @@ import { UsersService } from 'src/app/services/users.service';
 
 export class EditUsersComponent {
 
-
   errors: any = [];
   success!: string;
   editUserForm!: FormGroup;
   olduser!: User;
-  image: any;
+  image!: File;
   id: any;
   
   constructor(private userService: UsersService, private fb: FormBuilder, private route: ActivatedRoute){
@@ -49,9 +48,19 @@ export class EditUsersComponent {
   }
 
   submitForm() {
-    const formData = this.editUserForm.value
-    formData['image'] =  this.image;
-    formData['_method'] = 'put';
+    const formData = new FormData();
+    // formData['image'] =  this.image;
+    formData.append('name', this.editUserForm.get('name')?.value);
+    formData.append('password', this.editUserForm.get('password')?.value);
+    formData.append('role', this.editUserForm.get('role')?.value);
+    formData.append('email', this.editUserForm.get('email')?.value);
+    formData.append('phone', this.editUserForm.get('phone')?.value);
+    if(this.image){
+      formData.append('image', this.image, this.image?.name)
+    }
+    formData.append('_method', 'put');
+    
+
     const headers = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data'
