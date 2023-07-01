@@ -6,37 +6,30 @@
         <thead>
           <tr>
             <th scope="col">#ID</th>
-            <th scope="col">QTY(stock)</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quntity</th>
             <th scope="col">Price</th>
             <th scope="col">Profit</th>
             <th scope="col">Status</th>
-            <th scope="col">Unit_id</th>
             <th scope="col">Options</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>15</td>
-            <td>88$</td>
-            <td>554.5$</td>
-            <td>availble</td>
-            <td>5</td>
-            <td>
-                <button (click)="''" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
-                <button (click)="''" class="btn btn-danger delete-btn">Delete <i class="fas fa-xmark"></i></button>
+          <tr *ngFor="let ingrident of ingridents">
+            <td>{{ingrident.id}}</td>
+            <td>{{ingrident.name}}</td>
+            <td>{{ingrident.quntity}}</td>
+            <td>{{ingrident.price | currency: 'USD'}}</td>
+            <td>{{ingrident.profit}}</td>
+            <td *ngIf="ingrident.quntity">
+              <!-- Rounded switch -->
+              <label class="switch">
+                <input type="checkbox" [checked]="ingrident.quntity > 0">
+                <span class="slider round"></span>
+              </label>
             </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>48</td>
-            <td>88$</td>
-            <td>554.5$</td>
-            <td>availble</td>
-            <td>5</td>
             <td>
-                <button (click)="''" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
-                <button (click)="''" class="btn btn-danger delete-btn">Delete <i class="fas fa-xmark"></i></button>
+                <button (click)="editIngrident(ingrident.id)" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
             </td>
           </tr>
         </tbody>

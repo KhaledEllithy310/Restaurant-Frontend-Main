@@ -27,7 +27,7 @@ export class UsersComponent {
     this.router.navigate([`admin/users/edit/${id}`])
   }
   deleteUser(id: any) {
-      this.users = this.users?.filter((author:any) => author.id != id);
+      this.users = this.users?.filter((user:any) => user.id != id);
       this.listusersService.deleteUserByID(id).subscribe({
         next: (res: any) => {
           this.success = res.message;
