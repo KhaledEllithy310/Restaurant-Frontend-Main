@@ -16,18 +16,11 @@ import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'users', component: UsersComponent},
-  {path: 'users/add', component: AddUsersComponent},
-  {path: 'users/edit/:id', component: EditUsersComponent},
-  {path: 'ingridents', component: IngridentsComponent},
-  {path: 'ingridents/add', component: AddIngridentsComponent},
-  {path: 'ingridents/edit/:id', component: EditIngridentsComponent},
-  {path: 'kitchen', component: KitchenComponent},
-  { path: '', component: AdminComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -41,7 +34,9 @@ const routes: Routes = [
       { path: 'users/edit/:id', component: EditUsersComponent },
       { path: 'ingridents', component: IngridentsComponent },
       { path: 'ingridents/add', component: AddIngridentsComponent },
-      { path: 'ingridents/edit/:id', component: EditIngridentsComponent },
+      { path: 'ingridents/edit/:id', component: EditIngridentsComponent},
+      { path: 'kitchen', component: KitchenComponent},
+      { path: 'reservation', component: ReservationComponent}
     ],
   },
 ];
@@ -67,6 +62,7 @@ const routes: Routes = [
     AddIngridentsComponent,
     EditIngridentsComponent,
     KitchenComponent,
+    ReservationComponent,
   ],
     imports: [
     RouterModule.forChild(routes),

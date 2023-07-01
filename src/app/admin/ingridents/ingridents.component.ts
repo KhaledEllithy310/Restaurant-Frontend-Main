@@ -8,7 +8,6 @@ import { IngridentsService } from './../../services/ingridents.service';
   styleUrls: ['./ingridents.component.css']
 })
 export class IngridentsComponent {
-
   ingridents: any;
   success!: string;
   errors: any = [];
@@ -28,5 +27,4 @@ export class IngridentsComponent {
   editIngrident(id: any) {
     this.router.navigate([`admin/ingridents/edit/${id}`])
   }
-
 }
