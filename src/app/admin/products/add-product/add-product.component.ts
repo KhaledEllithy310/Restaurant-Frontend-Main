@@ -35,6 +35,10 @@ export class AddProductComponent {
   statusText!: string;
   total_price: any = 0;
   submitted = false;
+  successMessage: any;
+  showSuccessMessage: any;
+  ErrorMessage: any;
+  showErroressage: any;
   // total_price = this.totalPriceProduct();
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('updatefileInput', { static: false }) updatefileInput!: ElementRef;
@@ -54,7 +58,7 @@ export class AddProductComponent {
       productName: ['', [Validators.required, Validators.minLength(2)]],
       productDescription: [''],
       image: ['', [Validators.required]],
-      productDiscount: ['', [Validators.required]],
+      productDiscount: [,],
       category_id: ['', [Validators.required]],
     });
 
@@ -141,14 +145,24 @@ export class AddProductComponent {
 
   //Create a new Product
   createProduct() {
+    // Set the submitted flag to true
     this.submitted = true;
+    // Check if the form is invalid
+    if (this.productForm.invalid) {
+      return;
+    }
+    // get the image file from the file input element
     let image = this.addfileInput.nativeElement.files[0];
-    console.log(this.productForm);
+    // console.log(this.productForm);
 
+    // create a new FormData object to send to the server
     const newProduct = new FormData();
     newProduct.append('name', this.productForm.value.productName);
     newProduct.append('description', this.productForm.value.productDescription);
-    newProduct.append('discount', this.productForm.value.productDiscount);
+    // add the product discount to the FormData object if it exists
+    if (this.productForm.value.productDiscount) {
+      newProduct.append('discount', this.productForm.value.productDiscount);
+    }
     newProduct.append('category_id', this.productForm.value.category_id);
     newProduct.append('total_price', this.total_price);
     newProduct.append('image', image);
@@ -164,20 +178,36 @@ export class AddProductComponent {
       });
     });
 
+    
     this.productsService.CreateProduct(newProduct).subscribe(
-      (response) => {
+      (response: any) => {
         console.log(response);
+        this.productForm.reset();
+        //empty the IngredientsList after add this product
+        this.IngredientsList = [];
+        //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
+        this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+        this.successMessage = response.message;
+        this.showSuccessMessage = true;
+
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 3000);
+
+        this.submitted = false; // Set submitted to false after reset
       },
       (error) => {
         console.log(error);
+        this.ErrorMessage = error.error.message;
+        this.showErroressage = true;
+        setTimeout(() => {
+          this.showErroressage = false;
+        }, 3000);
+        this.submitted = false; // Set submitted to false after reset
         // Handle error response
       }
     );
-    this.productForm.reset();
-    //empty the IngredientsList after add this product
-    this.IngredientsList = [];
-    //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
-    this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+
     // window.location.reload();
   }
 
@@ -331,40 +361,6 @@ export class AddProductComponent {
   //   //   .subscribe((res) => console.log(res));
   //   // window.location.reload();
   // }
-
-  //CREATE Table
-  productName: any;
-  productDescription: any;
-  productDiscount: any;
-  category_id: any;
-  status: any;
-  Ingredient: any;
-  Extra: any;
-
-  createProduct1() {
-    const image = this.addfileInput.nativeElement.files[0];
-    const formData = new FormData();
-    formData.set('productName', this.productName);
-    formData.set('productDescription', this.productDescription);
-    formData.set('productDiscount', this.productDiscount);
-    formData.set('image', image);
-    formData.set('category_id', this.category_id);
-    formData.set('status', this.status);
-    formData.set('Ingredient', this.Ingredient);
-    formData.set('Extra', this.Extra);
-    // console.log(formData.get('productName'));
-    // console.log(formData.get('productDescription'));
-    // console.log(formData.get('productDiscount'));
-    // console.log(formData.get('status'));
-    // console.log(formData.get('image'));
-    // console.log(formData.get('category_id'));
-    // console.log(formData.get('Ingredient'));
-    // console.log(formData.get('Extra'));
-    // this.addService.createBook(formData).subscribe((res) => console.log(res));
-    // this.getAllBook();
-    // console.log(data);
-    // window.location.reload();
-  }
 
   //Update Category
   name_updated: any;

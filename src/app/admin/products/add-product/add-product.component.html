@@ -10,7 +10,9 @@
         <div class="col">
           <div class="bgGreyLight_1 vertical_align_center">
             <h2 class="form_title">Add Product</h2>
-
+            <div *ngIf="showSuccessMessage" class="alert alert-success">
+              {{ successMessage }}
+            </div>
             <div class="row">
               <!--Start productName  Input -->
               <div class="col-xl-6 inputs__container">
@@ -18,8 +20,7 @@
                   type="text"
                   class="input__form"
                   formControlName="productName"
-                  placeholder="Product Name required"
-                  [(ngModel)]="productName"
+                  placeholder="Product Name Is Required"
                 />
                 <!-- Start Validation For productName  -->
 
@@ -167,24 +168,6 @@
               </div>
               <!--End productDescription  Input -->
 
-              <!--Start Status Input -->
-              <!-- <div class="col-xl-6 inputs__container">
-                <div class="align-items-center status_input">
-                  <label>Status</label>
-                  <div class="switch">
-                    <div class="switch__2">
-                      <input
-                        id="switch-2T2"
-                        type="checkbox"
-                        formControlName="status"
-                      />
-                      <label for="switch-2T2"></label>
-                    </div>
-                    <div>{{ statusText }}</div>
-                  </div>
-                </div>
-              </div> -->
-              <!--End Status Input -->
             </div>
           </div>
           <div *ngIf="productForm.invalid && submitted" class="text-danger">
@@ -192,14 +175,14 @@
               Please fill in all required fields.
             </p>
           </div>
+          <div *ngIf="showErroressage" class="text-danger">
+            <p class="alert alert-danger">
+              {{ ErrorMessage }}
+            </p>
+          </div>
           <div class="btn_container">
             <div class="ntn_add_form">
-              <button
-                type="submit"
-                class="admin__main__btn__form"
-                [disabled]="productForm.invalid"
-                (click)="createProduct1()"
-              >
+              <button type="submit" class="admin__main__btn__form">
                 Add Product
               </button>
             </div>
@@ -271,7 +254,6 @@
             <label for="" class="px-2">Ingredient Name</label>
             <select
               name="category_id"
-              [(ngModel)]="category_id"
               class="input__form"
               formControlName="Ingredient_id"
             >
@@ -308,7 +290,6 @@
               class="input__form"
               formControlName="Ingredient_Quantity"
               placeholder=""
-              [(ngModel)]="productName"
             />
             <!-- Start Validation For Ingredient Quantity  -->
             <div
@@ -386,7 +367,6 @@
             >
             <select
               name="category_id"
-              [(ngModel)]="category_id"
               class="input__form"
               formControlName="Ingredient_id"
             >
