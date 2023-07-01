@@ -20,7 +20,8 @@ import { CountnumberComponent } from './countnumber/CountnumberComponent';
     FeaturesSectionComponent,
     AboutusSectionComponent,
     ReservationComponent,
-    CountnumberComponent 
+    CountnumberComponent,
+    
     
 
   ],
@@ -31,7 +32,8 @@ import { CountnumberComponent } from './countnumber/CountnumberComponent';
     GuestbookComponent,
     FooterComponent,
     ReservationComponent,
-    CountnumberComponent 
+    CountnumberComponent,
+     
     
   ],
 })
