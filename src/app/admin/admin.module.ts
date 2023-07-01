@@ -16,6 +16,9 @@ import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
+import { AddTablesComponent } from './tables/add-tables/add-tables.component';
+import { UpdateTablesComponent } from './tables/update-tables/update-tables.component';
+import { DeleteTablesComponent } from './tables/delete-tables/delete-tables.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent},
@@ -27,7 +30,7 @@ const routes: Routes = [
   {path: 'ingridents/add', component: AddIngridentsComponent},
   {path: 'ingridents/edit/:id', component: EditIngridentsComponent},
   {path: 'kitchen', component: KitchenComponent},
-  { path: '', component: AdminComponent },
+  {path: '', component: AdminComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -67,6 +70,9 @@ const routes: Routes = [
     AddIngridentsComponent,
     EditIngridentsComponent,
     KitchenComponent,
+    AddTablesComponent,
+    UpdateTablesComponent,
+    DeleteTablesComponent,
   ],
     imports: [
     RouterModule.forChild(routes),

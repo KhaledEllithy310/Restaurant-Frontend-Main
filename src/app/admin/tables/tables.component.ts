@@ -112,4 +112,5 @@ export class TablesComponent {
     // console.log(data);
     // window.location.reload();
   }
+  
 }
