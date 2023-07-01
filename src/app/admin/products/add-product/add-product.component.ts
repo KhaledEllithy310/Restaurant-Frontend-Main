@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-add-product',
@@ -16,101 +20,225 @@ export class AddProductComponent {
   categories!: any[];
   Ingredients!: any[];
   productExtra!: any[];
-  ingredientsProducts: any[] = [];
+  IngredientsList: any[] = [];
   ExtraProducts: any[] = [];
-  ingredients: any[] = [
-    {
-      id: 1,
-      name: 'ingredient1',
-      Quantity_Stock: 1000,
-      price: 100,
-      profit: 0.1,
-    },
-    {
-      id: 2,
-      name: 'ingredient2',
-      Quantity_Stock: 2000,
-      price: 200,
-      profit: 0.2,
-    },
-    {
-      id: 3,
-      name: 'ingredient3',
-      Quantity_Stock: 3000,
-      price: 300,
-      profit: 0.3,
-    },
-    {
-      id: 4,
-      name: 'ingredient4',
-      Quantity_Stock: 4000,
-      price: 400,
-      profit: 0.4,
-    },
-  ];
+  ingredients!: any[];
   data!: any[];
   idCategory!: number;
-  tableForm!: FormGroup;
+  productForm!: FormGroup;
   ingredientsForm!: FormGroup;
   ExtraForm!: FormGroup;
   showIngredientsForm = false;
   showExtraForm = false;
   isIngredientsListEmpty: boolean = true;
   isExtraListEmpty: boolean = true;
+  statusText!: string;
+  total_price: any = 0;
+  submitted = false;
+  // total_price = this.totalPriceProduct();
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('updatefileInput', { static: false }) updatefileInput!: ElementRef;
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private productsService: ProductsService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit() {
-    this.tableForm = this.fb.group({
+    // call the all Ingredients
+    this.getAllIngredients();
+    // call the all categories
+    this.getAllCategory();
+    // this.checkStatusAvailable();
+    this.productForm = this.fb.group({
       productName: ['', [Validators.required, Validators.minLength(2)]],
       productDescription: [''],
-      status: [true],
       image: ['', [Validators.required]],
-      productDiscount: [''],
+      productDiscount: ['', [Validators.required]],
       category_id: ['', [Validators.required]],
     });
 
     this.ingredientsForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
       Ingredient_Quantity: ['', [Validators.required]],
-      Ingredient_Price: ['', [Validators.required]],
-      Ingredient_profit: ['', [Validators.required]],
+      // Ingredient_Price: ['', [Validators.required]],
+      // Ingredient_profit: ['', [Validators.required]],
     });
 
     this.ExtraForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
       Ingredient_Quantity: ['', [Validators.required]],
-      Ingredient_Price: ['', [Validators.required]],
-      Ingredient_profit: ['', [Validators.required]],
+      // Ingredient_Price: ['', [Validators.required]],
+      // Ingredient_profit: ['', [Validators.required]],
     });
   }
 
   get product_Name_Control() {
-    return this.tableForm.controls['productName'];
+    return this.productForm.controls['productName'];
   }
   get product_Description_Control() {
-    return this.tableForm.controls['productDescription'];
+    return this.productForm.controls['productDescription'];
   }
   get status_Control() {
-    return this.tableForm.controls['status'];
+    return this.productForm.controls['status'];
+  }
+  get product_Discount_Control() {
+    return this.productForm.controls['productDiscount'];
+  }
+  get product_image_Control() {
+    return this.productForm.controls['image'];
+  }
+  get category_id_Control() {
+    return this.productForm.controls['category_id'];
   }
 
+  //check if the status is available or unavailable
+  // checkStatusAvailable() {
+  //   this.productForm.get('status')?.valueChanges.subscribe((value) => {
+  //     this.statusText = value ? 'Available' : 'Unavailable';
+  //   });
+  // }
+
+  // const statusControl = this.productForm.get('status');
+  // if (statusControl) {
+  //   const statusValue = statusControl.value;
+  //   console.log(statusControl.value);
+
+  //   if (statusValue === true) {
+  //     this.isUnAvailable = false;
+  //     this.isAvailable = true;
+  //   } else {
+  //     this.isAvailable = false;
+  //     this.isUnAvailable = true;
+  //   }
+  // }
+  //Get All Categories
+  getAllCategory() {
+    this.categoryService.getCategory().subscribe(
+      (response: any) => {
+        this.categories = response.data;
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
+  }
+
+  getAllIngredients() {
+    this.productsService.getIngredients().subscribe(
+      (response: any) => {
+        this.ingredients = response.data;
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
+  }
+
+  //Create a new Product
   createProduct() {
+    this.submitted = true;
     let image = this.addfileInput.nativeElement.files[0];
-    // console.log(this.tableForm.value);
-    const newProduct = {
-      productName: this.tableForm.value.productName,
-      productDescription: this.tableForm.value.productDescription,
-      status: this.tableForm.value.status,
-      image: image,
-      productDiscount: this.tableForm.value.productDiscount,
-      category_id: this.tableForm.value.category_id,
-    };
-    console.log(newProduct);
+    console.log(this.productForm);
+
+    const newProduct = new FormData();
+    newProduct.append('name', this.productForm.value.productName);
+    newProduct.append('description', this.productForm.value.productDescription);
+    newProduct.append('discount', this.productForm.value.productDiscount);
+    newProduct.append('category_id', this.productForm.value.category_id);
+    newProduct.append('total_price', this.total_price);
+    newProduct.append('image', image);
+    // Convert the array of objects to an array of strings
+    const ingredientStrings = this.IngredientsList.map((ingredient) =>
+      JSON.stringify(ingredient)
+    );
+    // Append the array of strings to the FormData object
+    ingredientStrings.forEach((ingredientString, index) => {
+      const ingredientObj = JSON.parse(ingredientString);
+      Object.keys(ingredientObj).forEach((key) => {
+        newProduct.append(`ingredients[${index}][${key}]`, ingredientObj[key]);
+      });
+    });
+
+    this.productsService.CreateProduct(newProduct).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
+    this.productForm.reset();
+    //empty the IngredientsList after add this product
+    this.IngredientsList = [];
+    //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
+    this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+    // window.location.reload();
+  }
+
+  //Calculate the total price of  product
+  totalPriceProduct() {
+    let total_price = 0;
+
+    for (let i = 0; i < this.IngredientsList.length; i++) {
+      total_price += parseFloat(this.IngredientsList[i].total);
+    }
+    //set the total price variable {this.total_price } to append it in form data
+    this.total_price = total_price;
+    return total_price;
   }
 
   addIngredientsForProduct() {
+    //get selected Ingredient
+    let selectedIngredient = this.ingredients.find(
+      (elem) => elem.id == this.ingredientsForm.value.Ingredient_id
+    );
+    // get Ingredient Price
+    let Ingredient_Price = selectedIngredient.price;
+    //// console.log('Ingredient_Price', Ingredient_Price);
+
+    // get Ingredient Profit
+    let Ingredient_Profit = selectedIngredient.profit;
+    ////  console.log('Ingredient_Profit', Ingredient_Profit);
+
+    // get Ingredient Quantity that user enter it into the input field
+    let Ingredient_Quantity = this.ingredientsForm.value.Ingredient_Quantity;
+    // // console.log('Ingredient_Quantity', Ingredient_Quantity);
+
+    // get Ingredient name
+    let Ingredient_name = selectedIngredient.name;
+
+    //calculate the total price = price * quantity * (1 + Profit)
+    let finalPrice =
+      Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
+
+    //create new Ingredient to sent it to the server
+    const newIngredient = {
+      id: this.ingredientsForm.value.Ingredient_id,
+      name: Ingredient_name,
+      quantity: this.ingredientsForm.value.Ingredient_Quantity,
+      total: finalPrice.toFixed(2),
+    };
+
+    //  // console.log(newIngredient);
+    //store the new ingredient in the IngredientsList {array}
+    this.IngredientsList.push(newIngredient);
+    // // console.log(this.IngredientsList);
+    //Call totalPrice function to calculate the total price after adding the new ingredient
+    this.totalPriceProduct();
+    //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
+    this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+    //disappear the form after submit
+    this.showIngredientsForm = false;
+  }
+
+  addExtraForProduct() {
+    this.submitted = true;
     let ingredientPrice = document.getElementById(
       'ingredientPrice'
     ) as HTMLInputElement;
@@ -118,49 +246,20 @@ export class AddProductComponent {
       'ingredientProfit'
     ) as HTMLInputElement;
     let Ingredient_Price =
-      this.ingredientsForm.value.ingredientPrice || ingredientPrice.value;
+      this.ExtraForm.value.ingredientPrice || ingredientPrice.value;
     console.log('Ingredient_Price', Ingredient_Price);
 
     let Ingredient_Profit =
-      this.ingredientsForm.value.ingredientProfit || ingredientProfit.value;
+      this.ExtraForm.value.ingredientProfit || ingredientProfit.value;
     console.log('Ingredient_Profit', Ingredient_Profit);
-    let Ingredient_Quantity = this.ingredientsForm.value.Ingredient_Quantity;
-    console.log();
+    let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
 
     console.log('Ingredient_Quantity', Ingredient_Quantity);
     let finalPrice =
       Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
     let Ingredient_name = this.ingredients.find(
-      (elem) => elem.id == this.ingredientsForm.value.Ingredient_id
+      (elem) => elem.id == this.ExtraForm.value.Ingredient_id
     ).name;
-
-    console.log(Ingredient_name);
-
-    const newIngredient = {
-      id: this.ingredientsForm.value.Ingredient_id,
-      name: Ingredient_name,
-      Quantity: this.ingredientsForm.value.Ingredient_Quantity,
-      Price: finalPrice.toFixed(2),
-    };
-    console.log(newIngredient);
-    this.ingredientsProducts.push(newIngredient);
-    this.isIngredientsListEmpty = this.ingredientsProducts.length === 0;
-    this.showIngredientsForm = false;
-  }
-
-  addExtraForProduct() {
-    let ingredientPrice = document.getElementById('ingredientPrice') as HTMLInputElement;
-    let ingredientProfit = document.getElementById(  'ingredientProfit') as HTMLInputElement;
-    let Ingredient_Price =this.ExtraForm.value.ingredientPrice || ingredientPrice.value;
-    console.log('Ingredient_Price', Ingredient_Price);
-
-    let Ingredient_Profit =this.ExtraForm.value.ingredientProfit || ingredientProfit.value;
-    console.log('Ingredient_Profit', Ingredient_Profit);
-    let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
-
-    console.log('Ingredient_Quantity', Ingredient_Quantity);
-    let finalPrice =Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
-    let Ingredient_name = this.ingredients.find(  (elem) => elem.id == this.ExtraForm.value.Ingredient_id).name;
 
     console.log(Ingredient_name);
 
@@ -176,29 +275,29 @@ export class AddProductComponent {
     this.showExtraForm = false;
   }
 
-  selectedIngredient(event: any) {
-    console.log(event.target.value);
-    let ingredientSelected = this.ingredients.find(
-      (elem) => elem.id == event.target.value
-    );
-    console.log(ingredientSelected);
+  // selectedIngredient(event: any) {
+  //   console.log(event.target.value);
+  //   let ingredientSelected = this.ingredients.find(
+  //     (elem) => elem.id == event.target.value
+  //   );
+  //   console.log(ingredientSelected);
 
-    let ingredientPrice = document.getElementById(
-      'ingredientPrice'
-    ) as HTMLInputElement;
-    if (ingredientPrice) {
-      ingredientPrice.value = ingredientSelected.price;
-    }
+  //   let ingredientPrice = document.getElementById(
+  //     'ingredientPrice'
+  //   ) as HTMLInputElement;
+  //   if (ingredientPrice) {
+  //     ingredientPrice.value = ingredientSelected.price;
+  //   }
 
-    let ingredientProfit = document.getElementById(
-      'ingredientProfit'
-    ) as HTMLInputElement;
-    if (ingredientProfit) {
-      ingredientProfit.value = ingredientSelected.profit;
-    }
-  }
+  //   let ingredientProfit = document.getElementById(
+  //     'ingredientProfit'
+  //   ) as HTMLInputElement;
+  //   if (ingredientProfit) {
+  //     ingredientProfit.value = ingredientSelected.profit;
+  //   }
+  // }
   //GET ALL CATEGORIES
-  getAllCategory() {
+  getAllProduct() {
     // this.getdataService
     //   .getAllCategory()
     //   .subscribe((res: any) => (this.categories = res));

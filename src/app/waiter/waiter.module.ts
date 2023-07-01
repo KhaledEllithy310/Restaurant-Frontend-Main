@@ -14,7 +14,7 @@ import { TextMutedPipe } from '../pipes/text-muted.pipe';
 const routes: Routes = [
   {
     path: 'ProductList',
-    component: WaiterProductListComponent,
+    component: WaiterComponent,
   },
   {
     path: 'ProductDetail',
