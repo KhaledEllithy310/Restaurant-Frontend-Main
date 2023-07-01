@@ -78,7 +78,6 @@
               <input
                 type="text"
                 class="input__form"
-                [(ngModel)]="name"
                 formControlName="name"
                 placeholder="Category Name"
               />
@@ -128,7 +127,6 @@
               [disabled]="!categoryForm.valid"
               data-bs-dismiss="modal"
               aria-label="Close"
-              (click)="createCategory()"
             >
               Add Category
             </button>
@@ -146,7 +144,7 @@
     aria-labelledby="exampleModalLabe2"
     aria-hidden="true"
   >
-    <div class="modal-dialog ">
+    <div class="modal-dialog">
       <div class="modal-content form_admin_modal">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabe2">
@@ -159,28 +157,41 @@
             aria-label="Close"
           ></button>
         </div>
-        <form [formGroup]="updateCategoryForm" (ngSubmit)="createCategory()">
+        <form
+          [formGroup]="updateCategoryForm"
+          (ngSubmit)="updateCategory(idCategory)"
+        >
           <div class="modal-body bgGreyLight_1 vertical_align_center">
             <!-- <label for="" class="">Category Name</label> -->
             <div class="mb-2 inputs__container">
               <input
+                id="name_updated"
                 type="text"
                 class="input__form"
-                [(ngModel)]="name_updated"
                 formControlName="name_updated"
                 name="name_updated"
                 placeholder="Category Name"
+                value=""
               />
             </div>
-            <div class="mb-2 inputs__container">
+            <div class="mb-2 inputs__container form__modal__image">
               <label for="" class="px-2">Upload Image</label>
               <input
                 #updatefileInput
+                id="image_updated"
                 type="file"
                 class="input__form"
                 formControlName="image_updated"
                 ngModel
+                (change)="onImageChange($event)"
                 name="image_updated"
+                value=""
+              />
+              <img
+                [src]="imageUrl"
+                *ngIf="imageUrl"
+                width="40"
+                height="40"
               />
             </div>
           </div>
@@ -197,7 +208,6 @@
               class="admin__main__btn__form"
               data-bs-dismiss="modal"
               aria-label="Close"
-              (click)="updateCategory(idCategory)"
             >
               Update Category
             </button>

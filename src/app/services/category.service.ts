@@ -20,6 +20,11 @@ export class CategoryService {
   }
 
   UpdateCategory(data: any, id: any) {
-    return this.http.put('http://127.0.0.1:8000/api/category/' + id, data);
+    console.log(data.get('name'));
+    return this.http.post('http://127.0.0.1:8000/api/category/' + id, data);
+  }
+
+  getOldCategory(id: any) {
+    return this.http.get('http://127.0.0.1:8000/api/category/' + id + '/edit');
   }
 }

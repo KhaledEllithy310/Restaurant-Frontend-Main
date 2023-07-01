@@ -184,7 +184,7 @@
             <div class="col-12 container__Ingredients">
               <h4>Ingredients</h4>
               <div class="list__Ingredients">
-                <li *ngFor="let ingredient of ingredientsProducts">
+                <li *ngFor="let ingredient of IngredientsList">
                   <span>{{ ingredient.name }}</span>
                   <span>{{ ingredient.Quantity }}kg</span>
                   <span class="list__Ingredients__price"
@@ -275,7 +275,7 @@
           <!--End Ingredient Quantity Input -->
 
           <!--Start Ingredient Price  Input -->
-          <div class="col-xl-6 inputs__container">
+          <!-- <div class="col-xl-6 inputs__container">
             <label for="" class="px-2">Ingredient Price</label>
             <input
               id="ingredientPrice"
@@ -283,12 +283,13 @@
               class="input__form"
               name="Ingredient_Price"
               formControlName="Ingredient_Price"
+              [disabled]="isDisabled"
             />
-          </div>
+          </div> -->
           <!--End Ingredient Price  Input -->
 
           <!--Start Ingredient profit Input -->
-          <div class="col-xl-6 inputs__container">
+          <!-- <div class="col-xl-6 inputs__container">
             <label for="" class="px-2">Ingredient profit</label>
             <input
               id="ingredientProfit"
@@ -296,12 +297,15 @@
               class="input__form"
               name="Ingredient_profit"
               formControlName="Ingredient_profit"
+              disabled
             />
-          </div>
+          </div> -->
           <!--End Ingredient profit Input -->
         </div>
       </div>
-      <button type="submit" class="admin__main__btn__form">Add Ingredients</button>
+      <button type="submit" class="admin__main__btn__form">
+        Add Ingredients
+      </button>
     </form>
     <!-- End Form Add Ingredients -->
 
@@ -369,7 +373,7 @@
           <!--End Ingredient Quantity Input -->
 
           <!--Start Ingredient Price  Input -->
-          <div class="col-xl-6 inputs__container">
+          <!-- <div class="col-xl-6 inputs__container">
             <label for="" class="px-2">Extra Price</label>
             <input
               id="ingredientPrice"
@@ -378,11 +382,11 @@
               name="Ingredient_Price"
               formControlName="Ingredient_Price"
             />
-          </div>
+          </div> -->
           <!--End Ingredient Price  Input -->
 
           <!--Start Ingredient profit Input -->
-          <div class="col-xl-6 inputs__container">
+          <!-- <div class="col-xl-6 inputs__container">
             <label for="" class="px-2">Extra profit</label>
             <input
               id="ingredientProfit"
@@ -391,7 +395,7 @@
               name="Ingredient_profit"
               formControlName="Ingredient_profit"
             />
-          </div>
+          </div> -->
           <!--End Ingredient profit Input -->
         </div>
       </div>

@@ -57,7 +57,6 @@ input::placeholder {
   text-transform: capitalize;
 }
 
-
 input[type='file']::file-selector-button {
   margin-right: 10px;
   vertical-align: middle;
@@ -251,6 +250,16 @@ input[type='file']:hover::file-selector-button {
   border-radius: 20px;
   outline: 1px solid var(--special-text-color);
   outline-offset: 4px;
+}
+.form__modal__image {
+  position: relative;
+}
+.form__modal__image img {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  right: 0;
+  top: 43%;
 }
 /* End admin modal Forms */
 

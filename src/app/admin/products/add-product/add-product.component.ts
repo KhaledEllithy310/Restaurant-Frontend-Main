@@ -16,7 +16,7 @@ export class AddProductComponent {
   categories!: any[];
   Ingredients!: any[];
   productExtra!: any[];
-  ingredientsProducts: any[] = [];
+  IngredientsList: any[] = [];
   ExtraProducts: any[] = [];
   ingredients: any[] = [
     {
@@ -76,15 +76,15 @@ export class AddProductComponent {
     this.ingredientsForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
       Ingredient_Quantity: ['', [Validators.required]],
-      Ingredient_Price: ['', [Validators.required]],
-      Ingredient_profit: ['', [Validators.required]],
+      // Ingredient_Price: ['', [Validators.required]],
+      // Ingredient_profit: ['', [Validators.required]],
     });
 
     this.ExtraForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
       Ingredient_Quantity: ['', [Validators.required]],
-      Ingredient_Price: ['', [Validators.required]],
-      Ingredient_profit: ['', [Validators.required]],
+      // Ingredient_Price: ['', [Validators.required]],
+      // Ingredient_profit: ['', [Validators.required]],
     });
   }
 
@@ -134,40 +134,50 @@ export class AddProductComponent {
   }
 
   addIngredientsForProduct() {
-    let ingredientPrice = document.getElementById(
-      'ingredientPrice'
-    ) as HTMLInputElement;
-    let ingredientProfit = document.getElementById(
-      'ingredientProfit'
-    ) as HTMLInputElement;
-    let Ingredient_Price =
-      this.ingredientsForm.value.ingredientPrice || ingredientPrice.value;
-    console.log('Ingredient_Price', Ingredient_Price);
+    // let ingredientPrice = document.getElementById(
+    //   'ingredientPrice'
+    // ) as HTMLInputElement;
+    // let ingredientProfit = document.getElementById(
+    //   'ingredientProfit'
+    // ) as HTMLInputElement;
 
-    let Ingredient_Profit =
-      this.ingredientsForm.value.ingredientProfit || ingredientProfit.value;
-    console.log('Ingredient_Profit', Ingredient_Profit);
+    //get selected Ingredient
+    let selectedIngredient = this.ingredients.find(
+      (elem) => elem.id == this.ingredientsForm.value.Ingredient_id
+    );
+    // get Ingredient Price
+    let Ingredient_Price = selectedIngredient.price;
+    //// console.log('Ingredient_Price', Ingredient_Price);
+
+    // get Ingredient Profit
+    let Ingredient_Profit = selectedIngredient.profit;
+    ////  console.log('Ingredient_Profit', Ingredient_Profit);
+
+    // get Ingredient Quantity that user enter it into the input field
     let Ingredient_Quantity = this.ingredientsForm.value.Ingredient_Quantity;
-    console.log();
+    // // console.log('Ingredient_Quantity', Ingredient_Quantity);
 
-    console.log('Ingredient_Quantity', Ingredient_Quantity);
+    // get Ingredient name
+    let Ingredient_name = selectedIngredient.name;
+
+    //calculate the total price = price * quantity * (1 + Profit)
     let finalPrice =
       Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
-    let Ingredient_name = this.ingredients.find(
-      (elem) => elem.id == this.ingredientsForm.value.Ingredient_id
-    ).name;
 
-    console.log(Ingredient_name);
-
+    //create new Ingredient to sent it to the server
     const newIngredient = {
       id: this.ingredientsForm.value.Ingredient_id,
       name: Ingredient_name,
       Quantity: this.ingredientsForm.value.Ingredient_Quantity,
       Price: finalPrice.toFixed(2),
     };
+
     console.log(newIngredient);
-    this.ingredientsProducts.push(newIngredient);
-    this.isIngredientsListEmpty = this.ingredientsProducts.length === 0;
+    //store the new ingredient in the IngredientsList {array}
+    this.IngredientsList.push(newIngredient);
+    //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
+    this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+    //disappear the form after submit
     this.showIngredientsForm = false;
   }
 
