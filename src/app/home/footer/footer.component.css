@@ -11,7 +11,12 @@
   }
    /* Third column content here  */
 
- 
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
   
   #theseccloumn{
     text-align: center;
@@ -30,5 +35,8 @@
   span{
     font-size: 14px;
   } 
- 
- 
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -17,17 +17,10 @@ import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingriden
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReservationComponent } from './reservation/reservation.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  { path: '', component: AdminComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'users/add', component: AddUsersComponent },
-  { path: 'users/edit/:id', component: EditUsersComponent },
-  { path: 'ingridents', component: IngridentsComponent },
-  { path: 'ingridents/add', component: AddIngridentsComponent },
-  { path: 'ingridents/edit/:id', component: EditIngridentsComponent },
-  { path: 'kitchen', component: KitchenComponent },
   { path: '', component: AdminComponent },
   {
     path: 'dashboard',
@@ -43,6 +36,9 @@ const routes: Routes = [
       { path: 'ingridents', component: IngridentsComponent },
       { path: 'ingridents/add', component: AddIngridentsComponent },
       { path: 'ingridents/edit/:id', component: EditIngridentsComponent },
+      { path: 'kitchen', component: KitchenComponent },
+      { path: 'reservation', component: ReservationComponent },
+      { path: 'profile', component: ProfileComponent },
     ],
   },
 ];
@@ -68,6 +64,8 @@ const routes: Routes = [
     AddIngridentsComponent,
     EditIngridentsComponent,
     KitchenComponent,
+    ReservationComponent,
+    ProfileComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

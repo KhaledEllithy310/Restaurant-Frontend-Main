@@ -1,0 +1,55 @@
+<div class="container pt-5">
+  <span class="section-title">
+    <h2>Reservation</h2>
+    <hr>
+  </span>
+  <div class="filter">
+    <div class="filter-date">
+      <h6>filter by date: </h6>
+      <div class="date">
+        <label for="startDate">Start Date</label>
+        <input type="date" [(ngModel)]="startDate" id="startDate">
+      </div>
+      <div class="date">
+        <label for="endDate">End Date</label>
+        <input type="date" [(ngModel)]="endDate" id="endDate" (change)="filterDataByDate()">
+      </div>
+    </div>
+  </div>
+  <table class="table table-dark text-center">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Table Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="filterReservation && filterReservation.length > 0;">
+        <tr *ngFor="let reserve of filterReservation">
+          <td>{{reserve.id}}</td>
+          <td>{{reserve.start_date}}</td>
+          <td *ngIf="reserve.end_date == null">Not Selected</td>
+          <td *ngIf="reserve.end_date">{{reserve.end_date}}</td>
+          <td>{{reserve.status}}</td>
+          <td>{{reserve.customer.name}}</td>
+          <td>{{reserve.table.number}}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="(!filterReservation || filterReservation.length == 0);">
+        <tr *ngFor="let reservation of reservations">
+          <td>{{reservation.id}}</td>
+          <td>{{reservation.start_date}}</td>
+          <td *ngIf="reservation.end_date == null">Not Selected</td>
+          <td *ngIf="reservation.end_date">{{reservation.end_date}}</td>
+          <td>{{reservation.status}}</td>
+          <td>{{reservation.customer.name}}</td>
+          <td>{{reservation.table.number}}</td>
+        </tr>
+        </ng-container>
+    </tbody>
+  </table>
+</div>

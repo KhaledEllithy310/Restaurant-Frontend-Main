@@ -10,7 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class UsersComponent {
 
   users: any;
-
+  success!: string;
+  errors: any = [];
   constructor(private listusersService: UsersService, private router: Router) {}
 
 
@@ -18,11 +19,25 @@ export class UsersComponent {
     this.listusersService.listUsers().subscribe((res: any) => this.users = res.data)
   }
 
+  reload() {
+    location.reload();
+  }
 
   editUser(id: any) {
     this.router.navigate([`admin/users/edit/${id}`])
   }
   deleteUser(id: any) {
-      this.users = this.users?.filter((author:any) => author.id != id);
+      this.users = this.users?.filter((user:any) => user.id != id);
+      this.listusersService.deleteUserByID(id).subscribe({
+        next: (res: any) => {
+          this.success = res.message;
+          console.log(res, "response")
+        },
+        error: (err: any) => {
+          this.errors = err.error.errors;
+          console.log(err.error.errors, "errors");
+        }
+        
+      })
   }
 }

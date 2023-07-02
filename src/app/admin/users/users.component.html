@@ -1,4 +1,9 @@
-<div class="container my-5">
+<div class="container py-5">
+  <h2>Users</h2>
+  <hr>
+  <div *ngIf="success">
+    <div class="alert alert-danger text-center">{{success}}</div>
+  </div>
     <div class="d-flex mb-2">
         <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn">Add User <i class="fas fa-user-plus"></i></a>
     </div>
@@ -17,14 +22,14 @@
         <tbody>
           <tr *ngFor="let user of users">
             <th>{{user.id}}</th>
-            <th><img [src]='"http://127.0.0.1:8000"+user.image' alt="avatar" width="40"></th>
+            <th><img [src]='user.image ? "http://127.0.0.1:8000"+user.image : "assets/images/user.png"' alt="avatar" width="40"></th>
             <td>{{user.name}}</td>
             <td>{{user.role}}</td>
             <td>{{user.email}}</td>
             <td>{{user.phone}}</td>
             <td>
-                <button (click)="editUser(user.id)" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
-                <button (click)="deleteUser(user.id)" class="btn btn-danger delete-btn">Delete <i class="fas fa-xmark"></i></button>
+                <button (click)="editUser(user.id)" class="btn btn-info m-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
+                <button (click)="deleteUser(user.id)" class="btn btn-danger m-2 delete-btn">Delete <i class="fas fa-xmark"></i></button>
             </td>
           </tr>
         </tbody>

@@ -9,6 +9,7 @@ hr {
 }
 table {
     font-weight: 200;
+    box-shadow: 0px 0px 20px 3px #000;
 }
 .add-btn {
     background: none;
@@ -37,4 +38,16 @@ table {
 tr:hover {
     box-shadow: 2px 0px 0px #9c9c9c;
     transition: 0.5s;
+}
+.filter {
+    display: flex;
+    color: #eee;
+    justify-content: start;
+    align-items: center;
+    padding: 15px;
+    margin: 10px;
+}
+.filter .date {
+    display: flex;
+    flex-direction: column;
 }

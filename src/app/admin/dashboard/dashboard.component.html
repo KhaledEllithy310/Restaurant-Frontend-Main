@@ -8,7 +8,7 @@
       <ul class="nav">
         <li>
           <a
-            routerLink="/admin/dashboard/tables"
+            [routerLink]="'/admin/dashboard/tables'"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
           >
@@ -16,13 +16,38 @@
           </a>
         </li>
         <li>
-          <a routerLink="/admin/dashboard/Categories" routerLinkActive="active">
+          <a [routerLink]="'/admin/dashboard/profile'" routerLinkActive="active">
+            Profile
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/admin/dashboard/Categories'" routerLinkActive="active">
             Categories
           </a>
         </li>
         <li>
-          <a routerLink="/admin/dashboard/products" routerLinkActive="active">
+          <a [routerLink]="'/admin/dashboard/products'" routerLinkActive="active">
             Products
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/admin/dashboard/users'" routerLinkActive="active">
+            Users
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/admin/dashboard/ingridents'" routerLinkActive="active">
+            Ingridents
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/admin/dashboard/kitchen'" routerLinkActive="active">
+            Kitchen
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/admin/dashboard/reservation'" routerLinkActive="active">
+            Reservation
           </a>
         </li>
         <!-- <ul class="nav">
