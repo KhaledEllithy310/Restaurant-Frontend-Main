@@ -1,18 +1,26 @@
 <div
-  class="card item_product my-2 mx-auto"
+  class="card item_product mx-auto"
   data-bs-toggle="modal"
   data-bs-target="#staticBackdrop"
-  (click)="getProductDetail(item)"
 >
-  <img src="{{ item.image_url }}" class="card-img-top" alt="..." />
+  <div class="sale_item">sale</div>
+  <!-- <img src="{{ item.image_url }}" class="card-img-top" alt="..." /> -->
+  <img
+    src="../../../../assets/images/menu/order1.png"
+    class="card-img-top"
+    alt="..."
+    (click)="getProductDetail(item)"
+  />
   <div class="card-body">
-    <h5 class="card-title item_product_publisher">{{ item.publisher }}</h5>
-    <h5 class="card-title item_product_title">
-      {{ item.title | textMuted : 20 }}
+    <h5 class="card-title item_product_publisher">
+      {{ item.publisher | textMuted : 10 }}
     </h5>
-    <p class="card-text">
-      {{ item.social_rank }}
-    </p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <!-- <h5 class="card-title item_product_title">
+      {{ item.title | textMuted : 20 }}
+    </h5> -->
+    <p class="card_price">$9.99</p>
+    <a class="btn_cart">
+      <i class="fa-solid fa-cart-plus" (click)="add(item)"></i> add to cart
+    </a>
   </div>
 </div>

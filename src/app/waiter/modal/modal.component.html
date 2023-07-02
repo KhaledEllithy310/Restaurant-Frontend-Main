@@ -2,7 +2,6 @@
 <div
   class="modal fade"
   id="staticBackdrop"
-  data-bs-backdrop="static"
   data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="staticBackdropLabel"
@@ -42,7 +41,9 @@
             <p class="card-text">
               {{ productSelected.social_rank }}
             </p>
-            <button  class="btn btn-primary" (click)="add(productSelected)">add to cart</button>
+            <button class="btn btn-primary" (click)="add(productSelected)">
+              add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -56,12 +57,3 @@
   </div>
 </div>
 
-<!-- <div class="modal-body">
-  <h5 class="modal-title">ID:{{ productSelected.id }}</h5>
-  <p>title:{{ productSelected.title }}</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="onClose()">
-    Close
-  </button>
-</div> -->

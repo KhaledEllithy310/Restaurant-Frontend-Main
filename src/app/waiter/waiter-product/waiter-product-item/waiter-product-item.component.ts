@@ -11,7 +11,7 @@ export class WaiterProductItemComponent {
   // productSelected: any = {};
   products!: any;
   @Output() productSelected = new EventEmitter<any>();
-
+  @Output() item_card = new EventEmitter<any>();
   constructor(private displayProductService: GetDataService) {}
   ngOnInit(): void {
     // console.log('Product:', this.item);
@@ -24,9 +24,12 @@ export class WaiterProductItemComponent {
   //     .subscribe((res) => (this.products = res));
   // }
 
-
   getProductDetail(item: any) {
     this.productSelected.emit(item);
     // console.log(item);
+  }
+
+  add(productSelected: any) {
+    this.item_card.emit(productSelected);
   }
 }

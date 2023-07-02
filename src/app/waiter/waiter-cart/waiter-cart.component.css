@@ -1,3 +1,13 @@
+:root {
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
 .cart {
   background-color: #eee;
   /* height: 100%; */
@@ -27,8 +37,18 @@
   right: 10px;
   top: 100px;
   z-index: 1050;
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+  padding: 3px 10px;
+  cursor: pointer;
+  border: 1px solid var(--background-color-of-sections);
+  transition: all 0.2s linear;
 }
 
+.cart_btn:hover {
+  /* background-color: var(--main-color); */
+  color: white;
+}
 /* .offcanvas.offcanvas-end {
   top: 56px;
 } */

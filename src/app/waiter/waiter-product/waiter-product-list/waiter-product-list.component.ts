@@ -37,6 +37,5 @@ export class WaiterProductListComponent {
 
   addToCart(event: any) {
     this.cartservice.addToCart(event);
-
   }
 }

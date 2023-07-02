@@ -94,8 +94,6 @@ export class AddProductComponent {
     return this.productForm.controls['category_id'];
   }
 
-
-
   //Get All Categories
   getAllCategory() {
     this.categoryService.getCategory().subscribe(
@@ -135,7 +133,7 @@ export class AddProductComponent {
     // get the image file from the file input element
     let image = this.addfileInput.nativeElement.files[0];
     // console.log(this.productForm);
-
+    console.log(this.productForm.value);
     // create a new FormData object to send to the server
     const newProduct = new FormData();
     newProduct.append('name', this.productForm.value.productName);
@@ -164,6 +162,24 @@ export class AddProductComponent {
     // ** End append ingredients array in form data **
 
     // ** Start append Extra array of id in form data **
+    // const ExtraStrings = this.ExtraListId.map((Extra) => {
+    //   return JSON.stringify(Extra);
+    // });
+    // // Append the array of strings to the FormData object
+    // ExtraStrings.forEach((extraString: any, index) => {
+    //   const ExtraObj = JSON.parse(extraString);
+    //   Object.keys(ExtraObj).forEach((key) => {
+    //     newProduct.append(`extra[${index}]`, ExtraObj[key]);
+    //   });
+    // });
+
+    // const ExtraStrings = this.ExtraListId.map((Extra) => {
+    //   return JSON.stringify(Extra);
+    // });
+    // const myArray = [1, 2, 3];
+    for (let i = 0; i < this.ExtraListId.length; i++) {
+      newProduct.append('extra[]', this.ExtraListId[i]);
+    }
     // Convert the array of objects to an array of strings
 
     // convert array elements to integers
@@ -207,6 +223,10 @@ export class AddProductComponent {
         this.IngredientsList = [];
         //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
         this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+        //empty the ExtraList after add this product
+        this.ExtraList = [];
+        //check if the ExtraList is empty => return false and container__Ingredients__Extra is disappear
+        this.isExtraListEmpty = this.ExtraList.length === 0;
         this.successMessage = response.message;
         this.showSuccessMessage = true;
 
@@ -239,6 +259,8 @@ export class AddProductComponent {
     this.ExtraList.forEach((extra) => {
       total_price += +extra.total;
     });
+
+    this.total_price = total_price;
     return total_price;
   }
 
@@ -250,6 +272,7 @@ export class AddProductComponent {
     // get Ingredient Price
     let Ingredient_Price = selectedIngredient.price;
     //// console.log('Ingredient_Price', Ingredient_Price);
+    console.log(this.ingredientsForm.value);
 
     // get Ingredient Profit
     let Ingredient_Profit = selectedIngredient.profit;
@@ -292,6 +315,7 @@ export class AddProductComponent {
     // get Ingredient Price
     let Ingredient_Price = selectedIngredient.price;
     //// console.log('Ingredient_Price', Ingredient_Price);
+    console.log(this.ExtraForm.value);
 
     // get Ingredient Profit
     let Ingredient_Profit = selectedIngredient.profit;

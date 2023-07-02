@@ -22,6 +22,10 @@ export class CategoriesComponent {
   selectedFile: File | undefined;
   categoryForm!: FormGroup;
   updateCategoryForm!: FormGroup;
+  searchTerm: string = '';
+  pageSize = 8;
+  pageNumber = 1;
+  totalItems = 0;
   // category!: any;
   // nameControl: FormControl;
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
@@ -78,16 +82,29 @@ export class CategoriesComponent {
 
   //Get All Categories
   getAllCategory() {
-    this.categoryService.getCategory().subscribe(
+    this.categoryService.getCategoryPagination(this.pageNumber).subscribe(
       (response: any) => {
         this.categories = response.data;
+        this.totalItems = response.meta.total;
+        this.pageSize = response.meta.per_page;
         console.log(response);
+        console.log('   this.totalItems', this.totalItems);
+        console.log('   this.pageSize', this.pageSize);
       },
       (error) => {
         console.log(error);
         // Handle error response
       }
     );
+  }
+
+  onPageChange(event: any) {
+    // this.pageSize = event.pageSize;
+    console.log(event);
+
+    this.pageNumber = event;
+    // this.pageNumber = event.page;
+    this.getAllCategory();
   }
 
   deleteCategory(index: any) {
@@ -185,5 +202,17 @@ export class CategoriesComponent {
       }
     );
     window.location.reload();
+  }
+
+  onSearch() {
+    this.categoryService.onSearch(this.searchTerm).subscribe(
+      (Response: any) => {
+        this.categories = Response.data;
+        console.log(Response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -1,4 +1,18 @@
-/* .product_list {
-  background-color: bisque;
-  padding: 10px;
-}  */
+:root {
+  --background-color-card: #3d414a;
+  --background-item: #3d414a;
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
+.our_menu {
+  color: white;
+  color: var(--special-text-color);
+  text-align: left;
+  font-family: 'Domine', serif;
+}

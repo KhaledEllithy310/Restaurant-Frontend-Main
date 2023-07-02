@@ -8,6 +8,15 @@
   >
     Add
   </button>
+  <form (ngSubmit)="onSearch()">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      placeholder="Search"
+    />
+    <button type="submit">Search</button>
+  </form>
   <table
     class="table table-secondary table-striped table-hover table-bordered text-center mt-3"
   >
@@ -50,6 +59,12 @@
         </td>
       </tr>
     </tbody>
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [pageSize]="pageSize"
+      [(page)]="pageNumber"
+      (pageChange)="onPageChange($event)"
+    ></ngb-pagination>
   </table>
 
   <!-- Modal for Add Category -->
@@ -187,12 +202,7 @@
                 name="image_updated"
                 value=""
               />
-              <img
-                [src]="imageUrl"
-                *ngIf="imageUrl"
-                width="40"
-                height="40"
-              />
+              <img [src]="imageUrl" *ngIf="imageUrl" width="40" height="40" />
             </div>
           </div>
           <div class="modal-footer">

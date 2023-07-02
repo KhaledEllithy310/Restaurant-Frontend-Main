@@ -11,11 +11,17 @@ export class ProductsService {
   // getProduct() {
   //   return this.http.get('http://127.0.0.1:8000/api/products');
   // }
-  getProduct(pageNumber: number, pageSize: number) {
-    const params = new HttpParams()
-      .set('page', pageNumber.toString())
-      .set('per_page', pageSize.toString());
-    return this.http.get('http://127.0.0.1:8000/api/products', { params });
+
+  // getProduct(pageNumber: number, pageSize: number) {
+  //   const params = new HttpParams()
+  //     .set('page', pageNumber.toString())
+  //     .set('per_page', pageSize.toString());
+  //   return this.http.get('http://127.0.0.1:8000/api/products', { params });
+  // }
+  getProduct(pageNumber: number) {
+    return this.http.get(
+      `http://127.0.0.1:8000/api/products?page=${pageNumber}`
+    );
   }
 
   getIngredients() {
@@ -24,5 +30,9 @@ export class ProductsService {
 
   CreateProduct(data: any) {
     return this.http.post('http://127.0.0.1:8000/api/products', data);
+  }
+
+  change_status(id: any) {
+    return this.http.get('http://127.0.0.1:8000/api/products/status/' + id);
   }
 }
