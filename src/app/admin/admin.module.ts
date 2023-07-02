@@ -17,6 +17,7 @@ import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingriden
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent},
@@ -36,7 +37,8 @@ const routes: Routes = [
       { path: 'ingridents/add', component: AddIngridentsComponent },
       { path: 'ingridents/edit/:id', component: EditIngridentsComponent},
       { path: 'kitchen', component: KitchenComponent},
-      { path: 'reservation', component: ReservationComponent}
+      { path: 'reservation', component: ReservationComponent},
+      { path: 'profile', component: ProfileComponent}
     ],
   },
 ];
@@ -63,6 +65,7 @@ const routes: Routes = [
     EditIngridentsComponent,
     KitchenComponent,
     ReservationComponent,
+    ProfileComponent,
   ],
     imports: [
     RouterModule.forChild(routes),

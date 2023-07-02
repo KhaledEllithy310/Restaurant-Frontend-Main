@@ -25,6 +25,6 @@ export class IngridentsComponent {
     })
   }
   editIngrident(id: any) {
-    this.router.navigate([`admin/ingridents/edit/${id}`])
+    this.router.navigate([`admin/dashboard/ingridents/edit/${id}`])
   }
 }
