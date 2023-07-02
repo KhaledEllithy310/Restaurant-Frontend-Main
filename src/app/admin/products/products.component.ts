@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,6 +14,7 @@ export class ProductsComponent {
   totalItems = 0;
   products!: any[];
   searchTerm: string = '';
+  searchForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +28,16 @@ export class ProductsComponent {
   ngOnInit() {
     //call the  All Products
     this.getAllProducts();
+    //handel the search when the user clear the input search
+    this.searchForm = this.fb.group({
+      searchTerm: '',
+    });
+
+    this.searchForm.controls['searchTerm'].valueChanges.subscribe(
+      (term: string) => {
+        this.search(term);
+      }
+    );
   }
 
   //Get All Products
@@ -66,13 +77,27 @@ export class ProductsComponent {
   // }
 
   onSearch() {
-    // this.categoryService.onSearch(this.searchTerm).subscribe(
-    //   (Response) => {
+    // this.productsService.onSearch(this.searchTerm).subscribe(
+    //   (Response: any) => {
+    //     this.products = Response.data.data;
     //     console.log(Response);
     //   },
     //   (error) => {
     //     console.log(error);
     //   }
     // );
+  }
+
+  search(term: string) {
+    // Perform search using the term
+    this.productsService.onSearch(term).subscribe(
+      (Response: any) => {
+        this.products = Response.data.data;
+        console.log(Response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

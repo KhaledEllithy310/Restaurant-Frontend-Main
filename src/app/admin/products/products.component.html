@@ -3,12 +3,23 @@
 <!-- HTML template -->
 <div class="container good">
   <a class="btn__gen mt-3 btn__primary" [routerLink]="'add'"> AddProduct </a>
-  <form (ngSubmit)="onSearch()">
+  <!-- <form (ngSubmit)="onSearch()">
     <input
       type="text"
       [(ngModel)]="searchTerm"
       name="searchTerm"
       placeholder="Search"
+    />
+    <button type="submit">Search</button>
+  </form> -->
+
+  <form (ngSubmit)="onSearch()" id="search_form" [formGroup]="searchForm">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      placeholder="Search"
+      formControlName="searchTerm"
     />
     <button type="submit">Search</button>
   </form>

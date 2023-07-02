@@ -26,6 +26,8 @@ export class CategoriesComponent {
   pageSize = 8;
   pageNumber = 1;
   totalItems = 0;
+  searchForm!: FormGroup;
+
   // category!: any;
   // nameControl: FormControl;
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
@@ -38,6 +40,16 @@ export class CategoriesComponent {
   ) {}
 
   ngOnInit() {
+    this.searchForm = this.fb.group({
+      searchTerm: '',
+    });
+
+    this.searchForm.controls['searchTerm'].valueChanges.subscribe(
+      (term: string) => {
+        this.search(term);
+      }
+    );
+
     // call the all categories
     this.getAllCategory();
     //form group for add categoryForm
@@ -205,7 +217,20 @@ export class CategoriesComponent {
   }
 
   onSearch() {
-    this.categoryService.onSearch(this.searchTerm).subscribe(
+    // this.categoryService.onSearch(this.searchTerm).subscribe(
+    //   (Response: any) => {
+    //     this.categories = Response.data;
+    //     console.log(Response);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+  }
+  //search function
+  search(term: string) {
+    // Perform search using the term
+    this.categoryService.onSearch(term).subscribe(
       (Response: any) => {
         this.categories = Response.data;
         console.log(Response);

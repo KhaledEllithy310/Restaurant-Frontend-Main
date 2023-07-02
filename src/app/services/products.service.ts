@@ -35,4 +35,10 @@ export class ProductsService {
   change_status(id: any) {
     return this.http.get('http://127.0.0.1:8000/api/products/status/' + id);
   }
+
+  onSearch(searchTerm: any) {
+    return this.http.get(
+      'http://127.0.0.1:8000/api/search/product?keyword=' + searchTerm
+    );
+  }
 }

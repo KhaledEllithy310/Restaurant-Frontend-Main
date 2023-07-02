@@ -8,12 +8,13 @@
   >
     Add
   </button>
-  <form (ngSubmit)="onSearch()">
+  <form id="search_form" [formGroup]="searchForm">
     <input
       type="text"
       [(ngModel)]="searchTerm"
       name="searchTerm"
       placeholder="Search"
+      formControlName="searchTerm"
     />
     <button type="submit">Search</button>
   </form>
