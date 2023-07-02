@@ -236,6 +236,7 @@ export class CategoriesComponent {
         console.log(Response);
       },
       (error) => {
+        this.categories = error.error.data;
         console.log(error);
       }
     );
