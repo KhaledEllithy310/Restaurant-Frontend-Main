@@ -6,6 +6,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -13,15 +14,17 @@ import {
 })
 export class TablesComponent {
   categories!: any[];
+  tables!: any[];
   data!: any[];
   idCategory!: number;
   tableForm!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
+  khaled!: boolean;
+  constructor(private fb: FormBuilder, private aya: CategoryService) {}
   ngOnInit() {
+    this.getAllTables();
     this.tableForm = this.fb.group({
-      TableNo: ['', [Validators.required, Validators.minLength(2)]],
-      guest_numbers: ['', [Validators.required, Validators.minLength(2)]],
+      TableNo: ['', [Validators.required]],
+      guest_numbers: ['', [Validators.required]],
       status: [true],
     });
   }
@@ -40,10 +43,10 @@ export class TablesComponent {
   }
 
   //GET ALL CATEGORIES
-  getAllCategory() {
-    // this.getdataService
-    //   .getAllCategory()
-    //   .subscribe((res: any) => (this.categories = res));
+  getAllTables() {
+    this.aya
+      .getTable()
+      .subscribe((response: any) => (this.tables = response.data));
   }
 
   // createCategory(data: any) {

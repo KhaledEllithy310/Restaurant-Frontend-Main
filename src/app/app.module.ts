@@ -24,7 +24,6 @@ import { HomeModule } from './home/home.module';
     NgbModule,
     WaiterModule,
     RegisterModule,
-    NgbModule,
     AdminModule,
     HomeModule
   ],

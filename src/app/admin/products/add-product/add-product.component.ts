@@ -21,7 +21,9 @@ export class AddProductComponent {
   Ingredients!: any[];
   productExtra!: any[];
   IngredientsList: any[] = [];
-  ExtraProducts: any[] = [];
+  ExtraList: any[] = [];
+  ExtraListId: any[] = [];
+
   ingredients!: any[];
   data!: any[];
   idCategory!: number;
@@ -65,15 +67,11 @@ export class AddProductComponent {
     this.ingredientsForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
       Ingredient_Quantity: ['', [Validators.required]],
-      // Ingredient_Price: ['', [Validators.required]],
-      // Ingredient_profit: ['', [Validators.required]],
     });
 
     this.ExtraForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
       Ingredient_Quantity: ['', [Validators.required]],
-      // Ingredient_Price: ['', [Validators.required]],
-      // Ingredient_profit: ['', [Validators.required]],
     });
   }
 
@@ -96,26 +94,8 @@ export class AddProductComponent {
     return this.productForm.controls['category_id'];
   }
 
-  //check if the status is available or unavailable
-  // checkStatusAvailable() {
-  //   this.productForm.get('status')?.valueChanges.subscribe((value) => {
-  //     this.statusText = value ? 'Available' : 'Unavailable';
-  //   });
-  // }
 
-  // const statusControl = this.productForm.get('status');
-  // if (statusControl) {
-  //   const statusValue = statusControl.value;
-  //   console.log(statusControl.value);
 
-  //   if (statusValue === true) {
-  //     this.isUnAvailable = false;
-  //     this.isAvailable = true;
-  //   } else {
-  //     this.isAvailable = false;
-  //     this.isUnAvailable = true;
-  //   }
-  // }
   //Get All Categories
   getAllCategory() {
     this.categoryService.getCategory().subscribe(
@@ -130,6 +110,7 @@ export class AddProductComponent {
     );
   }
 
+  //Get All Ingredients
   getAllIngredients() {
     this.productsService.getIngredients().subscribe(
       (response: any) => {
@@ -166,10 +147,13 @@ export class AddProductComponent {
     newProduct.append('category_id', this.productForm.value.category_id);
     newProduct.append('total_price', this.total_price);
     newProduct.append('image', image);
+
+    // ** Start append ingredients array in form data **
     // Convert the array of objects to an array of strings
     const ingredientStrings = this.IngredientsList.map((ingredient) =>
       JSON.stringify(ingredient)
     );
+
     // Append the array of strings to the FormData object
     ingredientStrings.forEach((ingredientString, index) => {
       const ingredientObj = JSON.parse(ingredientString);
@@ -177,8 +161,44 @@ export class AddProductComponent {
         newProduct.append(`ingredients[${index}][${key}]`, ingredientObj[key]);
       });
     });
+    // ** End append ingredients array in form data **
 
-    
+    // ** Start append Extra array of id in form data **
+    // Convert the array of objects to an array of strings
+
+    // convert array elements to integers
+    // const extras = this.ExtraListId.map((value) => parseInt(value));
+    // newProduct.append('extra', extras);
+    // convert extras array to a JSON-formatted string
+    // const extrasJson = JSON.stringify(extras);
+    // // append extrasJson string to newProduct object
+    // newProduct.append('extra', extrasJson);
+    // console.log(newProduct.get('extra'));
+
+    // extras.forEach((value: string, index: string) => {
+    //   newProduct.append(`extra[${index}]`, value);
+    //   console.log(newProduct.get('extra'));
+    // });
+    // const ExtraStrings = this.ExtraListId.map((extra) => {
+    //   JSON.stringify(extra);
+    //   console.log(JSON.stringify(extra));
+    // });
+    // console.log('ExtraStrings', ExtraStrings);
+
+    // // Append the array of strings to the FormData object
+    // ExtraStrings.forEach((extraString: any, index) => {
+    //   console.log('extraString', extraString);
+    //   newProduct.append(`extra[${index}]`, extraString);
+
+    //   // const extraObj = JSON.parse(extraString);
+    //   // Object.keys(extraObj).forEach((key) => {
+    //   //   newProduct.append(`extra[${index}]`, extraObj[key]);
+    //   //   console.log(extraObj[key]);
+    //   // });
+    // });
+    // ** End append Extra array of id in form data **
+
+    //call the service and sent the request to the server
     this.productsService.CreateProduct(newProduct).subscribe(
       (response: any) => {
         console.log(response);
@@ -210,16 +230,15 @@ export class AddProductComponent {
 
     // window.location.reload();
   }
-
-  //Calculate the total price of  product
-  totalPriceProduct() {
+  //Calculate the total price of  product {Ingredient + extra}
+  calculate_total_price() {
     let total_price = 0;
-
-    for (let i = 0; i < this.IngredientsList.length; i++) {
-      total_price += parseFloat(this.IngredientsList[i].total);
-    }
-    //set the total price variable {this.total_price } to append it in form data
-    this.total_price = total_price;
+    this.IngredientsList.forEach((Ingredient) => {
+      total_price += +Ingredient.total;
+    });
+    this.ExtraList.forEach((extra) => {
+      total_price += +extra.total;
+    });
     return total_price;
   }
 
@@ -259,8 +278,6 @@ export class AddProductComponent {
     //store the new ingredient in the IngredientsList {array}
     this.IngredientsList.push(newIngredient);
     // // console.log(this.IngredientsList);
-    //Call totalPrice function to calculate the total price after adding the new ingredient
-    this.totalPriceProduct();
     //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
     this.isIngredientsListEmpty = this.IngredientsList.length === 0;
     //disappear the form after submit
@@ -268,42 +285,86 @@ export class AddProductComponent {
   }
 
   addExtraForProduct() {
-    this.submitted = true;
-    let ingredientPrice = document.getElementById(
-      'ingredientPrice'
-    ) as HTMLInputElement;
-    let ingredientProfit = document.getElementById(
-      'ingredientProfit'
-    ) as HTMLInputElement;
-    let Ingredient_Price =
-      this.ExtraForm.value.ingredientPrice || ingredientPrice.value;
-    console.log('Ingredient_Price', Ingredient_Price);
+    //get selected Ingredient
+    let selectedIngredient = this.ingredients.find(
+      (elem) => elem.id == this.ExtraForm.value.Ingredient_id
+    );
+    // get Ingredient Price
+    let Ingredient_Price = selectedIngredient.price;
+    //// console.log('Ingredient_Price', Ingredient_Price);
 
-    let Ingredient_Profit =
-      this.ExtraForm.value.ingredientProfit || ingredientProfit.value;
-    console.log('Ingredient_Profit', Ingredient_Profit);
+    // get Ingredient Profit
+    let Ingredient_Profit = selectedIngredient.profit;
+    ////  console.log('Ingredient_Profit', Ingredient_Profit);
+
+    // get Ingredient Quantity that user enter it into the input field
     let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
+    // // console.log('Ingredient_Quantity', Ingredient_Quantity);
 
-    console.log('Ingredient_Quantity', Ingredient_Quantity);
+    // get Ingredient name
+    let Ingredient_name = selectedIngredient.name;
+
+    //calculate the total price = price * quantity * (1 + Profit)
     let finalPrice =
       Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
-    let Ingredient_name = this.ingredients.find(
-      (elem) => elem.id == this.ExtraForm.value.Ingredient_id
-    ).name;
 
-    console.log(Ingredient_name);
-
+    //create new Extra to sent it to the server
+    const ExtraId = {
+      id: this.ExtraForm.value.Ingredient_id,
+    };
+    //create new Extra to Show it in the browser for the user
     const newExtra = {
       id: this.ExtraForm.value.Ingredient_id,
       name: Ingredient_name,
-      Quantity: this.ExtraForm.value.Ingredient_Quantity,
-      Price: finalPrice.toFixed(2),
+      quantity: this.ExtraForm.value.Ingredient_Quantity,
+      total: finalPrice.toFixed(2),
     };
-    console.log(newExtra);
-    this.ExtraProducts.push(newExtra);
-    this.isExtraListEmpty = this.ExtraProducts.length === 0;
+
+    //  // console.log(newIngredient);
+    //store the new Extra in the ExtraList {array}
+    this.ExtraList.push(newExtra);
+
+    //store the new Extra in the ExtraList {array}
+    this.ExtraListId.push(ExtraId.id);
+    console.log(this.ExtraListId);
+
+    // // console.log(this.IngredientsList);
+    //check if the ExtraList is empty => return false and container__Ingredients__Extra is disappear
+    this.isExtraListEmpty = this.ExtraList.length === 0;
+    //disappear the form after submit
     this.showExtraForm = false;
   }
+
+  // addExtraForProduct() {
+  //   this.submitted = true;
+
+  //   let Ingredient_Price = this.ExtraForm.value.ingredientPrice;
+  //   console.log('Ingredient_Price', Ingredient_Price);
+
+  //   let Ingredient_Profit = this.ExtraForm.value.ingredientProfit;
+  //   console.log('Ingredient_Profit', Ingredient_Profit);
+  //   let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
+
+  //   console.log('Ingredient_Quantity', Ingredient_Quantity);
+  //   let finalPrice =
+  //     Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
+  //   let Ingredient_name = this.ingredients.find(
+  //     (elem) => elem.id == this.ExtraForm.value.Ingredient_id
+  //   ).name;
+
+  //   console.log(Ingredient_name);
+
+  //   const newExtra = {
+  //     id: this.ExtraForm.value.Ingredient_id,
+  //     name: Ingredient_name,
+  //     Quantity: this.ExtraForm.value.Ingredient_Quantity,
+  //     Price: finalPrice.toFixed(2),
+  //   };
+  //   console.log(newExtra);
+  //   this.ExtraList.push(newExtra);
+  //   this.isExtraListEmpty = this.ExtraList.length === 0;
+  //   this.showExtraForm = false;
+  // }
 
   // selectedIngredient(event: any) {
   //   console.log(event.target.value);
@@ -326,57 +387,4 @@ export class AddProductComponent {
   //     ingredientProfit.value = ingredientSelected.profit;
   //   }
   // }
-  //GET ALL CATEGORIES
-  getAllProduct() {
-    // this.getdataService
-    //   .getAllCategory()
-    //   .subscribe((res: any) => (this.categories = res));
-  }
-
-  // createCategory(data: any) {
-  //   // this.addService.createCategory(data).subscribe((res) => console.log(res));
-  //   // this.getAllCategory();
-  //   // window.location.reload();
-  // }
-
-  deleteCategory(index: any) {
-    // let category = document.getElementById(`cate${index}`);
-    // category?.remove();
-    // let idCategory = this.categories[index]._id;
-    // this.deleteService
-    //   .deleteCategory(idCategory)
-    //   .subscribe((res) => console.log(res));
-    // console.log(this.categories);
-    // window.location.reload();
-  }
-
-  //GET THE ID OF THE OBJECT
-  getIdCategory(idCategory: any) {
-    // this.idCategory = idCategory;
-  }
-
-  // updateCategory(data: any, idCategory: any) {
-  //   // this.updateService
-  //   //   .updateCategory(idCategory, data)
-  //   //   .subscribe((res) => console.log(res));
-  //   // window.location.reload();
-  // }
-
-  //Update Category
-  name_updated: any;
-  image_updated: any;
-
-  updateTable() {
-    // const image_updated = this.updatefileInput.nativeElement.files[0];
-    // console.log('image_updated', image_updated);
-    // const formData = new FormData();
-    // formData.set('name_updated', this.name_updated);
-    // formData.append('image_updated', image_updated);
-    // console.log(formData.get('name_updated'));
-    // console.log(formData.get('image_updated'));
-    // this.addService.createBook(formData).subscribe((res) => console.log(res));
-    // this.getAllBook();
-    // console.log(data);
-    // window.location.reload();
-  }
 }

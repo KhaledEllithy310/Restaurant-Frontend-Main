@@ -167,7 +167,6 @@
                 <!-- End Validation For productDescription -->
               </div>
               <!--End productDescription  Input -->
-
             </div>
           </div>
           <div *ngIf="productForm.invalid && submitted" class="text-danger">
@@ -217,18 +216,19 @@
                   >
                 </li>
                 <div class="total_price_ingredient">
-                  total price = <span>${{ totalPriceProduct() }}</span>
+                  total price =
+                  <span>${{ calculate_total_price() }}</span>
                 </div>
               </div>
             </div>
             <div class="col-12 container__Extra">
               <h4>Extra</h4>
               <div class="list__Ingredients">
-                <li *ngFor="let Extra of ExtraProducts">
+                <li *ngFor="let Extra of ExtraList">
                   <span>{{ Extra.name }}</span>
-                  <span>{{ Extra.Quantity }}kg</span>
+                  <span>{{ Extra.quantity }}kg</span>
                   <span class="list__Ingredients__price"
-                    >${{ Extra.Price }}</span
+                    >${{ Extra.total }}</span
                   >
                 </li>
               </div>

@@ -21,39 +21,63 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>1</th>
-        <td>hot dog</td>
-        <td>Good</td>
-        <td><img src="" alt="image" /></td>
-        <td>50%</td>
+      <!-- <tr
+        *ngFor="
+          let product of products
+            | slice : (page - 1) * pageSize : page * pageSize
+        "
+      > -->
+      <tr *ngFor="let product of products">
+        <th>{{ product.id }}</th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description || "No Descri.." }}</td>
+        <td>
+          <img
+            [src]="'http://127.0.0.1:8000' + product.image"
+            alt="image"
+            width="30"
+            height="30"
+          />
+        </td>
+        <td>{{ product.discount || "%0" }}</td>
         <td class="text-center">
           <div class="switch">
             <div class="switch__2">
               <input
-                id="switch-2"
+                id="switch-2-P-No{{ product.id }}"
                 type="checkbox"
                 checked
                 formControlName="status"
               />
-              <label for="switch-2"></label>
+              <label for="switch-2-P-No{{ product.id }}"></label>
             </div>
           </div>
         </td>
-        <td>ay 7aga</td>
-        <td>meat , rice</td>
-        <td>cheese</td>
+        <td>{{ product.category_id || "wrong" }}</td>
+        <td>
+          <select name="Ingredients" id="Ingredients">
+            <option
+              *ngFor="let Ingredient of product.ingredients"
+              value="{{ Ingredient.id }}"
+            >
+              {{ Ingredient.name || "No Ingredient" }}
+            </option>
+          </select>
+        </td>
+        <td>{{ product.extra || "No Extra" }}</td>
         <td class="btn_container">
-          <div class="btn btn__gen btn-danger btn_actions">Delete</div>
-          <div
-            class="btn btn__gen btn_actions btn-warning"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal2"
-          >
-            Update
-          </div>
+          <div class="btn btn__gen btn_actions btn-warning">Update</div>
         </td>
       </tr>
     </tbody>
   </table>
+  <!-- <ngb-pagination
+    [pageSize]="pageSize"
+    [collectionSize]="totalItems"
+    [(page)]="pageNumber"
+    (pageChange)="onPageChange($event)"
+    [maxSize]="10"
+    [boundaryLinks]="true"
+  >
+  </ngb-pagination> -->
 </div>

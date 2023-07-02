@@ -1,114 +1,55 @@
 import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { ProductsService } from 'src/app/services/products.service';
+import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
-  categories!: any[];
-  data!: any[];
-  idCategory!: number;
-  tableForm!: FormGroup;
+  pageSize = 10;
+  pageNumber = 1;
+  totalItems = 0;
+  products!: any[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private productsService: ProductsService,
+    config: NgbPaginationConfig
+  ) {
+    // customize default values of pagination controls
+    // config.maxSize = 10;
+    // config.pageSize = this.pageSize;
+    // config.boundaryLinks = true;
+  }
   ngOnInit() {
-    this.tableForm = this.fb.group({
-      TableNo: ['', [Validators.required, Validators.minLength(2)]],
-      guest_numbers: ['', [Validators.required, Validators.minLength(2)]],
-      status: [true],
-    });
-  }
-  get guest_numbers_Control() {
-    return this.tableForm.controls['guest_numbers'];
-  }
-  get TableNo_Control() {
-    return this.tableForm.controls['TableNo'];
-  }
-  get status_Control() {
-    return this.tableForm.controls['status'];
+    //call the  All Products
+    this.getAllProducts();
   }
 
-  createTable() {
-    console.log(this.tableForm.value);
+  //Get All Products
+  getAllProducts() {
+    this.productsService.getProduct(this.pageNumber, this.pageSize).subscribe(
+      (response: any) => {
+        this.products = response.data;
+        this.totalItems = response.total;
+        console.log(this.totalItems);
+
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
   }
 
-  //GET ALL CATEGORIES
-  getAllCategory() {
-    // this.getdataService
-    //   .getAllCategory()
-    //   .subscribe((res: any) => (this.categories = res));
-  }
-
-  // createCategory(data: any) {
-  //   // this.addService.createCategory(data).subscribe((res) => console.log(res));
-  //   // this.getAllCategory();
-  //   // window.location.reload();
+  // onPageChange(event: any) {
+  //   this.pageSize = event.pageSize;
+  //   this.pageNumber = event.page;
+  //   // this.pageNumber = event.page;
+  //   this.getAllProducts();
   // }
-
-  deleteCategory(index: any) {
-    // let category = document.getElementById(`cate${index}`);
-    // category?.remove();
-    // let idCategory = this.categories[index]._id;
-    // this.deleteService
-    //   .deleteCategory(idCategory)
-    //   .subscribe((res) => console.log(res));
-    // console.log(this.categories);
-    // window.location.reload();
-  }
-
-  //GET THE ID OF THE OBJECT
-  getIdCategory(idCategory: any) {
-    // this.idCategory = idCategory;
-  }
-
-  // updateCategory(data: any, idCategory: any) {
-  //   // this.updateService
-  //   //   .updateCategory(idCategory, data)
-  //   //   .subscribe((res) => console.log(res));
-  //   // window.location.reload();
-  // }
-
-  //CREATE Table
-  guest_numbers: any;
-  TableNo: any;
-  status: any;
-
-  createTable1() {
-    const formData = new FormData();
-    formData.set('TableNo', this.TableNo);
-    formData.set('guest_numbers', this.guest_numbers);
-    formData.set('status', this.status);
-    console.log(formData.get('TableNo'));
-    console.log(formData.get('guest_numbers'));
-    console.log(formData.get('status'));
-
-    // this.addService.createBook(formData).subscribe((res) => console.log(res));
-    // this.getAllBook();
-    // console.log(data);
-    // window.location.reload();
-  }
-
-  //Update Category
-  name_updated: any;
-  image_updated: any;
-
-  updateTable() {
-    // const image_updated = this.updatefileInput.nativeElement.files[0];
-    // console.log('image_updated', image_updated);
-    // const formData = new FormData();
-    // formData.set('name_updated', this.name_updated);
-    // formData.append('image_updated', image_updated);
-    // console.log(formData.get('name_updated'));
-    // console.log(formData.get('image_updated'));
-    // this.addService.createBook(formData).subscribe((res) => console.log(res));
-    // this.getAllBook();
-    // console.log(data);
-    // window.location.reload();
-  }
 }

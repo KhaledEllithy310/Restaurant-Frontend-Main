@@ -16,17 +16,18 @@ import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
-  {path: '', component: AdminComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'users', component: UsersComponent},
-  {path: 'users/add', component: AddUsersComponent},
-  {path: 'users/edit/:id', component: EditUsersComponent},
-  {path: 'ingridents', component: IngridentsComponent},
-  {path: 'ingridents/add', component: AddIngridentsComponent},
-  {path: 'ingridents/edit/:id', component: EditIngridentsComponent},
-  {path: 'kitchen', component: KitchenComponent},
+  { path: '', component: AdminComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'users/add', component: AddUsersComponent },
+  { path: 'users/edit/:id', component: EditUsersComponent },
+  { path: 'ingridents', component: IngridentsComponent },
+  { path: 'ingridents/add', component: AddIngridentsComponent },
+  { path: 'ingridents/edit/:id', component: EditIngridentsComponent },
+  { path: 'kitchen', component: KitchenComponent },
   { path: '', component: AdminComponent },
   {
     path: 'dashboard',
@@ -68,12 +69,13 @@ const routes: Routes = [
     EditIngridentsComponent,
     KitchenComponent,
   ],
-    imports: [
+  imports: [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
     NgbDropdownModule,
     CommonModule,
+    NgbModule,
   ],
   exports: [AdminComponent],
 })

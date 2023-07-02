@@ -21,19 +21,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>1</th>
-        <td>4</td>
+      <tr *ngFor="let table of tables; let i = index" id="cate{{ i }}">
+        <th>{{ table.number }}</th>
+        <td>{{ table.guest_numbers }}</td>
         <td class="text-center">
           <div class="switch">
             <div class="switch__2">
               <input
-                id="switch-2"
+                id="switch-2TNo{{ table.number }}"
                 type="checkbox"
                 checked
                 formControlName="status"
               />
-              <label for="switch-2"></label>
+              <label for="switch-2TNo{{ table.number }}"></label>
             </div>
           </div>
         </td>
