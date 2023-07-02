@@ -14,7 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,7 +25,9 @@ import { HomeModule } from './home/home.module';
     WaiterModule,
     RegisterModule,
     AdminModule,
-    HomeModule
+    HomeModule,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent],

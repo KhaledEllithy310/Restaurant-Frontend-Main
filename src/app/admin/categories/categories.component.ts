@@ -122,7 +122,7 @@ export class CategoriesComponent {
   deleteCategory(index: any) {
     let category = document.getElementById(`cate${index}`);
     category?.remove();
-    let idCategory = this.categories[index].id;
+     let idCategory = this.categories[index].id;
     this.categoryService.DeleteCategory(idCategory).subscribe(
       (response: any) => {
         console.log(response);

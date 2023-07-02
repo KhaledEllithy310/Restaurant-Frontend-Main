@@ -1,0 +1,96 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+   
+   background-color: #0e1317;
+}
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+label {
+  display: block;
+  font-weight:300;
+  margin-bottom: 2px;
+  font-size: 13PX;
+  color: white;
+}
+
+input {
+  margin-top: 5px;
+  width: 90%;
+  font-size: 13px;
+  border: none;
+  border-bottom: 1px solid gold;
+  background-color: transparent;
+  align-items: center;
+  
+}
+
+button[type="submit"] {
+  background-color: #c39c6e;
+  color: white; 
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  border-radius: none;
+  margin-top: 10px;
+ 
+}
+
+button[type="submit"]:hover {
+  background-color: black;
+}
+/* this is for make the colum two */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.left-column {
+  width: 50%;
+ 
+}
+
+.right-column {
+  width: 50%;
+   /* background-color: black;
+   opacity: 50%; */
+}
+
+p{
+    color: white;
+    font-size: 15px;
+}
+/* .counter {
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  animation: count-up 2s ease-in-out forwards;
+} */
+
+/* .counter {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+.counter-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  padding: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 10px;
+} */

@@ -1,0 +1,169 @@
+import { Component, ViewChild , ElementRef,  OnInit } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+@Component({
+  selector: 'app-countnumber',
+  templateUrl: './countnumber.component.html',
+  styleUrls: ['./countnumber.component.css']
+})
+export class CountnumberComponent  implements OnInit {
+  // projectcount:number = 0;
+  // clientcount:number =0;
+  // coffecups:number =0;
+  // sushitypes:number = 0;
+  // projectcountstop:any = setInterval(()=>{
+  //   this.projectcount ++;
+  //   if(this.projectcount ==200)
+  //   {
+  //     clearInterval(this.projectcountstop);
+  //   }
+  // },50)
+
+  // clientcountstop:any = setInterval(()=>{
+  //   this.clientcount ++;
+  //   if(this.clientcount ==180)
+  //   {
+  //     clearInterval(this.clientcountstop);
+  //   }
+  // },50)
+
+  // coffecupsstop:any = setInterval(()=>{
+  //   this.coffecups ++;
+  //   if(this.coffecups==350)
+  //   {
+  //     clearInterval(this.coffecupsstop);
+  //   }
+  // },50)
+  // sushitypesstop:any = setInterval(()=>{
+  //   this.sushitypes ++;
+  //   if(this.sushitypes==20)
+  //   {
+  //     clearInterval(this.sushitypesstop);
+  //   }
+  // },50)
+  @ViewChild('counterRef', { static: true }) counterElement1!: ElementRef;
+  @ViewChild('counterRef2', { static: true }) counterElement2!: ElementRef;
+  @ViewChild('counterRef3', { static: true }) counterElement3!: ElementRef;
+
+  counter1$: Observable<number> | null = null;
+  counter2$: Observable<number> | null = null;
+  counter3$: Observable<number> | null = null;
+
+  MAX_COUNT_1 = 10;
+  MAX_COUNT_2 = 15;
+  MAX_COUNT_3 = 15; 
+
+  constructor() { }
+
+  ngOnInit() {
+    const options = {
+      rootMargin: '-50px 0px',
+      threshold: 0
+    };
+
+    const observer1 = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (this.counter1$ === null) {
+          this.counter1$ = new Observable<number>(observer => {
+            let count = 0;
+            const intervalId = setInterval(() => {
+              if (count <= this.MAX_COUNT_1) {
+                observer.next(count++);
+              } else {
+                observer.complete();
+              }
+            }, 500);
+
+            return () => {
+              clearInterval(intervalId);
+              observer.complete();
+            };
+          });
+
+          this.counter1$.subscribe(count => {
+            this.counterElement1.nativeElement.innerHTML = count.toString();
+          });
+
+          observer1.unobserve(this.counterElement1.nativeElement);
+
+          setTimeout(() => {
+            this.counter1$ = null;
+            this.counterElement1.nativeElement.innerHTML = 'Done!';
+          }, 5000);
+        }
+      }
+    }, options);
+
+    const observer2 = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (this.counter2$ === null) {
+          this.counter2$ = new Observable<number>(observer => {
+            let count = 0;
+            const intervalId = setInterval(() => {
+              if (count <= this.MAX_COUNT_2) {
+                observer.next(count++);
+              } else {
+                observer.complete();
+              }
+            }, 750);
+
+            return () => {
+              clearInterval(intervalId);
+              observer.complete();
+            };
+          });
+
+          this.counter2$.subscribe(count => {
+            this.counterElement2.nativeElement.innerHTML = count.toString();
+          });
+
+          observer3.unobserve(this.counterElement2.nativeElement);
+
+          setTimeout(() => {
+            this.counter3$ = null;
+            this.counterElement2.nativeElement.innerHTML = 'Done!';
+          }, 11250);
+        }
+      }
+    }, options);
+  //  this is for counter3
+    const observer3 = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (this.counter3$ === null) {
+          this.counter3$ = new Observable<number>(observer => {
+            let count = 0;
+            const intervalId = setInterval(() => {
+              if (count <= this.MAX_COUNT_3) {
+                observer.next(count++);
+              } else {
+                observer.complete();
+              }
+            }, 750);
+
+            return () => {
+              clearInterval(intervalId);
+              observer.complete();
+            };
+          });
+
+          this.counter3$.subscribe(count => {
+            this.counterElement3.nativeElement.innerHTML = count.toString();
+          });
+
+          observer2.unobserve(this.counterElement3.nativeElement);
+
+          setTimeout(() => {
+            this.counter3$ = null;
+            // this.counterElement3.nativeElement.innerHTML = 'Done!';
+          }, 11250);
+        }
+      }
+    }, options);
+
+    observer1.observe(this.counterElement1.nativeElement);
+    observer2.observe(this.counterElement2.nativeElement);
+    observer3.observe(this.counterElement3.nativeElement);
+  }
+}
+
+
