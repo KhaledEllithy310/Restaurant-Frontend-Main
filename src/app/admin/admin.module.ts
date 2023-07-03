@@ -49,12 +49,6 @@ const routes: Routes = [
   },
 ];
 
-// const routes: Routes = [
-//   {path: '', component: AdminComponent},
-//   {path: 'dashboard', component: DashboardComponent},
-
-// ];
-
 @NgModule({
   declarations: [
     AdminComponent,
