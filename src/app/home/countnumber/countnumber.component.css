@@ -1,11 +1,16 @@
 
-h4{
+.backgroundcolor{
    color: #c39c6e; 
    text-align: center;
+   font-size: 30px;
 }
-p{
+.backgroundcolor div {
+  color: inherit;
+  font-size: inherit;
+}
+p,div{
   color: white;  
-  font-size: 15px;
+  font-size: 12px;
   text-align: center;
   font-family:  'cursive';
 }

@@ -44,14 +44,17 @@ export class CountnumberComponent  implements OnInit {
   @ViewChild('counterRef', { static: true }) counterElement1!: ElementRef;
   @ViewChild('counterRef2', { static: true }) counterElement2!: ElementRef;
   @ViewChild('counterRef3', { static: true }) counterElement3!: ElementRef;
+  @ViewChild('counterRef4', { static: true }) counterElement4!: ElementRef;
 
   counter1$: Observable<number> | null = null;
   counter2$: Observable<number> | null = null;
   counter3$: Observable<number> | null = null;
+  counter4$: Observable<number> | null = null;
 
-  MAX_COUNT_1 = 10;
-  MAX_COUNT_2 = 15;
-  MAX_COUNT_3 = 15; 
+  MAX_COUNT_1 = 200;
+  MAX_COUNT_2 = 180;
+  MAX_COUNT_3 = 350; 
+  MAX_COUNT_4 = 20; 
 
   constructor() { }
 
@@ -60,7 +63,7 @@ export class CountnumberComponent  implements OnInit {
       rootMargin: '-50px 0px',
       threshold: 0
     };
-
+    //  this is for the first counter
     const observer1 = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         if (this.counter1$ === null) {
@@ -72,7 +75,7 @@ export class CountnumberComponent  implements OnInit {
               } else {
                 observer.complete();
               }
-            }, 500);
+            }, 130);
 
             return () => {
               clearInterval(intervalId);
@@ -88,12 +91,12 @@ export class CountnumberComponent  implements OnInit {
 
           setTimeout(() => {
             this.counter1$ = null;
-            this.counterElement1.nativeElement.innerHTML = 'Done!';
-          }, 5000);
+            
+          }, 11250);
         }
       }
     }, options);
-
+    // this is for counter2
     const observer2 = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         if (this.counter2$ === null) {
@@ -105,7 +108,7 @@ export class CountnumberComponent  implements OnInit {
               } else {
                 observer.complete();
               }
-            }, 750);
+            }, 100);
 
             return () => {
               clearInterval(intervalId);
@@ -117,11 +120,11 @@ export class CountnumberComponent  implements OnInit {
             this.counterElement2.nativeElement.innerHTML = count.toString();
           });
 
-          observer3.unobserve(this.counterElement2.nativeElement);
+          observer2.unobserve(this.counterElement2.nativeElement);
 
           setTimeout(() => {
-            this.counter3$ = null;
-            this.counterElement2.nativeElement.innerHTML = 'Done!';
+            this.counter2$ = null;
+            
           }, 11250);
         }
       }
@@ -138,7 +141,7 @@ export class CountnumberComponent  implements OnInit {
               } else {
                 observer.complete();
               }
-            }, 750);
+            }, 90);
 
             return () => {
               clearInterval(intervalId);
@@ -150,7 +153,7 @@ export class CountnumberComponent  implements OnInit {
             this.counterElement3.nativeElement.innerHTML = count.toString();
           });
 
-          observer2.unobserve(this.counterElement3.nativeElement);
+          observer3.unobserve(this.counterElement3.nativeElement);
 
           setTimeout(() => {
             this.counter3$ = null;
@@ -159,10 +162,43 @@ export class CountnumberComponent  implements OnInit {
         }
       }
     }, options);
+    const observer4 = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (this.counter4$ === null) {
+          this.counter4$ = new Observable<number>(observer => {
+            let count = 0;
+            const intervalId = setInterval(() => {
+              if (count <= this.MAX_COUNT_4) {
+                observer.next(count++);
+              } else {
+                observer.complete();
+              }
+            }, 250);
+
+            return () => {
+              clearInterval(intervalId);
+              observer.complete();
+            };
+          });
+
+          this.counter4$.subscribe(count => {
+            this.counterElement4.nativeElement.innerHTML = count.toString();
+          });
+
+          observer4.unobserve(this.counterElement4.nativeElement);
+
+          setTimeout(() => {
+            this.counter4$ = null;
+          }, 50);
+        }
+      }
+    }, options);
 
     observer1.observe(this.counterElement1.nativeElement);
     observer2.observe(this.counterElement2.nativeElement);
     observer3.observe(this.counterElement3.nativeElement);
+    observer4.observe(this.counterElement4.nativeElement);
+
   }
 }
 
