@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 import {
   FormGroup,
@@ -293,10 +294,61 @@ export class AddProductComponent {
       quantity: this.ingredientsForm.value.Ingredient_Quantity,
       total: finalPrice.toFixed(2),
     };
+    //check if the ingredients exsit in the IngredientsList or not
+    let ingredientsExist = this.IngredientsList.find(
+      (elem) => elem.id == newIngredient.id
+    );
+    if (!ingredientsExist) {
+      //store the new ingredient in the IngredientsList {array}
+      this.IngredientsList.push(newIngredient);
+    } else {
+      // if (
+      //   confirm(
+      //     'Ingredient already exists. Do you want to update the quantity?'
+      //   )
+      // ) {
+      //   // Find the index of the existing ingredient in the array
+      //   const index = this.IngredientsList.findIndex(
+      //     (elem) => elem.id === newIngredient.id
+      //   );
+      //   // Update the quantity of the existing ingredient
+      //   this.IngredientsList[index].quantity = newIngredient.quantity;
+      //   // Recalculate the total price for the updated ingredient
+      //   this.IngredientsList[index].total = (
+      //     newIngredient.quantity *
+      //     Ingredient_Price *
+      //     (1 + +Ingredient_Profit)
+      //   ).toFixed(2);
+      // }
+      Swal.fire({
+        title: 'Do you want to update the quantity?',
+        text: 'Ingredient already exists !',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Update it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Updated!', 'Your Ingredient has been updated.', 'success');
+          // Find the index of the existing ingredient in the array
+          const index = this.IngredientsList.findIndex(
+            (elem) => elem.id === newIngredient.id
+          );
+          // Update the quantity of the existing ingredient
+          this.IngredientsList[index].quantity = newIngredient.quantity;
+          // Recalculate the total price for the updated ingredient
+          this.IngredientsList[index].total = (
+            newIngredient.quantity *
+            Ingredient_Price *
+            (1 + +Ingredient_Profit)
+          ).toFixed(2);
+        }
+      });
+    }
 
     //  // console.log(newIngredient);
-    //store the new ingredient in the IngredientsList {array}
-    this.IngredientsList.push(newIngredient);
+
     // // console.log(this.IngredientsList);
     //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
     this.isIngredientsListEmpty = this.IngredientsList.length === 0;
@@ -331,12 +383,16 @@ export class AddProductComponent {
       name: Ingredient_name,
     };
     //  // console.log(newIngredient);
-    //store the new Extra in the ExtraList {array}
-    this.ExtraList.push(newExtra);
-
-    //store the new Extra in the ExtraList {array}
-    this.ExtraListId.push(ExtraId.id);
-    console.log(this.ExtraListId);
+    //check if the ingredients exsit in the IngredientsList or not
+    let ExtraExist = this.ExtraList.find((elem) => elem.id == newExtra.id);
+    if (!ExtraExist) {
+      //store the new Extra in the ExtraList {array}
+      this.ExtraList.push(newExtra);
+      //store the new Extra in the ExtraList {array}
+      this.ExtraListId.push(ExtraId.id);
+    } else {
+      alert('Extra already exists');
+    }
 
     // // console.log(this.IngredientsList);
     //check if the ExtraList is empty => return false and container__Ingredients__Extra is disappear
