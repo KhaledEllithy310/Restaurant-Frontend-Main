@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
@@ -11,10 +10,12 @@ import { ReservationService } from 'src/app/services/reservation.service';
 export class ReservationComponent {
   reservations: any;
   filterReservation: any = [];
+  filterBytable: any = [];
   urlapi = 'http://127.0.0.1:8000/api/reservation/date';
+  urlapi2 = 'http://127.0.0.1:8000/api/reservation';
   startDate: any;
   endDate: any;
-
+  tableNum: any;
   constructor(private reservationService: ReservationService, private http: HttpClient) {}
 
   ngOnInit() {
@@ -30,4 +31,10 @@ export class ReservationComponent {
       this.filterReservation = res.data;
     });
 }
+  filterDataByTable() {
+    const url = `${this.urlapi2}/${this.tableNum}`;
+    this.http.get(url).subscribe((res: any) => {
+      this.filterBytable = res.data
+    });
+  }
 }

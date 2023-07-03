@@ -3,17 +3,25 @@
     <h2>Reservation</h2>
     <hr>
   </span>
+  <h6 class="text-white"><i class="fas fa-filter"></i> filter by date or table number: </h6>
   <div class="filter">
     <div class="filter-date">
-      <h6>filter by date: </h6>
-      <div class="date">
-        <label for="startDate">Start Date</label>
-        <input type="date" [(ngModel)]="startDate" id="startDate">
+      <div class="date form-group">
+        <div class="me-4">
+          <label for="startDate">Start Date</label>
+          <input type="date" [(ngModel)]="startDate" id="startDate" class="form-control">
+        </div>
+        <div>
+          <label for="endDate">End Date</label>
+          <input type="date" [(ngModel)]="endDate" id="endDate" (change)="filterDataByDate()" class="form-control">
+        </div>
       </div>
-      <div class="date">
-        <label for="endDate">End Date</label>
-        <input type="date" [(ngModel)]="endDate" id="endDate" (change)="filterDataByDate()">
-      </div>
+    </div>
+    <div class="tableNum">
+      <form (submit)="filterDataByTable()">
+        <input type="text" [(ngModel)]="tableNum" name="tableNum" class="form-control" placeholder="write table number">
+        <button type="submit" class="btn btn-outline-info ms-2 w-50">filter <i class="fas fa-filter"></i></button>
+      </form>
     </div>
   </div>
   <table class="table table-dark text-center">
@@ -39,7 +47,18 @@
           <td>{{reserve.table.number}}</td>
         </tr>
       </ng-container>
-      <ng-container *ngIf="(!filterReservation || filterReservation.length == 0);">
+      <ng-container *ngIf="(!filterReservation || filterReservation.length == 0) && filterBytable && filterBytable.length > 0;">
+        <tr *ngFor="let reserve of filterBytable">
+          <td>{{reserve.id}}</td>
+          <td>{{reserve.start_date}}</td>
+          <td *ngIf="reserve.end_date == null">Not Selected</td>
+          <td *ngIf="reserve.end_date">{{reserve.end_date}}</td>
+          <td>{{reserve.status}}</td>
+          <td>{{reserve.customer.name}}</td>
+          <td>{{reserve.table.number}}</td>
+        </tr>
+        </ng-container>
+      <ng-container *ngIf="(!filterReservation || filterReservation.length == 0) && (!filterBytable || filterBytable.length == 0);">
         <tr *ngFor="let reservation of reservations">
           <td>{{reservation.id}}</td>
           <td>{{reservation.start_date}}</td>
