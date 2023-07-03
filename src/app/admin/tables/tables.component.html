@@ -23,9 +23,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let table of TableNo; let i = index" id="cate{{ i }}">
-        <th>{{ i + 1 }}</th>
+      <tr *ngFor="let table of Tables; let i = index" id="cate{{ i }}">
         <td>{{ table.number }}</td>
+        <td>{{table.guest_numbers}}</td>
         <td>
           <!-- Rounded switch -->
           <label class="switch">
@@ -194,18 +194,19 @@
             <input
               type="number"
               class="input__form"
-              formControlName="TableNo"
+              formControlName="TableNo_updated"
+              id="TableNo_updated"
             />
             <!-- Start Validation For Table No  -->
 
             <div
-              *ngIf="TableNo_Control.invalid && TableNo_Control.touched"
+              *ngIf="TableNo_updated_Control.invalid && TableNo_updated_Control.touched"
               class="text-danger"
             >
-              <div *ngIf="TableNo_Control.errors?.['required']">
+              <div *ngIf="TableNo_updated_Control.errors?.['required']">
                 <p class="alert alert-danger">TableNo is required</p>
               </div>
-              <div *ngIf="TableNo_Control.errors?.['minlength']">
+              <div *ngIf="TableNo_updated_Control.errors?.['minlength']">
                 <p class="alert alert-danger">
                   Name must be at least
                   {{ TableNo_Control.errors?.['minlength'].requiredLength }}
@@ -224,19 +225,19 @@
             <input
               type="number"
               class="input__form"
-              formControlName="guest_numbers"
+              formControlName="guest_numbers_updated"
             />
             <!-- Start Validation For guest_numbers -->
             <div
               *ngIf="
-                guest_numbers_Control.invalid && guest_numbers_Control.touched
+              guest_numbers_updated_Control.invalid && guest_numbers_updated_Control.touched
               "
               class="text-danger"
             >
-              <div *ngIf="guest_numbers_Control.errors?.['required']">
+              <div *ngIf="guest_numbers_updated_Control.errors?.['required']">
                 <p class="alert alert-danger">guest numbers is required</p>
               </div>
-              <div *ngIf="guest_numbers_Control.errors?.['minlength']">
+              <div *ngIf="guest_numbers_updated_Control.errors?.['minlength']">
                 <p class="alert alert-danger">
                   Name must be at least
                   {{ guest_numbers_Control.errors?.['minlength'].requiredLength }}
@@ -252,7 +253,7 @@
             <label>Status<span class="text-danger">*</span></label>
             <!-- Rounded switch -->
             <label class="switch">
-              <input type="checkbox" [checked]="" />
+              <input type="checkbox" [checked]="" formControlName="status_updated_Control"/>
               <span class="slider round"></span>
             </label>
           </div>

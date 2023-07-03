@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class TablesService {
 
   constructor( private http: HttpClient) { }
+  
   addTables(data:any) {
     return this.http.post('http://127.0.0.1:8000/api/tables/' , data);
     }
@@ -14,7 +15,7 @@ export class TablesService {
       return this.http.get('http://127.0.0.1:8000/api/tables/');
     }
   
-
+    
   // AddCategory(data: any) {
   //   return this.http.post('http://127.0.0.1:8000/api/category', data);
   // }
@@ -27,6 +28,6 @@ export class TablesService {
   }
 
   getOldTable(id: any) {
-    return this.http.get('http://127.0.0.1:8000/api/tables/' + id + '/edit');
+    return this.http.get('http://127.0.0.1:8000/api/tables/' + id );
   }
 }

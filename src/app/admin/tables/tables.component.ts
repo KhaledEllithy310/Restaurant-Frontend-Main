@@ -14,7 +14,7 @@ import { TablesService } from 'src/app/services/tables.service';
 })
 export class TablesComponent {
   guest_numbers: any;
-  TableNo!:any;
+  Tables!:any;
   status: any;
   tableForm!: FormGroup;
   idtable!: number;
@@ -43,6 +43,9 @@ export class TablesComponent {
     });
     this.updatetableForm = this.fb.group({
       TableNo_updated: ['', [Validators.required]],
+      guest_numbers_updated: ['', [Validators.required]],
+      status_updated: ['', [Validators.required]],
+
 
     });
   }
@@ -54,6 +57,15 @@ export class TablesComponent {
   }
   get status_Control() {
     return this.tableForm.controls['status'];
+  }
+  get guest_numbers_updated_Control() {
+    return this.tableForm.controls['guest_numbers_updated'];
+  }
+  get TableNo_updated_Control() {
+    return this.tableForm.controls['TableNo_updated'];
+  }
+  get status_updated_Control() {
+    return this.tableForm.controls['status_updated'];
   }
 
   createTable() {
@@ -81,11 +93,12 @@ export class TablesComponent {
     console.log(this.tableForm.value);
   }
 
-  //GET ALL CATEGORIES
+  //GET ALL TABLES
   getAllTable() {
     this.tableService.getTable().subscribe({
     next: (res :any)=>{
-      this.TableNo =res.data
+      this.Tables =res.data,
+      console.log(res)
     },
     error: (err:any)=>{
       console.log(err);
@@ -123,16 +136,16 @@ export class TablesComponent {
 
   //GET THE ID OF THE OBJECT
   getIdtable(idtable: any) {
-    // this.idCategory = idCategory;
        //Call The Old Category
+       console.log(idtable)
        this.tableService
        .getOldTable(idtable)
        .subscribe((Response: any) => {
          this.selectedtable = Response.data;
-         console.log(this.selectedtable.TableNo);
+         console.log(this.selectedtable.number);
          //set the image of the old category to  {this.imageUrl} to display it in modal
          //set the name of the old category to the input field value {name_updated}
-         TableNo_updated.value = this.selectedtable.TableNo;
+         TableNo_updated.value = this.selectedtable.number;
        });
 
      //store the idCategory in {this.idCategory} to pass it to the modal
@@ -204,8 +217,8 @@ export class TablesComponent {
   }
 
   //Update Category
-  name_updated: any;
-  image_updated: any;
+  // name_updated: any;
+  // image_updated: any;
 
   updateTable() {
     // const image_updated = this.updatefileInput.nativeElement.files[0];
