@@ -1,41 +1,48 @@
 <div class="container pt-5">
   <span class="section-title">
-    <h2>Ingridents</h2>
-    <hr>
+    <h2 class="form_title">Ingridents</h2>
+    <hr />
   </span>
   <div class="d-flex mb-2">
-        <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn">Add Ingridents <i class="fas fa-plus"></i></a>
-    </div>
-    <table class="table table-dark text-center">
-        <thead>
-          <tr>
-            <th scope="col">#ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Quntity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Profit</th>
-            <th scope="col">Status</th>
-            <th scope="col">Options</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ingrident of ingridents">
-            <td>{{ingrident.id}}</td>
-            <td>{{ingrident.name}}</td>
-            <td>{{ingrident.quntity}}</td>
-            <td>{{ingrident.price | currency: 'USD'}}</td>
-            <td>{{ingrident.profit}}</td>
-            <td *ngIf="ingrident.quntity">
-              <!-- Rounded switch -->
-              <label class="switch">
-                <input type="checkbox" [checked]="ingrident.quntity > 0">
-                <span class="slider round"></span>
-              </label>
-            </td>
-            <td>
-                <button (click)="editIngrident(ingrident.id)" class="btn btn-info me-2 edit-btn">Edit <i class="fas fa-pen-to-square"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn"
+      >Add Ingridents <i class="fas fa-plus"></i
+    ></a>
+  </div>
+  <table class="table table-dark text-center">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quntity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Profit</th>
+        <th scope="col">Status</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ingrident of ingridents">
+        <td>{{ ingrident.id }}</td>
+        <td>{{ ingrident.name }}</td>
+        <td>{{ ingrident.quntity }}</td>
+        <td>{{ ingrident.price | currency : "USD" }}</td>
+        <td>{{ ingrident.profit }}</td>
+        <td *ngIf="ingrident.quntity">
+          <!-- Rounded switch -->
+          <label class="switch">
+            <input type="checkbox" [checked]="ingrident.quntity > 0" />
+            <span class="slider round"></span>
+          </label>
+        </td>
+        <td>
+          <button
+            (click)="editIngrident(ingrident.id)"
+            class="btn btn-info me-2 edit-btn"
+          >
+            Edit <i class="fas fa-pen-to-square"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

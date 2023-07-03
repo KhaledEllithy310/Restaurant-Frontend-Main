@@ -4,7 +4,7 @@
     <form
       [formGroup]="productForm"
       (ngSubmit)="createProduct()"
-      class="form_admin form__admin__special"
+      class="form_admin form__admin__special text-bg-dark"
     >
       <div class="row">
         <div class="col">
@@ -16,11 +16,13 @@
             <div class="row">
               <!--Start productName  Input -->
               <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2"
+                  >Product Name<span class="text-danger">*</span></label
+                >
                 <input
                   type="text"
                   class="input__form"
                   formControlName="productName"
-                  placeholder="Product Name Is Required"
                 />
                 <!-- Start Validation For productName  -->
 
@@ -47,11 +49,11 @@
 
               <!--Start productDiscount  Input -->
               <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2">Product Discount</label>
                 <input
                   type="text"
                   class="input__form"
                   name="productDiscount"
-                  placeholder="product Discount"
                   formControlName="productDiscount"
                 />
                 <!-- Start Validation For product Discount  -->
@@ -134,10 +136,10 @@
 
               <!--Start productDescription  Input -->
               <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2">Product Description</label>
                 <textarea
                   class="input__form"
                   name=""
-                  placeholder="product Description"
                   formControlName="productDescription"
                   id=""
                   cols="30"
@@ -179,23 +181,26 @@
               {{ ErrorMessage }}
             </p>
           </div>
-          <div class="btn_container">
+          <div class="btn_container vertical">
             <div class="ntn_add_form">
-              <button type="submit" class="admin__main__btn__form">
+              <button type="submit" class="btn-lg admin__sec__btn__form">
                 Add Product
               </button>
             </div>
-            <div class="btn_extra_form">
+            <div class="">
               <a
-                class="admin__main__btn__form"
+                class="btn btn-primary ms-auto add-btn mx-2"
                 (click)="showIngredientsForm = true"
               >
                 <!-- <i class="fa-solid fa-circle-plus"></i> -->
-                Add Ingredient
+                Add Ingredient <i class="fas fa-plus"></i>
               </a>
-              <a class="admin__main__btn__form" (click)="showExtraForm = true">
+              <a
+                class="btn btn-primary ms-auto add-btn"
+                (click)="showExtraForm = true"
+              >
                 <!-- <i class="fa-solid fa-circle-plus"></i> -->
-                Add Extra
+                Add Extra <i class="fas fa-plus"></i>
               </a>
             </div>
           </div>
@@ -243,7 +248,7 @@
     <form
       [formGroup]="ingredientsForm"
       (ngSubmit)="addIngredientsForProduct()"
-      class="form_admin"
+      class="form_admin text-bg-dark"
       *ngIf="showIngredientsForm"
     >
       <div class="vertical_align_center">
@@ -251,7 +256,9 @@
         <div class="row">
           <!--Start Ingredient Name  Input -->
           <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2">Ingredient Name</label>
+            <label for="" class="px-2"
+              >Ingredient Name<span class="text-danger">*</span></label
+            >
             <select
               name="category_id"
               class="input__form"
@@ -284,7 +291,9 @@
 
           <!--Start Ingredient Quantity  Input -->
           <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2">Ingredient Quantity</label>
+            <label for="" class="px-2"
+              >Ingredient Quantity<span class="text-danger">*</span></label
+            >
             <input
               type="number"
               class="input__form"
@@ -310,39 +319,11 @@
             <!-- End Validation For Ingredient Quantity -->
           </div>
           <!--End Ingredient Quantity Input -->
-
-          <!--Start Ingredient Price  Input -->
-          <!-- <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2">Ingredient Price</label>
-            <input
-              id="ingredientPrice"
-              type="number"
-              class="input__form"
-              name="Ingredient_Price"
-              formControlName="Ingredient_Price"
-              [disabled]="isDisabled"
-            />
-          </div> -->
-          <!--End Ingredient Price  Input -->
-
-          <!--Start Ingredient profit Input -->
-          <!-- <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2">Ingredient profit</label>
-            <input
-              id="ingredientProfit"
-              type="number"
-              class="input__form"
-              name="Ingredient_profit"
-              formControlName="Ingredient_profit"
-              disabled
-            />
-          </div> -->
-          <!--End Ingredient profit Input -->
         </div>
       </div>
       <button
         type="submit"
-        class="admin__main__btn__form"
+        class="btn-lg admin__sec__btn__form"
         [disabled]="ingredientsForm.invalid"
       >
         Add Ingredients
@@ -354,14 +335,14 @@
     <form
       [formGroup]="ExtraForm"
       (ngSubmit)="addExtraForProduct()"
-      class="form_admin"
+      class="form_admin_extra w-25 text-bg-dark"
       *ngIf="showExtraForm"
     >
       <div class="vertical_align_center">
         <h2 class="form_title">Add Extra</h2>
         <div class="row">
           <!--Start Ingredient Name  Input -->
-          <div class="col-xl-6 inputs__container">
+          <div class="col-xl-12 inputs__container">
             <label for="" class="px-2"
               >Extra Name <span class="text-danger">*</span></label
             >
@@ -397,7 +378,7 @@
           <!--End Ingredient Name  Input -->
 
           <!--Start Ingredient Quantity  Input -->
-          <div class="col-xl-6 inputs__container">
+          <!-- <div class="col-xl-6 inputs__container">
             <label for="" class="px-2"
               >Extra Quantity<span class="text-danger">*</span></label
             >
@@ -407,7 +388,7 @@
               formControlName="Ingredient_Quantity"
               placeholder=""
             />
-            <!-- Start Validation For Ingredient Quantity  -->
+            Start Validation For Ingredient Quantity
             <div
               *ngIf="
                 ExtraForm.controls['Ingredient_Quantity'].invalid &&
@@ -421,42 +402,18 @@
                 <p class="alert alert-danger">Extra Quantity is required</p>
               </div>
             </div>
-            <!-- End Validation For Ingredient Quantity -->
-          </div>
-          <!--End Ingredient Quantity Input -->
-
-          <!--Start Ingredient Price  Input -->
-          <!-- <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2">Extra Price</label>
-            <input
-              id="ingredientPrice"
-              type="number"
-              class="input__form"
-              name="Ingredient_Price"
-              formControlName="Ingredient_Price"
-            />
+            End Validation For Ingredient Quantity
           </div> -->
-          <!--End Ingredient Price  Input -->
-
-          <!--Start Ingredient profit Input -->
-          <!-- <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2">Extra profit</label>
-            <input
-              id="ingredientProfit"
-              type="number"
-              class="input__form"
-              name="Ingredient_profit"
-              formControlName="Ingredient_profit"
-            />
-          </div> -->
-          <!--End Ingredient profit Input -->
+          <!-- End Ingredient Quantity Input -->
         </div>
       </div>
       <!-- Show message if form is invalid and submitted -->
       <div *ngIf="ExtraForm.invalid && submitted" class="text-danger">
         <p class="alert alert-danger">Please fill in all required fields.</p>
       </div>
-      <button type="submit" class="admin__main__btn__form">Add Extra</button>
+      <button type="submit" class="btn-lg admin__sec__btn__form">
+        Add Extra
+      </button>
     </form>
     <!-- End Form Add Extra -->
   </div>

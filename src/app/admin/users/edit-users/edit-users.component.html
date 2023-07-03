@@ -2,129 +2,248 @@
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <a [routerLink]="'/admin/dashboard/users'">Back <i class="fas fa-arrow-left"></i></a>
-        <div class="card text-bg-dark my-5 shadow-2-strong card-registration" style="border-radius: 15px;">
+        <a [routerLink]="'/admin/dashboard/users'"
+          >Back <i class="fas fa-arrow-left"></i
+        ></a>
+        <div
+          class="card text-bg-dark my-5 shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
           <div class="card-body p-4 p-md-5 h-100">
             <div class="upper-card">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit User <i class="fas fa-user-pen"></i></h3>
-              <img [src]='"http://127.0.0.1:8000"+olduser.image' width="30" alt="avatar">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 form_title">
+                Edit User <i class="fas fa-user-pen"></i>
+              </h3>
+              <img
+                [src]="'http://127.0.0.1:8000' + olduser.image"
+                width="30"
+                alt="avatar"
+              />
             </div>
-            <form
-              (ngSubmit)="submitForm()"
-              [formGroup] = "editUserForm"
-            >
+            <form (ngSubmit)="submitForm()" [formGroup]="editUserForm">
               <div class="row">
-                  <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                      <label class="form-label" for="name">Username</label>
-                      <input type="text" [value]="olduser.name" [(ngModel)]="olduser.name" name="name" formControlName="name" id="name" class="form-control form-control-lg" />
-                      <div id="fnameHelp" class="form-text text-danger" *ngIf="editUserForm.controls['name'].touched && editUserForm.controls['name'].invalid">
-                        <span *ngIf="editUserForm.controls['name'].errors?.['required'] && !errors.name">
-                          <div class="alert alert-danger">The username field is required.</div>
-                        </span>
-                        <span *ngIf="editUserForm.controls['name'].errors?.['minlength']">
-                          <div class="alert alert-danger">username must be more than 2 characters</div>
-                        </span>
-                      </div>
-                      <div *ngIf="errors.name" class="mt-2">
-                        <div class="alert alert-danger">{{errors.name}}</div>
-                      </div>
-                  </div>
-                  
-                  </div>
-                  <div class="col-md-6 mb-4">
-  
-                      <div class="form-outline">
-                          <label class="form-label" for="emailAddress">Email</label>
-                          <input type="email" [value]="olduser.email" id="emailAddress" formControlName="email" name="email" [(ngModel)]="olduser.email" class="form-control form-control-lg" />
-                          <div id="emailHelp" class="form-text text-danger" *ngIf="editUserForm.controls['email'].touched && editUserForm.controls['email'].invalid">
-                            <span *ngIf="editUserForm.controls['email'].errors?.['required'] && !errors.email">
-                                <div class="alert alert-danger">The email field is required.</div>
-                            </span>
-                            <span *ngIf="editUserForm.controls['email'].errors?.['email']">
-                                <div class="alert alert-danger">Type a Valid Email</div>
-                            </span>
-                          </div>
-                          <div *ngIf="errors.email" class="mt-2">
-                            <div class="alert alert-danger">{{errors.email}}</div>
-                          </div>
-                      </div>
-  
-                  </div>
-              </div>
-  
-              <div class="row">
-                  <div class="col-md-6 mb-4 d-flex align-items-center">
-  
-                  <div class="form-outline datepicker w-100">
-                      <label class="form-label" for="phone">Phone Number</label>
-                      <input type="tel" id="phone" [value]="olduser.phone" formControlName="phone" name="phone" [(ngModel)]="olduser.phone" class="form-control form-control-lg" />
-                      <div id="phoneNumHelp" class="form-text text-danger" *ngIf="editUserForm.controls['phone'].touched && editUserForm.controls['phone'].invalid">
-                        <span *ngIf="editUserForm.controls['phone'].errors?.['required'] && !errors.phone">
-                            <div class="alert alert-danger">The phone field is required</div>
-                        </span>
-                        <span *ngIf="editUserForm.controls['phone'].errors?.['pattern']">
-                            <div class="alert alert-danger">Phone Number Must be 11 digits and started with 010 or 011 or 012</div>
-                        </span>
-                      </div>
-                      <div *ngIf="errors.phone" class="mt-2">
-                        <div class="alert alert-danger">{{errors.phone}}</div>
-                      </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline inputs__container">
+                    <label class="form-label" for="name">Username</label>
+                    <input
+                      type="text"
+                      [value]="olduser.name"
+                      [(ngModel)]="olduser.name"
+                      name="name"
+                      formControlName="name"
+                      id="name"
+                      class="form-control form-control-lg"
+                    />
+                    <div
+                      id="fnameHelp"
+                      class="form-text text-danger"
+                      *ngIf="
+                        editUserForm.controls['name'].touched &&
+                        editUserForm.controls['name'].invalid
+                      "
+                    >
+                      <span
+                        *ngIf="editUserForm.controls['name'].errors?.['required'] && !errors.name"
+                      >
+                        <div class="alert alert-danger">
+                          The username field is required.
+                        </div>
+                      </span>
+                      <span
+                        *ngIf="editUserForm.controls['name'].errors?.['minlength']"
+                      >
+                        <div class="alert alert-danger">
+                          username must be more than 2 characters
+                        </div>
+                      </span>
                     </div>
-  
+                    <div *ngIf="errors.name" class="mt-2">
+                      <div class="alert alert-danger">{{ errors.name }}</div>
+                    </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                      <label class="form-label" for="password">Password</label>
-                      <input type="password" id="password" [value]="olduser.password" formControlName="password" name="password" [(ngModel)]="olduser.password" class="form-control form-control-lg" />
-                      <div id="passwordHelp" class="form-text text-danger" *ngIf="editUserForm.controls['password'].touched && editUserForm.controls['password'].invalid">
-                        <span *ngIf="editUserForm.controls['password'].errors?.['required'] && !errors.password">
-                          <div class="alert alert-danger">This password field is required</div>
-                        </span>
-                        <span *ngIf="editUserForm.controls['password'].errors?.['minlength']">
-                            <div class="alert alert-danger">Less Than 8 Characters | </div>
-                        </span>
-                        <span *ngIf="editUserForm.controls['password'].errors?.['pattern']">
-                            <div class="alert alert-danger">Week Password</div>
-                        </span>
-                      </div>
-                      <div *ngIf="errors.password" class="mt-2">
-                        <div class="alert alert-danger">{{errors.password}}</div>
-                      </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline inputs__container">
+                    <label class="form-label" for="emailAddress">Email</label>
+                    <input
+                      type="email"
+                      [value]="olduser.email"
+                      id="emailAddress"
+                      formControlName="email"
+                      name="email"
+                      [(ngModel)]="olduser.email"
+                      class="form-control form-control-lg"
+                    />
+                    <div
+                      id="emailHelp"
+                      class="form-text text-danger"
+                      *ngIf="
+                        editUserForm.controls['email'].touched &&
+                        editUserForm.controls['email'].invalid
+                      "
+                    >
+                      <span
+                        *ngIf="editUserForm.controls['email'].errors?.['required'] && !errors.email"
+                      >
+                        <div class="alert alert-danger">
+                          The email field is required.
+                        </div>
+                      </span>
+                      <span
+                        *ngIf="editUserForm.controls['email'].errors?.['email']"
+                      >
+                        <div class="alert alert-danger">Type a Valid Email</div>
+                      </span>
+                    </div>
+                    <div *ngIf="errors.email" class="mt-2">
+                      <div class="alert alert-danger">{{ errors.email }}</div>
+                    </div>
                   </div>
+                </div>
               </div>
-              
+
               <div class="row">
-                  <div class="col-12 my-3">
-                      <label class="form-label" for="select-input">Choose Role</label>
-                  <div class="form-outline">
-                      <select class="form-select form-control-lg w-100" formControlName="role" name="role" [value]="olduser.role" [(ngModel)]="olduser.role" id="select-input">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100 inputs__container">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      [value]="olduser.phone"
+                      formControlName="phone"
+                      name="phone"
+                      [(ngModel)]="olduser.phone"
+                      class="form-control form-control-lg"
+                    />
+                    <div
+                      id="phoneNumHelp"
+                      class="form-text text-danger"
+                      *ngIf="
+                        editUserForm.controls['phone'].touched &&
+                        editUserForm.controls['phone'].invalid
+                      "
+                    >
+                      <span
+                        *ngIf="editUserForm.controls['phone'].errors?.['required'] && !errors.phone"
+                      >
+                        <div class="alert alert-danger">
+                          The phone field is required
+                        </div>
+                      </span>
+                      <span
+                        *ngIf="editUserForm.controls['phone'].errors?.['pattern']"
+                      >
+                        <div class="alert alert-danger">
+                          Phone Number Must be 11 digits and started with 010 or
+                          011 or 012
+                        </div>
+                      </span>
+                    </div>
+                    <div *ngIf="errors.phone" class="mt-2">
+                      <div class="alert alert-danger">{{ errors.phone }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 inputs__container">
+                  <label class="form-label" for="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    [value]="olduser.password"
+                    formControlName="password"
+                    name="password"
+                    [(ngModel)]="olduser.password"
+                    class="form-control form-control-lg"
+                  />
+                  <div
+                    id="passwordHelp"
+                    class="form-text text-danger"
+                    *ngIf="
+                      editUserForm.controls['password'].touched &&
+                      editUserForm.controls['password'].invalid
+                    "
+                  >
+                    <span
+                      *ngIf="editUserForm.controls['password'].errors?.['required'] && !errors.password"
+                    >
+                      <div class="alert alert-danger">
+                        This password field is required
+                      </div>
+                    </span>
+                    <span
+                      *ngIf="editUserForm.controls['password'].errors?.['minlength']"
+                    >
+                      <div class="alert alert-danger">
+                        Less Than 8 Characters |
+                      </div>
+                    </span>
+                    <span
+                      *ngIf="editUserForm.controls['password'].errors?.['pattern']"
+                    >
+                      <div class="alert alert-danger">Week Password</div>
+                    </span>
+                  </div>
+                  <div *ngIf="errors.password" class="mt-2">
+                    <div class="alert alert-danger">{{ errors.password }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 my-3">
+                  <label class="form-label" for="select-input"
+                    >Choose Role</label
+                  >
+                  <div class="form-outline inputs__container">
+                    <select
+                      class="form-select form-control-lg w-100"
+                      formControlName="role"
+                      name="role"
+                      [value]="olduser.role"
+                      [(ngModel)]="olduser.role"
+                      id="select-input"
+                    >
                       <option value="1" disabled>Choose option</option>
                       <option value="Admin">Admin</option>
                       <option value="Waiter">Waiter</option>
                       <option value="Cashier">Cashier</option>
                       <option value="Kitchen">Kitchen</option>
                       <div *ngIf="errors.role" class="mt-2">
-                        <div class="alert alert-danger">{{errors.role}}</div>
+                        <div class="alert alert-danger">{{ errors.role }}</div>
                       </div>
                     </select>
                   </div>
+                </div>
               </div>
-              </div>
-  
+
               <div class="row">
-                  <div class="col-12">
-                  <label class="form-label" for="upload-image">Upload Image</label>
-                  <input type="file" (change)="onFileSelected($event)" id="upload-image" class="form-control">
+                <div class="col-12 inputs__container">
+                  <label class="form-label" for="upload-image"
+                    >Upload Image</label
+                  >
+                  <input
+                    type="file"
+                    (change)="onFileSelected($event)"
+                    id="upload-image"
+                    class="form-control"
+                  />
                   <div *ngIf="errors.image">
-                    <div class="alert alert-danger">{{errors.image}}</div>
+                    <div class="alert alert-danger">{{ errors.image }}</div>
                   </div>
                 </div>
               </div>
               <div class="mt-4 pt-2">
-                  <input class="btn btn-primary btn-lg" type="submit" value="Done" />
+                <!-- <input
+                  class="btn btn-primary btn-lg"
+                  type="submit"
+                  value="Done"
+                /> -->
+                <button class="btn-lg admin__sec__btn__form" type="submit">
+                  Done
+                </button>
               </div>
               <div *ngIf="success" class="mt-2">
-                <div class="alert alert-success">{{success}}</div>
+                <div class="alert alert-success">{{ success }}</div>
               </div>
             </form>
           </div>

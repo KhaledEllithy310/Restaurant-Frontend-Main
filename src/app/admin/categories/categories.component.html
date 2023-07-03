@@ -1,32 +1,35 @@
 <!-- <app-admin-navbar></app-admin-navbar> -->
 
 <div class="container good p-60">
-  <button
-    class="admin__main__btn__form"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal1"
-  >
-    Add
-  </button>
-  <form id="search_form" [formGroup]="searchForm">
-    <input
-      type="text"
-      [(ngModel)]="searchTerm"
-      name="searchTerm"
-      placeholder="Search"
-      formControlName="searchTerm"
-    />
-    <button type="submit">Search</button>
-  </form>
-  <table
-    class="table table-secondary table-striped table-hover table-bordered text-center mt-3"
-  >
+  <h2 class="form_title">Categories</h2>
+  <hr />
+  <div class="header_admin d-flex justify-content-between pt-4">
+    <form id="search_form" [formGroup]="searchForm">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        name="searchTerm"
+        placeholder="Search.."
+        formControlName="searchTerm"
+        class="input_search text-left"
+      />
+      <!-- <button type="submit">Search</button> -->
+    </form>
+    <button
+      class="btn btn-primary ms-auto add-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal1"
+    >
+      Add
+    </button>
+  </div>
+  <table class="table table-dark text-center mt-3">
     <thead>
       <tr>
-        <th scope="col" class="w-25">ID</th>
-        <th scope="col" class="w-25">NAME</th>
-        <th scope="col" class="w-25">Image</th>
-        <th scope="col" class="btn_container">ACTION</th>
+        <th scope="col" class="">ID</th>
+        <th scope="col" class="">NAME</th>
+        <th scope="col" class="">Image</th>
+        <th scope="col" class="">ACTION</th>
       </tr>
     </thead>
     <tbody>
@@ -41,21 +44,21 @@
             height="30"
           />
         </td>
-        <td class="btn_container">
+        <td class="">
           <div
-            class="btn btn__gen btn-danger btn_actions"
+            class="btn btn-danger m-2 delete-btn"
             (click)="deleteCategory(i)"
           >
-            Delete
+            Delete <i class="fas fa-xmark"></i>
           </div>
           <!-- Button modal for update -->
           <div
-            class="btn btn__gen btn_actions btn-warning"
+            class="btn btn-info m-2 edit-btn"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal2"
             (click)="getIdCategory(category.id)"
           >
-            Update
+            Edit <i class="fas fa-pen-to-square"></i>
           </div>
         </td>
       </tr>
@@ -77,7 +80,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content form_admin_modal">
+      <div class="modal-content text-bg-dark">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
           <button
@@ -88,15 +91,13 @@
           ></button>
         </div>
         <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
-          <div class="modal-body bgGreyLight_1 vertical_align_center">
+          <div class="modal-body vertical_align_center">
             <!--Start Category Name Input -->
             <div class="mb-2 inputs__container">
-              <input
-                type="text"
-                class="input__form"
-                formControlName="name"
-                placeholder="Category Name"
-              />
+              <label for="" class="px-2"
+                >Category Name<span class="text-danger">*</span></label
+              >
+              <input type="text" class="input__form" formControlName="name" />
               <!-- Start Validation For Name Of Category -->
               <div
                 *ngIf="nameControl.invalid && nameControl.touched"
@@ -118,7 +119,9 @@
             <!--End Category Name Input -->
             <!--Start Upload Image Input -->
             <div class="mb-2 inputs__container">
-              <label for="" class="px-2">Upload Image</label>
+              <label for="" class="px-2"
+                >Upload Image<span class="text-danger">*</span></label
+              >
               <input
                 #addfileInput
                 type="file"
@@ -132,14 +135,14 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="admin__main__btn__form"
+              class="admin__close__btn__form"
               data-bs-dismiss="modal"
             >
               Close
             </button>
             <button
               type="submit"
-              class="admin__main__btn__form"
+              class="btn-lg admin__sec__btn__form mx-3"
               [disabled]="!categoryForm.valid"
               data-bs-dismiss="modal"
               aria-label="Close"
@@ -161,7 +164,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content form_admin_modal">
+      <div class="modal-content text-bg-dark">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabe2">
             Update Category
@@ -209,14 +212,14 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="admin__main__btn__form"
+              class="admin__close__btn__form"
               data-bs-dismiss="modal"
             >
               Close
             </button>
             <button
               type="submit"
-              class="admin__main__btn__form"
+              class="admin__sec__btn__form"
               data-bs-dismiss="modal"
               aria-label="Close"
             >

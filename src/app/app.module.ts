@@ -26,8 +26,8 @@ import { HomeModule } from './home/home.module';
     RegisterModule,
     AdminModule,
     HomeModule,
-    
-   
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],

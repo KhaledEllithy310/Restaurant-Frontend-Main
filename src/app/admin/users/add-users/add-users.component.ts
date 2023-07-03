@@ -7,7 +7,7 @@ import { UsersService } from 'src/app/services/users.service';
 @Component({
   selector: 'app-add-users',
   templateUrl: './add-users.component.html',
-  styleUrls: ['./add-users.component.css']
+  styleUrls: ['./add-users.component.css'],
 })
 export class AddUsersComponent {
   user: User = {
@@ -15,29 +15,39 @@ export class AddUsersComponent {
     password: '',
     email: '',
     role: UserRole.Admin,
-    phone: ''
-  }
+    phone: '',
+  };
   errors: any = [];
   success!: string;
   addUserForm!: FormGroup;
 
-  constructor(private addUserService: UsersService, private fb: FormBuilder){}
+  constructor(private addUserService: UsersService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.addUserForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]], 
-      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/),
+        ],
+      ],
       role: ['', [Validators.required]],
-      email: [null, [Validators.required, Validators.email]], 
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^(010|011|012)\d{8}$/)]] 
-    })
+      email: [null, [Validators.required, Validators.email]],
+      phoneNumber: [
+        null,
+        [Validators.required, Validators.pattern(/^(010|011|012)\d{8}$/)],
+      ],
+    });
   }
 
   get registerForm() {
     return this.addUserForm.controls;
   }
 
-  onFileSelected(event: any){
+  onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.user.image = file;
@@ -50,26 +60,25 @@ export class AddUsersComponent {
     formData.append('password', this.user.password);
     formData.append('email', this.user.email);
     formData.append('role', this.user.role);
-    if(this.user.image) {
+    if (this.user.image) {
       formData.append('image', this.user.image, this.user.image?.name);
     }
     formData.append('phone', this.user.phone);
     // console.log(formData);
     const headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Content-Type': 'multipart/form-data'
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
     });
-    
+
     this.addUserService.addUser(formData, headers).subscribe({
       next: (res: any) => {
         this.success = res.message;
-        console.log(res, "response")
+        console.log(res, 'response');
       },
       error: (err: any) => {
         this.errors = err.error.errors;
-        console.log(err.error.errors, "errors");
-      }
-    })
-
+        console.log(err.error.errors, 'errors');
+      },
+    });
   }
 }
