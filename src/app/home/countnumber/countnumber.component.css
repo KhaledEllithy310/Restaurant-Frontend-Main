@@ -1,16 +1,16 @@
-
-.backgroundcolor{
-   color: #c39c6e; 
-   text-align: center;
-   font-size: 30px;
+.backgroundcolor {
+  color: #c39c6e !important;
+  text-align: center;
+  font-size: 30px;
 }
 .backgroundcolor div {
   color: inherit;
   font-size: inherit;
 }
-p,div{
-  color: white;  
+p,
+div {
+  color: white;
   font-size: 12px;
   text-align: center;
-  font-family:  'cursive';
+  font-family: 'cursive';
 }

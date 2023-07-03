@@ -1,12 +1,12 @@
-import { Component, ViewChild , ElementRef,  OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-countnumber',
   templateUrl: './countnumber.component.html',
-  styleUrls: ['./countnumber.component.css']
+  styleUrls: ['./countnumber.component.css'],
 })
-export class CountnumberComponent  implements OnInit {
+export class CountnumberComponent implements OnInit {
   // projectcount:number = 0;
   // clientcount:number =0;
   // coffecups:number =0;
@@ -53,21 +53,21 @@ export class CountnumberComponent  implements OnInit {
 
   MAX_COUNT_1 = 200;
   MAX_COUNT_2 = 180;
-  MAX_COUNT_3 = 350; 
-  MAX_COUNT_4 = 20; 
+  MAX_COUNT_3 = 350;
+  MAX_COUNT_4 = 20;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     const options = {
       rootMargin: '-50px 0px',
-      threshold: 0
+      threshold: 0,
     };
     //  this is for the first counter
-    const observer1 = new IntersectionObserver(entries => {
+    const observer1 = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         if (this.counter1$ === null) {
-          this.counter1$ = new Observable<number>(observer => {
+          this.counter1$ = new Observable<number>((observer) => {
             let count = 0;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_1) {
@@ -83,7 +83,7 @@ export class CountnumberComponent  implements OnInit {
             };
           });
 
-          this.counter1$.subscribe(count => {
+          this.counter1$.subscribe((count) => {
             this.counterElement1.nativeElement.innerHTML = count.toString();
           });
 
@@ -91,16 +91,15 @@ export class CountnumberComponent  implements OnInit {
 
           setTimeout(() => {
             this.counter1$ = null;
-            
           }, 11250);
         }
       }
     }, options);
     // this is for counter2
-    const observer2 = new IntersectionObserver(entries => {
+    const observer2 = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         if (this.counter2$ === null) {
-          this.counter2$ = new Observable<number>(observer => {
+          this.counter2$ = new Observable<number>((observer) => {
             let count = 0;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_2) {
@@ -116,7 +115,7 @@ export class CountnumberComponent  implements OnInit {
             };
           });
 
-          this.counter2$.subscribe(count => {
+          this.counter2$.subscribe((count) => {
             this.counterElement2.nativeElement.innerHTML = count.toString();
           });
 
@@ -124,16 +123,15 @@ export class CountnumberComponent  implements OnInit {
 
           setTimeout(() => {
             this.counter2$ = null;
-            
           }, 11250);
         }
       }
     }, options);
-  //  this is for counter3
-    const observer3 = new IntersectionObserver(entries => {
+    //  this is for counter3
+    const observer3 = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         if (this.counter3$ === null) {
-          this.counter3$ = new Observable<number>(observer => {
+          this.counter3$ = new Observable<number>((observer) => {
             let count = 0;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_3) {
@@ -149,7 +147,7 @@ export class CountnumberComponent  implements OnInit {
             };
           });
 
-          this.counter3$.subscribe(count => {
+          this.counter3$.subscribe((count) => {
             this.counterElement3.nativeElement.innerHTML = count.toString();
           });
 
@@ -162,10 +160,10 @@ export class CountnumberComponent  implements OnInit {
         }
       }
     }, options);
-    const observer4 = new IntersectionObserver(entries => {
+    const observer4 = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         if (this.counter4$ === null) {
-          this.counter4$ = new Observable<number>(observer => {
+          this.counter4$ = new Observable<number>((observer) => {
             let count = 0;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_4) {
@@ -181,7 +179,7 @@ export class CountnumberComponent  implements OnInit {
             };
           });
 
-          this.counter4$.subscribe(count => {
+          this.counter4$.subscribe((count) => {
             this.counterElement4.nativeElement.innerHTML = count.toString();
           });
 
@@ -198,8 +196,5 @@ export class CountnumberComponent  implements OnInit {
     observer2.observe(this.counterElement2.nativeElement);
     observer3.observe(this.counterElement3.nativeElement);
     observer4.observe(this.counterElement4.nativeElement);
-
   }
 }
-
-
