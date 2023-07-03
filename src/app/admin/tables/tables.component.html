@@ -1,6 +1,9 @@
 <!-- <app-admin-navbar></app-admin-navbar> -->
 
 <!-- HTML template -->
+<!-- <app-admin-navbar></app-admin-navbar> -->
+
+<!-- HTML template -->
 <div class="container good p-60">
   <h2 class="form_title">Tables</h2>
   <hr />
@@ -25,11 +28,15 @@
     <tbody>
       <tr *ngFor="let table of Tables; let i = index" id="cate{{ i }}">
         <td>{{ table.number }}</td>
-        <td>{{table.guest_numbers}}</td>
+        <td>{{ table.guest_numbers }}</td>
         <td>
           <!-- Rounded switch -->
           <label class="switch">
-            <input type="checkbox" [checked]="table.status > 0" />
+            <input
+              type="checkbox"
+              [checked]="table.status > 0"
+              (click)="change_status(table.id)"
+            />
             <span class="slider round"></span>
           </label>
         </td>
@@ -134,7 +141,7 @@
               <label>Status<span class="text-danger">*</span></label>
               <!-- Rounded switch -->
               <label class="switch">
-                <input type="checkbox" [checked]="" />
+                <input type="checkbox" [checked]="" formControlName="status" />
                 <span class="slider round"></span>
               </label>
             </div>
@@ -143,18 +150,17 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="admin__close__btn__form"
+              class="admin_closebtn_form"
               data-bs-dismiss="modal"
             >
               Close
             </button>
             <button
               type="submit"
-              class="btn-lg admin__sec__btn__form mx-3"
+              class="btn-lg admin_secbtn_form mx-3"
               [disabled]="!tableForm.valid"
               data-bs-dismiss="modal"
               aria-label="Close"
-              (click)="createTable1()"
             >
               Add Table
             </button>
@@ -183,7 +189,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <form #UpdatedcategoryData="ngForm">
+      <form [formGroup]="updatetableForm" (ngSubmit)="updatetable(idtable)">
         <div class="modal-body bgGreyLight_1 vertical_align_center">
           <!--Start Table No  Input -->
 
@@ -200,7 +206,10 @@
             <!-- Start Validation For Table No  -->
 
             <div
-              *ngIf="TableNo_updated_Control.invalid && TableNo_updated_Control.touched"
+              *ngIf="
+                TableNo_updated_Control.invalid &&
+                TableNo_updated_Control.touched
+              "
               class="text-danger"
             >
               <div *ngIf="TableNo_updated_Control.errors?.['required']">
@@ -226,11 +235,13 @@
               type="number"
               class="input__form"
               formControlName="guest_numbers_updated"
+              id="guest_numbers_updated"
             />
             <!-- Start Validation For guest_numbers -->
             <div
               *ngIf="
-              guest_numbers_updated_Control.invalid && guest_numbers_updated_Control.touched
+                guest_numbers_updated_Control.invalid &&
+                guest_numbers_updated_Control.touched
               "
               class="text-danger"
             >
@@ -253,7 +264,11 @@
             <label>Status<span class="text-danger">*</span></label>
             <!-- Rounded switch -->
             <label class="switch">
-              <input type="checkbox" [checked]="" formControlName="status_updated_Control"/>
+              <input
+                type="checkbox"
+                [checked]=""
+                formControlName="status_updated"
+              />
               <span class="slider round"></span>
             </label>
           </div>
@@ -262,17 +277,16 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="admin__close__btn__form"
+            class="admin_closebtn_form"
             data-bs-dismiss="modal"
           >
             Close
           </button>
           <button
             type="submit"
-            class="btn-lg admin__sec__btn__form mx-3"
+            class="btn-lg admin_secbtn_form mx-3"
             data-bs-dismiss="modal"
             aria-label="Close"
-            (click)="updateTable()"
           >
             Update Table
           </button>
@@ -282,3 +296,5 @@
   </div>
 </div>
 <!-- </div> -->
+
+
