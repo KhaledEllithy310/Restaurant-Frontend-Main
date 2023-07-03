@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <img
+          class="card-img-top"
+          [src]="'http://127.0.0.1:8000' + targetProduct.image"
+          alt=""
+        />
+        <div class="card-body">
+          <h4 class="card-title">{{ targetProduct.name }}</h4>
+          <p class="card-text">${{ targetProduct.total_price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <button
+    class="btn btn-outline-primary my-4"
+    [routerLink]="'admin/dashboard/products'"
+  >
+    back
+  </button> -->
+</div>

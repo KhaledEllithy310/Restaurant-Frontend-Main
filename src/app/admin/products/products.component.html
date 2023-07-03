@@ -75,9 +75,12 @@
         </td>
         <td>{{ product.extra || "No Extra" }}</td>
         <td class="">
-          <div class="btn btn-info m-2 edit-btn">
-            Edit <i class="fas fa-pen-to-square"></i>
-          </div>
+          <a
+            class="btn btn-info m-2 edit-btn"
+            (click)="redirectToShowDetailsProduct(product.id)"
+          >
+            Show Details <i class="fas fa-pen-to-square"></i>
+          </a>
         </td>
       </tr>
     </tbody>

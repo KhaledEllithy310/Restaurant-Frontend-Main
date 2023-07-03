@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,8 @@ export class ProductsComponent {
 
   constructor(
     private fb: FormBuilder,
-    private productsService: ProductsService // config: NgbPaginationConfig
+    private productsService: ProductsService,
+    private router: Router
   ) {
     // customize default values of pagination controls
     // config.maxSize = 10;
@@ -42,7 +44,7 @@ export class ProductsComponent {
 
   //Get All Products
   getAllProducts() {
-    this.productsService.getProduct(this.pageNumber).subscribe(
+    this.productsService.getProductPagination(this.pageNumber).subscribe(
       (response: any) => {
         this.products = response.data;
         this.totalItems = response.total;
@@ -99,5 +101,15 @@ export class ProductsComponent {
         console.log(error);
       }
     );
+  }
+
+  redirectToShowDetailsProduct(product_id: any) {
+    console.log(product_id);
+
+    this.router.navigate([
+      'admin/dashboard/products/product-details/',
+      product_id,
+    ]);
+    // this.emitFromChild.emit(id)
   }
 }

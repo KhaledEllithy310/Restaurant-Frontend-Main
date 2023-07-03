@@ -18,10 +18,13 @@ export class ProductsService {
   //     .set('per_page', pageSize.toString());
   //   return this.http.get('http://127.0.0.1:8000/api/products', { params });
   // }
-  getProduct(pageNumber: number) {
+  getProductPagination(pageNumber: number) {
     return this.http.get(
       `http://127.0.0.1:8000/api/products?page=${pageNumber}`
     );
+  }
+  getAllProduct() {
+    return this.http.get(`http://127.0.0.1:8000/api/products`);
   }
 
   getIngredients() {
