@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbDatepicker, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TablesComponent } from './tables/tables.component';
 import { ProductsComponent } from './products/products.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
@@ -73,6 +73,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgbDropdownModule,
     CommonModule,
+    NgbModule
   ],
   exports: [AdminComponent],
 })

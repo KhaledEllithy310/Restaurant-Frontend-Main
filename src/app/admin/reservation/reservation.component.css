@@ -42,12 +42,21 @@ tr:hover {
 .filter {
     display: flex;
     color: #eee;
-    justify-content: start;
-    align-items: center;
+    justify-content: space-around;
+    align-items: end;
     padding: 15px;
     margin: 10px;
 }
+.filter-date {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .filter .date {
     display: flex;
-    flex-direction: column;
+}
+.tableNum form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
