@@ -24,8 +24,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let table of TableNo; let i = index" id="cate{{ i }}">
-        <th>{{ i + 1 }}</th>
-        <td>{{ table.number }}</td>
+        <th>{{ table.number }}</th>
+        <td>{{ table.guest_numbers }}</td>
         <td>
           <!-- Rounded switch -->
           <label class="switch">
@@ -224,7 +224,7 @@
             <input
               type="number"
               class="input__form"
-              formControlName="guest_numbers"
+              formControlName="guest_numbers_updated"
             />
             <!-- Start Validation For guest_numbers -->
             <div
