@@ -228,13 +228,9 @@
             </div>
             <div class="col-12 container__Extra">
               <h4>Extra</h4>
-              <div class="list__Ingredients">
+              <div class="list__Ingredients list__Extra">
                 <li *ngFor="let Extra of ExtraList">
                   <span>{{ Extra.name }}</span>
-                  <span>{{ Extra.quantity }}kg</span>
-                  <span class="list__Ingredients__price"
-                    >${{ Extra.total }}</span
-                  >
                 </li>
               </div>
             </div>
@@ -253,6 +249,9 @@
     >
       <div class="vertical_align_center">
         <h2 class="form_title">Add Ingredient</h2>
+        <div class="close_icon" (click)="closeIngredientForm()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
         <div class="row">
           <!--Start Ingredient Name  Input -->
           <div class="col-xl-6 inputs__container">
@@ -339,6 +338,10 @@
       *ngIf="showExtraForm"
     >
       <div class="vertical_align_center">
+        <div class="close_icon" (click)="closeExtraForm()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+
         <h2 class="form_title">Add Extra</h2>
         <div class="row">
           <!--Start Ingredient Name  Input -->

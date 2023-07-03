@@ -256,9 +256,6 @@ export class AddProductComponent {
     this.IngredientsList.forEach((Ingredient) => {
       total_price += +Ingredient.total;
     });
-    this.ExtraList.forEach((extra) => {
-      total_price += +extra.total;
-    });
 
     this.total_price = total_price;
     return total_price;
@@ -303,6 +300,8 @@ export class AddProductComponent {
     // // console.log(this.IngredientsList);
     //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
     this.isIngredientsListEmpty = this.IngredientsList.length === 0;
+    //clear the data in form
+    this.ingredientsForm.reset();
     //disappear the form after submit
     this.showIngredientsForm = false;
   }
@@ -312,38 +311,25 @@ export class AddProductComponent {
     let selectedIngredient = this.ingredients.find(
       (elem) => elem.id == this.ExtraForm.value.Ingredient_id
     );
-    // get Ingredient Price
-    let Ingredient_Price = selectedIngredient.price;
-    //// console.log('Ingredient_Price', Ingredient_Price);
-    console.log(this.ExtraForm.value);
-
-    // get Ingredient Profit
-    let Ingredient_Profit = selectedIngredient.profit;
-    ////  console.log('Ingredient_Profit', Ingredient_Profit);
-
-    // get Ingredient Quantity that user enter it into the input field
-    let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
-    // // console.log('Ingredient_Quantity', Ingredient_Quantity);
 
     // get Ingredient name
     let Ingredient_name = selectedIngredient.name;
-
-    //calculate the total price = price * quantity * (1 + Profit)
-    let finalPrice =
-      Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
 
     //create new Extra to sent it to the server
     const ExtraId = {
       id: this.ExtraForm.value.Ingredient_id,
     };
-    //create new Extra to Show it in the browser for the user
+    // // create new Extra to Show it in the browser for the user
+    //  // const newExtra = {
+    ////   id: this.ExtraForm.value.Ingredient_id,
+    // //   name: Ingredient_name,
+    // //   quantity: this.ExtraForm.value.Ingredient_Quantity,
+    // //   total: finalPrice.toFixed(2),
+    //  // };
     const newExtra = {
       id: this.ExtraForm.value.Ingredient_id,
       name: Ingredient_name,
-      quantity: this.ExtraForm.value.Ingredient_Quantity,
-      total: finalPrice.toFixed(2),
     };
-
     //  // console.log(newIngredient);
     //store the new Extra in the ExtraList {array}
     this.ExtraList.push(newExtra);
@@ -355,10 +341,24 @@ export class AddProductComponent {
     // // console.log(this.IngredientsList);
     //check if the ExtraList is empty => return false and container__Ingredients__Extra is disappear
     this.isExtraListEmpty = this.ExtraList.length === 0;
+    //clear the data in form
+    this.ExtraForm.reset();
     //disappear the form after submit
     this.showExtraForm = false;
   }
 
+  closeIngredientForm() {
+    //clear the data in form
+    this.ingredientsForm.reset();
+    //disappear the form after submit
+    this.showIngredientsForm = false;
+  }
+  closeExtraForm() {
+    //clear the data in form
+    this.ExtraForm.reset();
+    //disappear the form after submit
+    this.showExtraForm = false;
+  }
   // addExtraForProduct() {
   //   this.submitted = true;
 

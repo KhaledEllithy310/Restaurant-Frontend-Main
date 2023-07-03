@@ -255,6 +255,7 @@ hr {
   border-radius: 20px;
   /* outline: 1px solid var(--special-text-color); */
   /* outline-offset: 4px; */
+  position: relative;
 }
 
 .form_admin_extra {
@@ -263,6 +264,30 @@ hr {
   padding: 20px;
   color: white;
   border-radius: 20px;
+  position: relative;
+}
+
+.close_icon {
+  color: var(--special-button-color);
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: var(--background-color-of-sections);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.close_icon:hover {
+  color: var(--background-color-of-sections);
+  background-color: var(--special-button-color);
 }
 
 .form__admin__special {
@@ -526,6 +551,14 @@ tr:hover {
   background-color: transparent !important;
   color: white !important;
   border: 1px solid #00dc94;
+}
+
+.list__Extra {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  row-gap: 8px;
+  column-gap: 15px;
 }
 
 /* End Admin Style */
