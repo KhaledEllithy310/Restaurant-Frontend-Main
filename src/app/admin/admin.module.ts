@@ -35,7 +35,10 @@ const routes: Routes = [
       { path: 'tables', component: TablesComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'products/add', component: AddProductComponent },
-      {path: 'products/product-details/:id',component: ProductDetailsComponent,},
+      {
+        path: 'products/product-details/:id',
+        component: ProductDetailsComponent,
+      },
       { path: 'users', component: UsersComponent },
       { path: 'users/add', component: AddUsersComponent },
       { path: 'users/edit/:id', component: EditUsersComponent },
