@@ -9,6 +9,7 @@ import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/services/products.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import { CategoryService } from 'src/app/services/category.service';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
     ProductsComponent,
     AddProductComponent,
     ProductDetailsComponent,
+    UpdateProductComponent,
   ],
   imports: [
     CommonModule,
