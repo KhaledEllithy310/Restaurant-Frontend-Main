@@ -4,11 +4,10 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product';
 
-@Injectable(
+@Injectable()
 //   {
 //   providedIn: 'root',
 // }
-)
 export class ProductsService {
   private URL: string = environment.productBaseUrl;
   constructor(private http: HttpClient) {}
@@ -20,6 +19,9 @@ export class ProductsService {
     return this.http.get(`${this.URL}`);
   }
 
+  getProductById(id: any) {
+    return this.http.get(`${this.URL}/` + id);
+  }
   getIngredients() {
     return this.http.get('http://127.0.0.1:8000/api/ingredients');
   }

@@ -10,6 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
     FormsModule,
     NgbDropdownModule,
     NgbModule,
+    // SharedModule,
   ],
   exports: [
     DisplayProductsComponent,

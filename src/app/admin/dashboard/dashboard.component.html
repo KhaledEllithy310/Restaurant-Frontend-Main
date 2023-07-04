@@ -40,34 +40,32 @@
           </a>
         </li> -->
 
-
-          <li
-            class="position-static"
-            ngbDropdown
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
+        <li
+          class="position-static"
+          ngbDropdown
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="dropdown-toggle text-align-left dropdown_link_dashboard" ngbDropdownToggle>
+            Products
+          </a>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+            id="drop_container"
           >
-            <button
-              class="nav-link dropdown-toggle btn w-100"
-              ngbDropdownToggle
-            >
-              Products
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button
-                ngbDropdownItem
-                routerLink="/admin/dashboard/products/display"
-              >
+            <li>
+              <a ngbDropdownItem routerLink="/admin/dashboard/products/display">
                 Display Products
-              </button>
-              <button
-                ngbDropdownItem
-                routerLink="/admin/dashboard/products/add"
-              >
+              </a>
+            </li>
+            <li>
+              <a ngbDropdownItem routerLink="/admin/dashboard/products/add">
                 Add Products
-              </button>
-            </div>
-          </li>
+              </a>
+            </li>
+          </div>
+        </li>
 
         <li>
           <a [routerLink]="'/admin/dashboard/users'" routerLinkActive="active">

@@ -69,13 +69,13 @@ export class DisplayProductsComponent {
     this.getAllProducts();
   }
 
-  // change_status(id_Product: any) {
-  //   console.log(id_Product);
+  change_status(id_Product: any) {
+    console.log(id_Product);
 
-  //   this.productsService
-  //     .change_status(id_Product)
-  //     .subscribe((Response) => console.log(Response));
-  // }
+    this.productsService
+      .change_status(id_Product)
+      .subscribe((Response) => console.log(Response));
+  }
 
   onSearch() {
     // this.productsService.onSearch(this.searchTerm).subscribe(
