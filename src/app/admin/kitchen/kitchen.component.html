@@ -1,6 +1,9 @@
 <div class="container py-5">
   <h2 class="form_title">Kitchen</h2>
   <hr />
+  <div *ngIf="!orders">
+    <div class="alert alert-info text-center">Kitchen Is Empty or Loading ...</div>
+  </div>
   <div class="chef-box my-4" *ngFor="let order of orders">
     <div class="table-info">
       <h3 class="my-2 text-start">Table: <span style="color: #deac80">{{order.table_id}}</span></h3>
@@ -10,10 +13,11 @@
           <span class="dine-in" style="background-color: #deac80">Dine-in</span>
         </div>
         <div>time: {{order.created_at | date :'shortTime'}}</div>
+        <button class="btn btn-outline-primary m-1" (click)="completeOrder(order.id)">Order Done</button>
       </div>
     </div>
     <div class="orders">
-      <h3 class="mb-5">Complated <span style="color: #deac80">[{{getOrderStatus(order.order_products)}}/{{order.products.length}}]</span></h3>
+      <h3 class="mb-5">Completed <span style="color: #deac80">[{{getOrderStatus(order.order_products).length}}/{{order.products.length}}]</span></h3>
       <div class="orders-cards">
         <div class="container">
         <div class="row">
@@ -31,11 +35,12 @@
                   <h5 class="card-title">{{product.name}}</h5>
                   <span>X{{getQuantity(product.id, order.order_products)}}</span>
                 </div>
-                <p class="card-text">- extra cheese</p>
-                <p class="card-text">- large size</p>
+                <div style="height: 100px" *ngIf="getExtra(product.id, order.order_products)">
+                  <p class="card-text" *ngFor="let extra of getExtra(product.id, order.order_products)">- {{extra}}</p>
+                </div>
                 <div class="options">
-                  <button class="btn btn-info my-2 btn-complate" (click)="complete(order.id, getOrderProductId(product.id, order.order_products))">Complated</button>
-                  <button class="btn btn-danger btn-cancel" (click)="canceledOrder(order.id, getOrderProductId(product.id, order.order_products))">Cancel</button>
+                  <button class="btn btn-info my-2 btn-complate" (click)="complete(order.id, getOrderProductId(product.id, order.order_products))" [disabled]="getOrderProductStatus(order.order_products, product.id) === 'Complete'">Completed</button>
+                  <button class="btn btn-danger btn-cancel" (click)="canceledOrder(order.id, getOrderProductId(product.id, order.order_products))" [disabled]="getOrderProductStatus(order.order_products, product.id) === 'Cancel'">Cancel</button>
                 </div>
               </div>
             </div>

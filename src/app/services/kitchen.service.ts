@@ -17,4 +17,7 @@ export class KitchenService {
   canceled(orderId: any, orderProdutId: any) {
     return this.http.put(`http://127.0.0.1:8000/api/order_products/${orderId}/cancel/${orderProdutId}`, {});
   }
+  completeOrder(orderId: any) {
+    return this.http.put(`http://127.0.0.1:8000/api/orders/kitchen/${orderId}`,{});
+  }
 }

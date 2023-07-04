@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { KitchenService } from 'src/app/services/kitchen.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
@@ -14,16 +14,31 @@ export class KitchenComponent {
   errorComplete: any;
   canceledSuccess: any;
   errorCanceled: any;
+  comleteOrderSuccess: any;
+  completeOrderError: any;
 
   constructor(private kitchen: KitchenService) {}
 
   ngOnInit() {
-    this.kitchen.getOrders().subscribe((res: any) => this.orders = res.data);
+    this.kitchen.getOrders().subscribe({
+      next: (res: any) => {
+        this.orders = res.data;
+        console.log(this.orders);
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    });
   }
 
   getQuantity(productId: number, orderProducts: any[]) {
     const product = orderProducts.find(p => p.product_id === productId);
     return product ? product.quantity : 0;
+  }
+
+  getExtra(productId: number, orderProducts: any[]) {
+    const product = orderProducts.find(p => p.product_id === productId);
+    return product ? product.extra : null;
   }
   
   getOrderProductId(productId: number, orderProducts: any[]) {
@@ -33,7 +48,11 @@ export class KitchenComponent {
 
   getOrderStatus(orderProducts: any[]) {
     const completedProducts = orderProducts.filter((op: { status: string; }) => op.status === "Complete");
-    return completedProducts.length;
+    return completedProducts;
+  }
+  getOrderProductStatus(orderProducts: any[], productId: number) {
+    const orderProduct = orderProducts.find(op => op.product_id === productId);
+    return orderProduct ? orderProduct.status : null;
   }
 
   complete(orderID: any, orderProductID: any) {
@@ -41,6 +60,7 @@ export class KitchenComponent {
       next: (res: any) => {
         this.completedSuccess = res;
         console.log(res);
+        Swal.fire('Completed Product!','', 'success');
         const order = this.orders.find((o: any) => o.id === orderID);
         const orderProduct = order.order_products.find((op: any) => op.id === orderProductID);
         if (orderProduct) {
@@ -59,6 +79,7 @@ export class KitchenComponent {
       next: (res: any) => {
         this.canceledSuccess = res;
         console.log(res);
+        Swal.fire('Canceled Product!', '','error');
         const order = this.orders.find((o: any) => o.id === orderID);
         const orderProduct = order.order_products.find((op: any) => op.id === orderProductID);
         if (orderProduct) {
@@ -69,6 +90,21 @@ export class KitchenComponent {
       error: (err: any) => {
         this.errorCanceled = err.errors.error;
         console.log(err);
+      }
+    })
+  }
+  completeOrder(orderID: any) {
+    this.kitchen.completeOrder(orderID).subscribe({
+      next: (res: any) => {
+        this.comleteOrderSuccess = res;
+        console.log(this.comleteOrderSuccess);
+        Swal.fire('Order Is Done!', '','success');
+        this.ngOnInit();
+      },
+      error: (err: any) => {
+        this.completeOrderError= err.error.message;
+        console.log(err);
+        Swal.fire('Not Completed Order', this.completeOrderError,'error');
       }
     })
   }
