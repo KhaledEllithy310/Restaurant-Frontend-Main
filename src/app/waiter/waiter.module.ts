@@ -9,7 +9,7 @@ import { WaiterProductItemComponent } from './waiter-product/waiter-product-item
 import { WaiterProductDetailComponent } from './waiter-product/waiter-product-detail/waiter-product-detail.component';
 import { WaiterCartComponent } from './waiter-cart/waiter-cart.component';
 import { ModalComponent } from './modal/modal.component';
-import { TextMutedPipe } from '../pipes/text-muted.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -34,9 +34,8 @@ const routes: Routes = [
     WaiterComponent,
     WaiterCartComponent,
     ModalComponent,
-    TextMutedPipe,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
   providers: [GetDataService, CartService],
   exports: [ModalComponent],
 })

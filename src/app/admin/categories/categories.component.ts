@@ -49,7 +49,6 @@ export class CategoriesComponent {
         this.search(term);
       }
     );
-
     // call the all categories
     this.getAllCategory();
     //form group for add categoryForm
@@ -66,6 +65,7 @@ export class CategoriesComponent {
       image_updated: [''],
     });
   }
+
   //create form control for input {name}
   get nameControl() {
     return this.categoryForm.controls['name'];

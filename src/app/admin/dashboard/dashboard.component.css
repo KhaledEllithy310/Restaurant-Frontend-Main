@@ -169,3 +169,20 @@ body {
 #sidebar .nav a i {
   margin-right: 16px;
 }
+
+#drop_container {
+  background-color: var(--main-color);
+  width: 92%;
+  margin-inline: auto;
+  border-radius: 10px;
+}
+
+#sidebar #drop_container li a {
+  background-color: var(--background-color-of-sections);
+  width: 90%;
+  margin: 0;
+}
+
+.dropdown_link_dashboard {
+  cursor: pointer;
+}

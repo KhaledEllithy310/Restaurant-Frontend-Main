@@ -24,8 +24,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let table of TableNo; let i = index" id="cate{{ i }}">
-        <th>{{ i + 1 }}</th>
-        <td>{{ table.number }}</td>
+        <th>{{ table.number }}</th>
+        <td>{{ table.guest_numbers }}</td>
         <td>
           <!-- Rounded switch -->
           <label class="switch">
@@ -130,14 +130,14 @@
             </div>
             <!--End guest_numbers  Input -->
             <!--Start Status Input -->
-            <div class="mb-2 align-items-center status_input inputs__container">
+            <!-- <div class="mb-2 align-items-center status_input inputs__container">
               <label>Status<span class="text-danger">*</span></label>
-              <!-- Rounded switch -->
+              Rounded switch
               <label class="switch">
                 <input type="checkbox" [checked]="" />
                 <span class="slider round"></span>
               </label>
-            </div>
+            </div> -->
             <!--End Status Input -->
           </div>
           <div class="modal-footer">
@@ -224,7 +224,7 @@
             <input
               type="number"
               class="input__form"
-              formControlName="guest_numbers"
+              formControlName="guest_numbers_updated"
             />
             <!-- Start Validation For guest_numbers -->
             <div
@@ -248,14 +248,14 @@
           </div>
           <!--End guest_numbers  Input -->
           <!--Start Status Input -->
-          <div class="mb-2 align-items-center status_input inputs__container">
+          <!-- <div class="mb-2 align-items-center status_input inputs__container">
             <label>Status<span class="text-danger">*</span></label>
-            <!-- Rounded switch -->
+            Rounded switch
             <label class="switch">
               <input type="checkbox" [checked]="" />
               <span class="slider round"></span>
             </label>
-          </div>
+          </div> -->
           <!--End Status Input -->
         </div>
         <div class="modal-footer">
