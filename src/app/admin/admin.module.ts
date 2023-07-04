@@ -24,7 +24,6 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
-
 const routes: Routes = [
   { path: '', component: AdminComponent },
   {

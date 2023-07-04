@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
 import {
   FormGroup,
   FormControl,
@@ -20,6 +22,10 @@ export class TablesComponent {
   idtable!: number;
   selectedtable: any = {};
   updatetableForm!: FormGroup;
+ 
+  // ngOnInit():void{
+
+  // }
 
   // @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('addTables', { static: false }) addTables!: ElementRef;
@@ -28,6 +34,7 @@ export class TablesComponent {
     private fb: FormBuilder,
     private tableService: TablesService // private getCatService: GetDataService,
   ) {}
+   
 
   ngOnInit() {
     //call the all table
@@ -44,7 +51,16 @@ export class TablesComponent {
       guest_numbers_updated: ['', [Validators.required]],
       status_updated: ['', [Validators.required]],
     });
+    
+  
+
   }
+ 
+    // loadData() {
+    //   this.tableService.getData().subscribe((data) => {
+    //     this.table = data;
+    //   });
+    // }
   get guest_numbers_Control() {
     return this.tableForm.controls['guest_numbers'];
   }
@@ -63,6 +79,7 @@ export class TablesComponent {
   }
   get status_updated_Control() {
     return this.updatetableForm.controls['status_updated'];
+
   }
 
   createTable() {
@@ -76,7 +93,16 @@ export class TablesComponent {
     this.tableService.addTables(newTable).subscribe(
       (response) => {
         console.log(response);
-      },
+            this.tableService.getTable().subscribe({
+              next: (res: any) => {
+                (this.Tables = res.data), console.log(res);
+              },
+              error: (err: any) => {
+                console.log(err);
+              },
+             
+            });
+          ;},
       (error) => {
         console.log(error);
         // Handle error response
@@ -96,14 +122,7 @@ export class TablesComponent {
       error: (err: any) => {
         console.log(err);
       },
-      // (response: any) => {
-      //   this.TableNo = response.data;
-      //   console.log(response);
-      // },
-      // (error) => {
-      //   console.log(error);
-      //   // Handle error response
-      // }
+     
     });
   }
 
@@ -138,23 +157,18 @@ export class TablesComponent {
     this.tableService.getOldTable(idtable).subscribe((Response: any) => {
       this.selectedtable = Response.data;
       console.log(this.selectedtable.TableNo);
+      //  this.tableService.getTable().subscribe({
+      //   next: (res: any) => {
+      //     (this.Tables = res.data), console.log(res);
+      //   },
+      //   error: (err: any) => {
+      //     console.log(err);
+      //   },
+       
+      // });
+      
     });
-    // const updatetable = new FormData();
-    // updatetable.append(
-    //   'number',
-    //   this.updatetableForm.value.TableNo_updated || this.selectedtable.number
-    // );
-    // updatetable.append(
-    //   'guest_numbers',
-    //   this.updatetableForm.value.guest_numbers_updated ||
-    //     this.selectedtable.guest_numbers
-    // );
-    // updatetable.append(
-    //   'status',
-    //   this.updatetableForm.value.status_updated || this.selectedtable.status
-    // );
-    ////console.log(updatetable.get('TableNo_updated'));
-
+   
     const updatetable2 = {
       number:
         this.updatetableForm.value.TableNo_updated || this.selectedtable.number,
@@ -165,10 +179,6 @@ export class TablesComponent {
         this.updatetableForm.value.status_updated || this.selectedtable.status,
     };
 
-    // console.log(updatetable.get('number'));
-    // console.log(updatetable.get('guest_numbers'));
-    // console.log(updatetable.get('status'));
-
     this.tableService.UpdateTable(updatetable2, idtable).subscribe(
       (response) => {
         console.log(response);
@@ -177,7 +187,6 @@ export class TablesComponent {
         console.log(error);
       }
     );
-    // window.location.reload();
   }
 
   change_status(id_Product: any) {

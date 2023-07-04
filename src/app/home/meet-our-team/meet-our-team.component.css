@@ -60,7 +60,7 @@ body{
     width: 250px;
     height: 400px;
     transition: transform 0.2s ease-out;
-         /* margin-top: 80px; */
+       
          border-radius: 0;
          background-color: transparent;
 
@@ -82,21 +82,7 @@ body{
     border-radius: 0;
 }
 
-/* .card .card-content {
-    padding: 20px;
-} */
 
-/* .card h3 {
-    font-size: 24px;
-    margin: 10px 0;
-} */
-
-/* .card p {
-    font-size: 16px;
-    margin: 10px 0;
-    line-height: 1.5em;
-} */
-/* this is for the lane */
 .container {
     display: flex;
     align-items: center;
@@ -116,14 +102,5 @@ body{
         height: auto;
     }
 }
-/* .box{
-    width: 30px;
-            height: 20px;
-            padding: 50px;
-            margin-left: 200px;
-            
-            
-            background-color: #b8860b;
-            
-} */
+
 
