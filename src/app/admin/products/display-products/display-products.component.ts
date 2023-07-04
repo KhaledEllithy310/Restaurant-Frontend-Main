@@ -3,13 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  selector: 'app-display-products',
+  templateUrl: './display-products.component.html',
+  styleUrls: ['./display-products.component.css'],
 })
-export class ProductsComponent {
+export class DisplayProductsComponent {
   pageSize = 8;
   pageNumber = 1;
   totalItems = 0;
@@ -112,5 +111,4 @@ export class ProductsComponent {
     ]);
     // this.emitFromChild.emit(id)
   }
-
 }

@@ -16,37 +16,85 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="'/admin/dashboard/profile'" routerLinkActive="active">
+          <a
+            [routerLink]="'/admin/dashboard/profile'"
+            routerLinkActive="active"
+          >
             Profile
           </a>
         </li>
         <li>
-          <a [routerLink]="'/admin/dashboard/Categories'" routerLinkActive="active">
+          <a
+            [routerLink]="'/admin/dashboard/Categories'"
+            routerLinkActive="active"
+          >
             Categories
           </a>
         </li>
-        <li>
-          <a [routerLink]="'/admin/dashboard/products'" routerLinkActive="active">
+        <!-- <li>
+          <a
+            [routerLink]="'/admin/dashboard/products'"
+            routerLinkActive="active"
+          >
             Products
           </a>
-        </li>
+        </li> -->
+
+
+          <li
+            class="position-static"
+            ngbDropdown
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <button
+              class="nav-link dropdown-toggle btn w-100"
+              ngbDropdownToggle
+            >
+              Products
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button
+                ngbDropdownItem
+                routerLink="/admin/dashboard/products/display"
+              >
+                Display Products
+              </button>
+              <button
+                ngbDropdownItem
+                routerLink="/admin/dashboard/products/add"
+              >
+                Add Products
+              </button>
+            </div>
+          </li>
+
         <li>
           <a [routerLink]="'/admin/dashboard/users'" routerLinkActive="active">
             Users
           </a>
         </li>
         <li>
-          <a [routerLink]="'/admin/dashboard/ingridents'" routerLinkActive="active">
+          <a
+            [routerLink]="'/admin/dashboard/ingridents'"
+            routerLinkActive="active"
+          >
             Ingridents
           </a>
         </li>
         <li>
-          <a [routerLink]="'/admin/dashboard/kitchen'" routerLinkActive="active">
+          <a
+            [routerLink]="'/admin/dashboard/kitchen'"
+            routerLinkActive="active"
+          >
             Kitchen
           </a>
         </li>
         <li>
-          <a [routerLink]="'/admin/dashboard/reservation'" routerLinkActive="active">
+          <a
+            [routerLink]="'/admin/dashboard/reservation'"
+            routerLinkActive="active"
+          >
             Reservation
           </a>
         </li>
