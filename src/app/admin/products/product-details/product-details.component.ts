@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 export class ProductDetailsComponent {
   targetProduct: any;
   targetExtraList: any[] = [];
+  newExtraList: any[] = [];
+
   targetIngredientList: any[] = [];
   categories!: any[];
   Ingredients!: any[];
@@ -30,8 +32,8 @@ export class ProductDetailsComponent {
   ingredientsForm!: FormGroup;
   ExtraForm!: FormGroup;
   showIngredientsForm = false;
+  statusUpdateProductForm = false;
   showProductForm = false;
-
   showExtraForm = false;
   isIngredientsListEmpty: boolean = true;
   isExtraListEmpty: boolean = true;
@@ -44,6 +46,9 @@ export class ProductDetailsComponent {
   showErroressage: any;
   statusUpdateButton: boolean = false;
   statusUpdateProductButton: boolean = false;
+
+  imageUrl: any;
+  selectedFile: File | undefined;
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('updatefileInput', { static: false }) updatefileInput!: ElementRef;
   constructor(
@@ -96,9 +101,12 @@ export class ProductDetailsComponent {
   getTargetExtra() {
     for (const key in this.targetProduct.extra) {
       if (this.targetProduct.extra.hasOwnProperty(key)) {
-        const name = this.targetProduct.extra[key][0].name;
+        const name = this.targetProduct.extra[key].name;
+        const id = this.targetProduct.extra[key].id;
         console.log(name);
-        this.targetExtraList.push(name);
+        // this.targetExtraList.push({ name: name, id: id });
+        this.newExtraList.push({ name: name, id: id });
+        this.targetExtraList = this.newExtraList;
         console.log(this.targetExtraList);
       }
     }
@@ -237,12 +245,12 @@ export class ProductDetailsComponent {
       this.productForm.value.productDescription || productDescription.value
     );
     // add the product discount to the FormData object if it exists
-    if (this.productForm.value.productDiscount) {
-      updateProduct.append(
-        'discount',
-        this.productForm.value.productDiscount || productDiscount.value
-      );
-    }
+    // if (this.productForm.value.productDiscount) {
+    updateProduct.append(
+      'discount',
+      this.productForm.value.productDiscount || productDiscount.value
+    );
+    // }
     updateProduct.append(
       'category_id',
       this.productForm.value.category_id || category_id.value
@@ -253,42 +261,69 @@ export class ProductDetailsComponent {
     }
     updateProduct.append('_method', 'put');
 
+    this.targetExtraList = [];
+    this.targetExtraList = this.newExtraList;
+    console.log(this.targetExtraList);
+
+    this.ExtraListId = [];
+
+    for (let i = 0; i < this.newExtraList.length; i++) {
+      this.ExtraListId.push(this.newExtraList[i].id);
+    }
+
+    this.targetProduct = {
+      name: updateProduct.get('name'),
+      description: updateProduct.get('description'),
+      discount: updateProduct.get('discount'),
+      category_id: updateProduct.get('category_id'),
+      // image: updateProduct.get('image'),
+    };
+
+    console.log(this.targetProduct);
+
     // ** Start append Extra array of id in form data **
     for (let i = 0; i < this.ExtraListId.length; i++) {
       updateProduct.append('extra[]', this.ExtraListId[i]);
     }
     // ** End append Extra array of id in form data **
+    //select the button to show it and update again
+    let Update_Product = document.getElementById(
+      'Update_Product'
+    ) as HTMLInputElement;
+    let targetId = this.activatedRoute.snapshot.params['id'];
 
     //call the service and sent the request to the server
-    this.productsService
-      .UpdateProduct(this.targetProduct.id, updateProduct)
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          this.productForm.reset();
+    this.productsService.UpdateProduct(targetId, updateProduct).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.productForm.reset();
+        this.showProductForm = false;
+        // this.statusUpdateProductButton = !this.statusUpdateProductButton;
+        Update_Product.style.display = this.showProductForm
+          ? 'none'
+          : 'inline-block';
+        Swal.fire({
+          icon: 'success',
+          title: response.message,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.submitted = false; // Set submitted to false after reset
+      },
+      (error) => {
+        console.log(error);
 
-          Swal.fire({
-            icon: 'success',
-            title: response.message,
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          this.submitted = false; // Set submitted to false after reset
-        },
-        (error) => {
-          console.log(error);
+        Swal.fire({
+          icon: 'warning',
+          title: error.error.message,
+          showConfirmButton: false,
+          timer: 2000,
+        });
 
-          Swal.fire({
-            icon: 'warning',
-            title: error.error.message,
-            showConfirmButton: false,
-            timer: 2000,
-          });
-
-          this.submitted = false; // Set submitted to false after reset
-          // Handle error response
-        }
-      );
+        this.submitted = false; // Set submitted to false after reset
+        // Handle error response
+      }
+    );
 
     // window.location.reload();
   }
@@ -300,25 +335,27 @@ export class ProductDetailsComponent {
       total_price += +Ingredient.total;
     });
 
-    this.total_price = total_price;
+    this.total_price = total_price.toFixed(2);
     return total_price;
   }
 
   addIngredientsForProduct() {
     //get selected Ingredient
     let selectedIngredient = this.ingredients.find(
-      (elem) =>
-        elem.id == this.oldIngredient.id ||
-        this.ingredientsForm.value.Ingredient_id
+      (elem) => elem.id == this.ingredientsForm.value.Ingredient_id
+    );
+    let oldIngredientForUpdate = this.ingredients.find(
+      (elem) => elem.id == this.oldIngredient.id
     );
     console.log(selectedIngredient);
     console.log('oldIngredient', this.oldIngredient);
 
     // get Ingredient Price
-    let Ingredient_Price = selectedIngredient?.price;
-    //// console.log('Ingredient_Price', Ingredient_Price);
-    console.log(this.ingredientsForm.value);
+    let Ingredient_Price =
+      selectedIngredient?.price || oldIngredientForUpdate?.price;
+    console.log('Ingredient_Price', Ingredient_Price);
 
+    //// console.log('Ingredient_Price', Ingredient_Price);
     // get Ingredient Profit
     let Ingredient_Profit = selectedIngredient?.profit;
     ////  console.log('Ingredient_Profit', Ingredient_Profit);
@@ -338,11 +375,13 @@ export class ProductDetailsComponent {
 
     //create new Ingredient to sent it to the server
     const newIngredient = {
-      id: this.ingredientsForm.value.Ingredient_id,
+      id: selectedIngredient?.id,
       name: Ingredient_name,
       quantity: this.ingredientsForm.value.Ingredient_Quantity,
       total: finalPrice.toFixed(2),
     };
+
+    console.log(newIngredient);
 
     //check if the ingredients exsit in the IngredientsList or not
     let ingredientsExist = this.targetIngredientList.find(
@@ -434,7 +473,6 @@ export class ProductDetailsComponent {
         });
       }
     }
-
     //  // console.log(newIngredient);
 
     // // console.log(this.IngredientsList);
@@ -479,32 +517,6 @@ export class ProductDetailsComponent {
         oldIngredient_quantity.value = this.oldIngredient.quantity;
       }
     }, 100);
-
-    //get selected Ingredient
-    let selectedIngredient = this.ingredients.find(
-      (elem) => elem.id == ingredient_id
-    );
-    // // get Ingredient Price
-    // let Ingredient_Price = selectedIngredient.price;
-
-    // // get Ingredient Profit
-    // let Ingredient_Profit = selectedIngredient.profit;
-
-    // // Update the quantity of the existing ingredient
-    // this.targetIngredientList[index].quantity =
-    //   this.ingredientsForm.value.quantity;
-    // // Recalculate the total price for the updated ingredient
-    // this.targetIngredientList[index].total = (
-    //   this.ingredientsForm.value.quantity *
-    //   Ingredient_Price *
-    //   (1 + +Ingredient_Profit)
-    // ).toFixed(2);
-    // Swal.fire({
-    //   icon: 'success',
-    //   title: 'Ingredient Updated successfully',
-    //   showConfirmButton: false,
-    //   timer: 1500,
-    // });
   }
 
   addExtraForProduct() {
@@ -520,25 +532,22 @@ export class ProductDetailsComponent {
     const ExtraId = {
       id: this.ExtraForm.value.Ingredient_id,
     };
-    // // create new Extra to Show it in the browser for the user
-    //  // const newExtra = {
-    ////   id: this.ExtraForm.value.Ingredient_id,
-    // //   name: Ingredient_name,
-    // //   quantity: this.ExtraForm.value.Ingredient_Quantity,
-    // //   total: finalPrice.toFixed(2),
-    //  // };
+
     const newExtra = {
       id: this.ExtraForm.value.Ingredient_id,
       name: Ingredient_name,
     };
     //  // console.log(newIngredient);
     //check if the ingredients exsit in the IngredientsList or not
-    let ExtraExist = this.ExtraList.find((elem) => elem.id == newExtra.id);
+    let ExtraExist = this.newExtraList.find((elem) => elem.id == newExtra.id);
     if (!ExtraExist) {
       //store the new Extra in the ExtraList {array}
-      this.ExtraList.push(newExtra);
+      this.newExtraList.push(newExtra);
+
       //store the new Extra in the ExtraList {array}
-      this.ExtraListId.push(ExtraId.id);
+
+      console.log(this.ExtraListId);
+
       Swal.fire({
         icon: 'success',
         title: 'Extra added successfully',
@@ -553,14 +562,17 @@ export class ProductDetailsComponent {
         timer: 1500,
       });
     }
-
-    // // console.log(this.IngredientsList);
-    //check if the ExtraList is empty => return false and container__Ingredients__Extra is disappear
-    this.isExtraListEmpty = this.ExtraList.length === 0;
     //clear the data in form
     this.ExtraForm.reset();
     //disappear the form after submit
     this.showExtraForm = false;
+  }
+
+  deleteExtra(ExtraId: any) {
+    console.log(ExtraId);
+    this.newExtraList = this.newExtraList.filter(
+      (extra) => extra.id != ExtraId
+    );
   }
 
   closeIngredientForm() {
@@ -577,6 +589,21 @@ export class ProductDetailsComponent {
     this.showExtraForm = false;
   }
 
+  closeProductForm() {
+    //select the button to show it and update again
+    let Update_Product = document.getElementById(
+      'Update_Product'
+    ) as HTMLInputElement;
+    //clear the data in form
+    this.productForm.reset();
+    //disappear the form after submit
+    this.showProductForm = false;
+    Update_Product.style.display = this.showProductForm
+      ? 'none'
+      : 'inline-block';
+  }
+
+  //Update the Ingredient
   showUpdateIngredientButton() {
     this.statusUpdateButton = !this.statusUpdateButton;
     let Update_Ingredient = document.getElementById(
@@ -620,7 +647,10 @@ export class ProductDetailsComponent {
   }
 
   showUpdateProductButton() {
-    this.statusUpdateProductButton = !this.statusUpdateProductButton;
+    // this.statusUpdateProductForm = true;
+
+    // this.statusUpdateProductButton = !this.statusUpdateProductButton;
+    this.showProductForm = true;
     let Update_Product = document.getElementById(
       'Update_Product'
     ) as HTMLInputElement;
@@ -650,7 +680,7 @@ export class ProductDetailsComponent {
       category_id.value = this.targetProduct.category_id;
       productDescription.value = this.targetProduct.description;
     }, 100);
-    if (this.statusUpdateProductButton) {
+    if (this.showProductForm) {
       //****************************Update product************************//
     } else {
       // update the text of the 'Update Product' button to 'Update Product'
@@ -658,9 +688,18 @@ export class ProductDetailsComponent {
     }
     // set the 'display' property of the 'Update Product' button
     // based on the value of statusUpdateProductButton
-    Update_Product.style.display = this.statusUpdateProductButton
-      ? 'none'
-      : 'block';
+    Update_Product.style.display = this.showProductForm ? 'none' : 'block';
+  }
+
+  //set the selected image next to the input
+  onImageChange(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.selectedFile = file;
+      this.imageUrl = reader.result as string;
+    };
   }
 }
 

@@ -24,6 +24,12 @@
             class="card-img-top"
             alt="..."
           />
+          <!-- <img
+            *ngIf="imageUrl"
+            [src]="imageUrl"
+            class="card-img-top"
+            alt="..."
+          /> -->
         </div>
         <div class="card-body">
           <h5 class="card-title item_product_name">
@@ -31,7 +37,7 @@
           </h5>
 
           <div class="card-title item_product_title">
-            <p class="card_price">${{ targetProduct?.total_price }}</p>
+            <p class="card_price">${{ calculate_total_price() }}</p>
             <p class="main_product_title">Description</p>
             <p class="item_product_title_bottom">
               {{ targetProduct?.description }}
@@ -41,7 +47,7 @@
 
           <div class="card-title list__extra">
             <li *ngFor="let extra of targetExtraList">
-              <span> {{ extra }}</span>
+              <span> {{ extra.name }}</span>
             </li>
           </div>
           <!--
@@ -107,12 +113,15 @@
       [formGroup]="productForm"
       (ngSubmit)="updateProduct()"
       class="form_admin form__admin__special text-bg-dark"
-      *ngIf="statusUpdateProductButton"
+      *ngIf="showProductForm"
     >
       <div class="row">
         <div class="col">
           <div class="bgGreyLight_1 vertical_align_center">
             <h2 class="form_title">Update Product</h2>
+            <div class="close_icon" (click)="closeProductForm()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
             <!-- <div *ngIf="showSuccessMessage" class="alert alert-success">
               {{ successMessage }}
             </div> -->
@@ -190,6 +199,7 @@
                   class="input__form"
                   name="image"
                   formControlName="image"
+                  (change)="onImageChange($event)"
                 />
                 <!-- Start Validation For product image  -->
                 <div
@@ -255,17 +265,23 @@
               <div class="col-xl-6">
                 <label for="" class="px-2 py-3">All Extra</label>
                 <div class="card-title list__extra">
-                  <li *ngFor="let extra of targetExtraList">
-                    <span> {{ extra }}</span>
+                  <li *ngFor="let extra of newExtraList; let i = index">
+                    <span>
+                      <i
+                        class="fa-solid fa-trash-can"
+                        (click)="deleteExtra(extra.id)"
+                      ></i
+                      >{{ extra.name }}</span
+                    >
                   </li>
                 </div>
               </div>
             </div>
-            <div *ngIf="productForm.invalid && submitted" class="text-danger">
+            <!-- <div *ngIf="productForm.invalid && submitted" class="text-danger">
               <p class="alert alert-danger">
                 Please fill in all required fields.
               </p>
-            </div>
+            </div> -->
             <div *ngIf="showErroressage" class="text-danger">
               <p class="alert alert-danger">
                 {{ ErrorMessage }}
