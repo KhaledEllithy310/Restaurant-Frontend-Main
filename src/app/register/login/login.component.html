@@ -1,14 +1,17 @@
-<section class="bg-image" style="height: 120vh;background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHJlc3RhdXJhbnQlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww&w=1000&q=80'); background-repeat: no-repeat; background-size: cover;">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-      <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+<section class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHJlc3RhdXJhbnQlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww&w=1000&q=80'); background-repeat: no-repeat; background-size: cover;">
+    <div class="mask d-flex align-items-center gradient-custom-3">
+      <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card my-5" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-5">Login <i class="fas fa-arrow-right-from-bracket"></i></h2>
+                <h2 class="text-uppercase text-center mb-3">Login <i class="fas fa-arrow-right-from-bracket"></i></h2>
                 <hr>
                   <span *ngIf="messageSuccess">
                     <div class="alert alert-success text-center">Login Successfully</div>
+                  </span>
+                  <span *ngIf="dataNotCorrect">
+                    <div class="alert alert-danger text-center">Password or Email Not Correct</div>
                   </span>
                 <form
                 (ngSubmit)="onSubmit()"
@@ -19,47 +22,47 @@
                     <label class="form-label" for="form3Example3cg">Your Email <i class="fas fa-at"></i></label>
                     <input 
                     type="email" 
-                    [name]="email"
-                    [(ngModel)]="email"
                     formControlName="email" 
                     id="form3Example3cg" 
                     class="form-control form-control-lg"
                     aria-describedby="emailHelp"
                     />
                     <div id="emailHelp" class="form-text text-danger" *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
-                      <span *ngIf="loginForm.controls['email'].errors?.['required']">
+                      <span *ngIf="loginForm.controls['email'].errors?.['required'] && !errorsResponse.email">
                           <div class="alert alert-danger">This Field Is Required</div>
                       </span>
                       <span *ngIf="loginForm.controls['email'].errors?.['email']">
                           <div class="alert alert-danger">Type a Valid Email</div>
                       </span>
-                      <span *ngIf="loginForm.controls['email'].errors?.['cantSpace']">
-                          <div class="alert alert-danger">Cant Space</div>
-                      </span>
+                    </div>
+                    <div *ngIf="errorsResponse.email" class="mt-2">
+                      <div class="alert alert-danger">{{ errorsResponse.email }}</div>
                     </div>
                   </div>
   
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example4cg">Your Password <i class="fas fa-key"></i></label>
                     <input 
-                    [name]="password"
-                    [(ngModel)]="password"
                     formControlName="password"
                     type="password"
                     id="form3Example4cg" 
                     class="form-control form-control-lg" 
                     aria-describedby="passwordHelp"
+                    autocomplete="off"
                     />
                     <div id="passwordHelp" class="form-text text-danger" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
-                      <span *ngIf="loginForm.controls['password'].errors?.['required']">
+                      <span *ngIf="loginForm.controls['password'].errors?.['required'] && !errorsResponse.password">
                         <div class="alert alert-danger">This Field Is Required</div>
                       </span>
                       <span *ngIf="loginForm.controls['password'].errors?.['minlength']">
-                          <div class="alert alert-danger">Less Than 8 Characters | </div>
+                          <div class="alert alert-danger">Less Than 8 Characters</div>
                       </span>
                       <span *ngIf="loginForm.controls['password'].errors?.['pattern']">
                           <div class="alert alert-danger">Week Password</div>
                       </span>
+                    </div>
+                    <div *ngIf="errorsResponse.password" class="mt-2">
+                      <div class="alert alert-danger">{{ errorsResponse.password }}</div>
                     </div>
                   </div>
                   <div class="d-flex justify-content-center btn-div">
@@ -67,7 +70,7 @@
                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body register-btn" [disabled]="loginForm.invalid">Login</button>
                   </div>
                   <p class="text-center text-muted mt-5 mb-0">Want to Create an account? <a [routerLink]="'../signup'"
-                      class="fw-bold text-body"><u>Signup here</u></a></p>
+                      class="fw-bold text-body text-gray"><u>Signup here</u></a></p>
                 </form>
               </div>
           </div>

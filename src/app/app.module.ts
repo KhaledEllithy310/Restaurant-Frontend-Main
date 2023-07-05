@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { WaiterModule } from './waiter/waiter.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TextMutedPipe } from './pipes/text-muted.pipe';
 import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
+import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,10 +27,14 @@ import { HomeModule } from './home/home.module';
     RegisterModule,
     AdminModule,
     HomeModule,
-
-
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

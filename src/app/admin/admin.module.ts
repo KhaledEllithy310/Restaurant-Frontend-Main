@@ -24,6 +24,8 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorInterceptor } from '../helpers/http.interceptor';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -85,6 +87,7 @@ const routes: Routes = [
     CommonModule,
     NgbModule,
   ],
+  providers: [],
   exports: [AdminComponent],
 })
 export class AdminModule {}
