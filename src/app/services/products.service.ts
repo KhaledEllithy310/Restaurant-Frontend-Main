@@ -12,9 +12,18 @@ import Swal from 'sweetalert2';
 export class ProductsService {
   private URL: string = environment.productBaseUrl;
   private IngredientsList = new BehaviorSubject<any[]>([]);
+  private formStatus = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {}
 
+  setFormStatus(newStatus: any) {
+    this.formStatus.next(newStatus);
+  }
+
+  getFormStatus() {
+    return this.formStatus.asObservable();
+  }
+  
   initializeIngredientList(ingredients: any[]) {
     this.IngredientsList.next([...ingredients]);
   }
