@@ -101,6 +101,9 @@ export class ProductsService {
     return this.http.post(`${this.URL}`, data);
   }
 
+  UpdateProduct(idProduct: any, data: any) {
+    return this.http.post(`${this.URL}/` + idProduct, data);
+  }
   change_status(id: any) {
     return this.http.get(`${this.URL}/status/` + id);
   }

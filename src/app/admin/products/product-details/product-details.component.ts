@@ -66,7 +66,7 @@ export class ProductDetailsComponent {
     this.productForm = this.fb.group({
       productName: ['', [Validators.required, Validators.minLength(2)]],
       productDescription: [''],
-      image: ['', [Validators.required]],
+      image: [''],
       productDiscount: [,],
       category_id: ['', [Validators.required]],
     });
@@ -202,98 +202,101 @@ export class ProductDetailsComponent {
     // Set the submitted flag to true
     this.submitted = true;
     // Check if the form is invalid
-    if (this.productForm.invalid) {
-      return;
-    }
+    // if (this.productForm.invalid) {
+    //   return;
+    // }
+
+    //Select Elements Of Form
+    let productName = document.getElementById(
+      'productName'
+    ) as HTMLInputElement;
+
+    // productName.value = this.targetProduct.name;
+    let productDiscount = document.getElementById(
+      'productDiscount'
+    ) as HTMLInputElement;
+    let category_id = document.getElementById(
+      'category_id'
+    ) as HTMLInputElement;
+    let productDescription = document.getElementById(
+      'productDescription'
+    ) as HTMLInputElement;
+
     // get the image file from the file input element
     let image = this.updatefileInput.nativeElement.files[0];
     // console.log(this.productForm);
     console.log(this.productForm.value);
     // create a new FormData object to send to the server
-    const newProduct = new FormData();
-    newProduct.append('name', this.productForm.value.productName);
-    newProduct.append('description', this.productForm.value.productDescription);
+    const updateProduct = new FormData();
+    updateProduct.append(
+      'name',
+      this.productForm.value.productName || productName.value
+    );
+    updateProduct.append(
+      'description',
+      this.productForm.value.productDescription || productDescription.value
+    );
     // add the product discount to the FormData object if it exists
     if (this.productForm.value.productDiscount) {
-      newProduct.append('discount', this.productForm.value.productDiscount);
+      updateProduct.append(
+        'discount',
+        this.productForm.value.productDiscount || productDiscount.value
+      );
     }
-    newProduct.append('category_id', this.productForm.value.category_id);
-    newProduct.append('total_price', this.total_price);
-    newProduct.append('image', image);
-
-    // ** Start append ingredients array in form data **
-    // Convert the array of objects to an array of strings
-    const ingredientStrings = this.IngredientsList.map((ingredient) =>
-      JSON.stringify(ingredient)
+    updateProduct.append(
+      'category_id',
+      this.productForm.value.category_id || category_id.value
     );
-
-    // Append the array of strings to the FormData object
-    ingredientStrings.forEach((ingredientString, index) => {
-      const ingredientObj = JSON.parse(ingredientString);
-      Object.keys(ingredientObj).forEach((key) => {
-        newProduct.append(`ingredients[${index}][${key}]`, ingredientObj[key]);
-      });
-    });
-    // ** End append ingredients array in form data **
+    updateProduct.append('total_price', this.total_price);
+    if (image) {
+      updateProduct.append('image', image);
+    }
+    updateProduct.append('_method', 'put');
 
     // ** Start append Extra array of id in form data **
     for (let i = 0; i < this.ExtraListId.length; i++) {
-      newProduct.append('extra[]', this.ExtraListId[i]);
+      updateProduct.append('extra[]', this.ExtraListId[i]);
     }
     // ** End append Extra array of id in form data **
 
     //call the service and sent the request to the server
-    this.productsService.CreateProduct(newProduct).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.productForm.reset();
-        //empty the IngredientsList after add this product
-        this.IngredientsList = [];
-        //check if the IngredientsList is empty => return false and container__Ingredients__Extra is disappear
-        this.isIngredientsListEmpty = this.IngredientsList.length === 0;
-        //empty the ExtraList after add this product
-        this.ExtraList = [];
-        //check if the ExtraList is empty => return false and container__Ingredients__Extra is disappear
-        this.isExtraListEmpty = this.ExtraList.length === 0;
-        this.successMessage = response.message;
-        this.showSuccessMessage = true;
+    this.productsService
+      .UpdateProduct(this.targetProduct.id, updateProduct)
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          this.productForm.reset();
 
-        // setTimeout(() => {
-        //   this.showSuccessMessage = false;
-        // }, 3000);
-        Swal.fire({
-          icon: 'success',
-          title: response.message,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        this.submitted = false; // Set submitted to false after reset
-      },
-      (error) => {
-        console.log(error);
-        // this.ErrorMessage = error.error.message;
+          Swal.fire({
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          this.submitted = false; // Set submitted to false after reset
+        },
+        (error) => {
+          console.log(error);
 
-        Swal.fire({
-          icon: 'warning',
-          title: error.error.message,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        // this.showErroressage = true;
-        // setTimeout(() => {
-        //   this.showErroressage = false;
-        // }, 3000);
-        this.submitted = false; // Set submitted to false after reset
-        // Handle error response
-      }
-    );
+          Swal.fire({
+            icon: 'warning',
+            title: error.error.message,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+
+          this.submitted = false; // Set submitted to false after reset
+          // Handle error response
+        }
+      );
 
     // window.location.reload();
   }
+
   //Calculate the total price of  product {Ingredient + extra}
   calculate_total_price() {
     let total_price = 0;
-    this.IngredientsList.forEach((Ingredient) => {
+    this.targetIngredientList.forEach((Ingredient) => {
       total_price += +Ingredient.total;
     });
 
@@ -304,7 +307,9 @@ export class ProductDetailsComponent {
   addIngredientsForProduct() {
     //get selected Ingredient
     let selectedIngredient = this.ingredients.find(
-      (elem) => elem.id == this.oldIngredient.id
+      (elem) =>
+        elem.id == this.oldIngredient.id ||
+        this.ingredientsForm.value.Ingredient_id
     );
     console.log(selectedIngredient);
     console.log('oldIngredient', this.oldIngredient);
@@ -599,7 +604,7 @@ export class ProductDetailsComponent {
               console.log(response);
               Swal.fire({
                 icon: 'success',
-                title: 'Extra added successfully',
+                title: 'Ingredients added successfully',
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -618,16 +623,35 @@ export class ProductDetailsComponent {
     this.statusUpdateProductButton = !this.statusUpdateProductButton;
     let Update_Product = document.getElementById(
       'Update_Product'
-    ) as HTMLElement;
+    ) as HTMLInputElement;
+    console.log(Update_Product);
+
+    setTimeout(() => {
+      //Select Elements Of Form
+      let productName = document.getElementById(
+        'productName'
+      ) as HTMLInputElement;
+
+      // productName.value = this.targetProduct.name;
+      let productDiscount = document.getElementById(
+        'productDiscount'
+      ) as HTMLInputElement;
+      let category_id = document.getElementById(
+        'category_id'
+      ) as HTMLInputElement;
+      let productDescription = document.getElementById(
+        'productDescription'
+      ) as HTMLInputElement;
+
+      //Set the value of the selected element in form
+
+      productName.value = this.targetProduct.name;
+      productDiscount.value = this.targetProduct.discount;
+      category_id.value = this.targetProduct.category_id;
+      productDescription.value = this.targetProduct.description;
+    }, 100);
     if (this.statusUpdateProductButton) {
-      // set the form controls to the data of the target product
-      this.productForm.patchValue({
-        productName: this.targetProduct.name,
-        productDiscount: this.targetProduct.discount,
-        image: this.targetProduct.image,
-        category_id: this.targetProduct.category_id,
-        productDescription: this.targetProduct.description,
-      });
+      //****************************Update product************************//
     } else {
       // update the text of the 'Update Product' button to 'Update Product'
       Update_Product.innerText = 'Update Product';

@@ -126,6 +126,7 @@
                   type="text"
                   class="input__form"
                   formControlName="productName"
+                  id="productName"
                 />
                 <!-- Start Validation For productName  -->
 
@@ -158,6 +159,7 @@
                   class="input__form"
                   name="productDiscount"
                   formControlName="productDiscount"
+                  id="productDiscount"
                 />
                 <!-- Start Validation For product Discount  -->
                 <div
@@ -214,6 +216,7 @@
                   name="category_id"
                   class="input__form"
                   formControlName="category_id"
+                  id="category_id"
                 >
                   <option
                     *ngFor="let category of categories"
@@ -244,10 +247,18 @@
                   class="input__form"
                   name=""
                   formControlName="productDescription"
-                  id=""
+                  id="productDescription"
                   cols="30"
                   rows="3"
                 ></textarea>
+              </div>
+              <div class="col-xl-6">
+                <label for="" class="px-2 py-3">All Extra</label>
+                <div class="card-title list__extra">
+                  <li *ngFor="let extra of targetExtraList">
+                    <span> {{ extra }}</span>
+                  </li>
+                </div>
               </div>
             </div>
             <div *ngIf="productForm.invalid && submitted" class="text-danger">
@@ -262,7 +273,11 @@
             </div>
             <div class="btn_container vertical">
               <div class="ntn_add_form">
-                <button type="submit" class="btn-lg admin__sec__btn__form">
+                <button
+                  type="submit"
+                  class="btn-lg admin__sec__btn__form"
+                  [disabled]="showExtraForm"
+                >
                   Update Product
                 </button>
               </div>
