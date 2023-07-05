@@ -10,6 +10,7 @@ import { WaiterProductDetailComponent } from './waiter-product/waiter-product-de
 import { WaiterCartComponent } from './waiter-cart/waiter-cart.component';
 import { ModalComponent } from './modal/modal.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -35,7 +36,11 @@ const routes: Routes = [
     WaiterCartComponent,
     ModalComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    NgbModule,
+  ],
   providers: [GetDataService, CartService],
   exports: [ModalComponent],
 })

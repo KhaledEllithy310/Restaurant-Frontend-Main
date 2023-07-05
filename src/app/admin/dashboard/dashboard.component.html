@@ -17,6 +17,15 @@
         </li>
         <li>
           <a
+            [routerLink]="'/admin/dashboard/waiter'"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+          waiter
+          </a>
+        </li>
+        <li>
+          <a
             [routerLink]="'/admin/dashboard/profile'"
             routerLinkActive="active"
           >
