@@ -95,6 +95,8 @@ export class ProductDetailsComponent {
       console.log(this.targetProduct);
       this.getTargetExtra();
       this.getTargetIngredient();
+      //set the image of the old category to  {this.imageUrl} to display it in modal
+      this.imageUrl = this.targetProduct.image;
     });
   }
 
@@ -357,7 +359,8 @@ export class ProductDetailsComponent {
 
     //// console.log('Ingredient_Price', Ingredient_Price);
     // get Ingredient Profit
-    let Ingredient_Profit = selectedIngredient?.profit;
+    let Ingredient_Profit =
+      selectedIngredient?.profit || oldIngredientForUpdate?.profit;
     ////  console.log('Ingredient_Profit', Ingredient_Profit);
 
     // get Ingredient Quantity that user enter it into the input field
@@ -643,6 +646,7 @@ export class ProductDetailsComponent {
       });
     } else {
       Update_Ingredient.innerText = 'Update Ingredient';
+      Add_Ingredient.classList.add('d-none');
     }
   }
 
@@ -699,6 +703,7 @@ export class ProductDetailsComponent {
     reader.onload = () => {
       this.selectedFile = file;
       this.imageUrl = reader.result as string;
+      console.log(this.imageUrl);
     };
   }
 }

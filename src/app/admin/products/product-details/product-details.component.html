@@ -20,16 +20,19 @@
         <!-- <img src="{{ item.image_url }}" class="card-img-top" alt="..." /> -->
         <div class="col-5 mx-auto">
           <img
+            *ngIf="targetProduct?.image"
             [src]="'http://127.0.0.1:8000' + targetProduct?.image"
             class="card-img-top"
-            alt="..."
+            alt="targetProduct"
           />
-          <!-- <img
-            *ngIf="imageUrl"
-            [src]="imageUrl"
-            class="card-img-top"
-            alt="..."
-          /> -->
+          <ng-container *ngIf="imageUrl">
+            <img
+              [src]="imageUrl"
+              class="card-img-top"
+              alt=""
+              (error)="imageUrl = null"
+            />
+          </ng-container>
         </div>
         <div class="card-body">
           <h5 class="card-title item_product_name">
@@ -201,6 +204,7 @@
                   formControlName="image"
                   (change)="onImageChange($event)"
                 />
+                <img [src]="imageUrl" *ngIf="imageUrl" width="40" height="40" />
                 <!-- Start Validation For product image  -->
                 <div
                   *ngIf="
