@@ -1,6 +1,12 @@
 <div class="container p-60">
+  <a
+    class="btn btn-outline-primary my-4"
+    [routerLink]="'/admin/dashboard/products/display'"
+  >
+    back <i class="fas fa-arrow-left"></i>
+  </a>
   <div class="row">
-    <div class="col-6">
+    <div class="col-5">
       <div
         class="card item_product mx-auto"
         data-bs-toggle="modal"
@@ -24,16 +30,14 @@
 
           <div class="card-title item_product_title">
             <p class="card_price">${{ targetProduct.total_price }}</p>
-
-            <p class="item_product_title_top">Description</p>
-
+            <p class="main_product_title">Description</p>
             <p class="item_product_title_bottom">
               {{ targetProduct.description }}
             </p>
           </div>
-          <div
-            class="card-title item_product_extra list__Ingredients btn_extra_form"
-          >
+          <p class="main_product_title">extra</p>
+
+          <div class="card-title list__extra">
             <li *ngFor="let extra of targetExtraList">
               <span> {{ extra }}</span>
             </li>
@@ -45,21 +49,29 @@
         </div>
       </div>
     </div>
-    <div class="col-6 item_product">
-      <h3>Ingredients</h3>
+    <div class="col-7 item_product p-3">
+      <h3 class="main_product_title sec_product_title">Ingredients</h3>
       <div class="list__Ingredients">
-        <li *ngFor="let ingredient of targetProduct.Ingredients">
-          <span>{{ ingredient.name }} carrot</span>
-          <span>{{ ingredient.quantity }}110 kg</span>
+        <li *ngFor="let ingredient of targetIngredientList">
+          <span>{{ ingredient.name }} </span>
+          <span>{{ ingredient.quantity }}kg</span>
           <span class="list__Ingredients__price">${{ ingredient.total }}</span>
+
+          <div class="btn_container_ingredients">
+            <span
+              class="btn_ingredient_del btn btn-outline-danger"
+              (click)="deleteIngredient(ingredient.id)"
+              ><i class="fa-solid fa-trash-can"></i
+            ></span>
+            <span class="btn_ingredient_edit btn btn-info edit-btn"
+              ><i class="fa-regular fa-pen-to-square"></i
+            ></span>
+          </div>
         </li>
       </div>
     </div>
   </div>
-  <a
-    class="btn btn-outline-primary my-4"
-    [routerLink]="'/admin/dashboard/products/display'"
-  >
-    back <i class="fas fa-arrow-left"></i>
-  </a>
+
+
+
 </div>
