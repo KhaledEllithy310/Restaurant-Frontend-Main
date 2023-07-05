@@ -105,10 +105,15 @@ export class ProductDetailsComponent {
   }
 
   deleteIngredient(idIngredient: any) {
-    this.productsService.deleteIngredient(idIngredient);
-    this.productsService.getIngredientsList().subscribe((response: any) => {
-      this.targetIngredientList = response;
-      console.log(this.targetIngredientList);
+    this.targetIngredientList = this.targetIngredientList.filter(
+      (ingredient) => ingredient.id !== idIngredient
+    );
+    console.log(this.targetIngredientList);
+    Swal.fire({
+      icon: 'success',
+      title: 'Ingredient Deleted successfully',
+      showConfirmButton: false,
+      timer: 1000,
     });
   }
 
@@ -299,23 +304,28 @@ export class ProductDetailsComponent {
   addIngredientsForProduct() {
     //get selected Ingredient
     let selectedIngredient = this.ingredients.find(
-      (elem) => elem.id == this.ingredientsForm.value.Ingredient_id
+      (elem) => elem.id == this.oldIngredient.id
     );
+    console.log(selectedIngredient);
+    console.log('oldIngredient', this.oldIngredient);
+
     // get Ingredient Price
-    let Ingredient_Price = selectedIngredient.price;
+    let Ingredient_Price = selectedIngredient?.price;
     //// console.log('Ingredient_Price', Ingredient_Price);
     console.log(this.ingredientsForm.value);
 
     // get Ingredient Profit
-    let Ingredient_Profit = selectedIngredient.profit;
+    let Ingredient_Profit = selectedIngredient?.profit;
     ////  console.log('Ingredient_Profit', Ingredient_Profit);
 
     // get Ingredient Quantity that user enter it into the input field
-    let Ingredient_Quantity = this.ingredientsForm.value.Ingredient_Quantity;
+    let Ingredient_Quantity =
+      this.ingredientsForm.value.Ingredient_Quantity ||
+      this.oldIngredient.quantity;
     // // console.log('Ingredient_Quantity', Ingredient_Quantity);
 
     // get Ingredient name
-    let Ingredient_name = selectedIngredient.name;
+    let Ingredient_name = selectedIngredient?.name;
 
     //calculate the total price = price * quantity * (1 + Profit)
     let finalPrice =
@@ -337,54 +347,87 @@ export class ProductDetailsComponent {
     let IngredientFormTitle = document.getElementById(
       'IngredientFormTitle'
     ) as HTMLInputElement;
+    //************************* Update Ingredient *******************************//
+    if (IngredientFormTitle.innerText == 'Update Ingredient') {
+      const updatedIngredient = {
+        id: this.ingredientsForm.value.Ingredient_id || this.oldIngredient.id,
+        name: this.oldIngredient.name,
+        quantity:
+          this.ingredientsForm.value.Ingredient_Quantity ||
+          this.oldIngredient.quantity,
+        total: finalPrice.toFixed(2),
+      };
+      // this.ingredientsForm.value.Ingredient_id = this.oldIngredient.id;
+      // this.ingredientsForm.value.quantity = this.oldIngredient.quantity;
 
-    if (!ingredientsExist) {
-      //store the new ingredient in the IngredientsList {array}
-      this.targetIngredientList.push(newIngredient);
+      const index = this.targetIngredientList.findIndex(
+        (elem) => elem.id == this.oldIngredient.id
+      );
+      // Update the quantity of the existing ingredient
+      this.targetIngredientList[index].quantity = updatedIngredient.quantity;
+      // Recalculate the total price for the updated ingredient
+      this.targetIngredientList[index].total = (
+        updatedIngredient.quantity *
+        Ingredient_Price *
+        (1 + +Ingredient_Profit)
+      ).toFixed(2);
+
       Swal.fire({
         icon: 'success',
-        title: 'Ingredient added successfully',
+        title: 'Ingredient updated successfully',
         showConfirmButton: false,
         timer: 1500,
       });
-
-      console.log('targetIngredientList', this.targetIngredientList);
-    } else if (IngredientFormTitle.innerText == 'Update Ingredient') {
-      console.log('we will update function');
-      return;
     } else {
-      Swal.fire({
-        title: 'Do you want to update the quantity?',
-        text: 'This Ingredient already exists !',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Update it!',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire('Updated!', 'Your Ingredient has been updated.', 'success');
-          // Find the index of the existing ingredient in the array
-          const index = this.targetIngredientList.findIndex(
-            (elem) => elem.id == newIngredient.id
-          );
-          console.log('index', index);
+      if (!ingredientsExist) {
+        //store the new ingredient in the IngredientsList {array}
+        this.targetIngredientList.push(newIngredient);
+        Swal.fire({
+          icon: 'success',
+          title: 'Ingredient Added successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
-          console.log(
-            'updated targetIngredientList',
-            this.targetIngredientList
-          );
+        console.log('targetIngredientList', this.targetIngredientList);
+      } else {
+        Swal.fire({
+          title: 'Do you want to update the quantity?',
+          text: 'This Ingredient already exists !',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Update it!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Updated!',
+              'Your Ingredient has been updated.',
+              'success'
+            );
+            // Find the index of the existing ingredient in the array
+            const index = this.targetIngredientList.findIndex(
+              (elem) => elem.id == newIngredient.id
+            );
+            console.log('index', index);
 
-          // Update the quantity of the existing ingredient
-          this.targetIngredientList[index].quantity = newIngredient.quantity;
-          // Recalculate the total price for the updated ingredient
-          this.targetIngredientList[index].total = (
-            newIngredient.quantity *
-            Ingredient_Price *
-            (1 + +Ingredient_Profit)
-          ).toFixed(2);
-        }
-      });
+            console.log(
+              'updated targetIngredientList',
+              this.targetIngredientList
+            );
+
+            // Update the quantity of the existing ingredient
+            this.targetIngredientList[index].quantity = newIngredient.quantity;
+            // Recalculate the total price for the updated ingredient
+            this.targetIngredientList[index].total = (
+              newIngredient.quantity *
+              Ingredient_Price *
+              (1 + +Ingredient_Profit)
+            ).toFixed(2);
+          }
+        });
+      }
     }
 
     //  // console.log(newIngredient);
@@ -415,11 +458,20 @@ export class ProductDetailsComponent {
       let IngredientFormBtn = document.getElementById(
         'IngredientFormBtn'
       ) as HTMLInputElement;
+
+      let oldIngredient_id = document.getElementById(
+        'oldIngredient_id'
+      ) as HTMLInputElement;
+      let oldIngredient_quantity = document.getElementById(
+        'oldIngredient_quantity'
+      ) as HTMLInputElement;
       // Check if the element exists before accessing its innerText property
       if (IngredientFormTitle || IngredientFormBtn) {
         this.oldIngredient = this.targetIngredientList[index];
         IngredientFormTitle.innerText = 'Update Ingredient';
         IngredientFormBtn.innerText = 'Update Ingredient';
+        oldIngredient_id.value = this.oldIngredient.id;
+        oldIngredient_quantity.value = this.oldIngredient.quantity;
       }
     }, 100);
 
@@ -531,6 +583,32 @@ export class ProductDetailsComponent {
     if (this.statusUpdateButton) {
       Update_Ingredient.innerText = 'Done';
       Add_Ingredient.classList.remove('d-none');
+
+      //**Send New Ingredient To Sever */
+
+      Update_Ingredient.addEventListener('click', () => {
+        const ingredients = {
+          ingredients: this.targetIngredientList,
+        };
+        console.log(ingredients);
+        console.log(this.targetIngredientList);
+        this.productsService
+          .updateIngredient(this.targetProduct.id, ingredients)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              Swal.fire({
+                icon: 'success',
+                title: 'Extra added successfully',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            },
+            (error) => {
+              console.log(error);
+            }
+          ); // Add any code you want to execute when the button is clicked
+      });
     } else {
       Update_Ingredient.innerText = 'Update Ingredient';
     }

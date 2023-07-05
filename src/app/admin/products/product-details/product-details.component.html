@@ -15,26 +15,26 @@
         data-bs-target="#staticBackdrop"
       >
         <div class="sale_item">
-          sale <span>%{{ targetProduct.discount * 100 }}</span>
+          sale <span>%{{ targetProduct?.discount * 100 }}</span>
         </div>
         <!-- <img src="{{ item.image_url }}" class="card-img-top" alt="..." /> -->
         <div class="col-5 mx-auto">
           <img
-            [src]="'http://127.0.0.1:8000' + targetProduct.image"
+            [src]="'http://127.0.0.1:8000' + targetProduct?.image"
             class="card-img-top"
             alt="..."
           />
         </div>
         <div class="card-body">
           <h5 class="card-title item_product_name">
-            {{ targetProduct.name }}
+            {{ targetProduct?.name }}
           </h5>
 
           <div class="card-title item_product_title">
-            <p class="card_price">${{ targetProduct.total_price }}</p>
+            <p class="card_price">${{ targetProduct?.total_price }}</p>
             <p class="main_product_title">Description</p>
             <p class="item_product_title_bottom">
-              {{ targetProduct.description }}
+              {{ targetProduct?.description }}
             </p>
           </div>
           <p class="main_product_title">extra</p>
@@ -55,9 +55,9 @@
       <h3 class="main_product_title sec_product_title">Ingredients</h3>
       <div class="list__Ingredients">
         <li *ngFor="let ingredient of targetIngredientList">
-          <span>{{ ingredient.name }} </span>
-          <span>{{ ingredient.quantity }}kg</span>
-          <span class="list__Ingredients__price">${{ ingredient.total }}</span>
+          <span>{{ ingredient?.name }} </span>
+          <span>{{ ingredient?.quantity }}kg</span>
+          <span class="list__Ingredients__price">${{ ingredient?.total }}</span>
 
           <div class="btn_container_ingredients" *ngIf="statusUpdateButton">
             <span
@@ -305,6 +305,7 @@
               class="input__form"
               formControlName="Ingredient_id"
               [value]="oldIngredient.id"
+              id="oldIngredient_id"
             >
               <option
                 *ngFor="let ingredient of ingredients"
@@ -342,6 +343,7 @@
               formControlName="Ingredient_Quantity"
               placeholder=""
               [value]="oldIngredient.quantity"
+              id="oldIngredient_quantity"
             />
             <!-- Start Validation For Ingredient Quantity  -->
             <div
@@ -367,7 +369,6 @@
       <button
         type="submit"
         class="btn-lg admin__sec__btn__form"
-     
         id="IngredientFormBtn"
       >
         Add Ingredients
