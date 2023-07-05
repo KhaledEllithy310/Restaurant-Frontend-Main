@@ -36,6 +36,8 @@ export class WaiterProductListComponent {
   }
 
   addToCart(event: any) {
+    console.log('4444');
+
     this.cartservice.addToCart(event);
   }
 }
