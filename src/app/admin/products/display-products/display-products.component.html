@@ -30,13 +30,9 @@
       <tr>
         <th scope="col" class="">#ID</th>
         <th scope="col" class="">Name</th>
-        <th scope="col" class="">Description</th>
         <th scope="col" class="">image</th>
-        <th scope="col" class="">discount</th>
-        <!-- <th scope="col" class="w-25">status</th> -->
+        <th scope="col" class="w-25">status</th>
         <th scope="col" class="">category_id</th>
-        <th scope="col" class="">Ingredients</th>
-        <th scope="col" class="">extra</th>
         <th scope="col" class="">Options</th>
       </tr>
     </thead>
@@ -44,7 +40,6 @@
       <tr *ngFor="let product of products">
         <th>{{ product.id }}</th>
         <td>{{ product.name }}</td>
-        <td>{{ product.description || "No Descri.." }}</td>
         <td>
           <img
             [src]="'http://127.0.0.1:8000' + product.image"
@@ -53,9 +48,8 @@
             height="30"
           />
         </td>
-        <td>{{ product.discount || "%0" }}</td>
-        <!-- <td>
-          Rounded switch
+        <td>
+          <!-- Rounded switch -->
           <label class="switch">
             <input
               type="checkbox"
@@ -64,23 +58,13 @@
             />
             <span class="slider round"></span>
           </label>
-        </td> -->
+        </td>
 
         <td>{{ product.category_id || "wrong" }}</td>
-        <td>
-          <select name="Ingredients" id="Ingredients">
-            <option
-              *ngFor="let Ingredient of product.ingredients"
-              value="{{ Ingredient.id }}"
-            >
-              {{ Ingredient.name || "No Ingredient" }}
-            </option>
-          </select>
-        </td>
-        <td>{{ product.extra || "No Extra" }}</td>
         <td class="">
           <a
             class="btn btn-info m-2 edit-btn"
+            id="{{ product.id }}"
             (click)="redirectToShowDetailsProduct(product.id)"
           >
             Show Details <i class="fas fa-pen-to-square"></i>
