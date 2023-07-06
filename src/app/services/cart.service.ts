@@ -9,6 +9,8 @@ export class CartService {
   private cartProducts = new BehaviorSubject<any[]>([]);
   public cartContainer = this.cartProducts;
   private numberProductInCart = new BehaviorSubject(0);
+  private totalPriceCart = new BehaviorSubject(0);
+
   constructor(private http: HttpClient) {}
 
   //STORE ITEM IN ARRAY OF CART {cartProducts}
@@ -33,6 +35,14 @@ export class CartService {
     this.numberProductInCart.next(newVal);
   }
 
+  setTotalPrice(newVal: any) {
+    this.totalPriceCart.next(newVal);
+  }
+
+  getTotalPrice() {
+    return this.totalPriceCart.asObservable();
+  }
+  
   //***********************Api***********************//
 
   getAllCart() {
@@ -42,7 +52,12 @@ export class CartService {
   AddToCart(data: any) {
     return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
   }
+
   DeleteFromCart(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
+  }
+
+  UpdateCart(data: any) {
     return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
   }
 }

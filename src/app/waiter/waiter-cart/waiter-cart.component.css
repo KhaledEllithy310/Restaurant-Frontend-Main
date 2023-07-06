@@ -29,9 +29,14 @@
   margin-top: 30px;
   background-color: var(--background-color-of-sections);
   position: relative;
+  font-family: 'Rokkitt', serif;
+
   /* position: relative; */
 }
 
+.cart h1 {
+  font-family: 'Rokkitt', serif;
+}
 .cart_btn {
   position: fixed;
   /* position: absolute; */
@@ -183,4 +188,39 @@
 
 .card_product_delete:hover {
   background-color: var(--special-button-color);
+}
+
+.sideBar__footer {
+  border-top: 1px solid var(--special-text-color);
+}
+
+.sideBar__footer__totalPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+  font-family: 'Rokkitt', serif;
+  font-size: 25px;
+}
+
+.sideBar__footer__totalPrice__number {
+  font-size: 30px;
+}
+
+.sideBar__footer__submit {
+  background-color: var(--background-color-of-sections);
+  color: var(--special-text-color);
+  width: fit-content;
+  margin: auto;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.sideBar__footer__submit:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
 }

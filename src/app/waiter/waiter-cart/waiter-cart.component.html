@@ -63,6 +63,7 @@
               *ngFor="let product of CartProducts"
             >
               <div class="row">
+
                 <div class="col-5">
                   <img
                     [src]="'http://127.0.0.1:8000' + product.product.image"
@@ -118,7 +119,7 @@
     <div class="sideBar__footer">
       <div class="sideBar__footer__totalPrice">
         <div class="sideBar__footer__totalPrice__text">Total</div>
-        <div class="sideBar__footer__totalPrice__number">$33.10</div>
+        <div class="sideBar__footer__totalPrice__number">${{ totalPrice }}</div>
       </div>
       <div class="sideBar__footer__submit">submit order</div>
     </div>
