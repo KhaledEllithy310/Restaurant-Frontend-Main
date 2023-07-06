@@ -6,6 +6,8 @@ import {
   NgbOffcanvas,
   NgbOffcanvasRef,
 } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-waiter-cart',
   // standalone: true,
@@ -39,10 +41,79 @@ export class WaiterCartComponent {
 
   ngOnInit(): void {
     //GET PRODUCT THAT STORED IN CART
-    this.cartservice
-      .getCartProducts()
-      .subscribe((res: any) => (this.CartProducts = res));
-    // .subscribe((res: any) => console.log(res));
+    this.getAllCart();
+  }
+
+  getAllCart() {
+    this.cartservice.getAllCart().subscribe(
+      (Response: any) => {
+        // this.CartProducts = Response.data[0].data;
+        // console.log(this.cartservice.cartContainer);
+        console.log(Response.data[0].data);
+        this.cartservice.getCartProducts().subscribe((res) => {
+          console.log(res);
+          this.CartProducts = res;
+          // console.log(this.CartProducts);
+        });
+      },
+      (err: any) => console.log(err)
+    );
+  }
+
+  plusProduct(cardProduct: any) {
+    console.log(cardProduct);
+    cardProduct.quantity++;
+  }
+
+  minusProduct(cardProduct: any) {
+    console.log(cardProduct);
+    if (cardProduct.quantity > 0) {
+      cardProduct.quantity--;
+    }
+  }
+
+  deleteProduct(cardProduct: any) {
+    console.log(cardProduct);
+
+    const DataProductCart = {
+      id: cardProduct.id,
+      _method: 'delete',
+    };
+
+    this.cartservice.DeleteFromCart(DataProductCart).subscribe(
+      (Response: any) => {
+        this.ngOnInit();
+        console.log(Response);
+        this.updateCartData();
+        this.cartservice.getCartProducts().subscribe((res) => {
+          this.CartProducts = res.filter(
+            (product) => product.id != cardProduct.id
+          );
+          console.log(this.CartProducts);
+        });
+        Swal.fire({
+          icon: 'success',
+          title: Response.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      (err: any) => console.log(err)
+    );
+  }
+
+  totalPriceItem(cardProduct: any) {
+    return (+cardProduct.total_price * +cardProduct.quantity).toFixed(2);
+  }
+
+  updateCartData() {
+    this.cartservice.getAllCart().subscribe(
+      (Response: any) => {
+        console.log(Response);
+        this.cartservice.cartContainer.next(Response.data[0].data);
+      },
+      (err: any) => console.log(err)
+    );
   }
 
   moveCartBtn() {

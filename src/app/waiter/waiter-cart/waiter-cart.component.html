@@ -65,7 +65,7 @@
               <div class="row">
                 <div class="col-5">
                   <img
-                    src="{{ product.image }}"
+                    [src]="'http://127.0.0.1:8000' + product.product.image"
                     class="card-img-top"
                     alt="..."
                   />
@@ -75,11 +75,11 @@
                   <div class="card_product_right">
                     <div>
                       <h5 class="card-publisher item_product_name">
-                        {{ product.name }}
+                        {{ product.product.name }}
                       </h5>
                     </div>
                     <div class="total_item_price">
-                      ${{ product.total_price * product.quantity }}
+                      ${{ totalPriceItem(product) }}
                     </div>
                     <div class="single_item_price">
                       ${{ product.total_price }}
@@ -87,15 +87,19 @@
                     <!-- </div> -->
                   </div>
                   <div class="card_product_right_counter">
-                    <div class="min_counter">
+                    <div class="min_counter" (click)="minusProduct(product)">
                       <i class="fa-solid fa-minus"></i>
                     </div>
                     <div class="counter">{{ product.quantity }}</div>
-                    <div class="plus_counter">
+                    <div class="plus_counter" (click)="plusProduct(product)">
                       <i class="fa-solid fa-plus"></i>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div class="card_product_delete" (click)="deleteProduct(product)">
+                <i class="fa-solid fa-xmark"></i>
               </div>
             </div>
           </div>
@@ -111,6 +115,13 @@
         Close
       </button>
     </div> -->
+    <div class="sideBar__footer">
+      <div class="sideBar__footer__totalPrice">
+        <div class="sideBar__footer__totalPrice__text">Total</div>
+        <div class="sideBar__footer__totalPrice__number">$33.10</div>
+      </div>
+      <div class="sideBar__footer__submit">submit order</div>
+    </div>
   </div>
 </ng-template>
 

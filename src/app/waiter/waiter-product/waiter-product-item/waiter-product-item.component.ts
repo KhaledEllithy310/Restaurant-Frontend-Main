@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GetDataService } from './../../../services/get-data.service';
+import { CartService } from 'src/app/services/cart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-waiter-product-item',
@@ -12,7 +14,10 @@ export class WaiterProductItemComponent {
   products!: any;
   @Output() productSelected = new EventEmitter<any>();
   @Output() item_card = new EventEmitter<any>();
-  constructor(private displayProductService: GetDataService) {}
+  constructor(
+    private displayProductService: GetDataService,
+    private cartservice: CartService
+  ) {}
   ngOnInit(): void {
     // console.log('Product:', this.item);
     // this.displayProduct();
@@ -31,5 +36,6 @@ export class WaiterProductItemComponent {
 
   add(productSelected: any) {
     this.item_card.emit(productSelected);
+    console.log(productSelected.id);
   }
 }

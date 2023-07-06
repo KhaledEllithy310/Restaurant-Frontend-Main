@@ -28,6 +28,7 @@
 .card_product {
   margin-top: 30px;
   background-color: var(--background-color-of-sections);
+  position: relative;
   /* position: relative; */
 }
 
@@ -56,8 +57,17 @@
 .offcanvas {
   background-color: var(--background-color-of-body) !important;
   color: white;
+  /* border: 1px solid var(--special-button-color); */
 }
 
+.offcanvas.offcanvas-end {
+  border-left: 1px solid var(--special-button-color);
+}
+
+.offcanvas-body {
+  max-height: 575px;
+  overflow: auto;
+}
 .offcanvas .cart h1 {
   background-color: var(--main-color);
   margin: 0;
@@ -80,7 +90,7 @@
   font-size: 16px;
   text-align: left;
   font-family: 'Rokkitt', serif;
-  width: 80%;
+  /* width: 80%; */
   /* margin-right: auto; */
 }
 
@@ -91,6 +101,7 @@
   font-family: 'Rokkitt', serif;
   color: var(--special-text-color);
   font-weight: 600;
+  font-size: 20px;
 }
 
 .single_item_price {
@@ -105,10 +116,23 @@
   justify-content: space-evenly;
   align-items: center;
   flex-flow: row nowrap;
-  background-color: var(--background-color-of-body);
+  /* background-color: var(--background-color-of-body); */
   padding: 5px;
   width: 80%;
-  margin: 5px auto 0;
+  margin: 10px auto 0;
+}
+
+.card_product_right_counter div {
+  background-color: var(--background-color-of-body);
+  border-radius: 5px;
+  margin-inline: 10px;
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 2px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .min_counter,
@@ -116,9 +140,47 @@
   color: white;
   font: 16px;
   cursor: pointer;
+  color: var(--special-text-color);
+  transition: all 0.2s linear;
 }
 
 .min_counter:hover,
 .plus_counter:hover {
   color: var(--special-text-color);
+  color: var(--background-color-of-sections);
+  background-color: var(--special-button-color);
+}
+
+.sideBar__footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 399px;
+  background-color: var(--main-color);
+  z-index: 2;
+  padding: 10px;
+}
+
+.card_product_delete {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color);
+  color: var(--background-color-of-sections);
+  visibility: hidden;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.card_product:hover .card_product_delete {
+  visibility: visible;
+}
+
+.card_product_delete:hover {
+  background-color: var(--special-button-color);
 }
