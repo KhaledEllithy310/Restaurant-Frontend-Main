@@ -24,8 +24,8 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpInterceptorInterceptor } from '../helpers/http.interceptor';
+import { kitchenGuard } from '../guard/kitchen.guard';
+import { adminGuard } from '../guard/admin.guard';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -41,13 +41,27 @@ const routes: Routes = [
         path: 'products/product-details/:id',
         component: ProductDetailsComponent,
       },
-      { path: 'users', component: UsersComponent },
-      { path: 'users/add', component: AddUsersComponent },
-      { path: 'users/edit/:id', component: EditUsersComponent },
-      { path: 'ingridents', component: IngridentsComponent },
-      { path: 'ingridents/add', component: AddIngridentsComponent },
-      { path: 'ingridents/edit/:id', component: EditIngridentsComponent },
-      { path: 'kitchen', component: KitchenComponent },
+      { path: 'users', component: UsersComponent, 
+        // canActivate: [adminGuard] 
+      },
+      { path: 'users/add', component: AddUsersComponent, 
+        // canActivate: [adminGuard] 
+      },
+      { path: 'users/edit/:id', component: EditUsersComponent,
+        // canActivate: [adminGuard] 
+      },
+      { path: 'ingridents', component: IngridentsComponent, 
+        // canActivate: [adminGuard] 
+      },
+      { path: 'ingridents/add', component: AddIngridentsComponent,
+        // canActivate: [adminGuard] 
+      },
+      { path: 'ingridents/edit/:id', component: EditIngridentsComponent,
+        // canActivate: [adminGuard] 
+      },
+      { path: 'kitchen', component: KitchenComponent,
+        // canActivate: [kitchenGuard] 
+      },
       { path: 'reservation', component: ReservationComponent },
       { path: 'profile', component: ProfileComponent },
     ],

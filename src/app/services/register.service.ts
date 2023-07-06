@@ -13,6 +13,10 @@ export class RegisterService {
   }
   
   loginCustomer(body: any, headers: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/auth/customer/login`, body, headers)
+  }
+
+  loginStaff(body: any, headers: any) {
     return this.http.post(`http://127.0.0.1:8000/api/auth/user/login`, body, headers)
   }
   

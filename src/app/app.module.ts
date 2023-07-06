@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,8 @@ import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
     RegisterModule,
     AdminModule,
     HomeModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true })
   ],
   providers: [
     { 

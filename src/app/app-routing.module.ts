@@ -4,6 +4,8 @@ import { WaiterComponent } from './waiter/waiter.component';
 import { LoginComponent } from './register/login/login.component';
 import { SignupComponent } from './register/signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { authGuard } from './guard/auth.guard';
+import { adminGuard } from './guard/admin.guard';
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +30,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
+      // canActivate: [authGuard]
   },
 ];
 @NgModule({
