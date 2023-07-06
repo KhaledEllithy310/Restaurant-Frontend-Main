@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { WaiterModule } from './waiter/waiter.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TextMutedPipe } from './pipes/text-muted.pipe';
 import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
-import { TextMutedPipe } from './pipes/text-muted.pipe';
-
+import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
+// import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [AppComponent, ],
@@ -30,10 +31,16 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
     AdminModule,
     HomeModule,
     CustomerModule,
-    CashierModule
-
+    CashierModule,
+    HomeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

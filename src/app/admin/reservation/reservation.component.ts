@@ -8,26 +8,39 @@ import { ReservationService } from 'src/app/services/reservation.service';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent {
+
   reservations: any;
+
   filterReservation: any = [];
+
   filterBytable: any = [];
+
   urlapi = 'http://127.0.0.1:8000/api/reservation/date';
   urlapi2 = 'http://127.0.0.1:8000/api/reservation';
+  
   startDate: any;
+  
   endDate: any;
+
   tableNum: any;
   constructor(private reservationService: ReservationService, private http: HttpClient) {}
 
   ngOnInit() {
     this.reservationService.getAllResevations().subscribe((res: any) => {
       this.reservations = res.data.data;
-      this.filterDataByDate();
+      // this.filterDataByDate();
     })
   }
 
-  filterDataByDate() {
+  filterDataByDate(): any {
+
+    if (this.startDate == '' || this.endDate == '') {
+      return this.filterReservation = [];
+    }
+
     const url = `${this.urlapi}?start_date=${this.startDate}&end_date=${this.endDate}`;
     this.http.get(url).subscribe((res: any) => {
+
       this.filterReservation = res.data;
     });
 }

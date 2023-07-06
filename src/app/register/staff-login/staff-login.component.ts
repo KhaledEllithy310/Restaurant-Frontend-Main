@@ -1,16 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegisterService } from 'src/app/services/register.service';
 import { Router } from '@angular/router';
+import { RegisterService } from 'src/app/services/register.service';
 import { StorgeTokenService } from 'src/app/services/storge-token.service';
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent {
 
+@Component({
+  selector: 'app-staff-login',
+  templateUrl: './staff-login.component.html',
+  styleUrls: ['./staff-login.component.css']
+})
+export class StaffLoginComponent {
   messageSuccess: boolean = false;
   loginForm!: FormGroup;
   errorsResponse: any = [];
@@ -19,7 +19,7 @@ export class LoginComponent {
   token: any;
   userData: any;
 
-  constructor(private loginService: RegisterService,
+  constructor(private loginStaffService: RegisterService,
               private route: Router,
               private fb: FormBuilder,
               private storageService: StorgeTokenService) {}
@@ -47,19 +47,38 @@ export class LoginComponent {
       Accept: 'application/json',
       'Content-Type': 'multipart/form-data',
     });
-    this.loginService.loginCustomer(formDetails, headers).subscribe({
+
+    this.loginStaffService.loginStaff(formDetails, headers).subscribe({
       next: (res: any) => {
         this.responseData = res;
         this.storageService.saveUser(this.responseData)
-        // this.userData = this.responseData.user;
+
         this.userData = this.storageService.getUser().user;
-        console.log(this.userData);
-        
         this.messageSuccess = true;
         this.dataNotCorrect = false;
-        setTimeout(() => {
-          this.route.navigate(['']);
-        }, 3000);
+        switch(this.userData.role) {
+          case 'Admin':
+            console.log('admin')
+            this.route.navigate(['/admin/dashboard']);
+            break;
+          case 'Waiter':
+            console.log('waiter');
+            break;
+          case 'Cashair':
+            console.log('cashair');
+            break;
+            case 'Kitchen':
+              console.log('kitchen')
+              this.route.navigate(['/admin/dashboard/kitchen']);
+              break;
+              default:
+                console.log('not staff');
+                this.route.navigate(['/home']);
+                break;
+        }
+        // setTimeout(() => {
+        //   this.route.navigate(['']);
+        // }, 3000);
       },
       error: (err: any) => {
         this.errorsResponse = err.error.errors;
