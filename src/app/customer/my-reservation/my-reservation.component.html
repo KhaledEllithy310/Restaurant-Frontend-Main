@@ -1,0 +1,45 @@
+<div class="container pt-5">
+  <span class="section-title">
+    <h2>Reservation</h2>
+    <hr>
+  </span>
+  <table class="table table-dark text-center">
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Table Number</th>
+            <th scope="col">Options</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let reservation of reservations">
+          <td>{{reservation.id}}</td>
+          <td>{{reservation.start_date}}</td>
+          <td>{{reservation.status}}</td>
+          <td>{{reservation.table.number}}</td>
+
+          <td>
+
+            <button *ngIf ="reservation.status=='progress'"
+            (click)="cancelReservation(reservation.id)"
+              class="btn btn-danger m-2 delete-btn"
+            >
+              Cancel <i class="fas fa-xmark"></i>
+            </button>
+          </td>
+        </tr>
+    </tbody>
+    <ngb-pagination
+    [collectionSize]="totalItems"
+    [pageSize]="pageSize"
+    [(page)]="pageNumber"
+    (pageChange)="onPageChange($event)"
+  ></ngb-pagination>
+  </table>
+
+
+</div>

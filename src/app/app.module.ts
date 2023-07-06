@@ -1,3 +1,4 @@
+import { CashierModule } from './cashier/cashier.module';
 import { CustomerModule } from './customer/customer.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,6 +30,7 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
     AdminModule,
     HomeModule,
     CustomerModule,
+    CashierModule
 
   ],
   providers: [],

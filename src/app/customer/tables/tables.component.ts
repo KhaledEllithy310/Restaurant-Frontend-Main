@@ -19,8 +19,8 @@ export class TablesComponent {
   }
   ShowAvailableTime(id:string)
   {
-   return this.router.navigate(['/MakeReservation', id]);
+   return this.router.navigate(['customer/MakeReservation', id]);
 
   }
-  
+
 }

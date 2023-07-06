@@ -4,17 +4,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TablesComponent } from './tables/tables.component';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
-import { NgbDateAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { MyReservationComponent } from './my-reservation/my-reservation.component';
 
 
 const routes = [
   {path:'tablesForbook',component:TablesComponent},
-  {path:'MakeReservation/:id',component:AddReservationComponent}
+  {path:'MakeReservation/:id',component:AddReservationComponent},
+  {path:'MyReservations',component:MyReservationComponent}
 ]
 @NgModule({
   declarations: [
     TablesComponent,
-    AddReservationComponent
+    AddReservationComponent,
+    MyReservationComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +25,7 @@ const routes = [
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
+    NgbTimepickerModule
 
 
   ],

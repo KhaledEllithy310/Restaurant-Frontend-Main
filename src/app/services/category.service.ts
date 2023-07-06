@@ -31,7 +31,7 @@ export class CategoryService {
   }
 
   getOldCategory(id: any) {
-    return this.http.get(`${this.URL}` + id + '/edit');
+    return this.http.get(`${this.URL}/` + id + '/edit');
   }
 
   onSearch(searchTerm: any) {

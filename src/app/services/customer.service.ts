@@ -24,4 +24,10 @@ private URL=environment.baseUrl;
    {
     return this.http.post(`${this.URL}reservation`,data)
    }
+
+   getCustomerReservations(pageNum:number)
+   {
+    return this.http.get(`${this.URL}reservation/get/customer?page=${pageNum}`)
+
+   }
 }

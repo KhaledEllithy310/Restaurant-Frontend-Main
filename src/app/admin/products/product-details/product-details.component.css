@@ -111,35 +111,43 @@
   font-size: 13px;
 } */
 
-.item_product_title_top {
-  font-size: 20px;
-  font-family: 'Domine', serif;
-  font-family: 'Rokkitt', serif;
-}
 .item_product_title_bottom {
   font-size: 16px;
   text-align: justify;
   font-family: 'Rokkitt', serif;
 }
 
-.list__Ingredients li {
+.list__extra {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
-  background-color: var(--main-color);
-  background-color: #2b2b33;
-  padding: 7px 10px;
-  border-radius: 20px;
-  margin-bottom: 5px;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
-.list__Ingredients li span {
+.list__extra li {
+  /* background-color: var(--main-color);
+  background-color: #2b2b33;
+  padding: 7px 7px;
+  border-radius: 20px; */
+  margin-bottom: 5px;
+  width: fit-content;
+  list-style: none;
+}
+
+.list__extra li span {
   font-family: 'Rokkitt', serif;
   font-weight: 600;
   background-color: #00dc94;
   color: var(--background-color-of-body);
-  padding: 0px 10px;
+  padding: 5px 5px;
   border-radius: 10px;
+}
+
+.ingredients_data span {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
 }
 
 .list__Ingredients .list__Ingredients__price {
@@ -148,8 +156,47 @@
   border: 1px solid #00dc94;
 }
 
-.btn_extra_form {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+.main_product_title {
+  font-size: 20px;
+  font-family: 'Rokkitt', serif;
+  text-transform: capitalize;
+  padding-bottom: 3px;
+  /* border-bottom: 1px solid var(--special-text-color); */
+  position: relative;
+  width: fit-content;
+  /* transition: all 0.3s; */
+}
+
+.main_product_title:after {
+  content: '';
+  width: 50%;
+  height: 2px;
+  background-color: var(--special-button-color);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.main_product_title:hover:after {
+  width: 100%;
+}
+
+.sec_product_title {
+  font-size: 30px;
+}
+
+.btn_container_ingredients span {
+  background-color: transparent;
+  color: white;
+  transition: all 0.3s;
+  margin: 0 10px;
+}
+
+.btn_container_ingredients .btn_ingredient_del:hover {
+  color: red;
+}
+
+.btn_container_ingredients .btn_ingredient_edit:hover {
+  color: #0e9dbd;
 }
