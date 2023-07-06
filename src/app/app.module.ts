@@ -1,3 +1,4 @@
+import { CustomerModule } from './customer/customer.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -13,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 import { TextMutedPipe } from './pipes/text-muted.pipe';
 
+
 @NgModule({
   declarations: [AppComponent, ],
   imports: [
@@ -26,6 +28,8 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
     RegisterModule,
     AdminModule,
     HomeModule,
+    CustomerModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

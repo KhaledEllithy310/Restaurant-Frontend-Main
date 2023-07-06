@@ -1,0 +1,38 @@
+
+<div class="container">
+  <div class ="row">
+    <div class="text-primary">{{ message }}</div>
+    <form action="" [formGroup]="formGroup" (ngSubmit)="OnSubmit()">
+
+      <ngb-datepicker
+
+      formControlName="dateControl"
+       [minDate]="minDate"
+        [maxDate]="maxDate"
+       [markDisabled]="markDisabled">
+
+      </ngb-datepicker>
+
+
+      <ngb-timepicker
+      
+       formControlName="timeControl"
+       [hourStep]="1"
+       [minuteStep]="15"
+       [secondStep]="0">
+
+      </ngb-timepicker>
+
+
+
+                <input type="submit">
+
+    </form>
+
+  </div>
+
+</div>
+
+
+
+
