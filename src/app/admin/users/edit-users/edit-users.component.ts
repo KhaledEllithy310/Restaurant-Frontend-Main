@@ -16,7 +16,7 @@ export class EditUsersComponent {
   errors: any = [];
   success!: string;
   editUserForm!: FormGroup;
-  olduser!: User;
+  olduser: any = [];
   image!: File;
   id: any;
   

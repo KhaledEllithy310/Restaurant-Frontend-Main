@@ -13,7 +13,7 @@ export class EditIngridentsComponent {
   
   editingridentForm!: FormGroup;
   
-  oldIngrident: any;
+  oldIngrident: any = [];
 
   id: any;
   success: any;
