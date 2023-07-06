@@ -27,9 +27,7 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     WaiterModule,
     RegisterModule,
     AdminModule,
-    HomeModule,
-    NgxUiLoaderModule,
-    NgxUiLoaderHttpModule.forRoot({ showForeground: true })
+    HomeModule
   ],
   providers: [
     { 

@@ -6,6 +6,7 @@ import { SignupComponent } from './register/signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { authGuard } from './guard/auth.guard';
 import { adminGuard } from './guard/admin.guard';
+import { guestGuard } from './guard/guest.guard';
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +26,7 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
+      // canActivate: [guestGuard]
   },
   {
     path: 'admin',

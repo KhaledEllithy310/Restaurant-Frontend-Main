@@ -26,6 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { kitchenGuard } from '../guard/kitchen.guard';
 import { adminGuard } from '../guard/admin.guard';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { guestGuard } from '../guard/guest.guard';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -99,7 +101,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgbDropdownModule,
     CommonModule,
-    NgbModule,
+    NgbModule
   ],
   providers: [],
   exports: [AdminComponent],

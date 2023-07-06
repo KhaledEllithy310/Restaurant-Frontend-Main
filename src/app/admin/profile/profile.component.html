@@ -1,1 +1,179 @@
-<h3 class="text-white">Profile</h3>
+<div class="container pt-5">
+    <h2>Ahmed's Profile</h2>
+    <hr style="width: 10%">
+    <div class="row p-5">
+        <div class="col image-div">
+            <div class="image" title="update image">
+                <img src="assets/chefTest.jpg" alt="">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header">User Details</div>
+                <div class="card-body">
+                    <h3 class="card-title">Name: Ahmed Mangood</h3>
+                    <hr style="width: 28%;">
+                    <p class="card-text">Email: am@am.com</p>
+                    <p class="card-text">PhoneNumber: 0124674879</p>
+                    <p class="card-text">Role: Kitchen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr style="width: 100%">
+    <div class="row p-5">
+        <div class="col">
+            <h3>Edit Your Details</h3>
+            <form (ngSubmit)="submitForm()" [formGroup]="editUserForm">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline inputs__container">
+                      <label class="form-label" for="name">Username</label>
+                      <input
+                        type="text"
+                        [value]="olduser.name"
+                        [(ngModel)]="olduser.name"
+                        name="name"
+                        formControlName="name"
+                        id="name"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        id="fnameHelp"
+                        class="form-text text-danger"
+                        *ngIf="
+                          editUserForm.controls['name'].touched &&
+                          editUserForm.controls['name'].invalid
+                        "
+                      >
+                        <span
+                          *ngIf="editUserForm.controls['name'].errors?.['required'] && !errors.name"
+                        >
+                          <div class="alert alert-danger">
+                            The username field is required.
+                          </div>
+                        </span>
+                        <span
+                          *ngIf="editUserForm.controls['name'].errors?.['minlength']"
+                        >
+                          <div class="alert alert-danger">
+                            username must be more than 2 characters
+                          </div>
+                        </span>
+                      </div>
+                      <div *ngIf="errors.name" class="mt-2">
+                        <div class="alert alert-danger">{{ errors.name }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline inputs__container">
+                      <label class="form-label" for="emailAddress">Email</label>
+                      <input
+                        type="email"
+                        [value]="olduser.email"
+                        id="emailAddress"
+                        formControlName="email"
+                        name="email"
+                        [(ngModel)]="olduser.email"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        id="emailHelp"
+                        class="form-text text-danger"
+                        *ngIf="
+                          editUserForm.controls['email'].touched &&
+                          editUserForm.controls['email'].invalid
+                        "
+                      >
+                        <span
+                          *ngIf="editUserForm.controls['email'].errors?.['required'] && !errors.email"
+                        >
+                          <div class="alert alert-danger">
+                            The email field is required.
+                          </div>
+                        </span>
+                        <span
+                          *ngIf="editUserForm.controls['email'].errors?.['email']"
+                        >
+                          <div class="alert alert-danger">Type a Valid Email</div>
+                        </span>
+                      </div>
+                      <div *ngIf="errors.email" class="mt-2">
+                        <div class="alert alert-danger">{{ errors.email }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+                    <div class="form-outline datepicker w-100 inputs__container">
+                      <label class="form-label" for="phone">Phone Number</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        [value]="olduser.phone"
+                        formControlName="phone"
+                        name="phone"
+                        [(ngModel)]="olduser.phone"
+                        class="form-control form-control-lg"
+                      />
+                      <div
+                        id="phoneNumHelp"
+                        class="form-text text-danger"
+                        *ngIf="
+                          editUserForm.controls['phone'].touched &&
+                          editUserForm.controls['phone'].invalid
+                        "
+                      >
+                        <span
+                          *ngIf="editUserForm.controls['phone'].errors?.['required'] && !errors.phone"
+                        >
+                          <div class="alert alert-danger">
+                            The phone field is required
+                          </div>
+                        </span>
+                        <span
+                          *ngIf="editUserForm.controls['phone'].errors?.['pattern']"
+                        >
+                          <div class="alert alert-danger">
+                            Phone Number Must be 11 digits and started with 010 or
+                            011 or 012
+                          </div>
+                        </span>
+                      </div>
+                      <div *ngIf="errors.phone" class="mt-2">
+                        <div class="alert alert-danger">{{ errors.phone }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 inputs__container">
+                    <label class="form-label" for="upload-image"
+                      >Upload Image</label
+                    >
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event)"
+                      id="upload-image"
+                      class="form-control form-control-lg"
+                    />
+                    <div *ngIf="errors.image">
+                      <div class="alert alert-danger">{{ errors.image }}</div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="pt-2">
+                  <button class="btn-lg admin__sec__btn__form" type="submit">
+                    Done
+                  </button>
+                </div>
+
+                <div *ngIf="success" class="mt-2">
+                  <div class="alert alert-success">{{ success }}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
