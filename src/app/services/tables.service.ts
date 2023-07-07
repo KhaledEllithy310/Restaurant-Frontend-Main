@@ -2,24 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TablesService {
+  constructor(private http: HttpClient) {}
 
-  constructor( private http: HttpClient) { }
-  addTables(data:any) {
-    return this.http.post('http://127.0.0.1:8000/api/tables/' , data);
-    }
-    getTable() {
-      return this.http.get('http://127.0.0.1:8000/api/tables/');
-    }
-  
+  addTables(data: any) {
+    return this.http.post('http://127.0.0.1:8000/api/tables/', data);
+  }
 
-  // AddCategory(data: any) {
-  //   return this.http.post('http://127.0.0.1:8000/api/category', data);
-  // }
-
- 
+  getTable() {
+    return this.http.get('http://127.0.0.1:8000/api/tables/');
+  }
 
   UpdateTable(data: any, id: any) {
     console.log(data.get('TableNo'));
@@ -29,4 +23,11 @@ export class TablesService {
   getOldTable(id: any) {
     return this.http.get('http://127.0.0.1:8000/api/tables/' + id + '/edit');
   }
+
+  //Get Available Table For Waiter
+  getAvailableTable() {
+    return this.http.get('http://127.0.0.1:8000/api/tables/available');
+  }
+
+  
 }

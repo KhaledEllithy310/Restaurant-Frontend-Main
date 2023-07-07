@@ -10,7 +10,7 @@ const routes = [
 ]
 @NgModule({
   declarations: [
-    ShowReservationsComponent
+    ShowReservationsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="tables_waiter">
+    <div class="">
+      <div class="row">
+        <div class="col tables_waiter_available_container">
+          <div class="row">
+            <div
+              class="tables_waiter_available col-lg-3 col-md-4 col-sm-6"
+              *ngFor="let table of tables"
+            >
+              <div class="table_container" (click)="showOrderTable(table)">
+                <h2>Table</h2>
+                <p>{{ table.number }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="d-inline-flex" > -->
+          <div class="order_container" *ngIf="showOrders" #tablesWaiterOrders>
+            <div class="tables_waiter_orders" id="tables_waiter_orders">
+              <div class="cart text-center">
+                <h1 class="mb-2">Orders Table No {{ TableNumber }}</h1>
+                <div class="container">
+                  <div class="row">
+                    <div class="card_product_container">
+                      <div
+                        class="col-12 card_product_order"
+                        *ngFor="let order of ordersTable"
+                      >
+                        <div class="row">
+                          <div class="col-5">
+                            <img
+                              [src]="'http://127.0.0.1:8000' + order.image"
+                              class="card-img-top"
+                              alt="..."
+                            />
+                          </div>
+                          <div
+                            class="col-7 p-0 card_product_right_container_order"
+                          >
+                            <div class="card_product_right_">
+                              <div>
+                                <h5 class="card-publisher item_product_name">
+                                  {{ order.name }}
+                                  <!-- {{ order.id }} -->
+                                </h5>
+                              </div>
+                              <div class="total_item_price"></div>
+                              <div class="single_item_price">
+                                ${{ order.totalPrice }}
+                              </div>
+                            </div>
+                            <div class="card_product_right_counter">
+                              <div class="counter">{{ order.quantity }}</div>
+                              <!-- <div class="counter">{{ order.status }}</div> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-3" [@fade]="showOrders" *ngIf="showOrders === 'visible'">
+        <div class="tables_waiter_orders">{{ tableid }}</div>
+      </div> -->
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

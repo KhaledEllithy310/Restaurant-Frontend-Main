@@ -200,3 +200,22 @@
 .btn_container_ingredients .btn_ingredient_edit:hover {
   color: #0e9dbd;
 }
+
+.list__extra span {
+  position: relative;
+}
+.list__extra i {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  font-size: 12px;
+  /* background-color: red; */
+  color: red;
+
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.list__extra i:hover {
+  color: white;
+}
