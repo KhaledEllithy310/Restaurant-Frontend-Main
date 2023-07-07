@@ -86,17 +86,18 @@ export class WaiterCartComponent {
     const newCardProduct = {
       id: cardProduct.id,
       _method: 'put',
-      quantity: ++cardProduct.quantity,
+      quantity: cardProduct.quantity + 1,
     };
 
     this.cartservice.UpdateCart(newCardProduct).subscribe(
       (res) => {
         console.log(res);
         // cardProduct.quantity++;
+        cardProduct.quantity++; // increment the quantity after the request is successful
         this.totalPriceAllProductsCart();
       },
       (err) => {
-        --cardProduct.quantity;
+        // --cardProduct.quantity;
         console.log(err);
         Swal.fire({
           icon: 'error',
