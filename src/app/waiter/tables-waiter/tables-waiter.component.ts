@@ -55,7 +55,8 @@ export class TablesWaiterComponent {
     let orderTableObject = {};
     this.orderService.getOrderTable(id_table).subscribe(
       (response: any) => {
-        console.log(response);
+        console.log(response.data[0].products);
+        // console.log(response.data[0].products);
         // for (let i = 0; i < response.data[0].products.length; i++) {
         //   for (let j = 0; j < response.data[0].order_products.length; j++) {
         //     orderTableObject = {
@@ -66,12 +67,17 @@ export class TablesWaiterComponent {
         //     };
         //   }
         // }
-        this.ordersTable.push(orderTableObject);
-        console.log(this.ordersTable);
+        this.ordersTable = response.data[0].products;
+        console.log('ordersTable:', this.ordersTable);
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  closeOrderTable() {
+    //disappear OrderTable after click
+    this.showOrders = false;
   }
 }
