@@ -44,7 +44,11 @@ export class ReservationComponent {
       this.filterReservation = res.data;
     });
 }
-  filterDataByTable() {
+  filterDataByTable(): any {
+    if (!this.tableNum) {
+      this.filterBytable = this.reservations;
+      return;
+    }
     const url = `${this.urlapi2}/${this.tableNum}`;
     this.http.get(url).subscribe((res: any) => {
       this.filterBytable = res.data

@@ -3,7 +3,7 @@
     <hr style="width: 10%">
     <div class="row p-5">
         <div class="col image-div">
-            <div class="image" title="update image">
+            <div class="image">
                 <img [src]="'http://127.0.0.1:8000' + olduser.image" alt="">
             </div>
         </div>
@@ -22,7 +22,8 @@
     </div>
     <hr style="width: 100%">
     <div class="row p-5">
-        <div class="col">
+      <button (click)="onClick()" class="btn btn-primary d-inline m-2 toggle">Toggle first element</button>
+        <div class="col div-form">
             <h3>Edit Your Details</h3>
             <form (ngSubmit)="submitForm()" [formGroup]="editUserForm">
                 <div class="row">
@@ -150,7 +151,7 @@
                   </div>
                   <div class="col-md-6 inputs__container">
                     <label class="form-label" for="upload-image"
-                      >Upload Image</label
+                      >Update Image</label
                     >
                     <input
                       type="file"

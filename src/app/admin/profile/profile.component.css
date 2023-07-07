@@ -24,8 +24,8 @@
     width: 200px;
     height: 200px;
 }
-.image::before {
-    content: "+";
+/* .image::before {
+    content: "";
     position: absolute;
     width: 50px;
     height: 50px;
@@ -38,11 +38,11 @@
     justify-content: center;
     font-size: 35px;
     cursor: pointer;
-}
-.image-div .image:hover::before {
+} */
+/* .image-div .image:hover::before {
     transition: 1s;
     color: #deac80;
-}
+} */
 img {
     width: 100%;
     height: 100%;
@@ -54,4 +54,10 @@ img {
     --bs-card-border-color: rgba(178, 176, 176, 0);
     --bs-card-bg: #fff0;
     color: #eee
+}
+.div-form {
+    display: none;
+}
+.open {
+    display: block;
 }

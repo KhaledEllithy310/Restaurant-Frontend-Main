@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ProfileComponent {
   errors: any = [];
-  success!: string;
+  success!: any;
   editUserForm!: FormGroup;
   olduser: any = [];
   image!: File;
@@ -62,7 +62,11 @@ export class ProfileComponent {
       {
       next: (res: any) => {
         this.success = res.message;
+        setTimeout(() => {
+          this.success = false;
+        }, 3000);
         console.log(res)
+        this.ngOnInit();
       },
       error: (err: any) => {
         this.errors = err.error.errors;
@@ -70,6 +74,12 @@ export class ProfileComponent {
       }
     }
     )
-
+  }
+  onClick() {
+    const btn = document.querySelector(".toggle");
+    const div = document.querySelector('.div-form');
+    btn?.addEventListener('click', () => {
+      div?.classList.toggle('open');
+    })
   }
 }
