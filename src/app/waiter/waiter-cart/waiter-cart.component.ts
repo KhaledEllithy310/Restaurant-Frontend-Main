@@ -89,11 +89,23 @@ export class WaiterCartComponent {
       quantity: ++cardProduct.quantity,
     };
 
-    this.cartservice.UpdateCart(newCardProduct).subscribe((res) => {
-      console.log(res);
-      // cardProduct.quantity++;
-      this.totalPriceAllProductsCart();
-    });
+    this.cartservice.UpdateCart(newCardProduct).subscribe(
+      (res) => {
+        console.log(res);
+        // cardProduct.quantity++;
+        this.totalPriceAllProductsCart();
+      },
+      (err) => {
+        --cardProduct.quantity;
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    );
   }
 
   minusProduct(cardProduct: any) {
@@ -234,18 +246,27 @@ export class WaiterCartComponent {
       products: newProductCart,
     };
 
+    const deletedCartObject = {
+      _method: 'delete',
+    };
     console.log(order);
-
+    //Send Request to make order
     this.orderService.createOrder(order).subscribe(
       (res: any) => {
         console.log(res);
+
+        //Send Request and Delete All Cart Objects from server
+        this.cartservice.DeleteCart(deletedCartObject).subscribe(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         this.CartProducts = [];
         this.totalPrice = 0;
-        // if (res.data.length === 0) {
-        //   console.log('The array is empty');
-        //   this.totalPrice = 0;
-        //   return;
-        // }
+
         Swal.fire({
           icon: 'success',
           title: res.message,

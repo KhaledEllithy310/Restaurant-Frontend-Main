@@ -57,8 +57,11 @@ export class CartService {
     return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
   }
 
-  UpdateCart(data: any) {
+  DeleteCart(data: any) {
     return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
   }
 
+  UpdateCart(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
+  }
 }
