@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -5,6 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class OrderService {
+  URl=environment.baseUrl;
   constructor(private http: HttpClient) {}
 
   createOrder(data: any) {
@@ -13,5 +15,10 @@ export class OrderService {
 
   getOrderTable(id: any) {
     return this.http.get(`http://127.0.0.1:8000/api/orders/tables/` + id);
+  }
+
+  makeOrderServerd(id:number)
+  {
+    return this.http.post(`${this.URl}orders/served/${id}`,[])
   }
 }

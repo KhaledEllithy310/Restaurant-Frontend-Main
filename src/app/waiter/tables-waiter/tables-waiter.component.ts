@@ -1,3 +1,4 @@
+import  Swal from 'sweetalert2';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { TablesService } from 'src/app/services/tables.service';
 import { OrderService } from './../../services/order.service';
@@ -14,7 +15,7 @@ export class TablesWaiterComponent {
   ordersTable: any[] = [];
   @ViewChild('tablesWaiterOrders', { static: false })
   tablesWaiterOrders!: ElementRef;
-
+  orderId!:number
   constructor(
     private tablesService: TablesService,
     private elementRef: ElementRef,
@@ -46,21 +47,18 @@ export class TablesWaiterComponent {
   @HostListener('window:click', ['$event.target'])
   onClick(targetElement: HTMLElement) {
     const clickedInside = this.elementRef.nativeElement.contains(targetElement);
-    console.log();
-
-    if (clickedInside) {
-      console.log('111111');
-
+    if (!clickedInside) {
       this.showOrders = false;
     }
   }
 
   getOrderTable(id_table: any) {
-    this.ordersTable = [];
+    this.ordersTable =[];
+
     this.orderService.getOrderTable(id_table).subscribe(
       (response: any) => {
 
-        console.log(response.data[0].products);
+      this.orderId= response.data[0]['id'];
         this.ordersTable = response.data[0].products;
         console.log('ordersTable:', this.ordersTable);
       },
@@ -70,8 +68,15 @@ export class TablesWaiterComponent {
     );
   }
 
+  changeStatus()
+  {
+    this.orderService.makeOrderServerd(this.orderId).subscribe((respone:any)=>{
+      this.ordersTable=[]
+      Swal
+    })
+  }
+
   closeOrderTable() {
-    //disappear OrderTable after click
     this.showOrders = false;
   }
 }
