@@ -7,15 +7,10 @@
   --main-color: #222b3d;
   /* Last Change */
 }
-
+/* 
 .cart {
   background-color: #eee;
-  /* height: 100%; */
-  /* height: 100vh; */
-  /* overflow-y: auto; */
-  /* display: inline-flex; */
-  /* width: 30%; */
-}
+} */
 
 .cart img {
   height: 120px;

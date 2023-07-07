@@ -8,6 +8,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { TablesService } from 'src/app/services/tables.service';
+import { OrderService } from './../../services/order.service';
 
 @Component({
   selector: 'app-waiter-cart',
@@ -25,7 +26,8 @@ export class WaiterCartComponent {
   constructor(
     private cartservice: CartService,
     private offcanvasService: NgbOffcanvas,
-    private tableService: TablesService
+    private tableService: TablesService,
+    private orderService: OrderService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -232,7 +234,7 @@ export class WaiterCartComponent {
 
     console.log(order);
 
-    this.cartservice.createOrder(order).subscribe(
+    this.orderService.createOrder(order).subscribe(
       (res: any) => {
         console.log(res);
         this.CartProducts = [];
