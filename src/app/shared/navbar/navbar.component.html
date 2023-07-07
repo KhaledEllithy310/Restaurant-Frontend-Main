@@ -41,6 +41,17 @@
             Dashboard</a
           >
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            routerLinkActive="active"
+            [routerLink]="'/cashier/ShowReservations'"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Cashier</a
+          >
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -69,8 +80,14 @@
                 >ProductList</a
               >
             </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="'/Waiter/tables'"
+                routerLinkActive="active"
+                >Tables</a
+              >
+            </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -118,9 +135,12 @@
           ></label>
         </form>
       </div>
-      <button class="btn btn-outline-success book-btn ms-3" type="submit">
+      <a class="btn btn-outline-success book-btn ms-3" [routerLink]="'/customer/tablesForbook'" type="submit">
         BOOK A TABLE
-      </button>
+      </a>
+      <a class="btn btn-outline-success book-btn ms-3" [routerLink]="'/customer/MyReservations'" type="submit">
+        My Reservations
+      </a>
     </div>
   </div>
 </nav>

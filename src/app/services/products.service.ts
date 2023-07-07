@@ -23,7 +23,7 @@ export class ProductsService {
   getFormStatus() {
     return this.formStatus.asObservable();
   }
-  
+
   initializeIngredientList(ingredients: any[]) {
     this.IngredientsList.next([...ingredients]);
   }
@@ -91,10 +91,19 @@ export class ProductsService {
     return this.http.get('http://127.0.0.1:8000/api/ingredients');
   }
 
+  updateIngredient(idIngredient: any, data: any) {
+    return this.http.put(
+      'http://127.0.0.1:8000/api/product/update/ingredients/' + idIngredient,
+      data
+    );
+  }
   CreateProduct(data: any) {
     return this.http.post(`${this.URL}`, data);
   }
 
+  UpdateProduct(idProduct: any, data: any) {
+    return this.http.post(`${this.URL}/` + idProduct, data);
+  }
   change_status(id: any) {
     return this.http.get(`${this.URL}/status/` + id);
   }

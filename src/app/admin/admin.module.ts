@@ -23,7 +23,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { kitchenGuard } from '../guard/kitchen.guard';
 import { adminGuard } from '../guard/admin.guard';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { guestGuard } from '../guard/guest.guard';
 import { ProductsModule } from './products/products.module';
 
@@ -40,26 +39,32 @@ const routes: Routes = [
             (m) => m.CategoriesModule
           ),
       },
-      { path: 'users', component: UsersComponent, 
-        // canActivate: [adminGuard] 
+      { path: 'tables', component: TablesComponent },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/products.module').then((m) => m.ProductsModule),
       },
-      { path: 'users/add', component: AddUsersComponent, 
-        // canActivate: [adminGuard] 
+      { path: 'users', component: UsersComponent,
+        // canActivate: [adminGuard]
+      },
+      { path: 'users/add', component: AddUsersComponent,
+        // canActivate: [adminGuard]
       },
       { path: 'users/edit/:id', component: EditUsersComponent,
-        // canActivate: [adminGuard] 
+        // canActivate: [adminGuard]
       },
-      { path: 'ingridents', component: IngridentsComponent, 
-        // canActivate: [adminGuard] 
+      { path: 'ingridents', component: IngridentsComponent,
+        // canActivate: [adminGuard]
       },
       { path: 'ingridents/add', component: AddIngridentsComponent,
-        // canActivate: [adminGuard] 
+        // canActivate: [adminGuard]
       },
       { path: 'ingridents/edit/:id', component: EditIngridentsComponent,
-        // canActivate: [adminGuard] 
+        // canActivate: [adminGuard]
       },
       { path: 'kitchen', component: KitchenComponent,
-        // canActivate: [kitchenGuard] 
+        // canActivate: [kitchenGuard]
       },
       { path: 'tables', component: TablesComponent },
       {

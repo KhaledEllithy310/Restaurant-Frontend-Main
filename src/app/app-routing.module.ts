@@ -23,14 +23,25 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
-      // canActivate: [guestGuard]
+      canActivate: [guestGuard]
   },
   {
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
-      // canActivate: [authGuard]
+      // canActivate: [authGuard,adminGuard]
   },
+  {
+    path:'customer',
+    loadChildren:()=>
+    import('./customer/customer.module').then((m)=>m.CustomerModule),
+          // canActivate: [authGuard,adminGuard]
+
+  },{
+  path:'cashier',
+  loadChildren:() =>
+  import('./cashier/cashier.module').then((m)=>m.CashierModule)
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

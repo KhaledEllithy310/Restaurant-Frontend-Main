@@ -10,6 +10,8 @@ import { WaiterProductDetailComponent } from './waiter-product/waiter-product-de
 import { WaiterCartComponent } from './waiter-cart/waiter-cart.component';
 import { ModalComponent } from './modal/modal.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TablesWaiterComponent } from './tables-waiter/tables-waiter.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,10 @@ const routes: Routes = [
     path: 'ProductItem',
     component: WaiterProductItemComponent,
   },
+  {
+    path: 'tables',
+    component: TablesWaiterComponent,
+  },
 ];
 
 @NgModule({
@@ -34,8 +40,9 @@ const routes: Routes = [
     WaiterComponent,
     WaiterCartComponent,
     ModalComponent,
+    TablesWaiterComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule],
   providers: [GetDataService, CartService],
   exports: [ModalComponent],
 })

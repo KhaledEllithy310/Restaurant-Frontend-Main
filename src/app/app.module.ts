@@ -1,3 +1,5 @@
+import { CashierModule } from './cashier/cashier.module';
+import { CustomerModule } from './customer/customer.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -13,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+// import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [AppComponent, ],
@@ -27,10 +29,12 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     WaiterModule,
     RegisterModule,
     AdminModule,
+    CustomerModule,
+    CashierModule,
     HomeModule
   ],
   providers: [
-    { 
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorInterceptor,
       multi: true
