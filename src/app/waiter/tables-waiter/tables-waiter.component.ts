@@ -53,9 +53,10 @@ export class TablesWaiterComponent {
 
   getOrderTable(id_table: any) {
     let orderTableObject = {};
+    this.ordersTable =[];
+
     this.orderService.getOrderTable(id_table).subscribe(
       (response: any) => {
-        this.ordersTable =[];
 
         console.log(response.data[0].products);
         // console.log(response.data[0].products);
