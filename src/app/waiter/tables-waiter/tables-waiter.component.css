@@ -1,0 +1,11 @@
+.tables_waiter {
+  color: white;
+}
+
+.tables_waiter_available {
+  background-color: burlywood;
+}
+
+.tables_waiter_orders {
+  background-color: burlywood;
+}

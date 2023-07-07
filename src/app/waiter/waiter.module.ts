@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'ProductItem',
     component: WaiterProductItemComponent,
   },
+  {
+    path: 'tables',
+    component: TablesWaiterComponent,
+  },
 ];
 
 @NgModule({
@@ -38,11 +42,7 @@ const routes: Routes = [
     ModalComponent,
     TablesWaiterComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    NgbModule,
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule],
   providers: [GetDataService, CartService],
   exports: [ModalComponent],
 })
