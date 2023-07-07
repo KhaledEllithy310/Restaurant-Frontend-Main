@@ -12,29 +12,33 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getCategoryPagination(pageNumber: number) {
-    return this.http.get(`${this.URL}?page=${pageNumber}`);
+    return this.http.get(
+      `http://127.0.0.1:8000/api/category?page=${pageNumber}`
+    );
   }
   getCategory() {
-    return this.http.get(`${this.URL}`);
+    return this.http.get(`http://127.0.0.1:8000/api/category`);
   }
 
   AddCategory(data: any) {
-    return this.http.post(`${this.URL}`, data);
+    return this.http.post(`http://127.0.0.1:8000/api/category`, data);
   }
 
   DeleteCategory(id: any) {
-    return this.http.delete(`${this.URL}` + id);
+    return this.http.delete(`http://127.0.0.1:8000/api/category/` + id);
   }
 
   UpdateCategory(data: any, id: any) {
-    return this.http.post(`${this.URL}` + id, data);
+    return this.http.post(`http://127.0.0.1:8000/api/category/` + id, data);
   }
 
   getOldCategory(id: any) {
-    return this.http.get(`${this.URL}/` + id + '/edit');
+    return this.http.get(`http://127.0.0.1:8000/api/category/` + id + '/edit');
   }
 
   onSearch(searchTerm: any) {
-    return this.http.get(`${this.URL}/show?name=` + searchTerm);
+    return this.http.get(
+      `http://127.0.0.1:8000/api/category/show?name=` + searchTerm
+    );
   }
 }

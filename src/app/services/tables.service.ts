@@ -26,8 +26,6 @@ export class TablesService {
 
   //Get Available Table For Waiter
   getAvailableTable() {
-    return this.http.get('http://127.0.0.1:8000/api/tables/available');
+    return this.http.get('http://127.0.0.1:8000/api/tables/available/inday');
   }
-
-  
 }

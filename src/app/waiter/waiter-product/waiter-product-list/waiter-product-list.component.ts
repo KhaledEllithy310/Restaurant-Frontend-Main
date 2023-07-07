@@ -31,17 +31,19 @@ export class WaiterProductListComponent {
   }
 
   getAllProduct() {
-    this.productsService.getProductPagination(this.pageNumber).subscribe(
-      (response: any) => {
-        this.products = response.data;
-        this.totalItems = response.total;
-        this.pageSize = response.per_page;
-        console.log(this.products);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+    this.productsService
+      .getAvailableProductPagination(this.pageNumber)
+      .subscribe(
+        (response: any) => {
+          this.products = response.data.data;
+          this.totalItems = response.data.total;
+          this.pageSize = response.data.per_page;
+          console.log(this.products);
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
   }
 
   //Change Pages To Display Product
@@ -67,7 +69,7 @@ export class WaiterProductListComponent {
       (Response: any) => {
         // this.CartProducts = Response.data[0].data;
         console.log(Response);
-        this.cartservice.cartContainer.next(Response.data[0].data);
+        this.cartservice.cartContainer.next(Response.data[0]);
 
         this.cartservice.getCartProducts().subscribe((res) => {
           console.log(res);
@@ -155,7 +157,7 @@ export class WaiterProductListComponent {
     this.cartservice.getAllCart().subscribe(
       (Response: any) => {
         console.log(Response);
-        this.cartservice.cartContainer.next(Response.data[0].data);
+        this.cartservice.cartContainer.next(Response.data[0]);
       },
       (err: any) => console.log(err)
     );

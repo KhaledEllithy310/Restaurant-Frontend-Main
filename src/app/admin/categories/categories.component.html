@@ -34,7 +34,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let category of categories; let i = index" id="cate{{ i }}">
-        <th>{{ i + 1 }}</th>
+        <th>{{ category.id}}</th>
         <td>{{ category.name }}</td>
         <td>
           <img
