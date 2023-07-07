@@ -70,7 +70,7 @@ export class WaiterCartComponent {
   }
 
   getAllTable() {
-    this.tableService.getTable().subscribe(
+    this.tableService.getAvailableTable().subscribe(
       (response: any) => {
         console.log(response);
         this.tables = response.data;
@@ -86,14 +86,27 @@ export class WaiterCartComponent {
     const newCardProduct = {
       id: cardProduct.id,
       _method: 'put',
-      quantity: ++cardProduct.quantity,
+      quantity: cardProduct.quantity + 1,
     };
 
-    this.cartservice.UpdateCart(newCardProduct).subscribe((res) => {
-      console.log(res);
-      // cardProduct.quantity++;
-      this.totalPriceAllProductsCart();
-    });
+    this.cartservice.UpdateCart(newCardProduct).subscribe(
+      (res) => {
+        console.log(res);
+        // cardProduct.quantity++;
+        cardProduct.quantity++; // increment the quantity after the request is successful
+        this.totalPriceAllProductsCart();
+      },
+      (err) => {
+        // --cardProduct.quantity;
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    );
   }
 
   minusProduct(cardProduct: any) {
@@ -234,18 +247,27 @@ export class WaiterCartComponent {
       products: newProductCart,
     };
 
+    const deletedCartObject = {
+      _method: 'delete',
+    };
     console.log(order);
-
+    //Send Request to make order
     this.orderService.createOrder(order).subscribe(
       (res: any) => {
         console.log(res);
+
+        //Send Request and Delete All Cart Objects from server
+        this.cartservice.DeleteCart(deletedCartObject).subscribe(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         this.CartProducts = [];
         this.totalPrice = 0;
-        // if (res.data.length === 0) {
-        //   console.log('The array is empty');
-        //   this.totalPrice = 0;
-        //   return;
-        // }
+
         Swal.fire({
           icon: 'success',
           title: res.message,
