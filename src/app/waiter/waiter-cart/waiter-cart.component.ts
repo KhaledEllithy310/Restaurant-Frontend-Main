@@ -228,7 +228,7 @@ export class WaiterCartComponent {
     const order = {
       total_price: this.totalPrice,
       table_id: this.TableId,
-      user_id: 1,
+      user_id: 3,
       products: newProductCart,
     };
 

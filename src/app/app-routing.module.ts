@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
-      canActivate: [guestGuard]
+      // canActivate: [guestGuard]
   },
   {
     path: 'admin',
