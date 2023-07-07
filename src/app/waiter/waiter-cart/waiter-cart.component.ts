@@ -58,7 +58,7 @@ export class WaiterCartComponent {
       (Response: any) => {
         // this.CartProducts = Response.data[0].data;
         // console.log(this.cartservice.cartContainer);
-        console.log(Response.data[0].data);
+        console.log(Response);
         this.cartservice.getCartProducts().subscribe((res) => {
           console.log(res);
           this.CartProducts = res;
@@ -146,6 +146,7 @@ export class WaiterCartComponent {
         console.log(Response);
         this.totalPriceAllProductsCart();
         this.updateCartData();
+
         this.cartservice.getCartProducts().subscribe((res) => {
           const index = this.CartProducts.findIndex(
             (product) => product.id === cardProduct.id
@@ -153,7 +154,8 @@ export class WaiterCartComponent {
           if (index !== -1) {
             this.CartProducts.splice(index, 1);
           }
-          console.log(this.CartProducts);
+
+          console.log(this.totalPrice);
         });
         Swal.fire({
           icon: 'success',
@@ -238,6 +240,12 @@ export class WaiterCartComponent {
       (res: any) => {
         console.log(res);
         this.CartProducts = [];
+        this.totalPrice = 0;
+        // if (res.data.length === 0) {
+        //   console.log('The array is empty');
+        //   this.totalPrice = 0;
+        //   return;
+        // }
         Swal.fire({
           icon: 'success',
           title: res.message,
@@ -265,6 +273,12 @@ export class WaiterCartComponent {
   updateCartData() {
     this.cartservice.getAllCart().subscribe(
       (Response: any) => {
+        console.log(Response.data);
+        if (Response.data.length === 0) {
+          console.log('The array is empty');
+          this.totalPrice = 0;
+          return;
+        }
         console.log(Response);
         this.cartservice.cartContainer.next(Response.data[0].data);
       },

@@ -66,11 +66,12 @@ export class WaiterProductListComponent {
     this.cartservice.getAllCart().subscribe(
       (Response: any) => {
         // this.CartProducts = Response.data[0].data;
-        console.log(Response.data[0].data);
+        console.log(Response);
         this.cartservice.cartContainer.next(Response.data[0].data);
 
         this.cartservice.getCartProducts().subscribe((res) => {
           console.log(res);
+          this.CartProducts = res;
         });
       },
       (err: any) => console.log(err)
