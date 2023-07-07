@@ -240,6 +240,12 @@ export class WaiterCartComponent {
       (res: any) => {
         console.log(res);
         this.CartProducts = [];
+        this.totalPrice = 0;
+        // if (res.data.length === 0) {
+        //   console.log('The array is empty');
+        //   this.totalPrice = 0;
+        //   return;
+        // }
         Swal.fire({
           icon: 'success',
           title: res.message,
