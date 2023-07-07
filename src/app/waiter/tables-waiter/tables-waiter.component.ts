@@ -55,23 +55,31 @@ export class TablesWaiterComponent {
     let orderTableObject = {};
     this.orderService.getOrderTable(id_table).subscribe(
       (response: any) => {
-        console.log(response);
-        for (let i = 0; i < response.data[0].products.length; i++) {
-          for (let j = 0; j < response.data[0].order_products.length; j++) {
-            orderTableObject = {
-              name: response.data[0].products[i].name,
-              image: response.data[0].products[i].image,
-              quantity: response.data[0].order_products[j].quantity,
-              totalPrice: response.data[0].order_products[j].total_price,
-            };
-          }
-        }
-        this.ordersTable.push(orderTableObject);
-        console.log(this.ordersTable);
+        this.ordersTable =[];
+
+        console.log(response.data[0].products);
+        // console.log(response.data[0].products);
+        // for (let i = 0; i < response.data[0].products.length; i++) {
+        //   for (let j = 0; j < response.data[0].order_products.length; j++) {
+        //     orderTableObject = {
+        //       name: response.data[0].products[i].name,
+        //       image: response.data[0].products[i].image,
+        //       quantity: response.data[0].order_products[j].quantity,
+        //       totalPrice: response.data[0].order_products[j].total_price,
+        //     };
+        //   }
+        // }
+        this.ordersTable = response.data[0].products;
+        console.log('ordersTable:', this.ordersTable);
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  closeOrderTable() {
+    //disappear OrderTable after click
+    this.showOrders = false;
   }
 }
