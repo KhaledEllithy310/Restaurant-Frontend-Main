@@ -44,7 +44,13 @@
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title"></h4>
+    <h4 class="offcanvas-title">
+      <select name="table_id" id="" (change)="getTableId($event)">
+        <option value="{{ table.id }}" *ngFor="let table of tables">
+          Table No {{ table.number }}
+        </option>
+      </select>
+    </h4>
     <button
       type="button"
       class="btn-close"
@@ -63,7 +69,6 @@
               *ngFor="let product of CartProducts"
             >
               <div class="row">
-
                 <div class="col-5">
                   <img
                     [src]="'http://127.0.0.1:8000' + product.product.image"
@@ -121,7 +126,7 @@
         <div class="sideBar__footer__totalPrice__text">Total</div>
         <div class="sideBar__footer__totalPrice__number">${{ totalPrice }}</div>
       </div>
-      <div class="sideBar__footer__submit">submit order</div>
+      <div class="sideBar__footer__submit" (click)="createOrder()">submit order</div>
     </div>
   </div>
 </ng-template>

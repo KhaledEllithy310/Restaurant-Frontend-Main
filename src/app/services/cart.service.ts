@@ -42,7 +42,7 @@ export class CartService {
   getTotalPrice() {
     return this.totalPriceCart.asObservable();
   }
-  
+
   //***********************Api***********************//
 
   getAllCart() {
@@ -59,5 +59,9 @@ export class CartService {
 
   UpdateCart(data: any) {
     return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
+  }
+
+  createOrder(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/orders/`, data);
   }
 }

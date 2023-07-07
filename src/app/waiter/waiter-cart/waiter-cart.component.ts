@@ -7,6 +7,7 @@ import {
   NgbOffcanvasRef,
 } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { TablesService } from 'src/app/services/tables.service';
 
 @Component({
   selector: 'app-waiter-cart',
@@ -19,11 +20,12 @@ export class WaiterCartComponent {
   CartProducts!: any[];
   @Input() product: any;
   totalPrice: number = 0;
-  cartData: any[] = [];
-
+  tables!: any[];
+  TableId: any;
   constructor(
     private cartservice: CartService,
-    private offcanvasService: NgbOffcanvas
+    private offcanvasService: NgbOffcanvas,
+    private tableService: TablesService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -45,7 +47,8 @@ export class WaiterCartComponent {
     //GET PRODUCT THAT STORED IN CART
     this.getAllCart();
     this.totalPriceAllProductsCart();
-    console.log(this.CartProducts);
+    this.getAllTable();
+    // console.log(this.CartProducts);
   }
 
   getAllCart() {
@@ -61,6 +64,18 @@ export class WaiterCartComponent {
         });
       },
       (err: any) => console.log(err)
+    );
+  }
+
+  getAllTable() {
+    this.tableService.getTable().subscribe(
+      (response: any) => {
+        console.log(response);
+        this.tables = response.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
     );
   }
 
@@ -184,7 +199,7 @@ export class WaiterCartComponent {
           productCart[i].total_price * productCart[i].quantity;
       }
       // this.totalPrice = totalPriceAllProductsCart;
-      this.cartservice.setTotalPrice(totalPriceAllProductsCart);
+      this.cartservice.setTotalPrice(totalPriceAllProductsCart.toFixed(2));
       this.cartservice.getTotalPrice().subscribe((res: any) => {
         this.totalPrice = res;
       });
@@ -193,6 +208,57 @@ export class WaiterCartComponent {
     });
   }
 
+  createOrder() {
+    let newProductCart = [];
+    for (let i = 0; i < this.CartProducts.length; i++) {
+      const newCartObject = {
+        id: this.CartProducts[i].product.id,
+        // name: this.CartProducts[i].product.name,
+        total_price: this.CartProducts[i].product.total_price,
+        image: this.CartProducts[i].product.image,
+        quantity: this.CartProducts[i].quantity,
+      };
+      console.log(this.CartProducts);
+
+      newProductCart.push(newCartObject);
+    }
+
+    const order = {
+      total_price: this.totalPrice,
+      table_id: this.TableId,
+      user_id: 1,
+      products: newProductCart,
+    };
+
+    console.log(order);
+
+    this.cartservice.createOrder(order).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.CartProducts = [];
+        Swal.fire({
+          icon: 'success',
+          title: res.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      (err: any) => {
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Choose Your Table',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    );
+  }
+
+  getTableId(event: any) {
+    console.log(event.target.value);
+    this.TableId = event.target.value;
+  }
   //function to get the newest data from the server
   updateCartData() {
     this.cartservice.getAllCart().subscribe(
