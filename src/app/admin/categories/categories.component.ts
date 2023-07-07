@@ -49,7 +49,6 @@ export class CategoriesComponent {
         this.search(term);
       }
     );
-
     // call the all categories
     this.getAllCategory();
     //form group for add categoryForm
@@ -66,6 +65,7 @@ export class CategoriesComponent {
       image_updated: [''],
     });
   }
+
   //create form control for input {name}
   get nameControl() {
     return this.categoryForm.controls['name'];
@@ -100,8 +100,8 @@ export class CategoriesComponent {
         this.totalItems = response.meta.total;
         this.pageSize = response.meta.per_page;
         console.log(response);
-        console.log('   this.totalItems', this.totalItems);
-        console.log('   this.pageSize', this.pageSize);
+        // console.log('   this.totalItems', this.totalItems);
+        // console.log('   this.pageSize', this.pageSize);
       },
       (error) => {
         console.log(error);
@@ -122,7 +122,7 @@ export class CategoriesComponent {
   deleteCategory(index: any) {
     let category = document.getElementById(`cate${index}`);
     category?.remove();
-     let idCategory = this.categories[index].id;
+    let idCategory = this.categories[index].id;
     this.categoryService.DeleteCategory(idCategory).subscribe(
       (response: any) => {
         console.log(response);
@@ -137,6 +137,8 @@ export class CategoriesComponent {
 
   //GET THE ID OF THE OBJECT
   getIdCategory(idCategory: any) {
+    console.log(idCategory);
+
     //Call The Old Category
     this.categoryService
       .getOldCategory(idCategory)
@@ -157,7 +159,7 @@ export class CategoriesComponent {
       'name_updated'
     ) as HTMLInputElement;
 
-    console.log(name_updated.value);
+    console.log(name_updated);
   }
 
   //set the selected image next to the input

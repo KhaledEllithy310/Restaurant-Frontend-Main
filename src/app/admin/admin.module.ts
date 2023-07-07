@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NgbAlertModule,
@@ -12,8 +11,6 @@ import {
   NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TablesComponent } from './tables/tables.component';
-import { ProductsComponent } from './products/products.component';
-import { AddProductComponent } from './products/add-product/add-product.component';
 import { UsersComponent } from './users/users.component';
 import { AddUsersComponent } from './users/add-users/add-users.component';
 import { EditUsersComponent } from './users/edit-users/edit-users.component';
@@ -28,6 +25,7 @@ import { kitchenGuard } from '../guard/kitchen.guard';
 import { adminGuard } from '../guard/admin.guard';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { guestGuard } from '../guard/guest.guard';
+import { ProductsModule } from './products/products.module';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -35,13 +33,12 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      { path: 'Categories', component: CategoriesComponent },
-      { path: 'tables', component: TablesComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'products/add', component: AddProductComponent },
       {
-        path: 'products/product-details/:id',
-        component: ProductDetailsComponent,
+        path: 'Categories',
+        loadChildren: () =>
+          import('./categories/categories.module').then(
+            (m) => m.CategoriesModule
+          ),
       },
       { path: 'users', component: UsersComponent, 
         // canActivate: [adminGuard] 
@@ -64,26 +61,23 @@ const routes: Routes = [
       { path: 'kitchen', component: KitchenComponent,
         // canActivate: [kitchenGuard] 
       },
+      { path: 'tables', component: TablesComponent },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/products.module').then((m) => m.ProductsModule),
+      },
       { path: 'reservation', component: ReservationComponent },
       { path: 'profile', component: ProfileComponent },
     ],
   },
 ];
 
-// const routes: Routes = [
-//   {path: '', component: AdminComponent},
-//   {path: 'dashboard', component: DashboardComponent},
-
-// ];
-
 @NgModule({
   declarations: [
     AdminComponent,
     DashboardComponent,
-    CategoriesComponent,
     TablesComponent,
-    ProductsComponent,
-    AddProductComponent,
     UsersComponent,
     AddUsersComponent,
     EditUsersComponent,
@@ -93,7 +87,6 @@ const routes: Routes = [
     KitchenComponent,
     ReservationComponent,
     ProfileComponent,
-    ProductDetailsComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -101,7 +94,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgbDropdownModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    ProductsModule,
   ],
   providers: [],
   exports: [AdminComponent],

@@ -62,9 +62,7 @@ body {
 .input_container label {
   width: 190px;
   font-size: 20px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-family: 'Domine', serif;
-  /* font-family: 'Sawarabi Gothic', sans-serif; */
 }
 
 .error_form {
@@ -532,6 +530,7 @@ tr:hover {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--main-color);
   background-color: #2b2b33;
   padding: 7px 10px;
