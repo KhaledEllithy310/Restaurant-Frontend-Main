@@ -1,0 +1,59 @@
+:root {
+  --background-color-card: #3d414a;
+  --background-item: #3d414a;
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
+.our_menu {
+  color: white;
+  color: var(--special-text-color);
+  text-align: left;
+  font-family: 'Domine', serif;
+}
+
+.category_filter {
+  /* background-color: #deac80; */
+  /* height: 90vh; */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  width: 150px;
+  flex: 0 0 150px;
+}
+
+.category_filter li {
+  list-style: none;
+  padding: 15px 10px;
+  cursor: pointer;
+  background-color: var(--background-color-of-sections);
+  margin: 10px 0;
+  color: white;
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 2px;
+  transition: all 0.1s linear;
+  font-size: 20px;
+  font-family: 'Rokkitt', serif;
+  text-transform: capitalize;
+}
+
+.category_filter li:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+
+.category_filter li:active {
+}
+
+.category_filter .active {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+
+.category_filter {
+}

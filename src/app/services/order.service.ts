@@ -22,9 +22,9 @@ export class OrderService {
     return this.http.post(`${this.URl}orders/served/${id}`,[])
   }
 
-  makeOrderPaid(id:number)
+  makeOrderPaid(id:number,data:any)
   {
-    return this.http.post(`${this.URl}orders/paid/${id}`,[])
+    return this.http.post(`${this.URl}orders/paid/${id}`,data)
   }
 
   getServedOrder(id:number)

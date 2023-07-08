@@ -1,0 +1,71 @@
+:root {
+  --background-color-card: #3d414a;
+  --background-item: #3d414a;
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
+.item_product {
+  background-color: #1d2026;
+  color: white;
+  border-radius: 0;
+  margin-bottom: 50px;
+  position: relative;
+  /* box-shadow: 0 0 2px #9d9c9c; */
+}
+
+.item_product img {
+  height: 200px;
+  border-radius: 0;
+}
+
+.btn_cart {
+  position: absolute;
+  width: 80%;
+  padding: 10px;
+  right: 10%;
+  left: 10%;
+  bottom: -25px;
+  text-transform: uppercase;
+  background-color: var(--background-color-of-sections);
+  color: white;
+  text-decoration: none;
+  /* box-shadow: 0 0 2px #9d9c9c; */
+  cursor: pointer;
+  transition: all 0.3s linear;
+  font-family: 'Dosis', sans-serif;
+}
+
+.btn_cart:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+.item_product_publisher {
+  font-family: 'Dosis', sans-serif;
+}
+.card_price {
+  font-family: 'Rokkitt', serif;
+}
+.sale_item {
+  /* width: 30px; */
+  height: 60px;
+  background-color: var(--special-button-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-transform: capitalize;
+  color: var(--background-color-of-sections);
+  text-orientation: sideways;
+  writing-mode: vertical-lr;
+  transform: rotateZ(180deg);
+}
+/* .item_product_publisher,
+.item_product_title {
+  font-size: 13px;
+} */
+

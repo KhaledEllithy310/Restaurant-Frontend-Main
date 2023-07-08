@@ -1,0 +1,88 @@
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title">
+      <select name="table_id" id="" (change)="getTableId($event)">
+        <option value="" selected>Select Table</option>
+        <option value="{{ table.id }}" *ngFor="let table of tables">
+          Table No {{ table.number }}
+        </option>
+      </select>
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="cart text-center">
+      <h1 class="">Shopping Cart</h1>
+      <div class="container">
+        <div class="row">
+          <div class="card_product_container">
+            <div
+              class="col-12 card_product"
+              *ngFor="let product of CartProducts"
+            >
+              <div class="row">
+                <div class="col-5">
+                  <img
+                    [src]="'http://127.0.0.1:8000' + product.product.image"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-7 p-0 card_product_right_container">
+                  <!-- <div class="container"> -->
+                  <div class="card_product_right">
+                    <div>
+                      <h5 class="card-publisher item_product_name">
+                        {{ product.product.name }}
+                      </h5>
+                    </div>
+                    <div class="total_item_price">
+                      ${{ totalPriceItem(product) }}
+                    </div>
+                    <div class="single_item_price">
+                      ${{ product.total_price }}
+                    </div>
+                    <!-- </div> -->
+                  </div>
+                  <div class="card_product_right_counter">
+                    <div class="min_counter" (click)="minusProduct(product)">
+                      <i class="fa-solid fa-minus"></i>
+                    </div>
+                    <div class="counter">{{ product.quantity }}</div>
+                    <div class="plus_counter" (click)="plusProduct(product)">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card_product_delete" (click)="deleteProduct(product)">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sideBar__footer">
+      <div class="sideBar__footer__totalPrice">
+        <div class="sideBar__footer__totalPrice__text">Total</div>
+        <div class="sideBar__footer__totalPrice__number">${{ totalPrice }}</div>
+      </div>
+      <div class="sideBar__footer__submit" (click)="createOrder()">
+        submit order
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<a class="cart_btn" (click)="openEnd(content)">
+  <!-- {{ isOffcanvasOpen ? "Close" : "Open" }} -->
+  <i class="fa-solid fa-cart-shopping"></i>
+</a>
+

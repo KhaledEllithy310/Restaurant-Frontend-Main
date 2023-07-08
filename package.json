@@ -37,6 +37,7 @@
     "ngx-useful-swiper": "^10.0.1",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
+    "stripe-angular": "^1.9.3",
     "sweetalert2": "^11.7.12",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

@@ -46,7 +46,7 @@ const routes: Routes = [
     path:'cashier',
     loadChildren:() =>
     import('./cashier/cashier.module').then((m)=>m.CashierModule)
-  },  
+  },
   {
     path:'profile', component: ProfileComponent
   },
@@ -54,9 +54,16 @@ const routes: Routes = [
     // canActivate: [kitchenGuard]
   },
   {
+    path: 'stripe',
+    loadChildren: () =>
+      import('./stripesystem/stripesystem.module').then((m) => m.StripesystemModule),
+      // canActivate: [authGuard]
+  },
+  {
     path: '**',
     component: NotfoundComponent,
   },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,24 @@
+<div class="card item_product mx-auto">
+  <div class="sale_item">sale</div>
+  <!-- <img src="{{ item.image_url }}" class="card-img-top" alt="..." /> -->
+  <img
+    [src]="'http://127.0.0.1:8000' + item.image"
+    class="card-img-top"
+    alt="..."
+    (click)="getProductDetail(item)"
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+  />
+  <div class="card-body">
+    <h5 class="card-title item_product_publisher">
+      {{ item.name }}
+    </h5>
+    <!-- <h5 class="card-title item_product_title">
+      {{ item.title | textMuted : 20 }}
+    </h5> -->
+    <p class="card_price">${{ item.total_price }}</p>
+    <a class="btn_cart" (click)="add(item)">
+      <i class="fa-solid fa-cart-plus"></i> add to cart
+    </a>
+  </div>
+</div>

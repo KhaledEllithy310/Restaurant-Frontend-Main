@@ -42,6 +42,18 @@
           >
         </li>
         <li class="nav-item" *ngIf="login() && checkRole() === 'Kitchen'">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            routerLinkActive="active"
+            [routerLink]="'/stripe/checkout'"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Checkout</a
+          >
+        </li>
+        <li class="nav-item dropdown">
           <a
             class="nav-link"
             aria-current="page"
