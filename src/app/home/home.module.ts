@@ -7,8 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FeaturesSectionComponent } from './features-section/features-section.component';
 import { AboutusSectionComponent } from './aboutus-section/aboutus-section.component';
 import { CountnumberComponent } from './countnumber/CountnumberComponent';
-import { ReviewsComponent } from './reviews/reviews.component';
-// import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ReviweComponent } from './reviwe/reviwe.component';
 
 @NgModule({
   declarations: [
@@ -20,15 +19,13 @@ import { ReviewsComponent } from './reviews/reviews.component';
     AboutusSectionComponent,
     
     CountnumberComponent,
-          ReviewsComponent,
-          // SlickCarouselModule
+          ReviweComponent,
   ],
   imports: [CommonModule],
   exports: [
     HomeSection1Component,
     MeetOurTeamComponent,
     FooterComponent,
-    
     CountnumberComponent,
   ],
 })

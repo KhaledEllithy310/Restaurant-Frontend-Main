@@ -30,10 +30,12 @@
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
+              
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+             
             ]
           },
           "configurations": {

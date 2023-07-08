@@ -6,7 +6,7 @@
     padding: 0;
     height: 20vh;
     margin-bottom: 10px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
   }
   
   .text {
@@ -20,7 +20,7 @@
   }
   
   .gold {
-    color: gold;
+    color: #c39c6e;
   }
   img{
     width: 400px;

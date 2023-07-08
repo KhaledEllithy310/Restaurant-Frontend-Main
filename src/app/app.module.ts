@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 import { TextMutedPipe } from './pipes/text-muted.pipe';
-import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AppComponent, ],
   imports: [
@@ -26,7 +25,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterModule,
     AdminModule,
     HomeModule,
-    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],
