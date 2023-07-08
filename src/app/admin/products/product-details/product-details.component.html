@@ -1,22 +1,64 @@
-<div class="container">
+<div class="container p-60">
   <div class="row">
     <div class="col-6">
-      <div class="card">
-        <img
-          class="card-img-top img_card"
-          [src]="'http://127.0.0.1:8000' + targetProduct.image"
-          alt=""
-        />
-        <div class="card-body">
-          <h4 class="card-title">{{ targetProduct.name }}</h4>
-          <p class="card-text">${{ targetProduct.total_price }}</p>
+      <div
+        class="card item_product mx-auto"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
+        <div class="sale_item">
+          sale <span>%{{ targetProduct.discount * 100 }}</span>
         </div>
+        <!-- <img src="{{ item.image_url }}" class="card-img-top" alt="..." /> -->
+        <div class="col-5 mx-auto">
+          <img
+            [src]="'http://127.0.0.1:8000' + targetProduct.image"
+            class="card-img-top"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title item_product_name">
+            {{ targetProduct.name }}
+          </h5>
+
+          <div class="card-title item_product_title">
+            <p class="card_price">${{ targetProduct.total_price }}</p>
+
+            <p class="item_product_title_top">Description</p>
+
+            <p class="item_product_title_bottom">
+              {{ targetProduct.description }}
+            </p>
+          </div>
+          <div
+            class="card-title item_product_extra list__Ingredients btn_extra_form"
+          >
+            <li *ngFor="let extra of targetExtraList">
+              <span> {{ extra }}</span>
+            </li>
+          </div>
+          <!--
+          <a class="btn_cart">
+            <i class="fa-solid fa-cart-plus"></i> add to cart
+          </a> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-6 item_product">
+      <h3>Ingredients</h3>
+      <div class="list__Ingredients">
+        <li *ngFor="let ingredient of targetProduct.Ingredients">
+          <span>{{ ingredient.name }} carrot</span>
+          <span>{{ ingredient.quantity }}110 kg</span>
+          <span class="list__Ingredients__price">${{ ingredient.total }}</span>
+        </li>
       </div>
     </div>
   </div>
   <a
     class="btn btn-outline-primary my-4"
-    [routerLink]="'/admin/dashboard/products'"
+    [routerLink]="'/admin/dashboard/products/display'"
   >
     back <i class="fas fa-arrow-left"></i>
   </a>

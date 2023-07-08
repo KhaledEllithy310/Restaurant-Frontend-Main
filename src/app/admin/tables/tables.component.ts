@@ -9,6 +9,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { TablesService } from 'src/app/services/tables.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -17,12 +18,20 @@ import { TablesService } from 'src/app/services/tables.service';
 export class TablesComponent {
   guest_numbers: any;
   Tables!: any;
+  TableNo!: any;
   status: any;
   tableForm!: FormGroup;
   idtable!: number;
   selectedtable: any = {};
   updatetableForm!: FormGroup;
- 
+  tabless!: any[];
+  pageSize = 8;
+  pageNumber = 1;
+  totalItems = 0;
+  
+//   totalLength:any;
+//   p:number=1;
+//  itemsPerPage:number= 7
   // ngOnInit():void{
 
   // }
@@ -32,13 +41,15 @@ export class TablesComponent {
 
   constructor(
     private fb: FormBuilder,
-    private tableService: TablesService // private getCatService: GetDataService,
+    private tableService: TablesService, // private getCatService: GetDataService,
+    private router: Router
   ) {}
    
 
   ngOnInit() {
     //call the all table
     this.getAllTable();
+    // this.getAllTABLE();
     // to add  tableForm
     this.tableForm = this.fb.group({
       TableNo: ['', [Validators.required]],
@@ -115,15 +126,20 @@ export class TablesComponent {
 
   //GET ALL TABLES
   getAllTable() {
+    
     this.tableService.getTable().subscribe({
       next: (res: any) => {
         (this.Tables = res.data), console.log(res);
+        this.TableNo = res.data;
+        // this.totalLength=res.data.length;
+
       },
       error: (err: any) => {
         console.log(err);
       },
      
     });
+   
   }
 
   //GET THE ID OF THE OBJECT
@@ -133,16 +149,12 @@ export class TablesComponent {
     this.tableService.getOldTable(idtable).subscribe((Response: any) => {
       this.selectedtable = Response.data;
       console.log(this.selectedtable.number);
-      //set the image of the old category to  {this.imageUrl} to display it in modal
-      //set the name of the old category to the input field value {name_updated}
       TableNo_updated.value = this.selectedtable.number;
       guest_numbers_updated.value = this.selectedtable.guest_numbers;
     });
 
-    //store the idCategory in {this.idCategory} to pass it to the modal
     this.idtable = idtable;
 
-    //Select the input field name_updated
     let TableNo_updated = document.getElementById(
       'TableNo_updated'
     ) as HTMLInputElement;
@@ -157,16 +169,7 @@ export class TablesComponent {
     this.tableService.getOldTable(idtable).subscribe((Response: any) => {
       this.selectedtable = Response.data;
       console.log(this.selectedtable.TableNo);
-      //  this.tableService.getTable().subscribe({
-      //   next: (res: any) => {
-      //     (this.Tables = res.data), console.log(res);
-      //   },
-      //   error: (err: any) => {
-      //     console.log(err);
-      //   },
-       
-      // });
-      
+    
     });
    
     const updatetable2 = {
@@ -196,4 +199,30 @@ export class TablesComponent {
       .change_status(id_Product)
       .subscribe((Response) => console.log(Response));
   }
+  getAllTABLE() {
+    this.tableService.getTablePagination(this.pageNumber).subscribe(
+      (response: any) => {
+        this.tabless = response.data;
+        this.totalItems = response.total;
+        this.pageSize = response.per_page;
+        console.log(this.totalItems);
+
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
+     }
+    // onPageChange(event: any) {
+      
+    //   console.log(event);
+  
+    //   this.pageNumber = event;
+      
+    //   this.getAllTABLE();
+    // }
+ 
+
 }

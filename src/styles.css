@@ -61,9 +61,7 @@ body {
 .input_container label {
   width: 190px;
   font-size: 20px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-family: 'Domine', serif;
-  /* font-family: 'Sawarabi Gothic', sans-serif; */
 }
 
 .error_form {

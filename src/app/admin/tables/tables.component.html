@@ -4,6 +4,9 @@
 <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0"> -->
+<!-- <app-admin-navbar></app-admin-navbar> -->
+
+<!-- HTML template -->
 <div class="container good p-60">
   <h2 class="form_title">Tables</h2>
   <hr />
@@ -187,7 +190,6 @@
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
-        
         ></button>
       </div>
       <form [formGroup]="updatetableForm" (ngSubmit)="updatetable(idtable)">
@@ -292,13 +294,18 @@
             Update Table
           </button>
         </div>
+        
+      
       </form>
+
+      <!-- <ngb-pagination
+      [collectionSize]="totalItems"
+      [pageSize]="pageSize"
+      [(page)]="pageNumber"
+      (pageChange)="onPageChange($event)"
+    ></ngb-pagination> -->
     </div>
   </div>
 </div>
 <!-- </div> -->
-
-
-<!-- <button class="btn btn-danger mx-3" (click)="updatecounter()">-</button>
-<span>{{counter}}</span>
-<button class="btn btn-danger mx-3" (click)="decrascounter()">+</button> -->
+<!-- <pagination-controls  class="text-center my-pagination"(pageChange)="p = $event"></pagination-controls> -->

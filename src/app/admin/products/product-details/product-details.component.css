@@ -1,3 +1,155 @@
-.card img {
-  height: 300px;
+:root {
+  --background-color-card: #3d414a;
+  --background-item: #3d414a;
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
+.item_product {
+  background-color: #1d2026;
+  color: white;
+  border-radius: 0;
+  margin-bottom: 50px;
+  position: relative;
+  /* box-shadow: 0 0 2px #9d9c9c; */
+}
+
+.item_product img {
+  height: 200px;
+  border-radius: 0;
+}
+
+.btn_cart {
+  position: absolute;
+  width: 40%;
+  padding: 10px;
+  right: 30%;
+  left: 30%;
+  bottom: -25px;
+  text-transform: uppercase;
+  background-color: var(--background-color-of-sections);
+  color: white;
+  text-decoration: none;
+  /* box-shadow: 0 0 2px #9d9c9c; */
+  cursor: pointer;
+  transition: all 0.3s linear;
+  font-family: 'Dosis', sans-serif;
+}
+
+.btn_cart:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+
+.item_product_name {
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  font-size: 60px;
+  /* margin-bottom: 20px; */
+  text-transform: capitalize;
+  font-family: 'Tangerine', cursive;
+}
+
+.card_price {
+  font-family: 'Rokkitt', serif;
+  /* padding: 5px 20px; */
+  /* margin: auto 0; */
+  /* background-color: var(--special-button-color); */
+  /* position: absolute;
+  top: 0;
+  right: 0; */
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--special-button-color);
+  transition: all 0.2s ease-in-out;
+  font-size: 30px;
+  /* font-family: 'Tangerine', cursive; */
+}
+.sale_item {
+  padding: 5px 20px;
+  margin: auto 0;
+  background-color: var(--special-button-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: var(--background-color-of-sections);
+  transition: all 0.2s ease-in-out;
+  font-size: 20px;
+}
+
+.sale_item span {
+  font-size: 15px;
+  font-weight: 700;
+  background-color: var(--background-color-of-sections);
+  color: var(--special-text-color);
+  padding: 5px;
+  border-radius: 50%;
+  margin-left: 10px;
+  transition: all 0.2s ease-in-out;
+  width: 20px;
+  height: 20px;
+}
+
+.sale_item:hover {
+  background-color: var(--background-color-of-sections);
+  color: var(--special-text-color);
+}
+
+.sale_item:hover span {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+/* .item_product_publisher,
+.item_product_title {
+  font-size: 13px;
+} */
+
+.item_product_title_top {
+  font-size: 20px;
+  font-family: 'Domine', serif;
+  font-family: 'Rokkitt', serif;
+}
+.item_product_title_bottom {
+  font-size: 16px;
+  text-align: justify;
+  font-family: 'Rokkitt', serif;
+}
+
+.list__Ingredients li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background-color: var(--main-color);
+  background-color: #2b2b33;
+  padding: 7px 10px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+
+.list__Ingredients li span {
+  font-family: 'Rokkitt', serif;
+  font-weight: 600;
+  background-color: #00dc94;
+  color: var(--background-color-of-body);
+  padding: 0px 10px;
+  border-radius: 10px;
+}
+
+.list__Ingredients .list__Ingredients__price {
+  background-color: transparent !important;
+  color: white !important;
+  border: 1px solid #00dc94;
+}
+
+.btn_extra_form {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
