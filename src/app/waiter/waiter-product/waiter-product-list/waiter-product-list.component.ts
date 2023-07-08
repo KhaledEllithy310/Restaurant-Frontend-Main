@@ -21,6 +21,7 @@ export class WaiterProductListComponent {
   pageNumber = 1;
   totalItems = 0;
   totalPrice: number = 0;
+  selectedCategory: any = null;
 
   constructor(
     private cartservice: CartService,
@@ -60,7 +61,7 @@ export class WaiterProductListComponent {
           this.products = response.data.data;
           this.totalItems = response.data.total;
           this.pageSize = response.data.per_page;
-          console.log(this.products);
+          console.log('products available', this.products);
         },
         (err: any) => {
           console.log(err);
@@ -141,6 +142,52 @@ export class WaiterProductListComponent {
     );
   }
 
+  selectCategory(event: any, name: any) {
+    console.log(event.target.value);
+    let element = event.target;
+    let Category_Id = event.target.value;
+    // Remove "active" class from previously selected category
+    if (this.selectedCategory !== null) {
+      this.selectedCategory.classList.remove('active');
+    }
+    // Add "active" class to newly selected category
+    element.classList.add('active');
+    // Update selectedCategory variable
+    this.selectedCategory = element;
+    console.log(`Selected category: ${name}`);
+
+    //Request to server
+    if (Category_Id !== 0) {
+      this.productsService
+        .getProductByCategoryPagination(Category_Id, this.pageNumber)
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            this.products = res.data.data;
+            this.totalItems = res.data.total;
+            this.pageSize = res.data.per_page;
+            console.log(`products ${name} available`, this.products);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } else {
+      this.productsService
+        .getAvailableProductPagination(this.pageNumber)
+        .subscribe(
+          (response: any) => {
+            this.products = response.data.data;
+            this.totalItems = response.data.total;
+            this.pageSize = response.data.per_page;
+            console.log('All products available', this.products);
+          },
+          (err: any) => {
+            console.log(err);
+          }
+        );
+    }
+  }
   // totalPriceAllProductsCart() {
   //   // this.updateCartData();
   //   this.cartservice.getAllCart().subscribe((res: any) => {

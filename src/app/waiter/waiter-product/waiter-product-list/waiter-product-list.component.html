@@ -1,10 +1,19 @@
 <h1 class="py-3 our_menu">our menu</h1>
 <div class="row nowrap">
-  <div class="col-2">
+  <!-- <div class="col-2"> -->
     <div class="category_filter">
-      <li *ngFor="let category of categories">{{category.name}}</li>
+      <li class="" value="" (click)="selectCategory($event, '')">
+        All Dishes
+      </li>
+      <li
+        *ngFor="let category of categories"
+        (click)="selectCategory($event, '{{category.name}}')"
+        value="{{ category.id }}"
+      >
+        {{ category.name }}
+      </li>
     </div>
-  </div>
+  <!-- </div> -->
 
   <div class="col">
     <div class="row">

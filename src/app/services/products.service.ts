@@ -91,6 +91,10 @@ export class ProductsService {
     return this.http.get(`http://127.0.0.1:8000/api/products/`);
   }
 
+  getProductByCategoryPagination(id: any,pageNumber: number) {
+    return this.http.get(`http://127.0.0.1:8000/api/products/category/` + id);
+  }
+
   getProductById(id: any) {
     return this.http.get(`http://127.0.0.1:8000/api/products/` + id);
   }
@@ -105,6 +109,7 @@ export class ProductsService {
       data
     );
   }
+
   CreateProduct(data: any) {
     return this.http.post(`http://127.0.0.1:8000/api/products`, data);
   }
