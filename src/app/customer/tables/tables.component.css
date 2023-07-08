@@ -1,0 +1,54 @@
+:root {
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
+}
+
+.tables_waiter {
+  color: white;
+}
+
+.tables_waiter_available_container {
+  flex: 1;
+  text-align: center;
+}
+.tables_waiter_available {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  align-items: center;
+  margin: 10px;
+}
+
+.table_container {
+  text-align: center;
+  border: 1px solid var(--background-color-of-sections);
+  padding: 20px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: var(--background-color-of-sections);
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 2px;
+  font-size: 25px;
+  font-family: 'Rokkitt', serif;
+}
+
+.table_container:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+
+.tables_waiter_orders {
+  /* opacity: 1; */
+  transition: all 0.5s ease-in-out;
+}
+
+.title_table {
+  color: var(--special-text-color);
+  text-align: center;
+  padding: 40px;
+  font-family: 'Rokkitt', serif;
+}
