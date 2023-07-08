@@ -21,4 +21,9 @@ export class OrderService {
   {
     return this.http.post(`${this.URl}orders/served/${id}`,[])
   }
+
+  makeOrderPaid(id:number)
+  {
+    return this.http.post(`${this.URl}orders/paid/${id}`,[])
+  }
 }

@@ -72,7 +72,11 @@ export class TablesWaiterComponent {
   {
     this.orderService.makeOrderServerd(this.orderId).subscribe((respone:any)=>{
       this.ordersTable=[]
-      Swal
+      Swal.fire({
+        title: 'Make Reservation',
+        text: respone.message,
+        icon: 'success'
+      });
     })
   }
 

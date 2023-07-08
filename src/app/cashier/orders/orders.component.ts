@@ -12,6 +12,7 @@ export class OrdersComponent {
   TableNumber: any;
   showOrders: boolean = false;
   ordersTable: any[] = [];
+  orderId!:number;
   @ViewChild('tablesWaiterOrders', { static: false })
   tablesWaiterOrders!: ElementRef;
 
@@ -59,17 +60,6 @@ export class OrdersComponent {
       (response: any) => {
 
         console.log(response.data[0].products);
-        // console.log(response.data[0].products);
-        // for (let i = 0; i < response.data[0].products.length; i++) {
-        //   for (let j = 0; j < response.data[0].order_products.length; j++) {
-        //     orderTableObject = {
-        //       name: response.data[0].products[i].name,
-        //       image: response.data[0].products[i].image,
-        //       quantity: response.data[0].order_products[j].quantity,
-        //       totalPrice: response.data[0].order_products[j].total_price,
-        //     };
-        //   }
-        // }
         this.ordersTable = response.data[0].products;
         console.log('ordersTable:', this.ordersTable);
       },
@@ -77,6 +67,13 @@ export class OrdersComponent {
         console.log(err);
       }
     );
+  }
+
+  makeOrderPaid()
+  {
+    this.orderService.makeOrderPaid(this.orderId).subscribe((respone:any)=>{
+
+    })
   }
 
   closeOrderTable() {
