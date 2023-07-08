@@ -30,6 +30,10 @@ export class KitchenComponent {
       }
     });
   }
+  //     setTimeout(() => {
+  //   this.ngOnInit();
+  // }, 10000);
+
 
   getQuantity(productId: number, orderProducts: any[]) {
     const product = orderProducts.find(p => p.product_id === productId);
@@ -61,6 +65,12 @@ export class KitchenComponent {
         this.completedSuccess = res;
         console.log(res);
         Swal.fire('Completed Product!','', 'success');
+        
+        // const overlay = document.querySelector('.overlay');
+        // overlay?.classList.add('show');
+        // const message = document.createElement('h3');
+        // message.innerText = 'Completed';
+        // overlay?.appendChild(message);
         const order = this.orders.find((o: any) => o.id === orderID);
         const orderProduct = order.order_products.find((op: any) => op.id === orderProductID);
         if (orderProduct) {
@@ -74,12 +84,14 @@ export class KitchenComponent {
       }
     })
   }
+
   canceledOrder(orderID: any, orderProductID: any) {
     this.kitchen.canceled(orderID, orderProductID).subscribe({
       next: (res: any) => {
         this.canceledSuccess = res;
         console.log(res);
         Swal.fire('Canceled Product!', '','error');
+
         const order = this.orders.find((o: any) => o.id === orderID);
         const orderProduct = order.order_products.find((op: any) => op.id === orderProductID);
         if (orderProduct) {

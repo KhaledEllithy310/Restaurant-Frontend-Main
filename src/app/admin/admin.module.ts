@@ -17,14 +17,13 @@ import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
-import { KitchenComponent } from './kitchen/kitchen.component';
+import { KitchenComponent } from '../kitchen/kitchen.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ProductsModule } from './products/products.module';
+import { ProfileComponent } from '../shared/profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
-import { kitchenGuard } from '../guard/kitchen.guard';
 import { adminGuard } from '../guard/admin.guard';
 import { guestGuard } from '../guard/guest.guard';
+import { ProductsModule } from './products/products.module';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -63,12 +62,13 @@ const routes: Routes = [
       { path: 'ingridents/edit/:id', component: EditIngridentsComponent,
         // canActivate: [adminGuard]
       },
-      { path: 'kitchen', component: KitchenComponent,
-        // canActivate: [kitchenGuard]
+      { path: 'tables', component: TablesComponent },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/products.module').then((m) => m.ProductsModule),
       },
-      { path: 'reservation', component: ReservationComponent },
-      { path: 'profile', component: ProfileComponent },
-    ],
+      { path: 'reservation', component: ReservationComponent }    ],
   },
 ];
 
@@ -95,7 +95,6 @@ const routes: Routes = [
     CommonModule,
     NgbModule,
     ProductsModule,
-    NgbModule
   ],
   providers: [],
   exports: [AdminComponent],

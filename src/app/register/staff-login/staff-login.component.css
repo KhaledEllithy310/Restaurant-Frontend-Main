@@ -1,3 +1,11 @@
+section.bg-image {
+    height: 100vh;
+  }
+.gradient-custom-3 {
+    background: linear-gradient(to right, rgb(0 0 0 / 62%), rgb(0 0 0 / 50%));
+    height: 100%;
+}
+
 .register-btn {
     border: 0;
     width: 100%;

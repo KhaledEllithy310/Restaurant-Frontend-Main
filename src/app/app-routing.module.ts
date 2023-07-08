@@ -4,6 +4,10 @@ import { HomeComponent } from './home/home.component';
 import { authGuard } from './guard/auth.guard';
 import { adminGuard } from './guard/admin.guard';
 import { guestGuard } from './guard/guest.guard';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { customerGuard } from './guard/customer.guard';
+import { ProfileComponent } from './shared/profile/profile.component';
+import { KitchenComponent } from './kitchen/kitchen.component';
 const routes: Routes = [
   {
     path: '',
@@ -29,19 +33,30 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
-      // canActivate: [authGuard,adminGuard]
+      // canActivate: [authGuard, adminGuard]
   },
   {
     path:'customer',
     loadChildren:()=>
     import('./customer/customer.module').then((m)=>m.CustomerModule),
-          // canActivate: [authGuard,adminGuard]
+          // canActivate: [customerGuard]
 
-  },{
-  path:'cashier',
-  loadChildren:() =>
-  import('./cashier/cashier.module').then((m)=>m.CashierModule)
-  }
+  },
+  {
+    path:'cashier',
+    loadChildren:() =>
+    import('./cashier/cashier.module').then((m)=>m.CashierModule)
+  },  
+  {
+    path:'profile', component: ProfileComponent
+  },
+  { path: 'kitchen', component: KitchenComponent,
+    // canActivate: [kitchenGuard]
+  },
+  {
+    path: '**',
+    component: NotfoundComponent,
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -20,8 +20,10 @@ export class RegisterService {
     return this.http.post(`http://127.0.0.1:8000/api/auth/user/login`, body, headers)
   }
   
-  logout() {
-    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
-    return this.http.post(`http://127.0.0.1:8000/api/auth/customer/logout`, {}, httpOptions)
+  logoutCustomer() {
+    return this.http.post(`http://127.0.0.1:8000/api/auth/customer/logout`, {});
+  }
+  logoutStaff() {
+    return this.http.post(`http://127.0.0.1:8000/api/auth/user/logout`, {});
   }
 }

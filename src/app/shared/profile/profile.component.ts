@@ -26,7 +26,15 @@ export class ProfileComponent {
   }
   
     ngOnInit() {
-      this.profileService.getProfileData().subscribe((res: any) => this.olduser = res.data);
+      this.profileService.getProfileData().subscribe({
+      next:  (res: any) => {
+        console.log(res)
+        this.olduser = res.data
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    })
     }
 
 
@@ -57,7 +65,6 @@ export class ProfileComponent {
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data'
     });
-    console.log(this.olduser.id);
     this.profileService.updateProfileData(this.olduser.id, formData, headers).subscribe(
       {
       next: (res: any) => {
