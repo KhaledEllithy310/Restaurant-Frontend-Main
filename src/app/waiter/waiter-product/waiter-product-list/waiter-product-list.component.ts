@@ -217,12 +217,17 @@ export class WaiterProductListComponent {
           productCart[i].total_price * productCart[i].quantity;
       }
       // this.totalPrice = totalPriceAllProductsCart;
-      this.cartservice.setTotalPrice(totalPriceAllProductsCart);
+      console.log('before', totalPriceAllProductsCart.toFixed(2));
+
+      this.cartservice.setTotalPrice(
+        ((totalPriceAllProductsCart / 100) * 100).toFixed(2)
+      );
+
       this.cartservice.getTotalPrice().subscribe((res: any) => {
         this.totalPrice = res;
       });
-      console.log(this.totalPrice);
-      console.log('this.totalPrice', this.totalPrice);
+      // console.log(this.totalPrice);
+      // console.log('this.totalPrice', this.totalPrice);
     });
   }
 

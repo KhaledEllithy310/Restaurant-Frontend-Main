@@ -9,6 +9,7 @@ import {
 import Swal from 'sweetalert2';
 import { TablesService } from 'src/app/services/tables.service';
 import { OrderService } from './../../services/order.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-waiter-cart',
@@ -27,7 +28,8 @@ export class WaiterCartComponent {
     private cartservice: CartService,
     private offcanvasService: NgbOffcanvas,
     private tableService: TablesService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private reservationService: ReservationService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -43,6 +45,7 @@ export class WaiterCartComponent {
     }
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
   }
+
   //*End offcanvas ng-bootstrap*//
 
   ngOnInit(): void {
@@ -50,6 +53,7 @@ export class WaiterCartComponent {
     this.getAllCart();
     this.totalPriceAllProductsCart();
     this.getAllTable();
+
     // console.log(this.CartProducts);
   }
 
@@ -216,12 +220,17 @@ export class WaiterCartComponent {
           productCart[i].total_price * productCart[i].quantity;
       }
       // this.totalPrice = totalPriceAllProductsCart;
-      this.cartservice.setTotalPrice(totalPriceAllProductsCart.toFixed(2));
+      console.log('before', totalPriceAllProductsCart.toFixed(2));
+
+      this.cartservice.setTotalPrice(
+        ((totalPriceAllProductsCart / 100) * 100).toFixed(2)
+      );
+
       this.cartservice.getTotalPrice().subscribe((res: any) => {
         this.totalPrice = res;
       });
-      console.log(this.totalPrice);
-      console.log('this.totalPrice', this.totalPrice);
+      // console.log(this.totalPrice);
+      // console.log('this.totalPrice', this.totalPrice);
     });
   }
 
@@ -289,8 +298,12 @@ export class WaiterCartComponent {
 
   getTableId(event: any) {
     console.log(event.target.value);
-    this.TableId = event.target.value;
+    this.TableId = +event.target.value;
+    console.log('TableId', this.TableId);
+
+    this.getReservationByTableInDay(this.TableId);
   }
+
   //function to get the newest data from the server
   updateCartData() {
     this.cartservice.getAllCart().subscribe(
@@ -305,6 +318,17 @@ export class WaiterCartComponent {
         this.cartservice.cartContainer.next(Response.data[0]);
       },
       (err: any) => console.log(err)
+    );
+  }
+
+  getReservationByTableInDay(TableId: any) {
+    this.reservationService.getReservationByTableInDay(TableId).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
     );
   }
 }
