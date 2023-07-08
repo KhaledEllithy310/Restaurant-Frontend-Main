@@ -16,3 +16,44 @@
   text-align: left;
   font-family: 'Domine', serif;
 }
+
+.category_filter {
+  /* background-color: #deac80; */
+  /* height: 90vh; */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  width: 150px;
+  flex: 0 0 150px;
+}
+
+.category_filter li {
+  list-style: none;
+  padding: 15px 10px;
+  cursor: pointer;
+  background-color: var(--background-color-of-sections);
+  margin: 10px 0;
+  color: white;
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 2px;
+  transition: all 0.1s linear;
+  font-size: 20px;
+  font-family: 'Rokkitt', serif;
+  text-transform: capitalize;
+}
+
+.category_filter li:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+
+.category_filter li:active {
+}
+
+.category_filter .active {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+}
+
+.category_filter {
+}

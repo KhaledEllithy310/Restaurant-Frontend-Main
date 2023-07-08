@@ -1,5 +1,6 @@
 .gradient-custom-3 {
-    background: linear-gradient(to right, rgb(34 47 39 / 50%), rgb(96 100 101 / 50%));
+    background: linear-gradient(to right, rgb(0 0 0 / 62%), rgb(0 0 0 / 50%));
+    
     /* fallback for old browsers */
     /* background: #84fab0; */
     
@@ -30,6 +31,14 @@
     transition: 0.5s;
 }
 .card {
-    box-shadow: 0 0 10px 0px #87f1c1bf;
-    background: rgb(255 255 255 / 80%);
+    box-shadow: 0 0 10px 0px #b9ffdc38;
+    background: rgb(0 0 0 / 60%);
+    color: #eee;
+}
+.text-muted {
+    --bs-text-opacity: 1;
+    color: rgb(248 248 248 / 75%) !important;
+}
+.text-gray {
+    color: #eee !important;
 }

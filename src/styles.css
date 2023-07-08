@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import '~@fortawesome/fontawesome-free/css/all.css'; */
+@import '~@sweetalert2/theme-dark/dark.css';
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500&family=Oswald:wght@200;300;400;500;600;700&family=Rancho&family=Rokkitt:wght@400;500;600;700&family=Tangerine:wght@400;700&family=Ysabeau:wght@300;400;500;700;800&display=swap');
 /* body {
     font-family: 'Oswald', sans-serif;
@@ -529,6 +530,7 @@ tr:hover {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--main-color);
   background-color: #2b2b33;
   padding: 7px 10px;

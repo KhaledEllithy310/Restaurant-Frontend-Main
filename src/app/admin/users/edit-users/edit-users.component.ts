@@ -16,14 +16,13 @@ export class EditUsersComponent {
   errors: any = [];
   success!: string;
   editUserForm!: FormGroup;
-  olduser!: User;
+  olduser: any = [];
   image!: File;
   id: any;
   
   constructor(private userService: UsersService, private fb: FormBuilder, private route: ActivatedRoute){
     this.editUserForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]], 
-      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/)]],
       role: ['', [Validators.required]],
       email: [null, [Validators.required, Validators.email]], 
       phone: [null, [Validators.required, Validators.pattern(/^(010|011|012)\d{8}$/)]] 
@@ -51,7 +50,6 @@ export class EditUsersComponent {
     const formData = new FormData();
     // formData['image'] =  this.image;
     formData.append('name', this.editUserForm.get('name')?.value);
-    formData.append('password', this.editUserForm.get('password')?.value);
     formData.append('role', this.editUserForm.get('role')?.value);
     formData.append('email', this.editUserForm.get('email')?.value);
     formData.append('phone', this.editUserForm.get('phone')?.value);

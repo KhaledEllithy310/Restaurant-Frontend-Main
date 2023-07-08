@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
 import {
   FormGroup,
   FormControl,
@@ -7,6 +9,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { TablesService } from 'src/app/services/tables.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -14,34 +17,61 @@ import { TablesService } from 'src/app/services/tables.service';
 })
 export class TablesComponent {
   guest_numbers: any;
+  Tables!: any;
   TableNo!: any;
   status: any;
   tableForm!: FormGroup;
   idtable!: number;
   selectedtable: any = {};
   updatetableForm!: FormGroup;
+  tabless!: any[];
+  pageSize = 8;
+  pageNumber = 1;
+  totalItems = 0;
+  
+//   totalLength:any;
+//   p:number=1;
+//  itemsPerPage:number= 7
+  // ngOnInit():void{
+
+  // }
 
   // @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
   @ViewChild('addTables', { static: false }) addTables!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
-    private tableService: TablesService // private getCatService: GetDataService,
+    private tableService: TablesService, // private getCatService: GetDataService,
+    private router: Router
   ) {}
+   
 
   ngOnInit() {
     //call the all table
     this.getAllTable();
+    // this.getAllTABLE();
     // to add  tableForm
     this.tableForm = this.fb.group({
       TableNo: ['', [Validators.required]],
       guest_numbers: ['', [Validators.required]],
       status: [true],
     });
+
     this.updatetableForm = this.fb.group({
       TableNo_updated: ['', [Validators.required]],
+      guest_numbers_updated: ['', [Validators.required]],
+      status_updated: ['', [Validators.required]],
     });
+    
+  
+
   }
+ 
+    // loadData() {
+    //   this.tableService.getData().subscribe((data) => {
+    //     this.table = data;
+    //   });
+    // }
   get guest_numbers_Control() {
     return this.tableForm.controls['guest_numbers'];
   }
@@ -52,7 +82,16 @@ export class TablesComponent {
     return this.tableForm.controls['status'];
   }
 
+  get guest_numbers_updated_Control() {
+    return this.updatetableForm.controls['guest_numbers_updated'];
+  }
+  get TableNo_updated_Control() {
+    return this.updatetableForm.controls['TableNo_updated'];
+  }
+  get status_updated_Control() {
+    return this.updatetableForm.controls['status_updated'];
 
+  }
 
   createTable() {
     const newTable = new FormData();
@@ -65,7 +104,16 @@ export class TablesComponent {
     this.tableService.addTables(newTable).subscribe(
       (response) => {
         console.log(response);
-      },
+            this.tableService.getTable().subscribe({
+              next: (res: any) => {
+                (this.Tables = res.data), console.log(res);
+              },
+              error: (err: any) => {
+                console.log(err);
+              },
+             
+            });
+          ;},
       (error) => {
         console.log(error);
         // Handle error response
@@ -76,64 +124,42 @@ export class TablesComponent {
     console.log(this.tableForm.value);
   }
 
-  //GET ALL CATEGORIES
+  //GET ALL TABLES
   getAllTable() {
+    
     this.tableService.getTable().subscribe({
       next: (res: any) => {
+        (this.Tables = res.data), console.log(res);
         this.TableNo = res.data;
+        // this.totalLength=res.data.length;
+
       },
       error: (err: any) => {
         console.log(err);
       },
-      // (response: any) => {
-      //   this.TableNo = response.data;
-      //   console.log(response);
-      // },
-      // (error) => {
-      //   console.log(error);
-      //   // Handle error response
-      // }
+     
     });
+   
   }
-
-  // createTable(data: any) {
-  //   this.addService.createCategory(data).subscribe((res) => console.log(res));
-  //   this.getAllCategory();
-  //   window.location.reload();
-  // }
-
-  // deleteTable(index: any) {
-  //   let tables = document.getElementById(`cate${index}`);
-  //   tables?.remove();
-  //   let idtable = this.TableNo[index].id;
-  //   this.tableService.Deletetable(idtable).subscribe(
-  //     (response: any) => {
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
 
   //GET THE ID OF THE OBJECT
   getIdtable(idtable: any) {
-    // this.idCategory = idCategory;
     //Call The Old Category
+    console.log(idtable);
     this.tableService.getOldTable(idtable).subscribe((Response: any) => {
       this.selectedtable = Response.data;
-      console.log(this.selectedtable.TableNo);
-      //set the image of the old category to  {this.imageUrl} to display it in modal
-      //set the name of the old category to the input field value {name_updated}
-      TableNo_updated.value = this.selectedtable.TableNo;
+      console.log(this.selectedtable.number);
+      TableNo_updated.value = this.selectedtable.number;
+      guest_numbers_updated.value = this.selectedtable.guest_numbers;
     });
 
-    //store the idCategory in {this.idCategory} to pass it to the modal
     this.idtable = idtable;
 
-    //Select the input field name_updated
     let TableNo_updated = document.getElementById(
       'TableNo_updated'
+    ) as HTMLInputElement;
+    let guest_numbers_updated = document.getElementById(
+      'guest_numbers_updated'
     ) as HTMLInputElement;
 
     console.log(TableNo_updated.value);
@@ -143,14 +169,20 @@ export class TablesComponent {
     this.tableService.getOldTable(idtable).subscribe((Response: any) => {
       this.selectedtable = Response.data;
       console.log(this.selectedtable.TableNo);
+    
     });
-    const updatetable = new FormData();
-    updatetable.set(
-      'TableNo_updated',
-      this.updatetableForm.value.TableNo_updated || this.selectedtable.TableNo
-    );
-    console.log(updatetable.get('TableNo_updated'));
-    this.tableService.UpdateTable(updatetable, idtable).subscribe(
+   
+    const updatetable2 = {
+      number:
+        this.updatetableForm.value.TableNo_updated || this.selectedtable.number,
+      guest_numbers:
+        this.updatetableForm.value.guest_numbers_updated ||
+        this.selectedtable.guest_numbers,
+      status:
+        this.updatetableForm.value.status_updated || this.selectedtable.status,
+    };
+
+    this.tableService.UpdateTable(updatetable2, idtable).subscribe(
       (response) => {
         console.log(response);
       },
@@ -158,52 +190,39 @@ export class TablesComponent {
         console.log(error);
       }
     );
-    console.log(updatetable.get('TableNo'));
-    this.tableService.UpdateTable(updatetable, idtable).subscribe(
-      (response) => {
+  }
+
+  change_status(id_Product: any) {
+    console.log(id_Product);
+
+    this.tableService
+      .change_status(id_Product)
+      .subscribe((Response) => console.log(Response));
+  }
+  getAllTABLE() {
+    this.tableService.getTablePagination(this.pageNumber).subscribe(
+      (response: any) => {
+        this.tabless = response.data;
+        this.totalItems = response.total;
+        this.pageSize = response.per_page;
+        console.log(this.totalItems);
+
         console.log(response);
       },
       (error) => {
         console.log(error);
+        // Handle error response
       }
     );
-    window.location.reload();
-    //   .updateCategory(idCategory, data)
-    //   .subscribe((res) => console.log(res));
-    // window.location.reload();
-  }
+     }
+    // onPageChange(event: any) {
+      
+    //   console.log(event);
+  
+    //   this.pageNumber = event;
+      
+    //   this.getAllTABLE();
+    // }
+ 
 
-  //CREATE Table
-
-  createTable1() {
-    // const formData = new FormData();
-    // formData.set('TableNo', this.TableNo);
-    // formData.set('guest_numbers', this.guest_numbers);
-    // formData.set('status', this.status);
-    // console.log(formData.get('TableNo'));
-    // console.log(formData.get('guest_numbers'));
-    // console.log(formData.get('status'));
-    // this.addService.createBook(formData).subscribe((res) => console.log(res));
-    // this.getAllBook();
-    // console.log(data);
-    // window.location.reload();
-  }
-
-  //Update Category
-  name_updated: any;
-  image_updated: any;
-
-  updateTable() {
-    // const image_updated = this.updatefileInput.nativeElement.files[0];
-    // console.log('image_updated', image_updated);
-    // const formData = new FormData();
-    // formData.set('name_updated', this.name_updated);
-    // formData.append('image_updated', image_updated);
-    // console.log(formData.get('name_updated'));
-    // console.log(formData.get('image_updated'));
-    // this.addService.createBook(formData).subscribe((res) => console.log(res));
-    // this.getAllBook();
-    // console.log(data);
-    // window.location.reload();
-  }
 }
