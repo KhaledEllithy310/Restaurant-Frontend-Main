@@ -31,8 +31,8 @@
         <th scope="col" class="">#ID</th>
         <th scope="col" class="">Name</th>
         <th scope="col" class="">image</th>
-        <th scope="col" class="w-25">status</th>
-        <th scope="col" class="">category_id</th>
+        <th scope="col" class="">status</th>
+        <!-- <th scope="col" class="">category_id</th> -->
         <th scope="col" class="">Options</th>
       </tr>
     </thead>
@@ -53,14 +53,15 @@
           <label class="switch">
             <input
               type="checkbox"
-              [checked]="product.status > 0"
-              (click)="change_status(product.id)"
+              [checked]="product.status > 0 && product.closed == 0"
+              (click)="change_status(product)"
+             
             />
             <span class="slider round"></span>
           </label>
         </td>
 
-        <td>{{ product.category_id || "wrong" }}</td>
+        <!-- <td>{{ product.category_id }}</td> -->
         <td class="">
           <a
             class="btn btn-info m-2 edit-btn"

@@ -76,8 +76,11 @@ export class ProductsService {
   }
 
   getProductPagination(pageNumber: number): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>(`${this.URL}?page=${pageNumber}`);
+    return this.http.get<Array<Product>>(
+      `http://127.0.0.1:8000/api/products?page=${pageNumber}`
+    );
   }
+
   getAvailableProductPagination(pageNumber: number) {
     return this.http.get(
       `http://127.0.0.1:8000/api/active/product?page=${pageNumber}`
@@ -85,11 +88,15 @@ export class ProductsService {
   }
 
   getAllProduct() {
-    return this.http.get(`${this.URL}`);
+    return this.http.get(`http://127.0.0.1:8000/api/products/`);
+  }
+
+  getProductByCategoryPagination(id: any,pageNumber: number) {
+    return this.http.get(`http://127.0.0.1:8000/api/products/category/` + id);
   }
 
   getProductById(id: any) {
-    return this.http.get(`${this.URL}/` + id);
+    return this.http.get(`http://127.0.0.1:8000/api/products/` + id);
   }
 
   getIngredients() {
@@ -102,15 +109,20 @@ export class ProductsService {
       data
     );
   }
+
   CreateProduct(data: any) {
-    return this.http.post(`${this.URL}`, data);
+    return this.http.post(`http://127.0.0.1:8000/api/products`, data);
   }
 
   UpdateProduct(idProduct: any, data: any) {
-    return this.http.post(`${this.URL}/` + idProduct, data);
+    return this.http.post(
+      `http://127.0.0.1:8000/api/products/` + idProduct,
+      data
+    );
   }
+
   change_status(id: any) {
-    return this.http.get(`${this.URL}/status/` + id);
+    return this.http.get(`http://127.0.0.1:8000/api/products/status/` + id);
   }
 
   onSearch(searchTerm: any) {
