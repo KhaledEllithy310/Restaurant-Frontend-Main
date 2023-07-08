@@ -27,7 +27,7 @@ export class TablesWaiterComponent {
   }
 
   getAvailableTables() {
-    this.tablesService.getAvailableTable().subscribe(
+    this.tablesService.getActiveTable().subscribe(
       (response: any) => {
         console.log(response);
         this.tables = response.data;
@@ -73,7 +73,7 @@ export class TablesWaiterComponent {
     this.orderService.makeOrderServerd(this.orderId).subscribe((respone:any)=>{
       this.ordersTable=[]
       Swal.fire({
-        title: 'Make Reservation',
+        title: 'Served',
         text: respone.message,
         icon: 'success'
       });

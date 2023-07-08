@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { OrderService } from './../../services/order.service';
 import { TablesService } from 'src/app/services/tables.service';
 import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
@@ -27,7 +28,7 @@ export class OrdersComponent {
   }
 
   getAvailableTables() {
-    this.tablesService.getAvailableTable().subscribe(
+    this.tablesService.getActiveTable().subscribe(
       (response: any) => {
         console.log(response);
         this.tables = response.data;
@@ -56,12 +57,14 @@ export class OrdersComponent {
     let orderTableObject = {};
     this.ordersTable =[];
 
-    this.orderService.getOrderTable(id_table).subscribe(
+    this.orderService.getServedOrderByTableId(id_table).subscribe(
       (response: any) => {
-
+        this.orderId=response.data[0]['id'];
         console.log(response.data[0].products);
         this.ordersTable = response.data[0].products;
         console.log('ordersTable:', this.ordersTable);
+
+
       },
       (err) => {
         console.log(err);
@@ -72,7 +75,11 @@ export class OrdersComponent {
   makeOrderPaid()
   {
     this.orderService.makeOrderPaid(this.orderId).subscribe((respone:any)=>{
-
+      Swal.fire({
+        title: 'Payment',
+        text: respone.message,
+        icon: 'success'
+      });
     })
   }
 

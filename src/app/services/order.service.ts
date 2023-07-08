@@ -14,7 +14,7 @@ export class OrderService {
   }
 
   getOrderTable(id: any) {
-    return this.http.get(`http://127.0.0.1:8000/api/orders/tables/` + id);
+    return this.http.get(`http://127.0.0.1:8000/api/orders/tables/complete/` + id);
   }
 
   makeOrderServerd(id:number)
@@ -25,5 +25,16 @@ export class OrderService {
   makeOrderPaid(id:number)
   {
     return this.http.post(`${this.URl}orders/paid/${id}`,[])
+  }
+
+  getServedOrder(id:number)
+  {
+    return this.http.post(`${this.URl}orders/served/${id}`,[])
+  }
+
+  getServedOrderByTableId(id:number)
+  {
+    return this.http.get(`${this.URl}orders/tables/served/${id}`)
+
   }
 }
