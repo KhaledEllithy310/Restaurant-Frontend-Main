@@ -269,8 +269,8 @@ export class AddProductComponent {
       total_price += +Ingredient.total;
     });
 
-    this.total_price = total_price;
-    return total_price;
+    this.total_price = ((total_price / 100) * 100).toFixed(2);
+    return ((total_price / 100) * 100).toFixed(2);
   }
 
   addIngredientsForProduct() {
@@ -295,15 +295,18 @@ export class AddProductComponent {
     let Ingredient_name = selectedIngredient.name;
 
     //calculate the total price = price * quantity * (1 + Profit)
-    let finalPrice =
-      Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
+    let finalPrice = (
+      ((Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit)) /
+        100) *
+      100
+    ).toFixed(2);
 
     //create new Ingredient to sent it to the server
     const newIngredient = {
       id: this.ingredientsForm.value.Ingredient_id,
       name: Ingredient_name,
       quantity: this.ingredientsForm.value.Ingredient_Quantity,
-      total: finalPrice.toFixed(2),
+      total: finalPrice,
     };
     //check if the ingredients exsit in the IngredientsList or not
     let ingredientsExist = this.IngredientsList.find(
@@ -443,57 +446,4 @@ export class AddProductComponent {
     //disappear the form after submit
     this.showExtraForm = false;
   }
-
-  // addExtraForProduct() {
-  //   this.submitted = true;
-
-  //   let Ingredient_Price = this.ExtraForm.value.ingredientPrice;
-  //   console.log('Ingredient_Price', Ingredient_Price);
-
-  //   let Ingredient_Profit = this.ExtraForm.value.ingredientProfit;
-  //   console.log('Ingredient_Profit', Ingredient_Profit);
-  //   let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
-
-  //   console.log('Ingredient_Quantity', Ingredient_Quantity);
-  //   let finalPrice =
-  //     Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
-  //   let Ingredient_name = this.ingredients.find(
-  //     (elem) => elem.id == this.ExtraForm.value.Ingredient_id
-  //   ).name;
-
-  //   console.log(Ingredient_name);
-
-  //   const newExtra = {
-  //     id: this.ExtraForm.value.Ingredient_id,
-  //     name: Ingredient_name,
-  //     Quantity: this.ExtraForm.value.Ingredient_Quantity,
-  //     Price: finalPrice.toFixed(2),
-  //   };
-  //   console.log(newExtra);
-  //   this.ExtraList.push(newExtra);
-  //   this.isExtraListEmpty = this.ExtraList.length === 0;
-  //   this.showExtraForm = false;
-  // }
-
-  // selectedIngredient(event: any) {
-  //   console.log(event.target.value);
-  //   let ingredientSelected = this.ingredients.find(
-  //     (elem) => elem.id == event.target.value
-  //   );
-  //   console.log(ingredientSelected);
-
-  //   let ingredientPrice = document.getElementById(
-  //     'ingredientPrice'
-  //   ) as HTMLInputElement;
-  //   if (ingredientPrice) {
-  //     ingredientPrice.value = ingredientSelected.price;
-  //   }
-
-  //   let ingredientProfit = document.getElementById(
-  //     'ingredientProfit'
-  //   ) as HTMLInputElement;
-  //   if (ingredientProfit) {
-  //     ingredientProfit.value = ingredientSelected.profit;
-  //   }
-  // }
 }

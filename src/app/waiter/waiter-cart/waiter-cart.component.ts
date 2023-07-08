@@ -45,6 +45,7 @@ export class WaiterCartComponent {
     }
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
   }
+
   //*End offcanvas ng-bootstrap*//
 
   ngOnInit(): void {
@@ -52,8 +53,6 @@ export class WaiterCartComponent {
     this.getAllCart();
     this.totalPriceAllProductsCart();
     this.getAllTable();
-    console.log(((1894.7999999999997/100)*100).toFixed(2));
-    console.log((1894.7999999999997).toFixed(2));
 
     // console.log(this.CartProducts);
   }
