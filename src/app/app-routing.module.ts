@@ -8,6 +8,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { customerGuard } from './guard/customer.guard';
 import { ProfileComponent } from './shared/profile/profile.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
+import { waiterGuard } from './guard/waiter.guard';
+import { cashierGuard } from './guard/cashier.guard';
+import { kitchenGuard } from './guard/kitchen.guard';
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +25,7 @@ const routes: Routes = [
     path: 'Waiter',
     loadChildren: () =>
       import('./waiter/waiter.module').then((m) => m.WaiterModule),
+      canActivate: [authGuard, waiterGuard]
   },
   {
     path: 'register',
@@ -33,25 +37,27 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
-      // canActivate: [authGuard, adminGuard]
+      canActivate: [authGuard, adminGuard]
   },
   {
     path:'customer',
     loadChildren:()=>
     import('./customer/customer.module').then((m)=>m.CustomerModule),
-          // canActivate: [customerGuard]
+          canActivate: [customerGuard]
 
   },
   {
     path:'cashier',
     loadChildren:() =>
-    import('./cashier/cashier.module').then((m)=>m.CashierModule)
+    import('./cashier/cashier.module').then((m)=>m.CashierModule),
+    canActivate: [authGuard, cashierGuard]
   },  
   {
-    path:'profile', component: ProfileComponent
+    path:'profile', component: ProfileComponent,
+    canActivate: [authGuard]
   },
   { path: 'kitchen', component: KitchenComponent,
-    // canActivate: [kitchenGuard]
+    canActivate: [authGuard, kitchenGuard]
   },
   {
     path: '**',

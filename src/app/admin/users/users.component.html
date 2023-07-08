@@ -4,6 +4,9 @@
   <div *ngIf="success">
     <div class="alert alert-danger text-center">{{ success }}</div>
   </div>
+  <div *ngIf="errors === false">
+    <div class="alert alert-danger text-center">{{ errors }}</div>
+  </div>
   <div class="d-flex mb-2">
     <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn"
       >Add User <i class="fas fa-user-plus"></i
@@ -53,4 +56,10 @@
       </tr>
     </tbody>
   </table>
+  <ngb-pagination
+  [collectionSize]="totalItems"
+  [pageSize]="pageSize"
+  [(page)]="pageNumber"
+  (pageChange)="onPageChange($event)"
+></ngb-pagination>
 </div>
