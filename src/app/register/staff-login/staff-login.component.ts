@@ -63,13 +63,15 @@ export class StaffLoginComponent {
             break;
           case 'Waiter':
             console.log('waiter');
+            this.route.navigate(['/Waiter/ProductList']);
             break;
           case 'Cashair':
             console.log('cashair');
+            this.route.navigate(['/cashier/ShowReservations']);
             break;
             case 'Kitchen':
               console.log('kitchen')
-              this.route.navigate(['/admin/dashboard/kitchen']);
+              this.route.navigate(['kitchen']);
               break;
               default:
                 console.log('not staff');

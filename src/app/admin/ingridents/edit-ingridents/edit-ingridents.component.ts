@@ -24,7 +24,7 @@ export class EditIngridentsComponent {
       name: ['', [Validators.required]], 
       price: ['', [Validators.required]],
       profit: ['', [Validators.required, Validators.max(0.99)]],
-      quntity: ['', [Validators.required]], 
+      quntity: ['', [Validators.required], Validators.min(0)], 
     })
   }
 

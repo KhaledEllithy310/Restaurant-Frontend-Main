@@ -15,10 +15,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
+import { NotfoundComponent } from './notfound/notfound.component';
 // import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent, NotfoundComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,

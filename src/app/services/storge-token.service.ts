@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 const USER_KEY = 'token';
@@ -9,11 +10,7 @@ const USER_KEY = 'token';
 })
 export class StorgeTokenService {
 
-  constructor() { }
-
-  clean(): void {
-    sessionStorage.clear();
-  }
+  constructor() {}
 
   public saveUser(user: any): void {
     sessionStorage.removeItem(USER_KEY);
@@ -25,19 +22,18 @@ export class StorgeTokenService {
     if (user) {
       return JSON.parse(user);
     }
-
     return {};
   }
 
   public isLoggedIn(): boolean {
-
     const user = sessionStorage.getItem(USER_KEY);
-    
     if (user) {
       return true;
     }
-
     return false;
   }
 
+  public logout(): void {
+    sessionStorage.clear();
+  }
 }
