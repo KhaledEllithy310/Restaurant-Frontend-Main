@@ -78,6 +78,11 @@ export class ProductsService {
   getProductPagination(pageNumber: number): Observable<Array<Product>> {
     return this.http.get<Array<Product>>(`${this.URL}?page=${pageNumber}`);
   }
+  getAvailableProductPagination(pageNumber: number) {
+    return this.http.get(
+      `http://127.0.0.1:8000/api/active/product?page=${pageNumber}`
+    );
+  }
 
   getAllProduct() {
     return this.http.get(`${this.URL}`);

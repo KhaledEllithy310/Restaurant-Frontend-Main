@@ -296,13 +296,13 @@ export class WaiterCartComponent {
     this.cartservice.getAllCart().subscribe(
       (Response: any) => {
         console.log(Response.data);
-        if (Response.data.length === 0) {
+        if (Response.data[0].length === 0) {
           console.log('The array is empty');
           this.totalPrice = 0;
           return;
         }
-        console.log(Response);
-        this.cartservice.cartContainer.next(Response.data[0].data);
+        console.log(Response.data[0]);
+        this.cartservice.cartContainer.next(Response.data[0]);
       },
       (err: any) => console.log(err)
     );
