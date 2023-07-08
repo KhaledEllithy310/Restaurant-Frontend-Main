@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { CategoryService } from './../../services/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categories',
@@ -27,7 +28,7 @@ export class CategoriesComponent {
   pageNumber = 1;
   totalItems = 0;
   searchForm!: FormGroup;
-
+  openCategory!: boolean;
   // category!: any;
   // nameControl: FormControl;
   @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
@@ -37,9 +38,14 @@ export class CategoriesComponent {
     private getCatService: GetDataService,
     private fb: FormBuilder,
     private categoryService: CategoryService
-  ) {}
+  ) {
+    this.getAllCategory();
+  }
 
   ngOnInit() {
+    // call the all categories
+    // this.getAllCategory();
+
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
@@ -49,8 +55,6 @@ export class CategoriesComponent {
         this.search(term);
       }
     );
-    // call the all categories
-    this.getAllCategory();
     //form group for add categoryForm
     this.categoryForm = this.fb.group({
       name: [
@@ -82,6 +86,7 @@ export class CategoriesComponent {
     this.categoryService.AddCategory(newCategory).subscribe(
       (response) => {
         console.log(response);
+        this.getAllCategory();
         // Handle successful response
       },
       (error) => {
@@ -89,7 +94,7 @@ export class CategoriesComponent {
         // Handle error response
       }
     );
-    window.location.reload();
+    // window.location.reload();
   }
 
   //Get All Categories
@@ -99,7 +104,7 @@ export class CategoriesComponent {
         this.categories = response.data;
         this.totalItems = response.meta.total;
         this.pageSize = response.meta.per_page;
-        console.log(response);
+        console.log('categories:', this.categories);
         // console.log('   this.totalItems', this.totalItems);
         // console.log('   this.pageSize', this.pageSize);
       },
@@ -120,15 +125,42 @@ export class CategoriesComponent {
   }
 
   deleteCategory(index: any) {
-    let category = document.getElementById(`cate${index}`);
-    category?.remove();
+    this.openCategory = false;
+
     let idCategory = this.categories[index].id;
     this.categoryService.DeleteCategory(idCategory).subscribe(
       (response: any) => {
         console.log(response);
+        // let category = document.getElementById(`cate${index}`);
+        // category?.remove();
+        this.getAllCategory();
+        if (
+          response.message ==
+          "Category cannot be deleted, but it's now unavialable"
+        ) {
+          Swal.fire({
+            icon: 'success',
+            title: 'category is unavailable now',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'category deleted successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       },
       (error) => {
         console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: error.error.message,
+          showConfirmButton: false,
+          timer: 1000,
+        });
         // Handle error response
       }
     );
@@ -206,29 +238,31 @@ export class CategoriesComponent {
     console.log(updateCategory.get('image'));
     //Send the Request to the server
     this.categoryService.UpdateCategory(updateCategory, idCategory).subscribe(
-      (response) => {
+      (response: any) => {
         console.log(response);
+        this.getAllCategory();
+        Swal.fire({
+          icon: 'success',
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1000,
+        });
         // Handle successful response
       },
       (error) => {
         console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: error.error.message,
+          showConfirmButton: false,
+          timer: 1000,
+        });
         // Handle error response
       }
     );
-    window.location.reload();
+    // window.location.reload();
   }
 
-  onSearch() {
-    // this.categoryService.onSearch(this.searchTerm).subscribe(
-    //   (Response: any) => {
-    //     this.categories = Response.data;
-    //     console.log(Response);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
-  }
   //search function
   search(term: string) {
     // Perform search using the term
@@ -240,6 +274,33 @@ export class CategoriesComponent {
       (error) => {
         this.categories = error.error.data;
         console.log(error);
+      }
+    );
+  }
+
+  change_status(category_id: any, category_status: any) {
+    // this.openCategory = true;
+    console.log('category_status', category_status);
+
+    const newStatus = {
+      _method: 'put',
+      status: 1,
+    };
+
+    this.categoryService.openStatusCategory(category_id, newStatus).subscribe(
+      (response) => {
+        console.log(response);
+        console.log('category_status', category_status);
+        this.getAllCategory();
+        Swal.fire({
+          icon: 'success',
+          title: 'category is available now',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      (err) => {
+        console.log(err);
       }
     );
   }

@@ -16,3 +16,20 @@
   text-align: left;
   font-family: 'Domine', serif;
 }
+
+.category_filter {
+  background-color: #deac80;
+  height: 90vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+}
+
+.category_filter li {
+  list-style: none;
+  padding: 20px;
+  cursor: pointer;
+  background-color: var(--background-color-of-sections);
+  margin: 10px 0;
+  color: white;
+}

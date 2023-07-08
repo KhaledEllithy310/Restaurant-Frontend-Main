@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import { CategoryService } from 'src/app/services/category.service';
 import { ProductsService } from 'src/app/services/products.service';
 // import { Product } from '../../interfaces';
 import Swal from 'sweetalert2';
@@ -13,6 +14,7 @@ export class WaiterProductListComponent {
   products!: Array<any>;
   CartProducts!: any[];
   cartData: any[] = [];
+  categories!: any[];
 
   selectedProduct: any = null;
   pageSize = 8;
@@ -22,12 +24,32 @@ export class WaiterProductListComponent {
 
   constructor(
     private cartservice: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private categoryService: CategoryService
   ) {}
   ngOnInit() {
     this.getAllProduct();
     this.getAllCart();
     this.totalPriceAllProductsCart();
+    this.getActiveCategory();
+  }
+
+  //Get All Categories
+  getActiveCategory() {
+    this.categoryService.getCategoryPagination(this.pageNumber).subscribe(
+      (response: any) => {
+        this.categories = response.active_categories;
+        this.totalItems = response.meta.total;
+        this.pageSize = response.meta.per_page;
+        console.log('categories:', this.categories);
+        // console.log('   this.totalItems', this.totalItems);
+        // console.log('   this.pageSize', this.pageSize);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
   }
 
   getAllProduct() {

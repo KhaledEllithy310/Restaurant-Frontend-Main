@@ -41,4 +41,10 @@ export class CategoryService {
       `http://127.0.0.1:8000/api/category/show?name=` + searchTerm
     );
   }
+  openStatusCategory(id: any, data: any) {
+    return this.http.post(
+      `http://127.0.0.1:8000/api/category/` + id + `/status`,
+      data
+    );
+  }
 }

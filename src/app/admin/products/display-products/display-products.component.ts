@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-display-products',
   templateUrl: './display-products.component.html',
@@ -69,12 +71,31 @@ export class DisplayProductsComponent {
     this.getAllProducts();
   }
 
-  change_status(id_Product: any) {
-    console.log(id_Product);
+  change_status(product: any) {
+    console.log('id', product.id);
+    console.log('status before:', product.status);
+    console.log('closed before:', product.closed);
+    this.getAllProducts();
 
-    this.productsService
-      .change_status(id_Product)
-      .subscribe((Response) => console.log(Response));
+    if (product.status) {
+      this.productsService.change_status(product.id).subscribe(
+        (Response) => {
+          console.log('status after:', product.status);
+          console.log('closed after:', product.closed);
+          console.log(Response);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: "You Can't Open This Product",
+        showConfirmButton: false,
+        timer: 800,
+      });
+    }
   }
 
   onSearch() {
