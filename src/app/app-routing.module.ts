@@ -34,6 +34,12 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
       // canActivate: [authGuard]
   },
+  {
+    path: 'stripe',
+    loadChildren: () =>
+      import('./stripesystem/stripesystem.module').then((m) => m.StripesystemModule),
+      // canActivate: [authGuard]
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

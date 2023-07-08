@@ -1,0 +1,27 @@
+<div class="py-5 text-center">
+	<h2 class="text-white">Checkout</h2>
+	</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-8 mb-4" *ngIf="$checkout|async as membership">
+				<ul class="list-group mb-3">
+
+					<li class="list-group-item d-flex justify-content-between">
+						<span>Total (EGP)</span>
+						<strong>{{membership.price}}</strong>
+					</li>
+				</ul>
+
+				<form class="card p-2" (ngSubmit)="onSubmit(f)" #f="ngForm">
+					<div class="input-group">
+						<input type="hidden" class="form-control" 	name="priceId" [ngModel]="membership.priceId" #membershipId="ngModel">
+						<button class="btn btn-primary btn-lg btn-block" type="submit">
+							Continue to checkout <i class="fas fa-credit-card"></i></button>
+						<a class="btn btn-success btn-lg btn-block mt-5" [routerLink]="['/memberships']">
+							<i class="fas fa-arrow-left"></i> Cancel</a>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>

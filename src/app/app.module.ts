@@ -14,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
 import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { StripesystemModule } from './stripesystem/stripesystem.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,8 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     WaiterModule,
     RegisterModule,
     AdminModule,
-    HomeModule
+    HomeModule,
+    StripesystemModule
   ],
   providers: [
     { 
