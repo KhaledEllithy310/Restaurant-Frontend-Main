@@ -4,6 +4,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-display-products',
@@ -17,11 +18,13 @@ export class DisplayProductsComponent {
   products!: any[];
   searchTerm: string = '';
   searchForm!: FormGroup;
+  categories!: any[];
 
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) {
     // customize default values of pagination controls
     // config.maxSize = 10;
@@ -29,6 +32,7 @@ export class DisplayProductsComponent {
     // config.boundaryLinks = true;
   }
   ngOnInit() {
+    this.getAllCategory();
     //call the  All Products
     this.getAllProducts();
     //handel the search when the user clear the input search
@@ -42,7 +46,19 @@ export class DisplayProductsComponent {
       }
     );
   }
-
+  //Get All Categories
+  getAllCategory() {
+    this.categoryService.getCategory().subscribe(
+      (response: any) => {
+        this.categories = response.data;
+        console.log('categories:', this.categories);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
+  }
   //Get All Products
   getAllProducts() {
     this.productsService.getProductPagination(this.pageNumber).subscribe(
@@ -73,11 +89,19 @@ export class DisplayProductsComponent {
 
   change_status(product: any) {
     console.log('id', product.id);
-    console.log('status before:', product.status);
+    console.log('status of product before:', product.status);
     console.log('closed before:', product.closed);
-    this.getAllProducts();
+    console.log(this.categories);
 
-    if (product.status) {
+    let selectedCategory = this.categories.filter((category) => {
+      category.id == product.id;
+    });
+    console.log('selectedCategory', selectedCategory);
+
+    this.getAllProducts();
+    console.log('selectedCategory.status', selectedCategory[0].status);
+
+    if (selectedCategory[0].status) {
       this.productsService.change_status(product.id).subscribe(
         (Response) => {
           console.log('status after:', product.status);
