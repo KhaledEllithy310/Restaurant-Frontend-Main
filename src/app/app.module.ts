@@ -9,7 +9,6 @@ import { WaiterModule } from './waiter/waiter.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TextMutedPipe } from './pipes/text-muted.pipe';
 import { RegisterModule } from './register/register.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
@@ -18,6 +17,8 @@ import { HttpInterceptorInterceptor } from './helpers/http.interceptor';
 import { NotfoundComponent } from './notfound/notfound.component';
 // import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
+import { TextMutedPipe } from './pipes/text-muted.pipe';
+// import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AppComponent, NotfoundComponent, ],
   imports: [
@@ -40,6 +41,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
       useClass: HttpInterceptorInterceptor,
       multi: true
     }
+    // NgxPaginationModule
   ],
   bootstrap: [AppComponent],
 })

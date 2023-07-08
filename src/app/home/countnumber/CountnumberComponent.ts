@@ -7,40 +7,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./countnumber.component.css'],
 })
 export class CountnumberComponent implements OnInit {
-  // projectcount:number = 0;
-  // clientcount:number =0;
-  // coffecups:number =0;
-  // sushitypes:number = 0;
-  // projectcountstop:any = setInterval(()=>{
-  //   this.projectcount ++;
-  //   if(this.projectcount ==200)
-  //   {
-  //     clearInterval(this.projectcountstop);
-  //   }
-  // },50)
-
-  // clientcountstop:any = setInterval(()=>{
-  //   this.clientcount ++;
-  //   if(this.clientcount ==180)
-  //   {
-  //     clearInterval(this.clientcountstop);
-  //   }
-  // },50)
-
-  // coffecupsstop:any = setInterval(()=>{
-  //   this.coffecups ++;
-  //   if(this.coffecups==350)
-  //   {
-  //     clearInterval(this.coffecupsstop);
-  //   }
-  // },50)
-  // sushitypesstop:any = setInterval(()=>{
-  //   this.sushitypes ++;
-  //   if(this.sushitypes==20)
-  //   {
-  //     clearInterval(this.sushitypesstop);
-  //   }
-  // },50)
+ 
   @ViewChild('counterRef', { static: true }) counterElement1!: ElementRef;
   @ViewChild('counterRef2', { static: true }) counterElement2!: ElementRef;
   @ViewChild('counterRef3', { static: true }) counterElement3!: ElementRef;
@@ -68,7 +35,7 @@ export class CountnumberComponent implements OnInit {
       if (entries[0].isIntersecting) {
         if (this.counter1$ === null) {
           this.counter1$ = new Observable<number>((observer) => {
-            let count = 0;
+            let count = 100;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_1) {
                 observer.next(count++);
@@ -100,7 +67,7 @@ export class CountnumberComponent implements OnInit {
       if (entries[0].isIntersecting) {
         if (this.counter2$ === null) {
           this.counter2$ = new Observable<number>((observer) => {
-            let count = 0;
+            let count = 100;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_2) {
                 observer.next(count++);
@@ -132,7 +99,7 @@ export class CountnumberComponent implements OnInit {
       if (entries[0].isIntersecting) {
         if (this.counter3$ === null) {
           this.counter3$ = new Observable<number>((observer) => {
-            let count = 0;
+            let count = 250;
             const intervalId = setInterval(() => {
               if (count <= this.MAX_COUNT_3) {
                 observer.next(count++);

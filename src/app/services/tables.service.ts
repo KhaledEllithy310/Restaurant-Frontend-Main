@@ -1,27 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-@Injectable({
+import {BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import{Table} from '../interfaces/table';
+import { Fortables } from '../interfaces/fortables';
+@Injectable(
+  {
   providedIn: 'root',
-})
+}
+)
 export class TablesService {
+  private URL: string = environment.tableBaseUrl;
   constructor(private http: HttpClient) {}
 
-  addTables(data: any) {
-    return this.http.post('http://127.0.0.1:8000/api/tables/', data);
+  getTablePagination(pageNumber: number): Observable<Array<Fortables>> {
+    return this.http.get<Array<Fortables>>(`${this.URL}?page=${pageNumber}`);
   }
 
+  addTables(data: any):Observable<any> {
+    return this.http.post(`${this.URL}`, data);
+  }
   getTable() {
-    return this.http.get('http://127.0.0.1:8000/api/tables/');
+    return this.http.get(`${this.URL}`);
   }
 
-  UpdateTable(data: any, id: any) {
-    console.log(data.get('TableNo'));
-    return this.http.put('http://127.0.0.1:8000/api/tables/' + id, data);
+
+  UpdateTable(data: any, id: any):Observable<any> {
+    return this.http.put(`${this.URL}` + id, data);
   }
 
   getOldTable(id: any) {
-    return this.http.get('http://127.0.0.1:8000/api/tables/' + id + '/edit');
+    return this.http.get(`${this.URL}/status/` + id);
   }
 
   //Get Available Table For Waiter
@@ -36,4 +45,11 @@ export class TablesService {
   }
 
 
+
+  change_status(id: any) {
+    return this.http.get('http://127.0.0.1:8000/api/tables/status/' + id);
+  }
+  // getAllTABLE() {
+  //   return this.http.get(`${this.URL}`);
+  // }
 }
