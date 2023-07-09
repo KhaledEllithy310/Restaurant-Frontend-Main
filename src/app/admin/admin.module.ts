@@ -24,6 +24,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { adminGuard } from '../guard/admin.guard';
 import { guestGuard } from '../guard/guest.guard';
 import { ProductsModule } from './products/products.module';
+import { StatistcsComponent } from './statistcs/statistcs.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
             (m) => m.CategoriesModule
           ),
       },
-      { path: 'tables', component: TablesComponent },
+      {path: 'statistcs', component: StatistcsComponent},
       {
         path: 'products',
         loadChildren: () =>
@@ -86,6 +87,7 @@ const routes: Routes = [
     KitchenComponent,
     ReservationComponent,
     ProfileComponent,
+    StatistcsComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

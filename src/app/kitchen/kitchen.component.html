@@ -38,12 +38,19 @@
                 <div style="height: 100px" *ngIf="getExtra(product.id, order.order_products)">
                   <p class="card-text" *ngFor="let extra of getExtra(product.id, order.order_products)">- {{extra}}</p>
                 </div>
+                <div *ngIf="getOrderProductStatus(order.order_products, product.id) === 'Complete'">
+                  <span class="alert alert-info comp-alert">This Product Is Completed</span>
+                </div>
+                <div *ngIf="getOrderProductStatus(order.order_products, product.id) === 'Cancel'">
+                  <span class="alert alert-danger comp-alert cancel-alert">This Product Is Canceled</span>
+                </div>
+                <div [ngClass]="{'options-hide': getOrderProductStatus(order.order_products, product.id) === 'Complete' || getOrderProductStatus(order.order_products, product.id) === 'Cancel'}">
                 <div class="options">
                   <button class="btn btn-info my-2 btn-complate" (click)="complete(order.id, getOrderProductId(product.id, order.order_products))">Completed</button>
                   <button class="btn btn-danger btn-cancel" (click)="canceledOrder(order.id, getOrderProductId(product.id, order.order_products))">Cancel</button>
-                  <div class="overlay"></div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>

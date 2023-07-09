@@ -65,12 +65,7 @@ export class KitchenComponent {
         this.completedSuccess = res;
         console.log(res);
         Swal.fire('Completed Product!','', 'success');
-        
-        // const overlay = document.querySelector('.overlay');
-        // overlay?.classList.add('show');
-        // const message = document.createElement('h3');
-        // message.innerText = 'Completed';
-        // overlay?.appendChild(message);
+
         const order = this.orders.find((o: any) => o.id === orderID);
         const orderProduct = order.order_products.find((op: any) => op.id === orderProductID);
         if (orderProduct) {
@@ -83,6 +78,7 @@ export class KitchenComponent {
         console.log(err);
       }
     })
+    this.ngOnInit();
   }
 
   canceledOrder(orderID: any, orderProductID: any) {
@@ -104,6 +100,7 @@ export class KitchenComponent {
         console.log(err);
       }
     })
+    this.ngOnInit();
   }
   completeOrder(orderID: any) {
     this.kitchen.completeOrder(orderID).subscribe({

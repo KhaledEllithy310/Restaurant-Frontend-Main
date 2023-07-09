@@ -1,3 +1,19 @@
+.complete-msg {
+    background-color: #000;
+    color: white;
+}
+.options-hide {
+    display: none;
+}
+.comp-alert {
+    color: #eeeeee9c;
+    background: #7fffd44f;
+}
+.cancel-alert {
+    color: #eeeeee9c;
+    background: #4000004f;
+}
+
 .overlay {
     position: absolute;
     top: 0;
