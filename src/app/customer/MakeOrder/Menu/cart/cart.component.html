@@ -1,13 +1,5 @@
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title">
-      <select name="table_id" id="" (change)="getTableId($event)">
-        <option value="" selected>Select Table</option>
-        <option value="{{ table.id }}" *ngFor="let table of tables">
-          Table No {{ table.number }}
-        </option>
-      </select>
-    </h4>
     <button
       type="button"
       class="btn-close"

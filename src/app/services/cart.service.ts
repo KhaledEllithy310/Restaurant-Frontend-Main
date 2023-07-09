@@ -64,4 +64,28 @@ export class CartService {
   UpdateCart(data: any) {
     return this.http.post(`http://127.0.0.1:8000/api/cart`, data);
   }
+
+
+  //customer cart
+
+
+  getAllCartCustomer() {
+    return this.http.get(`http://127.0.0.1:8000/api/cart/customer`);
+  }
+
+  AddToCartCustomer(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/cart/customer`, data);
+  }
+
+  DeleteFromCartCustomer(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/cart/customer`, data);
+  }
+
+  DeleteCartCustomer(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/cart/customer`, data);
+  }
+
+  UpdateCartCustomer(data: any) {
+    return this.http.post(`http://127.0.0.1:8000/api/cart/customer`, data);
+  }
 }

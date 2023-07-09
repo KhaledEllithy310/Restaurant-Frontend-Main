@@ -1,3 +1,5 @@
+import { ReservationService } from 'src/app/services/reservation.service';
+import { StorgeTokenService } from './../../../../services/storge-token.service';
 import Swal from 'sweetalert2';
 import { OrderService } from './../../../../services/order.service';
 import { TablesService } from 'src/app/services/tables.service';
@@ -20,8 +22,9 @@ export class CartComponent {
   constructor(
     private cartservice: CartService,
     private offcanvasService: NgbOffcanvas,
-    private tableService: TablesService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private session:StorgeTokenService,
+    private reservationService:ReservationService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -43,35 +46,20 @@ export class CartComponent {
     //GET PRODUCT THAT STORED IN CART
     this.getAllCart();
     this.totalPriceAllProductsCart();
-    this.getAllTable();
     // console.log(this.CartProducts);
   }
 
   getAllCart() {
-    this.cartservice.getAllCart().subscribe(
+    this.cartservice.getAllCartCustomer().subscribe(
       (Response: any) => {
-        // this.CartProducts = Response.data[0].data;
-        // console.log(this.cartservice.cartContainer);
+
         console.log(Response);
         this.cartservice.getCartProducts().subscribe((res) => {
           console.log(res);
           this.CartProducts = res;
-          // console.log(this.CartProducts);
         });
       },
       (err: any) => console.log(err)
-    );
-  }
-
-  getAllTable() {
-    this.tableService.getAvailableTable().subscribe(
-      (response: any) => {
-        console.log(response);
-        this.tables = response.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
     );
   }
 
@@ -83,7 +71,7 @@ export class CartComponent {
       quantity: cardProduct.quantity + 1,
     };
 
-    this.cartservice.UpdateCart(newCardProduct).subscribe(
+    this.cartservice.UpdateCartCustomer(newCardProduct).subscribe(
       (res) => {
         console.log(res);
         // cardProduct.quantity++;
@@ -112,7 +100,7 @@ export class CartComponent {
         quantity: --cardProduct.quantity,
       };
 
-      this.cartservice.UpdateCart(newCardProduct).subscribe(
+      this.cartservice.UpdateCartCustomer(newCardProduct).subscribe(
         (res) => {
           console.log(res);
           this.totalPriceAllProductsCart();
@@ -148,7 +136,7 @@ export class CartComponent {
       _method: 'delete',
     };
     //request to delete card product to server
-    this.cartservice.DeleteFromCart(DataProductCart).subscribe(
+    this.cartservice.DeleteFromCartCustomer(DataProductCart).subscribe(
       (Response: any) => {
         console.log(Response);
         this.totalPriceAllProductsCart();
@@ -179,26 +167,6 @@ export class CartComponent {
     return (+cardProduct.total_price * +cardProduct.quantity).toFixed(2);
   }
 
-  // totalPriceAllProductsCart() {
-  //   // this.updateCartData();
-  //   this.cartservice.getAllCart().subscribe((res: any) => {
-  //     let productCart = res.data[0].data;
-  //     let totalPriceAllProductsCart = 0;
-  //     console.log(productCart);
-  //     for (let i = 0; i < productCart.length; i++) {
-  //       totalPriceAllProductsCart +=
-  //         productCart[i].total_price * productCart[i].quantity;
-  //     }
-  //     // this.totalPrice = totalPriceAllProductsCart;
-  //     this.cartservice.setTotalPrice(totalPriceAllProductsCart);
-  //     this.cartservice.getTotalPrice().subscribe((res: any) => {
-  //       this.totalPrice = res;
-  //     });
-  //     console.log(this.totalPrice);
-  //     console.log('this.totalPrice', this.totalPrice);
-  //   });
-  // }
-
   totalPriceAllProductsCart() {
     // this.updateCartData();
     this.cartservice.getCartProducts().subscribe((res: any) => {
@@ -220,7 +188,10 @@ export class CartComponent {
   }
 
   createOrder() {
-    let newProductCart = [];
+    const reservation=this.reservationService.getCustomerReservation();
+    if(reservation)
+    {
+      let newProductCart = [];
     for (let i = 0; i < this.CartProducts.length; i++) {
       const newCartObject = {
         id: this.CartProducts[i].product.id,
@@ -236,9 +207,10 @@ export class CartComponent {
 
     const order = {
       total_price: this.totalPrice,
-      table_id: this.TableId,
-      user_id: 3,
+      customer_id: this.session.getUser()['user']['id'],
       products: newProductCart,
+      start_date:reservation['start_date'],
+      table_id:reservation['table_id']
     };
 
     const deletedCartObject = {
@@ -251,7 +223,7 @@ export class CartComponent {
         console.log(res);
 
         //Send Request and Delete All Cart Objects from server
-        this.cartservice.DeleteCart(deletedCartObject).subscribe(
+        this.cartservice.DeleteCartCustomer(deletedCartObject).subscribe(
           (res) => {
             console.log(res);
           },
@@ -265,29 +237,22 @@ export class CartComponent {
         Swal.fire({
           icon: 'success',
           title: res.message,
-          showConfirmButton: false,
           timer: 1500,
         });
       },
       (err: any) => {
         console.log(err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Choose Your Table',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+
       }
     );
+    }
+
   }
 
-  getTableId(event: any) {
-    console.log(event.target.value);
-    this.TableId = event.target.value;
-  }
+
   //function to get the newest data from the server
   updateCartData() {
-    this.cartservice.getAllCart().subscribe(
+    this.cartservice.getAllCartCustomer().subscribe(
       (Response: any) => {
         console.log(Response.data);
         if (Response.data.length === 0) {

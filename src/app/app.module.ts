@@ -36,7 +36,7 @@ import { TextMutedPipe } from './pipes/text-muted.pipe';
     CustomerModule,
     CashierModule,
     HomeModule,
-    
+
   ],
   providers: [
     {

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ReservationService } from 'src/app/services/reservation.service';
 import Swal  from 'sweetalert2';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -26,7 +28,9 @@ export class ProductListComponent {
   constructor(
     private cartservice: CartService,
     private productsService: ProductsService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private sesseion:ReservationService,
+    private navigateRoute:Router
   ) {}
   ngOnInit() {
     this.getAllProduct();
@@ -88,7 +92,7 @@ export class ProductListComponent {
   }
 
   getAllCart() {
-    this.cartservice.getAllCart().subscribe(
+    this.cartservice.getAllCartCustomer().subscribe(
       (Response: any) => {
         // this.CartProducts = Response.data[0].data;
         console.log(Response.data);
@@ -109,11 +113,14 @@ export class ProductListComponent {
   }
 
   addToCart(productSelected: any) {
+    if(!this.sesseion.getCustomerReservation()){
+      this.navigateRoute.navigate(["customer/tablesForbook"])
+    }else{
     const newProductCart = {
       product_id: productSelected.id,
     };
 
-    this.cartservice.AddToCart(newProductCart).subscribe(
+    this.cartservice.AddToCartCustomer(newProductCart).subscribe(
       (Response: any) => {
         console.log(Response);
         this.updateCartData();
@@ -140,6 +147,7 @@ export class ProductListComponent {
         });
       }
     );
+    }
   }
 
   selectCategory(event: any, name: any) {
@@ -228,7 +236,7 @@ export class ProductListComponent {
 
   //function to get the newest data from the server
   updateCartData() {
-    this.cartservice.getAllCart().subscribe(
+    this.cartservice.getAllCartCustomer().subscribe(
       (Response: any) => {
         console.log(Response);
         this.cartservice.cartContainer.next(Response.data[0]);
@@ -236,4 +244,6 @@ export class ProductListComponent {
       (err: any) => console.log(err)
     );
   }
+
+
 }

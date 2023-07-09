@@ -1,3 +1,4 @@
+import { customerMakeOrderGuard } from './../guard/customer-make-order.guard';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,9 @@ const routes = [
   {path:'tablesForbook',component:TablesComponent},
   {path:'MakeReservation/:id',component:AddReservationComponent},
   {path:'MyReservations',component:MyReservationComponent},
-  {path:'MakeOrder',component:MakeOrderComponent}
+  { path: 'MakeOrder', component: MakeOrderComponent,
+  // canActivate: [customerMakeOrderGuard]
+}
 ]
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ const routes = [
   ],
   providers:[
     {provide: NgbDateAdapter, useClass: AddReservationComponent},
+
+
   ]
 
 })

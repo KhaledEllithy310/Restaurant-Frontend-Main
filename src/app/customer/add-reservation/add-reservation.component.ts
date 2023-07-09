@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import { CustomerService } from './../../services/customer.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ViewChild} from '@angular/core';
 import { NgbCalendar, NgbDatepickerConfig, NgbDateAdapter, NgbDateNativeAdapter , NgbDateStruct, NgbTimepickerModule, NgbTimeStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
@@ -33,7 +33,8 @@ export class AddReservationComponent {
   datepickerDisabled = false;
 
 
-constructor( private calendar: NgbCalendar, private router: ActivatedRoute, private customerService: CustomerService, private config: NgbDatepickerConfig) {
+constructor( private calendar: NgbCalendar, private router: ActivatedRoute,
+   private customerService: CustomerService, private config: NgbDatepickerConfig, private navigateRoute:Router) {
 
 
     this.minDate =calendar.getToday();
@@ -95,20 +96,47 @@ this.markDisabled = (date: NgbDateStruct) => !this.isDateSelectable(date);
 
 const data ={
   "start_date":this.dateValue,
-  "customer_id":1,
   "table_id":this.router.snapshot.params['id']
 }
-  this.customerService.makeReservation(data).subscribe((res:any)=>{
+Swal.fire({
+  title: 'Do you Want to Make Your Meal ? ',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+  cancelButtonText: 'No , i want my Reservation Only',
+}).then((result) => {
+  if (result.isConfirmed) {
+    this.addToLocalStorage(data);
+    this.navigateRoute.navigate(["customer/MakeOrder"])
+  } else {
+     this.customerService.makeReservation(data).subscribe((res:any)=>{
     Swal.fire({
       title: 'Make Reservation',
       text: res.message,
       icon: 'success'
     });
+  })
+  }
+});
 
-  });
+  // });
   this.formGroup.get('dateControl')?.setValue(null);
   this.formGroup.get('dateControl')?.reset();
   this.formGroup.reset();
 
   }
+
+  addToLocalStorage(data:any)
+  {
+const expirationTime = new Date().getTime() + 60 * 60 * 1000;
+
+const item = { value: data, expiration: expirationTime };
+
+const itemString = JSON.stringify(item);
+
+localStorage.setItem('Reservation_Info', itemString);
+  }
+
+
+
 }

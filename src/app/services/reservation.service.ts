@@ -11,4 +11,23 @@ export class ReservationService {
   getAllResevations() {
     return this.http.get(`http://127.0.0.1:8000/api/reservation`);
   }
+
+  getCustomerReservation()
+  {
+    const itemString = localStorage.getItem('Reservation_Info');
+
+if(itemString){
+const item = JSON.parse(itemString);
+
+if (item.expiration < new Date().getTime()) {
+  localStorage.removeItem('Reservation_Info');
+  return false;
+} else {
+  const value = item.value;
+  return value;
+}
+  }
+  return false;
+
+  }
 }

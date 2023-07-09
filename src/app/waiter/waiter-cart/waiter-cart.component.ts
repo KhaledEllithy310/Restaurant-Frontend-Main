@@ -1,3 +1,4 @@
+import { StorgeTokenService } from 'src/app/services/storge-token.service';
 import { Component, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { TemplateRef, ViewEncapsulation } from '@angular/core';
@@ -27,7 +28,8 @@ export class WaiterCartComponent {
     private cartservice: CartService,
     private offcanvasService: NgbOffcanvas,
     private tableService: TablesService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private session:StorgeTokenService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -243,7 +245,7 @@ export class WaiterCartComponent {
     const order = {
       total_price: this.totalPrice,
       table_id: this.TableId,
-      user_id: 3,
+      user_id: this.session.getUser()['user']['id'],
       products: newProductCart,
     };
 
