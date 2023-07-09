@@ -11,6 +11,7 @@ import {
 import Swal from 'sweetalert2';
 import { TablesService } from 'src/app/services/tables.service';
 import { OrderService } from './../../services/order.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-waiter-cart',
