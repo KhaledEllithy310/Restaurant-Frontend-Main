@@ -51,8 +51,8 @@ export class AddProductComponent {
   ) {}
 
   ngOnInit() {
-    // call the all Ingredients
-    this.getAllIngredients();
+    // // call the all Ingredients
+    // this.getAllIngredients();
     // call the all categories
     this.getAllCategory();
     // this.checkStatusAvailable();
@@ -64,10 +64,10 @@ export class AddProductComponent {
       category_id: ['', [Validators.required]],
     });
 
-    this.ingredientsForm = this.fb.group({
-      Ingredient_id: ['', [Validators.required]],
-      Ingredient_Quantity: ['', [Validators.required]],
-    });
+    // this.ingredientsForm = this.fb.group({
+    //   Ingredient_id: ['', [Validators.required]],
+    //   Ingredient_Quantity: ['', [Validators.required]],
+    // });
 
     this.ExtraForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
@@ -108,18 +108,22 @@ export class AddProductComponent {
     );
   }
 
-  //Get All Ingredients
-  getAllIngredients() {
-    this.productsService.getIngredients().subscribe(
-      (response: any) => {
-        this.ingredients = response.data;
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-        // Handle error response
-      }
-    );
+  // //Get All Ingredients
+  // getAllIngredients() {
+  //   this.productsService.getIngredients().subscribe(
+  //     (response: any) => {
+  //       this.ingredients = response.data;
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       // Handle error response
+  //     }
+  //   );
+  // }
+
+  toggleIngredientsForm() {
+    this.showIngredientsForm = !this.showIngredientsForm;
   }
 
   //Create a new Product
@@ -269,8 +273,8 @@ export class AddProductComponent {
       total_price += +Ingredient.total;
     });
 
-    this.total_price = total_price;
-    return total_price;
+    this.total_price = ((total_price / 100) * 100).toFixed(2);
+    return ((total_price / 100) * 100).toFixed(2);
   }
 
   addIngredientsForProduct() {
@@ -295,15 +299,18 @@ export class AddProductComponent {
     let Ingredient_name = selectedIngredient.name;
 
     //calculate the total price = price * quantity * (1 + Profit)
-    let finalPrice =
-      Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
+    let finalPrice = (
+      ((Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit)) /
+        100) *
+      100
+    ).toFixed(2);
 
     //create new Ingredient to sent it to the server
     const newIngredient = {
       id: this.ingredientsForm.value.Ingredient_id,
       name: Ingredient_name,
       quantity: this.ingredientsForm.value.Ingredient_Quantity,
-      total: finalPrice.toFixed(2),
+      total: finalPrice,
     };
     //check if the ingredients exsit in the IngredientsList or not
     let ingredientsExist = this.IngredientsList.find(
@@ -319,24 +326,6 @@ export class AddProductComponent {
         timer: 1500,
       });
     } else {
-      // if (
-      //   confirm(
-      //     'Ingredient already exists. Do you want to update the quantity?'
-      //   )
-      // ) {
-      //   // Find the index of the existing ingredient in the array
-      //   const index = this.IngredientsList.findIndex(
-      //     (elem) => elem.id === newIngredient.id
-      //   );
-      //   // Update the quantity of the existing ingredient
-      //   this.IngredientsList[index].quantity = newIngredient.quantity;
-      //   // Recalculate the total price for the updated ingredient
-      //   this.IngredientsList[index].total = (
-      //     newIngredient.quantity *
-      //     Ingredient_Price *
-      //     (1 + +Ingredient_Profit)
-      //   ).toFixed(2);
-      // }
       Swal.fire({
         title: 'Do you want to update the quantity?',
         text: 'This Ingredient already exists !',
@@ -431,69 +420,16 @@ export class AddProductComponent {
     this.showExtraForm = false;
   }
 
-  closeIngredientForm() {
-    //clear the data in form
-    this.ingredientsForm.reset();
-    //disappear the form after submit
-    this.showIngredientsForm = false;
-  }
+  // closeIngredientForm() {
+  //   //clear the data in form
+  //   this.ingredientsForm.reset();
+  //   //disappear the form after submit
+  //   this.showIngredientsForm = false;
+  // }
   closeExtraForm() {
     //clear the data in form
     this.ExtraForm.reset();
     //disappear the form after submit
     this.showExtraForm = false;
   }
-
-  // addExtraForProduct() {
-  //   this.submitted = true;
-
-  //   let Ingredient_Price = this.ExtraForm.value.ingredientPrice;
-  //   console.log('Ingredient_Price', Ingredient_Price);
-
-  //   let Ingredient_Profit = this.ExtraForm.value.ingredientProfit;
-  //   console.log('Ingredient_Profit', Ingredient_Profit);
-  //   let Ingredient_Quantity = this.ExtraForm.value.Ingredient_Quantity;
-
-  //   console.log('Ingredient_Quantity', Ingredient_Quantity);
-  //   let finalPrice =
-  //     Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
-  //   let Ingredient_name = this.ingredients.find(
-  //     (elem) => elem.id == this.ExtraForm.value.Ingredient_id
-  //   ).name;
-
-  //   console.log(Ingredient_name);
-
-  //   const newExtra = {
-  //     id: this.ExtraForm.value.Ingredient_id,
-  //     name: Ingredient_name,
-  //     Quantity: this.ExtraForm.value.Ingredient_Quantity,
-  //     Price: finalPrice.toFixed(2),
-  //   };
-  //   console.log(newExtra);
-  //   this.ExtraList.push(newExtra);
-  //   this.isExtraListEmpty = this.ExtraList.length === 0;
-  //   this.showExtraForm = false;
-  // }
-
-  // selectedIngredient(event: any) {
-  //   console.log(event.target.value);
-  //   let ingredientSelected = this.ingredients.find(
-  //     (elem) => elem.id == event.target.value
-  //   );
-  //   console.log(ingredientSelected);
-
-  //   let ingredientPrice = document.getElementById(
-  //     'ingredientPrice'
-  //   ) as HTMLInputElement;
-  //   if (ingredientPrice) {
-  //     ingredientPrice.value = ingredientSelected.price;
-  //   }
-
-  //   let ingredientProfit = document.getElementById(
-  //     'ingredientProfit'
-  //   ) as HTMLInputElement;
-  //   if (ingredientProfit) {
-  //     ingredientProfit.value = ingredientSelected.profit;
-  //   }
-  // }
 }

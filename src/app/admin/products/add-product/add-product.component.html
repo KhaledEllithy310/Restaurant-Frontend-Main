@@ -190,7 +190,7 @@
             <div class="">
               <a
                 class="btn btn-primary ms-auto add-btn mx-2"
-                (click)="showIngredientsForm = true"
+                (click)="showIngredientsForm = !showIngredientsForm"
               >
                 <!-- <i class="fa-solid fa-circle-plus"></i> -->
                 Add Ingredient <i class="fas fa-plus"></i>
@@ -249,7 +249,7 @@
     >
       <div class="vertical_align_center">
         <h2 class="form_title">Add Ingredient</h2>
-        <div class="close_icon" (click)="closeIngredientForm()">
+        <div class="close_icon" (click)="toggleIngredientsForm()">
           <i class="fa-solid fa-circle-xmark"></i>
         </div>
         <div class="row">

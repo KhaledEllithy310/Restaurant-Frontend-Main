@@ -66,12 +66,6 @@ const routes: Routes = [
       // canActivate: [authGuard]
   },
   {
-    path: 'stripe',
-    loadChildren: () =>
-      import('./stripesystem/stripesystem.module').then((m) => m.StripesystemModule),
-      // canActivate: [authGuard]
-  },
-  {
     path: '**',
     component: NotfoundComponent,
   },

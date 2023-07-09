@@ -17,13 +17,13 @@ import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { IngridentsComponent } from './ingridents/ingridents.component';
 import { AddIngridentsComponent } from './ingridents/add-ingridents/add-ingridents.component';
 import { EditIngridentsComponent } from './ingridents/edit-ingridents/edit-ingridents.component';
-import { KitchenComponent } from '../kitchen/kitchen.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { ProfileComponent } from '../shared/profile/profile.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { adminGuard } from '../guard/admin.guard';
 import { guestGuard } from '../guard/guest.guard';
 import { ProductsModule } from './products/products.module';
+import { ProfileComponent } from './../shared/profile/profile.component';
+import { KitchenComponent } from './../kitchen/kitchen.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -44,22 +44,34 @@ const routes: Routes = [
         loadChildren: () =>
           import('./products/products.module').then((m) => m.ProductsModule),
       },
-      { path: 'users', component: UsersComponent,
+      {
+        path: 'users',
+        component: UsersComponent,
         // canActivate: [adminGuard]
       },
-      { path: 'users/add', component: AddUsersComponent,
+      {
+        path: 'users/add',
+        component: AddUsersComponent,
         // canActivate: [adminGuard]
       },
-      { path: 'users/edit/:id', component: EditUsersComponent,
+      {
+        path: 'users/edit/:id',
+        component: EditUsersComponent,
         // canActivate: [adminGuard]
       },
-      { path: 'ingridents', component: IngridentsComponent,
+      {
+        path: 'ingridents',
+        component: IngridentsComponent,
         // canActivate: [adminGuard]
       },
-      { path: 'ingridents/add', component: AddIngridentsComponent,
+      {
+        path: 'ingridents/add',
+        component: AddIngridentsComponent,
         // canActivate: [adminGuard]
       },
-      { path: 'ingridents/edit/:id', component: EditIngridentsComponent,
+      {
+        path: 'ingridents/edit/:id',
+        component: EditIngridentsComponent,
         // canActivate: [adminGuard]
       },
       { path: 'tables', component: TablesComponent },
@@ -68,7 +80,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./products/products.module').then((m) => m.ProductsModule),
       },
-      { path: 'reservation', component: ReservationComponent }    ],
+      { path: 'reservation', component: ReservationComponent },
+    ],
   },
 ];
 

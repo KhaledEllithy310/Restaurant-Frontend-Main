@@ -14,6 +14,10 @@ private URL=environment.baseUrl;
    {
      return this.http.get(`${this.URL}tables/available`)
    }
+    getAvailableTablesPagination(pageNum:number)
+   {
+     return this.http.get(`${this.URL}tables/available?page=${pageNum}`)
+   }
 
    getAvailableTimeOnTable(id:string)
    {
