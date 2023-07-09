@@ -1,4 +1,4 @@
-import  Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { TablesService } from 'src/app/services/tables.service';
 import { OrderService } from './../../services/order.service';
@@ -15,7 +15,7 @@ export class TablesWaiterComponent {
   ordersTable: any[] = [];
   @ViewChild('tablesWaiterOrders', { static: false })
   tablesWaiterOrders!: ElementRef;
-  orderId!:number
+  orderId!: number;
   constructor(
     private tablesService: TablesService,
     private elementRef: ElementRef,
@@ -53,12 +53,11 @@ export class TablesWaiterComponent {
   }
 
   getOrderTable(id_table: any) {
-    this.ordersTable =[];
+    this.ordersTable = [];
 
     this.orderService.getOrderTable(id_table).subscribe(
       (response: any) => {
-
-      this.orderId= response.data[0]['id'];
+        this.orderId = response.data[0]['id'];
         this.ordersTable = response.data[0].products;
         console.log('ordersTable:', this.ordersTable);
       },
@@ -68,16 +67,17 @@ export class TablesWaiterComponent {
     );
   }
 
-  changeStatus()
-  {
-    this.orderService.makeOrderServerd(this.orderId).subscribe((respone:any)=>{
-      this.ordersTable=[]
-      Swal.fire({
-        title: 'Served',
-        text: respone.message,
-        icon: 'success'
+  changeStatus() {
+    this.orderService
+      .makeOrderServerd(this.orderId)
+      .subscribe((respone: any) => {
+        this.ordersTable = [];
+        Swal.fire({
+          title: 'Served',
+          text: respone.message,
+          icon: 'success',
+        });
       });
-    })
   }
 
   closeOrderTable() {

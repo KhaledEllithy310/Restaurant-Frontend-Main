@@ -34,7 +34,6 @@
                   />
                 </div>
                 <div class="col-7 p-0 card_product_right_container">
-                  <!-- <div class="container"> -->
                   <div class="card_product_right">
                     <div>
                       <h5 class="card-publisher item_product_name">
@@ -81,7 +80,12 @@
   </div>
 </ng-template>
 
-<a class="cart_btn" (click)="openEnd(content)">
-  <!-- {{ isOffcanvasOpen ? "Close" : "Open" }} -->
+<!-- <button class="cart_btn" (click)="openEnd(content)">
   <i class="fa-solid fa-cart-shopping"></i>
-</a>
+</button> -->
+<button
+  class="btn btn-lg btn-outline-primary mb-2 me-2 cart_btn"
+  (click)="openEnd(content)"
+>
+  <i class="fa-solid fa-cart-shopping"></i>
+</button>
