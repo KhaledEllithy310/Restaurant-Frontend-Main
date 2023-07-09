@@ -99,6 +99,7 @@ const routes: Routes = [
     KitchenComponent,
     ReservationComponent,
     ProfileComponent,
+    TablesComponent
   ],
   imports: [
     RouterModule.forChild(routes),
