@@ -1,3 +1,4 @@
+import { ReservationService } from 'src/app/services/reservation.service';
 import { StorgeTokenService } from 'src/app/services/storge-token.service';
 import { Component, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
@@ -29,7 +30,8 @@ export class WaiterCartComponent {
     private offcanvasService: NgbOffcanvas,
     private tableService: TablesService,
     private orderService: OrderService,
-    private session:StorgeTokenService
+    private session:StorgeTokenService,
+    private reservationService: ReservationService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;

@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FeaturesSectionComponent } from './features-section/features-section.component';
 import { AboutusSectionComponent } from './aboutus-section/aboutus-section.component';
 import { CountnumberComponent } from './countnumber/CountnumberComponent';
+import { ReviweComponent } from './reviwe/reviwe.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,13 @@ import { CountnumberComponent } from './countnumber/CountnumberComponent';
     AboutusSectionComponent,
     
     CountnumberComponent,
+          ReviweComponent,
   ],
   imports: [CommonModule],
   exports: [
     HomeSection1Component,
     MeetOurTeamComponent,
     FooterComponent,
-    
     CountnumberComponent,
   ],
 })

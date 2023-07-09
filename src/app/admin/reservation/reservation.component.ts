@@ -15,6 +15,10 @@ export class ReservationComponent {
 
   filterBytable: any = [];
 
+  pageSize = 8;
+  pageNumber = 1;
+  totalItems = 0;
+
   urlapi = 'http://127.0.0.1:8000/api/reservation/date';
   urlapi2 = 'http://127.0.0.1:8000/api/reservation';
   
@@ -23,13 +27,30 @@ export class ReservationComponent {
   endDate: any;
 
   tableNum: any;
+  errors: any = [];
   constructor(private reservationService: ReservationService, private http: HttpClient) {}
 
   ngOnInit() {
-    this.reservationService.getAllResevations().subscribe((res: any) => {
-      this.reservations = res.data.data;
-      // this.filterDataByDate();
-    })
+    this.getReservation();
+  }
+
+  getReservation() {
+    this.reservationService.reservationPagination(this.pageNumber).subscribe({
+      next: (res: any) => {
+          this.reservations = res.data.data;
+          this.totalItems = res.data.total;
+          this.pageSize = res.data.per_page;
+          console.log(this.totalItems);
+          console.log(res);
+      },
+      error: (err: any) => {
+        this.errors = err;
+      }});
+  }
+
+  onPageChange(event: any) {
+    this.pageNumber = event;
+    this.getReservation();
   }
 
   filterDataByDate(): any {

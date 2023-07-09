@@ -28,6 +28,13 @@ if (item.expiration < new Date().getTime()) {
 }
   }
   return false;
-
+  }
+  getReservationByTableInDay(TableId: any) {
+    return this.http.get(
+      `http://127.0.0.1:8000/api/reservation/bytable/` + TableId
+    );
+  }
+  reservationPagination(pageNumber: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/reservation?page=${pageNumber}`);
   }
 }

@@ -20,7 +20,6 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { StripesystemModule } from './stripesystem/stripesystem.module';
 
 import { TextMutedPipe } from './pipes/text-muted.pipe';
-// import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AppComponent, NotfoundComponent, ],
   imports: [

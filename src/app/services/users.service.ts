@@ -29,5 +29,10 @@ export class UsersService {
   editUserByID(id: any, body: any, headers: any) {
     return this.http.post(`http://127.0.0.1:8000/api/users/${id}`, body, headers);
   }
-  
+  userPagination(pageNumber: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/users/?page=${pageNumber}`);
+  }
+  onSearch(searchTerm: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/users/search?name=${searchTerm}`);
+  }
 }

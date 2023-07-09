@@ -22,4 +22,10 @@ export class IngridentsService {
   deleteIngridents(id: any) {
     return this.http.delete(`http://127.0.0.1:8000/api/ingredients/${id}`);
   }
+  ingridentsPagination(pageNumber: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/ingredients?page=${pageNumber}`);
+  }
+  ingridentsSearch(term: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/search/ingredient?keyword=${term}`);
+  }
 }

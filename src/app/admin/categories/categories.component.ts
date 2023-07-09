@@ -232,7 +232,6 @@ export class CategoriesComponent {
       updateCategory.set('image', image);
     }
     updateCategory.set('_method', 'put');
-    updateCategory.set('status', '1');
     // console.log(this.updateCategoryForm.value);
     console.log(updateCategory.get('name'));
     console.log(updateCategory.get('image'));
@@ -284,8 +283,9 @@ export class CategoriesComponent {
 
     const newStatus = {
       _method: 'put',
-      status: 1,
+      status: !category_status,
     };
+
 
     this.categoryService.openStatusCategory(category_id, newStatus).subscribe(
       (response) => {

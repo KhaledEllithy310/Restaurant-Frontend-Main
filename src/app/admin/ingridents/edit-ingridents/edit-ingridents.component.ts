@@ -51,10 +51,12 @@ export class EditIngridentsComponent {
     this.editIngrident.editIngridents(this.id, formObj).subscribe({
       next: (res: any) => {
         this.success = res.message;
+        this.errors = '';
         console.log(res);
       },
       error: (err: any) => {
         this.errors = err.error.errors;
+        this.success = '';
         console.log(err);
         
       }

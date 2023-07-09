@@ -5,6 +5,7 @@ import { Route, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
+import { userValidators } from '../validators/user-validator';
 
 @Component({
   selector: 'app-signup',
@@ -28,7 +29,7 @@ export class SignupComponent {
       confirmPassword: ['', [Validators.required]],
       email: [null, [Validators.required, Validators.email]], 
       phoneNumber: [null, [Validators.required, Validators.pattern(/^(010|011|012)\d{8}$/)]] 
-    })
+  })
   }
   get registerForm() {
     return this.signupForm.controls;
@@ -55,7 +56,8 @@ export class SignupComponent {
     this.signupService.registerCustomer(formDetails, headers).subscribe({
       next: (res: any) => {
         this.successResponse = res.message;
-        console.log(res);
+        this.errorsResponse = '';
+        // console.log(res);
         setTimeout(() => {
           this.route.navigate(['register/login']);
         }, 3000);

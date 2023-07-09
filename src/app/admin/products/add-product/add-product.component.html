@@ -259,7 +259,7 @@
               >Ingredient Name<span class="text-danger">*</span></label
             >
             <select
-              name="category_id"
+              name="Ingredient_id"
               class="input__form"
               formControlName="Ingredient_id"
             >
@@ -350,11 +350,10 @@
               >Extra Name <span class="text-danger">*</span></label
             >
             <select
-              name="category_id"
+              name="Ingredient_id"
               class="input__form"
               formControlName="Ingredient_id"
             >
-              <option value="10">aaa</option>
               <option
                 *ngFor="let ingredient of ingredients"
                 value="{{ ingredient.id }}"

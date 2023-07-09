@@ -44,9 +44,11 @@ export class AddIngridentsComponent {
     this.addIngrident.addIngridents(formData).subscribe({
       next: (res: any) => {
         this.success = res.message;
+        this.errors = '';
       },
       error: (err: any) => {
         this.errors = err.error.errors;
+        this.success = '';
         console.log(err);
         
       }

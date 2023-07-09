@@ -57,6 +57,7 @@ export class LoginComponent {
         
         this.messageSuccess = true;
         this.dataNotCorrect = false;
+
         setTimeout(() => {
           this.route.navigate(['']);
         }, 3000);

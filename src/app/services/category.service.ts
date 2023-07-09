@@ -42,7 +42,7 @@ export class CategoryService {
     );
   }
   openStatusCategory(id: any, data: any) {
-    return this.http.post(
+    return this.http.put(
       `http://127.0.0.1:8000/api/category/` + id + `/status`,
       data
     );

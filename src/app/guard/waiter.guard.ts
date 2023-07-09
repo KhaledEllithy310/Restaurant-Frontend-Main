@@ -3,7 +3,7 @@ import { StorgeTokenService } from '../services/storge-token.service';
 
 export const waiterGuard: CanActivateFn = (route, state) => {
   const token = new StorgeTokenService;
-  if(token.getUser().user.role === 'waiter') {
+  if(token.getUser().user.role === 'Waiter') {
     return true;
   } else {
     const route = new Router;

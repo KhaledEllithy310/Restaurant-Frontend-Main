@@ -75,13 +75,14 @@ export class DisplayProductsComponent {
     console.log('id', product.id);
     console.log('status before:', product.status);
     console.log('closed before:', product.closed);
-    this.getAllProducts();
+
 
     if (product.status) {
       this.productsService.change_status(product.id).subscribe(
         (Response) => {
           console.log('status after:', product.status);
           console.log('closed after:', product.closed);
+          this.getAllProducts();
           console.log(Response);
         },
         (err) => {

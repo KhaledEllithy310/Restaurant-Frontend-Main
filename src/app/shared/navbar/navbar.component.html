@@ -81,20 +81,20 @@
               >
             </li>
           </ul>
+          <div>
+            <li class="nav-item" *ngIf="login() && checkRole() === 'Cashier'">
+              <a
+                class="nav-link"
+                aria-current="page"
+                routerLinkActive="active"
+                [routerLink]="'/cashier/ShowReservations'"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Cashier</a
+              >
+            </li>
+        </div>
         </ul>
-        <div>
-          <li class="nav-item" *ngIf="login() && checkRole() === 'Cashier'">
-            <a
-              class="nav-link"
-              aria-current="page"
-              routerLinkActive="active"
-              [routerLink]="'/cashier/ShowReservations'"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              Cashier</a
-            >
-          </li>
-      </div>
       <div *ngIf="!login()">
         <ul class="navbar-nav m-auto mb-2">
           <li class="nav-item">
