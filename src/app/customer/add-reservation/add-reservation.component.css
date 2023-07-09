@@ -1,0 +1,21 @@
+ngb-datepicker
+{
+  background-color:  #ceb086;
+}
+
+.submit
+{
+  background-color: #ceb086;
+  color: white;
+  padding: 10px 10px;
+  border: 1px solid #ceb086;
+  border-radius: 10px;
+}
+.submit:not([disabled]):hover
+{
+  background-color: white;
+  color:  #ceb086;
+  padding: 10px 10px;
+  border: 1px solid #ceb086;
+}
+

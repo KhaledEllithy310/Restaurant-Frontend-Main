@@ -23,7 +23,7 @@ export class TablesService {
   getTable() {
     return this.http.get(`${this.URL}`);
   }
-  
+
 
   UpdateTable(data: any, id: any):Observable<any> {
     return this.http.put(`${this.URL}` + id, data);
@@ -32,6 +32,19 @@ export class TablesService {
   getOldTable(id: any) {
     return this.http.get(`${this.URL}/status/` + id);
   }
+
+  //Get Available Table For Waiter
+  getAvailableTable() {
+    return this.http.get('http://127.0.0.1:8000/api/tables/available/inday');
+  }
+
+  getActiveTable()
+  {
+    return this.http.get('http://127.0.0.1:8000/api/tables/available');
+
+  }
+
+
 
   change_status(id: any) {
     return this.http.get('http://127.0.0.1:8000/api/tables/status/' + id);

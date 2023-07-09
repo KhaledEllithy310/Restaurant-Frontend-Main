@@ -1,4 +1,12 @@
-<div class="container p-60">
+<div class="container p-50">
+  <a
+    class="btn btn-outline-primary my-4"
+    [routerLink]="'/admin/dashboard/products/display'"
+  >
+    back <i class="fas fa-arrow-left"></i>
+  </a>
+
+  <!-- Start Product Detail -->
   <div class="row">
     <div class="col-6">
       <div
@@ -7,35 +15,42 @@
         data-bs-target="#staticBackdrop"
       >
         <div class="sale_item">
-          sale <span>%{{ targetProduct.discount * 100 }}</span>
+          sale <span>%{{ targetProduct?.discount * 100 }}</span>
         </div>
         <!-- <img src="{{ item.image_url }}" class="card-img-top" alt="..." /> -->
         <div class="col-5 mx-auto">
           <img
-            [src]="'http://127.0.0.1:8000' + targetProduct.image"
+            *ngIf="targetProduct?.image"
+            [src]="'http://127.0.0.1:8000' + targetProduct?.image"
             class="card-img-top"
-            alt="..."
+            alt="targetProduct"
           />
+          <ng-container *ngIf="imageUrl">
+            <img
+              [src]="imageUrl"
+              class="card-img-top"
+              alt=""
+              (error)="imageUrl = null"
+            />
+          </ng-container>
         </div>
         <div class="card-body">
           <h5 class="card-title item_product_name">
-            {{ targetProduct.name }}
+            {{ targetProduct?.name }}
           </h5>
 
           <div class="card-title item_product_title">
-            <p class="card_price">${{ targetProduct.total_price }}</p>
-
-            <p class="item_product_title_top">Description</p>
-
+            <p class="card_price">${{ calculate_total_price() }}</p>
+            <p class="main_product_title">Description</p>
             <p class="item_product_title_bottom">
-              {{ targetProduct.description }}
+              {{ targetProduct?.description }}
             </p>
           </div>
-          <div
-            class="card-title item_product_extra list__Ingredients btn_extra_form"
-          >
+          <p class="main_product_title">extra</p>
+
+          <div class="card-title list__extra">
             <li *ngFor="let extra of targetExtraList">
-              <span> {{ extra }}</span>
+              <span> {{ extra.name }}</span>
             </li>
           </div>
           <!--
@@ -45,21 +60,420 @@
         </div>
       </div>
     </div>
-    <div class="col-6 item_product">
-      <h3>Ingredients</h3>
+    <div class="col-6 item_product p-3">
+      <h3 class="main_product_title sec_product_title">Ingredients</h3>
       <div class="list__Ingredients">
-        <li *ngFor="let ingredient of targetProduct.Ingredients">
-          <span>{{ ingredient.name }} carrot</span>
-          <span>{{ ingredient.quantity }}110 kg</span>
-          <span class="list__Ingredients__price">${{ ingredient.total }}</span>
+        <li *ngFor="let ingredient of targetIngredientList">
+          <span>{{ ingredient?.name }} </span>
+          <span>{{ ingredient?.quantity }}kg</span>
+          <span class="list__Ingredients__price">${{ ingredient?.total }}</span>
+
+          <div class="btn_container_ingredients" *ngIf="statusUpdateButton">
+            <span
+              class="btn_ingredient_del btn btn-outline-danger"
+              (click)="deleteIngredient(ingredient.id)"
+              ><i class="fa-solid fa-trash-can"></i
+            ></span>
+            <span
+              class="btn_ingredient_edit btn btn-info edit-btn"
+              (click)="getOldIngredient(ingredient.id)"
+              ><i class="fa-regular fa-pen-to-square"></i
+            ></span>
+          </div>
         </li>
       </div>
+      <a
+        class="btn btn-primary ms-auto add-btn mx-2 my-2"
+        (click)="showUpdateIngredientButton()"
+        id="Update_Ingredient"
+      >
+        <!-- <i class="fa-solid fa-circle-plus"></i> -->
+        Update Ingredient <i class="fas fa-plus"></i>
+      </a>
+
+      <a
+        class="btn btn-primary ms-auto add-btn mx-2 my-2 d-none"
+        id="Add_Ingredient"
+        (click)="showIngredientsForm = true"
+      >
+        <!-- <i class="fa-solid fa-circle-plus"></i> -->
+        Add Ingredient <i class="fas fa-plus"></i>
+      </a>
     </div>
   </div>
+  <!-- End Product Detail -->
   <a
-    class="btn btn-outline-primary my-4"
-    [routerLink]="'/admin/dashboard/products/display'"
+    class="btn btn-primary ms-auto add-btn mx-2 my-2"
+    (click)="showUpdateProductButton()"
+    id="Update_Product"
   >
-    back <i class="fas fa-arrow-left"></i>
+    <!-- <i class="fa-solid fa-circle-plus"></i> -->
+    Update Product <i class="fas fa-plus"></i>
   </a>
+  <div class="container_forms">
+    <!-- Start Form Update Product -->
+    <form
+      [formGroup]="productForm"
+      (ngSubmit)="updateProduct()"
+      class="form_admin form__admin__special text-bg-dark"
+      *ngIf="showProductForm"
+    >
+      <div class="row">
+        <div class="col">
+          <div class="bgGreyLight_1 vertical_align_center">
+            <h2 class="form_title">Update Product</h2>
+            <div class="close_icon" (click)="closeProductForm()">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <!-- <div *ngIf="showSuccessMessage" class="alert alert-success">
+              {{ successMessage }}
+            </div> -->
+            <div class="row">
+              <!--Start productName  Input -->
+              <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2"
+                  >Product Name<span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="input__form"
+                  formControlName="productName"
+                  id="productName"
+                />
+                <!-- Start Validation For productName  -->
+
+                <div
+                  *ngIf="
+                    product_Name_Control.invalid && product_Name_Control.touched
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="product_Name_Control.errors?.['required']">
+                    <p class="alert alert-danger">Product Name is required</p>
+                  </div>
+                  <div *ngIf="product_Name_Control.errors?.['minlength']">
+                    <p class="alert alert-danger">
+                      Name must be at least
+                      {{ product_Name_Control.errors?.['minlength'].requiredLength }}
+                      characters long
+                    </p>
+                  </div>
+                </div>
+                <!-- End Validation For productName -->
+              </div>
+              <!--End productName Input -->
+
+              <!--Start productDiscount  Input -->
+              <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2">Product Discount</label>
+                <input
+                  type="text"
+                  class="input__form"
+                  name="productDiscount"
+                  formControlName="productDiscount"
+                  id="productDiscount"
+                />
+                <!-- Start Validation For product Discount  -->
+                <div
+                  *ngIf="
+                    product_Discount_Control.invalid &&
+                    product_Discount_Control.touched
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="product_Discount_Control.errors?.['required']">
+                    <p class="alert alert-danger">
+                      product Discount is required
+                    </p>
+                  </div>
+                </div>
+                <!-- End Validation For product Discount -->
+              </div>
+              <!--End productDiscount  Input -->
+
+              <!--Start Upload Image Input -->
+              <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2"
+                  >Upload Image<span class="text-danger">*</span></label
+                >
+                <input
+                  #updatefileInput
+                  type="file"
+                  class="input__form"
+                  name="image"
+                  formControlName="image"
+                  (change)="onImageChange($event)"
+                />
+                <img [src]="imageUrl" *ngIf="imageUrl" width="40" height="40" />
+                <!-- Start Validation For product image  -->
+                <div
+                  *ngIf="
+                    product_image_Control.invalid &&
+                    product_image_Control.touched
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="product_image_Control.errors?.['required']">
+                    <p class="alert alert-danger">product image is required</p>
+                  </div>
+                </div>
+                <!-- End Validation For product image -->
+              </div>
+              <!--End Upload Image Input -->
+
+              <!--Start category_id  Input -->
+              <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2"
+                  >Category Name<span class="text-danger">*</span></label
+                >
+                <select
+                  name="category_id"
+                  class="input__form"
+                  formControlName="category_id"
+                  id="category_id"
+                >
+                  <option
+                    *ngFor="let category of categories"
+                    value="{{ category.id }}"
+                  >
+                    {{ category.name }}
+                  </option>
+                </select>
+                <!-- Start Validation For category_id  -->
+                <div
+                  *ngIf="
+                    category_id_Control.invalid && category_id_Control.touched
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="category_id_Control.errors?.['required']">
+                    <p class="alert alert-danger">category Name is required</p>
+                  </div>
+                </div>
+                <!-- End Validation For category_id -->
+              </div>
+              <!--End category_id  Input -->
+
+              <!--Start productDescription  Input -->
+              <div class="col-xl-6 inputs__container">
+                <label for="" class="px-2">Product Description</label>
+                <textarea
+                  class="input__form"
+                  name=""
+                  formControlName="productDescription"
+                  id="productDescription"
+                  cols="30"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="col-xl-6">
+                <label for="" class="px-2 py-3">All Extra</label>
+                <div class="card-title list__extra">
+                  <li *ngFor="let extra of newExtraList; let i = index">
+                    <span>
+                      <i
+                        class="fa-solid fa-trash-can"
+                        (click)="deleteExtra(extra.id)"
+                      ></i
+                      >{{ extra.name }}</span
+                    >
+                  </li>
+                </div>
+              </div>
+            </div>
+            <!-- <div *ngIf="productForm.invalid && submitted" class="text-danger">
+              <p class="alert alert-danger">
+                Please fill in all required fields.
+              </p>
+            </div> -->
+            <div *ngIf="showErroressage" class="text-danger">
+              <p class="alert alert-danger">
+                {{ ErrorMessage }}
+              </p>
+            </div>
+            <div class="btn_container vertical">
+              <div class="ntn_add_form">
+                <button
+                  type="submit"
+                  class="btn-lg admin__sec__btn__form"
+                  [disabled]="showExtraForm"
+                >
+                  Update Product
+                </button>
+              </div>
+              <div class="">
+                <a
+                  class="btn btn-primary ms-auto add-btn"
+                  (click)="showExtraForm = true"
+                >
+                  <!-- <i class="fa-solid fa-circle-plus"></i> -->
+                  Add Extra <i class="fas fa-plus"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- End Form Update Product -->
+
+    <!-- Start Form Add Ingredients -->
+    <form
+      [formGroup]="ingredientsForm"
+      (ngSubmit)="addIngredientsForProduct()"
+      class="form_admin text-bg-dark"
+      *ngIf="showIngredientsForm"
+    >
+      <div class="vertical_align_center">
+        <h2 class="form_title" id="IngredientFormTitle">Add Ingredient</h2>
+        <div class="close_icon" (click)="closeIngredientForm()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+        <div class="row">
+          <!--Start Ingredient Name  Input -->
+          <div class="col-xl-6 inputs__container">
+            <label for="" class="px-2"
+              >Ingredient Name<span class="text-danger">*</span></label
+            >
+            <select
+              name="category_id"
+              class="input__form"
+              formControlName="Ingredient_id"
+              [value]="oldIngredient.id"
+              id="oldIngredient_id"
+            >
+              <option
+                *ngFor="let ingredient of ingredients"
+                value="{{ ingredient.id }}"
+              >
+                {{ ingredient.name }}
+              </option>
+            </select>
+            <!-- Start Validation For Ingredient_id  -->
+            <div
+              *ngIf="
+                ingredientsForm.controls['Ingredient_id'].invalid &&
+                ingredientsForm.controls['Ingredient_id'].touched
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="ingredientsForm.controls['Ingredient_id'].errors?.['required']"
+              >
+                <p class="alert alert-danger">Ingredient Name is required</p>
+              </div>
+            </div>
+            <!-- End Validation For Ingredient_id -->
+          </div>
+          <!--End Ingredient Name  Input -->
+
+          <!--Start Ingredient Quantity  Input -->
+          <div class="col-xl-6 inputs__container">
+            <label for="" class="px-2"
+              >Ingredient Quantity<span class="text-danger">*</span></label
+            >
+            <input
+              type="number"
+              class="input__form"
+              formControlName="Ingredient_Quantity"
+              placeholder=""
+              [value]="oldIngredient.quantity"
+              id="oldIngredient_quantity"
+            />
+            <!-- Start Validation For Ingredient Quantity  -->
+            <div
+              *ngIf="
+                ingredientsForm.controls['Ingredient_Quantity'].invalid &&
+                ingredientsForm.controls['Ingredient_Quantity'].touched
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="ingredientsForm.controls['Ingredient_Quantity'].errors?.['required']"
+              >
+                <p class="alert alert-danger">
+                  Ingredient Quantity is required
+                </p>
+              </div>
+            </div>
+            <!-- End Validation For Ingredient Quantity -->
+          </div>
+          <!--End Ingredient Quantity Input -->
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn-lg admin__sec__btn__form"
+        id="IngredientFormBtn"
+      >
+        Add Ingredients
+      </button>
+    </form>
+    <!-- End Form Add Ingredients -->
+
+    <!-- Start Form Add Extra -->
+    <form
+      [formGroup]="ExtraForm"
+      (ngSubmit)="addExtraForProduct()"
+      class="form_admin_extra w-25 text-bg-dark"
+      *ngIf="showExtraForm"
+    >
+      <div class="vertical_align_center">
+        <div class="close_icon" (click)="closeExtraForm()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+
+        <h2 class="form_title">Add Extra</h2>
+        <div class="row">
+          <!--Start Ingredient Name  Input -->
+          <div class="col-xl-12 inputs__container">
+            <label for="" class="px-2"
+              >Extra Name <span class="text-danger">*</span></label
+            >
+            <select
+              name="category_id"
+              class="input__form"
+              formControlName="Ingredient_id"
+            >
+              <option value="10">aaa</option>
+              <option
+                *ngFor="let ingredient of ingredients"
+                value="{{ ingredient.id }}"
+              >
+                {{ ingredient.name }}
+              </option>
+            </select>
+            <!-- Start Validation For Ingredient_id  -->
+            <div
+              *ngIf="
+                ExtraForm.controls['Ingredient_id'].invalid &&
+                ExtraForm.controls['Ingredient_id'].touched
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="ExtraForm.controls['Ingredient_id'].errors?.['required']"
+              >
+                <p class="alert alert-danger">Extra Name is required</p>
+              </div>
+            </div>
+            <!-- End Validation For Ingredient_id -->
+          </div>
+          <!--End Ingredient Name  Input -->
+        </div>
+      </div>
+      <!-- Show message if form is invalid and submitted -->
+      <div *ngIf="ExtraForm.invalid && submitted" class="text-danger">
+        <p class="alert alert-danger">Please fill in all required fields.</p>
+      </div>
+      <button type="submit" class="btn-lg admin__sec__btn__form">
+        Add Extra
+      </button>
+    </form>
+    <!-- End Form Add Extra -->
+  </div>
 </div>
+
+<!-- <app-add-sub-ingredient
+  [showIngredientsForm]="showIngredientsForm"
+></app-add-sub-ingredient> -->

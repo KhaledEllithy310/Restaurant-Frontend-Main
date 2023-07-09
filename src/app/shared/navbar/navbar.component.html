@@ -20,7 +20,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav m-auto mb-2">
         <li class="nav-item">
           <a
             class="nav-link"
@@ -30,7 +30,7 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="login() && checkRole() === 'Admin'">
           <a
             class="nav-link"
             aria-current="page"
@@ -41,81 +41,97 @@
             Dashboard</a
           >
         </li>
+        <li class="nav-item" *ngIf="login() && checkRole() === 'Kitchen'">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            routerLinkActive="active"
+            [routerLink]="'/stripe/checkout'"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Checkout</a
+          >
+        </li>
         <li class="nav-item dropdown">
           <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+            class="nav-link"
+            aria-current="page"
             routerLinkActive="active"
+            [routerLink]="'kitchen'"
           >
-            Waiter
-          </a>
-          <ul class="dropdown-menu">
-            <li>
+            Kitchen</a
+          >
+        </li>
+        <ul class="navbar-nav m-auto mb-2" *ngIf="login() && checkRole() === 'Waiter'">
+            <li class="nav-item">
               <a
-                class="dropdown-item"
-                [routerLink]="'/Waiter/ProductDetail'"
-                routerLinkActive="active"
-                >ProductDetail</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
+                class="nav-link"
                 [routerLink]="'/Waiter/ProductList'"
                 routerLinkActive="active"
                 >ProductList</a
               >
             </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            register
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" [routerLink]="'/register/login'"
-                >Login</a
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="'/Waiter/tables'"
+                routerLinkActive="active"
+                >Tables</a
               >
             </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="'/register/signup'"
-                >Sign Up</a
-              >
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
-      </ul>
-      <div class="search-container">
-        <form action="/search" method="get">
-          <input
-            class="search expandright"
-            id="searchright"
-            type="search"
-            name="q"
-            placeholder="Search"
-          />
-          <label class="button-search searchbutton" for="searchright"
-            ><i class="fa-solid fa-magnifying-glass"></i
-          ></label>
-        </form>
+        </ul>
+        <div>
+          <li class="nav-item" *ngIf="login() && checkRole() === 'Cashier'">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLinkActive="active"
+              [routerLink]="'/cashier/ShowReservations'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Cashier</a
+            >
+          </li>
       </div>
-      <button class="btn btn-outline-success book-btn ms-3" type="submit">
+      <div *ngIf="!login()">
+        <ul class="navbar-nav m-auto mb-2">
+          <li class="nav-item">
+            <a class="nav-link"  routerLinkActive="active" [routerLink]="'/register/login'"
+              >Login <i class="fas fa-arrow-right-to-bracket"></i></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="'/register/staff-login'"
+              >Staff Only <i class="fas fa-kitchen-set"></i></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="'/register/signup'"
+              >Sign Up <i class="fas fa-user-plus"></i></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="login()">
+        <ul class="navbar-nav m-auto mb-2">
+          <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click)="logout()">Log Out <i class="fas fa-arrow-right-from-bracket"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="checkRole()" [routerLink]="'profile'">Profile <i class="fas fa-user"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="login() && !checkRole()">
+      <a class="btn btn-outline-success book-btn ms-3" [routerLink]="'/customer/tablesForbook'" type="submit">
         BOOK A TABLE
-      </button>
+      </a>
+      <a class="btn btn-outline-success book-btn ms-3" [routerLink]="'/customer/MyReservations'" type="submit">
+        My Reservations
+      </a>
+    </div>
     </div>
   </div>
 </nav>

@@ -1,0 +1,49 @@
+<h1 class="py-3 our_menu">our menu</h1>
+<div class="row nowrap">
+  <!-- <div class="col-2"> -->
+    <div class="category_filter">
+      <li class="" value="" (click)="selectCategory($event, '')">
+        All Dishes
+      </li>
+      <li
+        *ngFor="let category of categories"
+        (click)="selectCategory($event, '{{category.name}}')"
+        value="{{ category.id }}"
+      >
+        {{ category.name }}
+      </li>
+    </div>
+  <!-- </div> -->
+
+  <div class="col">
+    <div class="row">
+      <div
+        class="col-lg-3 col-md-4 col-sm-6"
+        *ngFor="let item of products; let i = index"
+      >
+        <!-- <app-waiter-product-item [item]="item"></app-waiter-product-item> -->
+        <app-product-item
+          [item]="item"
+          [id]="i"
+          (productSelected)="onProductSelected($event)"
+          (item_card)="addToCart($event)"
+        ></app-product-item>
+
+        <!-- <app-modal [productSelected]="item"></app-modal> -->
+
+        <!-- <app-modal
+          *ngIf="selectedProduct !== null"
+          [productSelected]="selectedProduct"
+          (close)="resetSelectedProduct()"
+          (item)="addToCart($event)"
+        ></app-modal> -->
+      </div>
+    </div>
+  </div>
+  <ngb-pagination
+    [collectionSize]="totalItems"
+    [pageSize]="pageSize"
+    [(page)]="pageNumber"
+    (pageChange)="onPageChange($event)"
+  ></ngb-pagination>
+</div>

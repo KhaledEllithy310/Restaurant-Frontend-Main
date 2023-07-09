@@ -1,0 +1,15 @@
+<h1 class="py-3  text-center" >Tables You Can Book On IT</h1>
+<div class="container">
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6 " *ngFor="let item of alltables; let i = index" >
+     <div class="border py-5 " (click)="ShowAvailableTime(item.id)" >
+      <div class="m-auto w-50 ">
+        <div><strong>Table</strong></div>
+        <div>{{ item.number }}</div>
+      </div>
+
+     </div>
+  </div>
+</div>
+
+</div>

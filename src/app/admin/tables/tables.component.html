@@ -29,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let table of Tables; let i = index" id="cate{{ i }}">
+      <tr *ngFor="let table of Tables  " id="5">
         <td>{{ table.number }}</td>
         <td>{{ table.guest_numbers }}</td>
         <td>
@@ -55,6 +55,18 @@
         </td>
       </tr>
     </tbody>
+
+    <div class="d-flex justify-content-center">
+      <!-- <pagination-controls
+        (pageChange)="onPageChange($event)"
+      ></pagination-controls> -->
+    </div>
+    <!-- <ngb-pagination
+    [collectionSize]="totalItems"
+    [pageSize]="pageSize"
+    [(page)]="pageNumber"
+    (pageChange)="onPageChange($event)"
+  ></ngb-pagination> -->
   </table>
   <!-- Modal for Add Table -->
   <div
@@ -298,12 +310,7 @@
       
       </form>
 
-      <!-- <ngb-pagination
-      [collectionSize]="totalItems"
-      [pageSize]="pageSize"
-      [(page)]="pageNumber"
-      (pageChange)="onPageChange($event)"
-    ></ngb-pagination> -->
+
     </div>
   </div>
 </div>

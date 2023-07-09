@@ -29,12 +29,14 @@
         <th scope="col" class="">ID</th>
         <th scope="col" class="">NAME</th>
         <th scope="col" class="">Image</th>
+        <th scope="col" class="">status</th>
+        <th scope="col" class="">status Number</th>
         <th scope="col" class="">ACTION</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let category of categories; let i = index" id="cate{{ i }}">
-        <th>{{ i + 1 }}</th>
+        <th>{{ category.id }}</th>
         <td>{{ category.name }}</td>
         <td>
           <img
@@ -43,6 +45,21 @@
             width="30"
             height="30"
           />
+        </td>
+
+        <td>
+          <!-- Rounded switch -->
+          <label class="switch">
+            <input
+              type="checkbox"
+              [checked]="category.status > 0"
+              (click)="change_status(category.id, category.status)"
+            />
+            <span class="slider round"></span>
+          </label>
+        </td>
+        <td>
+          <p>{{ category.status }}</p>
         </td>
         <td class="">
           <div

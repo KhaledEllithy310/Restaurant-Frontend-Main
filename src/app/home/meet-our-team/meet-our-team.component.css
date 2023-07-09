@@ -109,7 +109,7 @@
     .profile-cards {
       flex-direction: column;
       align-items: stretch;
-      overflow-x: scroll;
+      /* overflow-x: scroll; */
       margin: 0;
       height: auto; /* unset the fixed height */
     }

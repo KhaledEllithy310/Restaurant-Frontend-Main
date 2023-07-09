@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,17 +13,13 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class SignupComponent {
 
-  username!: string;
-  password!: string;
-  confirmPassword!: string;
-  email!: string;
-  phoneNumber!: string;
-
   messageSuccess: boolean = false;
 
   signupForm!: FormGroup;
+  successResponse: any;
+  errorsResponse: any = [];
 
-  constructor(private signupService: UsersService, private http: HttpClient, private fb: FormBuilder ) {}
+  constructor(private signupService: RegisterService, private route: Router, private fb: FormBuilder ) {}
   
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -43,15 +41,29 @@ export class SignupComponent {
   onSubmit() {
 
     const formDetails = {
-      "username": this.username,
-      "email": this.email,
-      "password": this.password,
-      "confirmPassword": this.confirmPassword,
-      "phoneNumber": this.phoneNumber
+      "name": this.signupForm.get('username')?.value,
+      "email": this.signupForm.get('email')?.value,
+      "password": this.signupForm.get('password')?.value,
+      "phone": this.signupForm.get('phoneNumber')?.value
     }
+    const headers = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    });
     console.log(formDetails);
-    if(formDetails) {
-      this.messageSuccess = true;
-    }
+
+    this.signupService.registerCustomer(formDetails, headers).subscribe({
+      next: (res: any) => {
+        this.successResponse = res.message;
+        console.log(res);
+        setTimeout(() => {
+          this.route.navigate(['register/login']);
+        }, 3000);
+      },
+      error: (err: any) => {
+        this.errorsResponse = err.error.errors;
+        console.log(err);
+      }
+    })
   }
 }

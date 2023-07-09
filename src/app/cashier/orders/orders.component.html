@@ -1,0 +1,74 @@
+<div class="container-fluid mx-auto">
+  <div class="row tables_waiter">
+    <div class="col tables_waiter_available_container">
+      <div class="row">
+        <div class="col-lg-3 p-3" *ngFor="let table of tables">
+          <div class="table_container" (click)="showOrderTable(table)">
+            <h2>Table</h2>
+            <p>{{ table.number }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="order_container" *ngIf="showOrders" #tablesWaiterOrders>
+      <div class="tables_waiter_orders" id="tables_waiter_orders">
+        <div class="cart text-center">
+          <h1 class="">Orders Table No {{ TableNumber }}</h1>
+          <div class="container">
+            <div class="row">
+              <div class="card_product_container">
+                <div class="close_icon" (click)="closeOrderTable()">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div class="col-12" *ngFor="let order of ordersTable">
+                  <div class="card_product_order">
+                    <div class="row">
+                      <div class="col-5">
+                        <img
+                          [src]="'http://127.0.0.1:8000' + order.image"
+                          class="card-img-top"
+                          alt="..."
+                        />
+                      </div>
+                      <div class="col-7">
+                        <div class="card_product_order_right">
+                          <div class="card_product_order_name">
+                            {{ order.name }}
+                          </div>
+                          <div class="card_product_order_name">
+                            Quantity : {{ order.quantity }}
+                          </div>
+                          <div class="card_product_order_price">
+                            Total Price : ${{ order.price }}
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="message" *ngIf="ordersTable.length == 0">
+                  <h1>No orders available</h1>
+                </div>
+                <div class="sideBar__footer"  *ngIf="ordersTable.length > 0">
+                  <div class="sideBar__footer__totalPrice">
+                    <div class="sideBar__footer__totalPrice__number"></div>
+                  </div>
+                  <div class="d-flex">
+                    <div class="sideBar__footer__submit" (click)="makeOrderPaid()">
+                      Cash
+                    </div>
+                    <div class="sideBar__footer__submit" (click)="paymentByVisa()">
+                      Visa
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

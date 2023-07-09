@@ -144,53 +144,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 mb-4 inputs__container">
-                  <label class="form-label" for="password">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    [value]="olduser.password"
-                    formControlName="password"
-                    name="password"
-                    [(ngModel)]="olduser.password"
-                    class="form-control form-control-lg"
-                  />
-                  <div
-                    id="passwordHelp"
-                    class="form-text text-danger"
-                    *ngIf="
-                      editUserForm.controls['password'].touched &&
-                      editUserForm.controls['password'].invalid
-                    "
-                  >
-                    <span
-                      *ngIf="editUserForm.controls['password'].errors?.['required'] && !errors.password"
-                    >
-                      <div class="alert alert-danger">
-                        This password field is required
-                      </div>
-                    </span>
-                    <span
-                      *ngIf="editUserForm.controls['password'].errors?.['minlength']"
-                    >
-                      <div class="alert alert-danger">
-                        Less Than 8 Characters |
-                      </div>
-                    </span>
-                    <span
-                      *ngIf="editUserForm.controls['password'].errors?.['pattern']"
-                    >
-                      <div class="alert alert-danger">Week Password</div>
-                    </span>
-                  </div>
-                  <div *ngIf="errors.password" class="mt-2">
-                    <div class="alert alert-danger">{{ errors.password }}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-12 my-3">
+                <div class="col-md-6 mb-4">
                   <label class="form-label" for="select-input"
                     >Choose Role</label
                   >
@@ -215,7 +169,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-12 inputs__container">
                   <label class="form-label" for="upload-image"
