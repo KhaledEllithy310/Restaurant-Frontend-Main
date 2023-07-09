@@ -102,9 +102,11 @@
                   aria-describedby="confirmpasswordHelp"
                   autocomplete="off"
                   />
+                  <!-- <div id="confirmpasswordHelp" class="form-text text-danger" *ngIf="signupForm.controls['confirmPassword'].touched && signupForm.controls['confirmPassword'].invalid"> -->
                     <span *ngIf="confirm()">
-                      <div class="alert alert-danger mt-1">not match</div>
+                      <div class="alert alert-danger mt-1">password not match</div>
                     </span>
+                  <!-- </div> -->
                 </div>
               </div>
             </div>

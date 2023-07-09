@@ -1,15 +1,13 @@
-import { AbstractControl, ValidationErrors } from "@angular/forms";
-
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 export class userValidators {
+static MatchValidator(source: string, target: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        const sourceCtrl = control.get(source);
+        const targetCtrl = control.get(target);
 
-    static cantContainSpace(control: AbstractControl): ValidationErrors | null {
-        
-        if((control.value as string).indexOf('') >= 0) {
-            return {
-                cantSpace: true
-            }
-        }
-        return null
+        return sourceCtrl && targetCtrl && sourceCtrl.value !== targetCtrl.value
+        ? { mismatch: true }
+        : null;
+    };
     }
-
 }

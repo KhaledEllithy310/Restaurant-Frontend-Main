@@ -73,11 +73,13 @@ export class AddUsersComponent {
     this.addUserService.addUser(formData, headers).subscribe({
       next: (res: any) => {
         this.success = res.message;
-        console.log(res, 'response');
+        this.errors = '';
+        // console.log(res, 'response');
       },
       error: (err: any) => {
         this.errors = err.error.errors;
-        console.log(err.error.errors, 'errors');
+        this.success = '';
+        // console.log(err.error.errors, 'errors');
       },
     });
   }

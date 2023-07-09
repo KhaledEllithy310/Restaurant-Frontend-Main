@@ -55,10 +55,10 @@ export class NavbarComponent {
       const user = this.storageService.getUser();
       if(user.user.role) {
         this.registerService.logoutStaff().subscribe({
-        next: (res: any) => {
-          console.log(res);
-          this.storageService.logout();
-          this.route.navigate(['/register/staff-login']);
+          next: (res: any) => {
+            this.route.navigate(['/register/staff-login']);
+            this.storageService.logout();
+            console.log(res);
         },
         error: (err: any) => {
           console.log(err);
@@ -67,9 +67,9 @@ export class NavbarComponent {
       } else {
         this.registerService.logoutCustomer().subscribe({
           next: (res: any) => {
-            console.log(res);
-            this.storageService.logout();
             this.route.navigate(['/register/login']);
+              this.storageService.logout();
+              console.log(res);
           },
           error: (err: any) => {
             console.log(err);
