@@ -337,8 +337,8 @@ export class ProductDetailsComponent {
       total_price += +Ingredient.total;
     });
 
-    this.total_price = total_price.toFixed(2);
-    return total_price;
+    this.total_price = ((total_price / 100) * 100).toFixed(2);
+    return ((total_price / 100) * 100).toFixed(2);
   }
 
   addIngredientsForProduct() {
@@ -373,15 +373,18 @@ export class ProductDetailsComponent {
     let Ingredient_name = selectedIngredient?.name;
 
     //calculate the total price = price * quantity * (1 + Profit)
-    let finalPrice =
-      Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit);
+    let finalPrice = (
+      ((Ingredient_Quantity * Ingredient_Price * (1 + +Ingredient_Profit)) /
+        100) *
+      100
+    ).toFixed(2);
 
     //create new Ingredient to sent it to the server
     const newIngredient = {
       id: selectedIngredient?.id,
       name: Ingredient_name,
       quantity: this.ingredientsForm.value.Ingredient_Quantity,
-      total: finalPrice.toFixed(2),
+      total: finalPrice,
     };
 
     console.log(newIngredient);
@@ -402,7 +405,7 @@ export class ProductDetailsComponent {
         quantity:
           this.ingredientsForm.value.Ingredient_Quantity ||
           this.oldIngredient.quantity,
-        total: finalPrice.toFixed(2),
+        total: finalPrice,
       };
       // this.ingredientsForm.value.Ingredient_id = this.oldIngredient.id;
       // this.ingredientsForm.value.quantity = this.oldIngredient.quantity;

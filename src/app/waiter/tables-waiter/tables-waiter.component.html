@@ -1,4 +1,5 @@
 <div class="container-fluid mx-auto">
+  <h1 class="title_table">Available Tables</h1>
   <div class="row tables_waiter">
     <div class="col tables_waiter_available_container">
       <div class="row">
@@ -41,7 +42,6 @@
                           <div class="card_product_order_price">
                             Total Price : ${{ order.price }}
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="message" *ngIf="ordersTable.length == 0">
                   <h1>No orders available</h1>
                 </div>
-                <div class="sideBar__footer"  *ngIf="ordersTable.length > 0">
+                <div class="sideBar__footer" *ngIf="ordersTable.length > 0">
                   <div class="sideBar__footer__totalPrice">
                     <div class="sideBar__footer__totalPrice__number"></div>
                   </div>
@@ -58,7 +58,6 @@
                     Server Order
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
