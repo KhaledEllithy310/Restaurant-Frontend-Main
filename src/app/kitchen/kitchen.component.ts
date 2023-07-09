@@ -16,7 +16,7 @@ export class KitchenComponent {
   comleteOrderSuccess: any;
   completeOrderError: any;
 
-  constructor(private kitchen: KitchenService) {}
+  constructor( private kitchen: KitchenService) {}
 
   ngOnInit() {
     this.kitchen.getOrders().subscribe({
