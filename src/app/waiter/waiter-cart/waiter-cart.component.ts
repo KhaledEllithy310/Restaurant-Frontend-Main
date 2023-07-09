@@ -10,6 +10,7 @@ import {
 import Swal from 'sweetalert2';
 import { TablesService } from 'src/app/services/tables.service';
 import { OrderService } from './../../services/order.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-waiter-cart',
@@ -24,12 +25,17 @@ export class WaiterCartComponent {
   totalPrice: number = 0;
   tables!: any[];
   TableId: any;
+
+  customerId: any;
+  reservationId: any;
+
   constructor(
     private cartservice: CartService,
     private offcanvasService: NgbOffcanvas,
     private tableService: TablesService,
     private orderService: OrderService,
-    private session:StorgeTokenService
+    private session:StorgeTokenService,
+    private reservationService: ReservationService
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -45,6 +51,7 @@ export class WaiterCartComponent {
     }
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
   }
+
   //*End offcanvas ng-bootstrap*//
 
   ngOnInit(): void {
@@ -52,6 +59,7 @@ export class WaiterCartComponent {
     this.getAllCart();
     this.totalPriceAllProductsCart();
     this.getAllTable();
+
     // console.log(this.CartProducts);
   }
 
@@ -187,26 +195,6 @@ export class WaiterCartComponent {
     return (+cardProduct.total_price * +cardProduct.quantity).toFixed(2);
   }
 
-  // totalPriceAllProductsCart() {
-  //   // this.updateCartData();
-  //   this.cartservice.getAllCart().subscribe((res: any) => {
-  //     let productCart = res.data[0].data;
-  //     let totalPriceAllProductsCart = 0;
-  //     console.log(productCart);
-  //     for (let i = 0; i < productCart.length; i++) {
-  //       totalPriceAllProductsCart +=
-  //         productCart[i].total_price * productCart[i].quantity;
-  //     }
-  //     // this.totalPrice = totalPriceAllProductsCart;
-  //     this.cartservice.setTotalPrice(totalPriceAllProductsCart);
-  //     this.cartservice.getTotalPrice().subscribe((res: any) => {
-  //       this.totalPrice = res;
-  //     });
-  //     console.log(this.totalPrice);
-  //     console.log('this.totalPrice', this.totalPrice);
-  //   });
-  // }
-
   totalPriceAllProductsCart() {
     // this.updateCartData();
     this.cartservice.getCartProducts().subscribe((res: any) => {
@@ -218,12 +206,15 @@ export class WaiterCartComponent {
           productCart[i].total_price * productCart[i].quantity;
       }
       // this.totalPrice = totalPriceAllProductsCart;
-      this.cartservice.setTotalPrice(totalPriceAllProductsCart.toFixed(2));
+      console.log('before', totalPriceAllProductsCart.toFixed(2));
+
+      this.cartservice.setTotalPrice(
+        ((totalPriceAllProductsCart / 100) * 100).toFixed(2)
+      );
+
       this.cartservice.getTotalPrice().subscribe((res: any) => {
         this.totalPrice = res;
       });
-      console.log(this.totalPrice);
-      console.log('this.totalPrice', this.totalPrice);
     });
   }
 
@@ -241,19 +232,24 @@ export class WaiterCartComponent {
 
       newProductCart.push(newCartObject);
     }
+    console.log('customer_id', this.customerId);
+    console.log('reservation_id', this.reservationId);
 
     const order = {
       total_price: this.totalPrice,
       table_id: this.TableId,
       user_id: this.session.getUser()['user']['id'],
       products: newProductCart,
+      customer_id: this.customerId,
+      reservation_id: this.reservationId,
     };
 
     const deletedCartObject = {
       _method: 'delete',
     };
+
     console.log(order);
-    //Send Request to make order
+    // Send Request to make order
     this.orderService.createOrder(order).subscribe(
       (res: any) => {
         console.log(res);
@@ -291,8 +287,12 @@ export class WaiterCartComponent {
 
   getTableId(event: any) {
     console.log(event.target.value);
-    this.TableId = event.target.value;
+    this.TableId = +event.target.value;
+    console.log('TableId', this.TableId);
+
+    this.getReservationByTableInDay(this.TableId);
   }
+
   //function to get the newest data from the server
   updateCartData() {
     this.cartservice.getAllCart().subscribe(
@@ -307,6 +307,62 @@ export class WaiterCartComponent {
         this.cartservice.cartContainer.next(Response.data[0]);
       },
       (err: any) => console.log(err)
+    );
+  }
+
+  getReservationByTableInDay(TableId: any) {
+    this.reservationService.getReservationByTableInDay(TableId).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.data.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: "This Table Hasn't Any Reservation",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger',
+            },
+            buttonsStyling: false,
+          });
+
+          swalWithBootstrapButtons
+            .fire({
+              title: `This Table Has Reservation`,
+              text: `For Mr :${res.data[0].customer.name} --
+                     Data: ${res.data[0].start_date}
+              `,
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'confirmation',
+              cancelButtonText: 'cancel',
+              reverseButtons: true,
+            })
+            .then((result) => {
+              if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire('Confirmed', '', 'success');
+                this.customerId = res.data[0].customer.id;
+                this.reservationId = res.data[0].id;
+              } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons.fire(
+                  'Cancelled',
+                  "this client hasn't Reservation",
+                  'error'
+                );
+              }
+            });
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
     );
   }
 }
