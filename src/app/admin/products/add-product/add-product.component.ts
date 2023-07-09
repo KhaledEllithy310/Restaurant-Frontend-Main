@@ -52,7 +52,7 @@ export class AddProductComponent {
 
   ngOnInit() {
     // // call the all Ingredients
-    // this.getAllIngredients();
+    this.getAllIngredients();
     // call the all categories
     this.getAllCategory();
     // this.checkStatusAvailable();
@@ -64,10 +64,10 @@ export class AddProductComponent {
       category_id: ['', [Validators.required]],
     });
 
-    // this.ingredientsForm = this.fb.group({
-    //   Ingredient_id: ['', [Validators.required]],
-    //   Ingredient_Quantity: ['', [Validators.required]],
-    // });
+    this.ingredientsForm = this.fb.group({
+      Ingredient_id: ['', [Validators.required]],
+      Ingredient_Quantity: ['', [Validators.required]],
+    });
 
     this.ExtraForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
@@ -109,18 +109,18 @@ export class AddProductComponent {
   }
 
   // //Get All Ingredients
-  // getAllIngredients() {
-  //   this.productsService.getIngredients().subscribe(
-  //     (response: any) => {
-  //       this.ingredients = response.data;
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //       // Handle error response
-  //     }
-  //   );
-  // }
+  getAllIngredients() {
+    this.productsService.getIngredients().subscribe(
+      (response: any) => {
+        this.ingredients = response.data;
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
+  }
 
   toggleIngredientsForm() {
     this.showIngredientsForm = !this.showIngredientsForm;
@@ -420,12 +420,12 @@ export class AddProductComponent {
     this.showExtraForm = false;
   }
 
-  // closeIngredientForm() {
-  //   //clear the data in form
-  //   this.ingredientsForm.reset();
-  //   //disappear the form after submit
-  //   this.showIngredientsForm = false;
-  // }
+  closeIngredientForm() {
+    //clear the data in form
+    this.ingredientsForm.reset();
+    //disappear the form after submit
+    this.showIngredientsForm = false;
+  }
   closeExtraForm() {
     //clear the data in form
     this.ExtraForm.reset();
