@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ReservationService } from 'src/app/services/reservation.service';
 import { StorgeTokenService } from './../../../../services/storge-token.service';
 import Swal from 'sweetalert2';
@@ -24,7 +25,9 @@ export class CartComponent {
     private offcanvasService: NgbOffcanvas,
     private orderService: OrderService,
     private session:StorgeTokenService,
-    private reservationService:ReservationService
+    private reservationService:ReservationService,
+    private navigateRoute:Router
+
   ) {}
   //*Start offcanvas ng-bootstrap*//
   isOffcanvasOpen = false;
@@ -258,6 +261,8 @@ export class CartComponent {
         if (Response.data.length === 0) {
           console.log('The array is empty');
           this.totalPrice = 0;
+          localStorage.removeItem("Reservation_Info");
+          this.navigateRoute.navigate(["customer/tablesForbook"])
           return;
         }
         console.log(Response.data[0]);
