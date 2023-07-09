@@ -3,6 +3,16 @@
     <h2 class="form_title">Ingridents</h2>
     <hr />
   </span>
+  <form id="search_form" [formGroup]="searchForm">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      placeholder="Search.."
+      formControlName="searchTerm"
+      class="input_search text-left"
+    />
+  </form>
   <div class="d-flex mb-2">
     <a [routerLink]="'add'" class="btn btn-primary ms-auto add-btn"
       >Add Ingridents <i class="fas fa-plus"></i
@@ -45,4 +55,10 @@
       </tr>
     </tbody>
   </table>
+  <ngb-pagination
+  [collectionSize]="totalItems"
+  [pageSize]="pageSize"
+  [(page)]="pageNumber"
+  (pageChange)="onPageChange($event)"
+></ngb-pagination>
 </div>

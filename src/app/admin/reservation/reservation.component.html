@@ -71,4 +71,10 @@
         </ng-container>
     </tbody>
   </table>
+  <ngb-pagination
+  [collectionSize]="totalItems"
+  [pageSize]="pageSize"
+  [(page)]="pageNumber"
+  (pageChange)="onPageChange($event)"
+></ngb-pagination>
 </div>

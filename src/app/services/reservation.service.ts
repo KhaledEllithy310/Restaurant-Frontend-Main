@@ -11,4 +11,7 @@ export class ReservationService {
   getAllResevations() {
     return this.http.get(`http://127.0.0.1:8000/api/reservation`);
   }
+  reservationPagination(pageNumber: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/reservation?page=${pageNumber}`);
+  }
 }

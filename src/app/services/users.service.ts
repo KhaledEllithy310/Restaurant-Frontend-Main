@@ -32,4 +32,7 @@ export class UsersService {
   userPagination(pageNumber: any) {
     return this.http.get(`http://127.0.0.1:8000/api/users/?page=${pageNumber}`);
   }
+  onSearch(searchTerm: any) {
+    return this.http.get(`http://127.0.0.1:8000/api/users/search?name=${searchTerm}`);
+  }
 }
