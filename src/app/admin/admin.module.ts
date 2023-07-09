@@ -24,6 +24,7 @@ import { guestGuard } from '../guard/guest.guard';
 import { ProductsModule } from './products/products.module';
 import { ProfileComponent } from './../shared/profile/profile.component';
 import { KitchenComponent } from './../kitchen/kitchen.component';
+import { StatistcsComponent } from './statistcs/statistcs.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
             (m) => m.CategoriesModule
           ),
       },
-      { path: 'tables', component: TablesComponent },
+      {path: 'statistcs', component: StatistcsComponent},
       {
         path: 'products',
         loadChildren: () =>
@@ -99,7 +100,7 @@ const routes: Routes = [
     KitchenComponent,
     ReservationComponent,
     ProfileComponent,
-    TablesComponent
+    StatistcsComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

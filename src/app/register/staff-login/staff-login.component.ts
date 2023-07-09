@@ -52,35 +52,43 @@ export class StaffLoginComponent {
       next: (res: any) => {
         this.responseData = res;
         this.storageService.saveUser(this.responseData)
-
+        
         this.userData = this.storageService.getUser().user;
         this.messageSuccess = true;
         this.dataNotCorrect = false;
+
         switch(this.userData.role) {
           case 'Admin':
             console.log('admin')
-            this.route.navigate(['/admin/dashboard']);
+            setTimeout(() => {
+              this.route.navigate(['/admin/dashboard/statistcs']);
+            }, 3000);
             break;
           case 'Waiter':
             console.log('waiter');
-            this.route.navigate(['/Waiter/ProductList']);
+            setTimeout(() => {
+              this.route.navigate(['/Waiter/ProductList']);
+            }, 3000);
+            
             break;
           case 'Cashair':
             console.log('cashair');
-            this.route.navigate(['/cashier/ShowReservations']);
+            setTimeout(() => {
+              this.route.navigate(['/cashier/ShowReservations']);
+            }, 3000);
+            
             break;
             case 'Kitchen':
               console.log('kitchen')
-              this.route.navigate(['kitchen']);
+              setTimeout(() => {
+                this.route.navigate(['kitchen']);
+              }, 3000);
               break;
               default:
                 console.log('not staff');
                 this.route.navigate(['/home']);
                 break;
         }
-        // setTimeout(() => {
-        //   this.route.navigate(['']);
-        // }, 3000);
       },
       error: (err: any) => {
         this.errorsResponse = err.error.errors;
