@@ -64,10 +64,10 @@ export class AddProductComponent {
       category_id: ['', [Validators.required]],
     });
 
-    // this.ingredientsForm = this.fb.group({
-    //   Ingredient_id: ['', [Validators.required]],
-    //   Ingredient_Quantity: ['', [Validators.required]],
-    // });
+    this.ingredientsForm = this.fb.group({
+      Ingredient_id: ['', [Validators.required]],
+      Ingredient_Quantity: ['', [Validators.required]],
+    });
 
     this.ExtraForm = this.fb.group({
       Ingredient_id: ['', [Validators.required]],
@@ -108,23 +108,20 @@ export class AddProductComponent {
     );
   }
 
-  // //Get All Ingredients
-  // getAllIngredients() {
-  //   this.productsService.getIngredients().subscribe(
-  //     (response: any) => {
-  //       this.ingredients = response.data;
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //       // Handle error response
-  //     }
-  //   );
-  // }
-
-  toggleIngredientsForm() {
-    this.showIngredientsForm = !this.showIngredientsForm;
+  //Get All Ingredients
+  getAllIngredients() {
+    this.productsService.getIngredients().subscribe(
+      (response: any) => {
+        this.ingredients = response.data;
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+        // Handle error response
+      }
+    );
   }
+
 
   //Create a new Product
   createProduct() {
@@ -166,21 +163,7 @@ export class AddProductComponent {
     // ** End append ingredients array in form data **
 
     // ** Start append Extra array of id in form data **
-    // const ExtraStrings = this.ExtraListId.map((Extra) => {
-    //   return JSON.stringify(Extra);
-    // });
-    // // Append the array of strings to the FormData object
-    // ExtraStrings.forEach((extraString: any, index) => {
-    //   const ExtraObj = JSON.parse(extraString);
-    //   Object.keys(ExtraObj).forEach((key) => {
-    //     newProduct.append(`extra[${index}]`, ExtraObj[key]);
-    //   });
-    // });
 
-    // const ExtraStrings = this.ExtraListId.map((Extra) => {
-    //   return JSON.stringify(Extra);
-    // });
-    // const myArray = [1, 2, 3];
     for (let i = 0; i < this.ExtraListId.length; i++) {
       newProduct.append('extra[]', this.ExtraListId[i]);
     }
@@ -234,9 +217,6 @@ export class AddProductComponent {
         this.successMessage = response.message;
         this.showSuccessMessage = true;
 
-        // setTimeout(() => {
-        //   this.showSuccessMessage = false;
-        // }, 3000);
         Swal.fire({
           icon: 'success',
           title: response.message,
@@ -255,10 +235,7 @@ export class AddProductComponent {
           showConfirmButton: false,
           timer: 2000,
         });
-        // this.showErroressage = true;
-        // setTimeout(() => {
-        //   this.showErroressage = false;
-        // }, 3000);
+
         this.submitted = false; // Set submitted to false after reset
         // Handle error response
       }
@@ -377,13 +354,15 @@ export class AddProductComponent {
     const ExtraId = {
       id: this.ExtraForm.value.Ingredient_id,
     };
-    // // create new Extra to Show it in the browser for the user
-    //  // const newExtra = {
-    ////   id: this.ExtraForm.value.Ingredient_id,
-    // //   name: Ingredient_name,
-    // //   quantity: this.ExtraForm.value.Ingredient_Quantity,
-    // //   total: finalPrice.toFixed(2),
-    //  // };
+
+    // create new Extra to Show it in the browser for the user
+    //  const newExtra = {
+    //   id: this.ExtraForm.value.Ingredient_id,
+    //   name: Ingredient_name,
+    //   quantity: this.ExtraForm.value.Ingredient_Quantity,
+    //   total: finalPrice.toFixed(2),
+    //  };
+
     const newExtra = {
       id: this.ExtraForm.value.Ingredient_id,
       name: Ingredient_name,
@@ -420,12 +399,13 @@ export class AddProductComponent {
     this.showExtraForm = false;
   }
 
-  // closeIngredientForm() {
-  //   //clear the data in form
-  //   this.ingredientsForm.reset();
-  //   //disappear the form after submit
-  //   this.showIngredientsForm = false;
-  // }
+  closeIngredientForm() {
+    //clear the data in form
+    this.ingredientsForm.reset();
+    //disappear the form after submit
+    this.showIngredientsForm = false;
+  }
+
   closeExtraForm() {
     //clear the data in form
     this.ExtraForm.reset();

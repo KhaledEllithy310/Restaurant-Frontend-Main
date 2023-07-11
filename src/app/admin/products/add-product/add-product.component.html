@@ -10,9 +10,6 @@
         <div class="col">
           <div class="bgGreyLight_1 vertical_align_center">
             <h2 class="form_title">Add Product</h2>
-            <!-- <div *ngIf="showSuccessMessage" class="alert alert-success">
-              {{ successMessage }}
-            </div> -->
             <div class="row">
               <!--Start productName  Input -->
               <div class="col-xl-6 inputs__container">
@@ -145,28 +142,7 @@
                   cols="30"
                   rows="3"
                 ></textarea>
-                <!-- Start Validation For productDescription -->
-                <!-- <div
-                  *ngIf="
-                    product_Description_Control.invalid &&
-                    product_Description_Control.touched
-                  "
-                  class="text-danger"
-                >
-                  <div *ngIf="product_Description_Control.errors?.['required']">
-                    <p class="alert alert-danger">guest numbers is required</p>
-                  </div>
-                  <div
-                    *ngIf="product_Description_Control.errors?.['minlength']"
-                  >
-                    <p class="alert alert-danger">
-                      Name must be at least
-                      {{ product_Description_Control.errors?.['minlength'].requiredLength }}
-                      characters long
-                    </p>
-                  </div>
-                </div> -->
-                <!-- End Validation For productDescription -->
+
               </div>
               <!--End productDescription  Input -->
             </div>
@@ -190,7 +166,7 @@
             <div class="">
               <a
                 class="btn btn-primary ms-auto add-btn mx-2"
-                (click)="showIngredientsForm = !showIngredientsForm"
+                (click)="showIngredientsForm = true"
               >
                 <!-- <i class="fa-solid fa-circle-plus"></i> -->
                 Add Ingredient <i class="fas fa-plus"></i>
@@ -239,6 +215,100 @@
       </div>
     </form>
     <!-- End Form Add Product -->
+
+    <!-- Start Form Add Ingredients -->
+    <form
+      [formGroup]="ingredientsForm"
+      (ngSubmit)="addIngredientsForProduct()"
+      class="form_admin text-bg-dark"
+      *ngIf="showIngredientsForm"
+    >
+      <div class="vertical_align_center">
+        <h2 class="form_title" id="IngredientFormTitle">Add Ingredient</h2>
+        <div class="close_icon" (click)="closeIngredientForm()">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+        <div class="row">
+          <!--Start Ingredient Name  Input -->
+          <div class="col-xl-6 inputs__container">
+            <label for="" class="px-2"
+              >Ingredient Name<span class="text-danger">*</span></label
+            >
+            <select
+              name="category_id"
+              class="input__form"
+              formControlName="Ingredient_id"
+              [value]=""
+              id="oldIngredient_id"
+            >
+              <option
+                *ngFor="let ingredient of ingredients"
+                value="{{ ingredient.id }}"
+              >
+                {{ ingredient.name }}
+              </option>
+            </select>
+            <!-- Start Validation For Ingredient_id  -->
+            <div
+              *ngIf="
+                ingredientsForm.controls['Ingredient_id'].invalid &&
+                ingredientsForm.controls['Ingredient_id'].touched
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="ingredientsForm.controls['Ingredient_id'].errors?.['required']"
+              >
+                <p class="alert alert-danger">Ingredient Name is required</p>
+              </div>
+            </div>
+            <!-- End Validation For Ingredient_id -->
+          </div>
+          <!--End Ingredient Name  Input -->
+
+          <!--Start Ingredient Quantity  Input -->
+          <div class="col-xl-6 inputs__container">
+            <label for="" class="px-2"
+              >Ingredient Quantity<span class="text-danger">*</span></label
+            >
+            <input
+              type="number"
+              class="input__form"
+              formControlName="Ingredient_Quantity"
+              placeholder=""
+              [value]=""
+              id="oldIngredient_quantity"
+            />
+            <!-- Start Validation For Ingredient Quantity  -->
+            <div
+              *ngIf="
+                ingredientsForm.controls['Ingredient_Quantity'].invalid &&
+                ingredientsForm.controls['Ingredient_Quantity'].touched
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="ingredientsForm.controls['Ingredient_Quantity'].errors?.['required']"
+              >
+                <p class="alert alert-danger">
+                  Ingredient Quantity is required
+                </p>
+              </div>
+            </div>
+            <!-- End Validation For Ingredient Quantity -->
+          </div>
+          <!--End Ingredient Quantity Input -->
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn-lg admin__sec__btn__form"
+        id="IngredientFormBtn"
+      >
+        Add Ingredients
+      </button>
+    </form>
+    <!-- End Form Add Ingredients -->
 
     <!-- Start Form Add Extra -->
     <form
@@ -290,34 +360,6 @@
           </div>
           <!--End Ingredient Name  Input -->
 
-          <!--Start Ingredient Quantity  Input -->
-          <!-- <div class="col-xl-6 inputs__container">
-            <label for="" class="px-2"
-              >Extra Quantity<span class="text-danger">*</span></label
-            >
-            <input
-              type="number"
-              class="input__form"
-              formControlName="Ingredient_Quantity"
-              placeholder=""
-            />
-            Start Validation For Ingredient Quantity
-            <div
-              *ngIf="
-                ExtraForm.controls['Ingredient_Quantity'].invalid &&
-                ExtraForm.controls['Ingredient_Quantity'].touched
-              "
-              class="text-danger"
-            >
-              <div
-                *ngIf="ExtraForm.controls['Ingredient_Quantity'].errors?.['required']"
-              >
-                <p class="alert alert-danger">Extra Quantity is required</p>
-              </div>
-            </div>
-            End Validation For Ingredient Quantity
-          </div> -->
-          <!-- End Ingredient Quantity Input -->
         </div>
       </div>
       <!-- Show message if form is invalid and submitted -->
