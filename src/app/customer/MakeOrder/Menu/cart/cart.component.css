@@ -24,13 +24,13 @@
   margin-top: 30px;
   background-color: var(--background-color-of-sections);
   position: relative;
-  font-family: 'Rokkitt', serif;
+  font-family: "Rokkitt", serif;
 
   /* position: relative; */
 }
 
 .cart h1 {
-  font-family: 'Rokkitt', serif;
+  font-family: "Rokkitt", serif;
 }
 .cart_btn {
   position: fixed;
@@ -54,21 +54,29 @@
   top: 56px;
 } */
 
-.offcanvas {
+.offcanvas,
+.offcanvas-body,
+.offcanvas-header {
   background-color: var(--background-color-of-body) !important;
   color: white;
   /* border: 1px solid var(--special-button-color); */
 }
 
+.offcanvas-header {
+  /* background-color: var(--main-color); */
+}
 .offcanvas.offcanvas-end {
   border-left: 1px solid var(--special-button-color);
+  background-color: var(--background-color-of-body) !important;
 }
 
 .offcanvas-body {
-  max-height: 526px;
+  /* max-height: 526px; */
+  max-height: 786px;
+
   overflow: auto;
 }
-.offcanvas .cart h1 {
+.offcanvas-body .cart h1 {
   background-color: var(--main-color);
   margin: 0;
   padding: 10px;
@@ -89,7 +97,7 @@
 .item_product_name {
   font-size: 16px;
   text-align: left;
-  font-family: 'Rokkitt', serif;
+  font-family: "Rokkitt", serif;
   /* width: 80%; */
   /* margin-right: auto; */
 }
@@ -98,7 +106,7 @@
   position: absolute;
   top: 2px;
   right: 15px;
-  font-family: 'Rokkitt', serif;
+  font-family: "Rokkitt", serif;
   color: var(--special-text-color);
   font-weight: 600;
   font-size: 20px;
@@ -108,7 +116,7 @@
   position: absolute;
   bottom: 1px;
   left: 1px;
-  font-family: 'Rokkitt', serif;
+  font-family: "Rokkitt", serif;
 }
 
 .card_product_right_counter {
@@ -194,7 +202,7 @@
   justify-content: space-between;
   align-items: center;
   text-transform: capitalize;
-  font-family: 'Rokkitt', serif;
+  font-family: "Rokkitt", serif;
   font-size: 25px;
 }
 

@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { ElementRef, ViewChild } from '@angular/core';
+import { Component } from "@angular/core";
+import { ElementRef, ViewChild } from "@angular/core";
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
-} from '@angular/forms';
-import { GetDataService } from 'src/app/services/get-data.service';
-import { CategoryService } from './../../services/category.service';
-import Swal from 'sweetalert2';
+} from "@angular/forms";
+import { GetDataService } from "src/app/services/get-data.service";
+import { CategoryService } from "./../../services/category.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css'],
+  selector: "app-categories",
+  templateUrl: "./categories.component.html",
+  styleUrls: ["./categories.component.css"],
 })
 export class CategoriesComponent {
   categories!: any[];
@@ -23,7 +23,7 @@ export class CategoriesComponent {
   selectedFile: File | undefined;
   categoryForm!: FormGroup;
   updateCategoryForm!: FormGroup;
-  searchTerm: string = '';
+  searchTerm: string = "";
   pageSize = 8;
   pageNumber = 1;
   totalItems = 0;
@@ -31,8 +31,8 @@ export class CategoriesComponent {
   openCategory!: boolean;
   // category!: any;
   // nameControl: FormControl;
-  @ViewChild('addfileInput', { static: false }) addfileInput!: ElementRef;
-  @ViewChild('updatefileInput', { static: false }) updatefileInput!: ElementRef;
+  @ViewChild("addfileInput", { static: false }) addfileInput!: ElementRef;
+  @ViewChild("updatefileInput", { static: false }) updatefileInput!: ElementRef;
 
   constructor(
     private getCatService: GetDataService,
@@ -47,10 +47,10 @@ export class CategoriesComponent {
     // this.getAllCategory();
 
     this.searchForm = this.fb.group({
-      searchTerm: '',
+      searchTerm: "",
     });
 
-    this.searchForm.controls['searchTerm'].valueChanges.subscribe(
+    this.searchForm.controls["searchTerm"].valueChanges.subscribe(
       (term: string) => {
         this.search(term);
       }
@@ -61,32 +61,33 @@ export class CategoriesComponent {
         this.selectedCategory.name,
         [Validators.required, Validators.minLength(2)],
       ],
-      image: [''],
+      image: [""],
     });
     //form group for update categoryForm
     this.updateCategoryForm = this.fb.group({
-      name_updated: ['', [Validators.required, Validators.minLength(2)]],
-      image_updated: [''],
+      name_updated: ["", [Validators.required, Validators.minLength(2)]],
+      image_updated: [""],
     });
   }
 
   //create form control for input {name}
   get nameControl() {
-    return this.categoryForm.controls['name'];
+    return this.categoryForm.controls["name"];
   }
 
   //Create a New Category
   createCategory() {
     const image = this.addfileInput.nativeElement.files[0];
     const newCategory = new FormData();
-    newCategory.append('name', this.categoryForm.value.name);
-    newCategory.append('image', image);
+    newCategory.append("name", this.categoryForm.value.name);
+    newCategory.append("image", image);
     console.log(newCategory);
 
     this.categoryService.AddCategory(newCategory).subscribe(
       (response) => {
         console.log(response);
         this.getAllCategory();
+        this.categoryForm.reset();
         // Handle successful response
       },
       (error) => {
@@ -94,7 +95,7 @@ export class CategoriesComponent {
         // Handle error response
       }
     );
-    this.categoryForm.reset()
+    this.categoryForm.reset();
     // window.location.reload();
   }
 
@@ -105,7 +106,7 @@ export class CategoriesComponent {
         this.categories = response.data;
         this.totalItems = response.meta.total;
         this.pageSize = response.meta.per_page;
-        console.log('categories:', this.categories);
+        console.log("categories:", this.categories);
         // console.log('   this.totalItems', this.totalItems);
         // console.log('   this.pageSize', this.pageSize);
       },
@@ -140,15 +141,15 @@ export class CategoriesComponent {
           "Category cannot be deleted, but it's now unavialable"
         ) {
           Swal.fire({
-            icon: 'success',
-            title: 'category is unavailable now',
+            icon: "success",
+            title: "category is unavailable now",
             showConfirmButton: false,
             timer: 1500,
           });
         } else {
           Swal.fire({
-            icon: 'success',
-            title: 'category deleted successfully',
+            icon: "success",
+            title: "category deleted successfully",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -157,7 +158,7 @@ export class CategoriesComponent {
       (error) => {
         console.log(error);
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           title: error.error.message,
           showConfirmButton: false,
           timer: 1000,
@@ -179,7 +180,7 @@ export class CategoriesComponent {
         this.selectedCategory = Response.data;
         console.log(this.selectedCategory.name);
         //set the image of the old category to  {this.imageUrl} to display it in modal
-        this.imageUrl = 'http://127.0.0.1:8000' + this.selectedCategory.image;
+        this.imageUrl = "http://127.0.0.1:8000" + this.selectedCategory.image;
         //set the name of the old category to the input field value {name_updated}
         name_updated.value = this.selectedCategory.name;
       });
@@ -189,7 +190,7 @@ export class CategoriesComponent {
 
     //Select the input field name_updated
     let name_updated = document.getElementById(
-      'name_updated'
+      "name_updated"
     ) as HTMLInputElement;
 
     console.log(name_updated);
@@ -215,7 +216,7 @@ export class CategoriesComponent {
         this.selectedCategory = Response.data;
         console.log(this.selectedCategory.name);
         // Set the image URL to display the old image
-        this.imageUrl = 'http://127.0.0.1:8000' + this.selectedCategory.image;
+        this.imageUrl = "http://127.0.0.1:8000" + this.selectedCategory.image;
       });
 
     // Selected The New Image For Category
@@ -225,24 +226,24 @@ export class CategoriesComponent {
     const updateCategory = new FormData();
     // if the user didn't enter new name => set the old name
     updateCategory.set(
-      'name',
+      "name",
       this.updateCategoryForm.value.name_updated || this.selectedCategory.name
     );
     // Set the image URL to display the old image
     if (image) {
-      updateCategory.set('image', image);
+      updateCategory.set("image", image);
     }
-    updateCategory.set('_method', 'put');
+    updateCategory.set("_method", "put");
     // console.log(this.updateCategoryForm.value);
-    console.log(updateCategory.get('name'));
-    console.log(updateCategory.get('image'));
+    console.log(updateCategory.get("name"));
+    console.log(updateCategory.get("image"));
     //Send the Request to the server
     this.categoryService.UpdateCategory(updateCategory, idCategory).subscribe(
       (response: any) => {
         console.log(response);
         this.getAllCategory();
         Swal.fire({
-          icon: 'success',
+          icon: "success",
           title: response.message,
           showConfirmButton: false,
           timer: 1000,
@@ -252,7 +253,7 @@ export class CategoriesComponent {
       (error) => {
         console.log(error);
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           title: error.error.message,
           showConfirmButton: false,
           timer: 1000,
@@ -280,21 +281,20 @@ export class CategoriesComponent {
 
   change_status(category_id: any, category_status: any) {
     // this.openCategory = true;
-    console.log('category_status', category_status);
+    console.log("category_status", category_status);
 
     const newStatus = {
-      _method: 'put',
+      _method: "put",
       status: !category_status,
     };
 
-
     this.categoryService.openStatusCategory(category_id, newStatus).subscribe(
-      (response:any) => {
+      (response: any) => {
         console.log(response);
-        console.log('category_status', category_status);
+        console.log("category_status", category_status);
         this.getAllCategory();
         Swal.fire({
-          icon: 'success',
+          icon: "success",
           title: response.message,
           showConfirmButton: false,
           timer: 1500,

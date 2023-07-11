@@ -1,57 +1,54 @@
-
-<div class="container ">
-  <div class ="row">
-    <div class="col-md-6 ">
-      <div class="text-primary ">{{ message }}</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="time_title">{{ message }}</div>
       <form action="" [formGroup]="formGroup" (ngSubmit)="OnSubmit()">
-
         <ngb-datepicker
-        [disabled]="datepickerDisabled"
-        formControlName="dateControl"
-         [minDate]="minDate"
+          [disabled]="datepickerDisabled"
+          formControlName="dateControl"
+          [minDate]="minDate"
           [maxDate]="maxDate"
-         [markDisabled]="markDisabled"
-         #datepicker
-         id="date"
-         [disabled]="datepickerDisabled"
-         >
-
+          [markDisabled]="markDisabled"
+          #datepicker
+          id="date"
+          [disabled]="datepickerDisabled"
+        >
         </ngb-datepicker>
 
-        <div *ngIf="formGroup.controls.dateControl.touched&&formGroup.controls.dateControl.errors?.['required']">
-          <p class="alert alert-danger">
-            This filed is required
-          </p>
+        <div
+          *ngIf="formGroup.controls.dateControl.touched&&formGroup.controls.dateControl.errors?.['required']"
+        >
+          <p class="alert alert-danger">This filed is required</p>
         </div>
 
-        <ngb-timepicker
-
-         formControlName="timeControl"
-         [hourStep]="1"
-         [minuteStep]="15"
-         [secondStep]="0"
-         [meridian]="true"
-         >
-
-        </ngb-timepicker>
-
-        <div *ngIf="formGroup.controls.timeControl.touched&&formGroup.controls.timeControl.errors?.['required']">
-          <p class="alert alert-danger">
-            Time Filed is required
-          </p>
+        <div class="time_picker">
+          <ngb-timepicker
+            class="align-items-center mx-auto"
+            formControlName="timeControl"
+            [hourStep]="1"
+            [minuteStep]="15"
+            [secondStep]="0"
+            [meridian]="true"
+          >
+          </ngb-timepicker>
+        </div>
+        <div
+          *ngIf="formGroup.controls.timeControl.touched&&formGroup.controls.timeControl.errors?.['required']"
+        >
+          <p class="alert alert-danger">Time Filed is required</p>
         </div>
 
-
-                  <input type="submit" [disabled]="formGroup.controls.timeControl.invalid||formGroup.controls.dateControl.invalid" class="submit">
-
+        <button
+          class="main__btn"
+          type="submit"
+          [disabled]="
+            formGroup.controls.timeControl.invalid ||
+            formGroup.controls.dateControl.invalid
+          "
+        >
+          reserve
+        </button>
       </form>
-
     </div>
-
   </div>
-    </div>
-
-
-
-
-
+</div>

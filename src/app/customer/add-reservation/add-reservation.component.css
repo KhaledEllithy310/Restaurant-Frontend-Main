@@ -1,21 +1,76 @@
-ngb-datepicker
-{
-  background-color:  #ceb086;
+:root {
+  /* Last Change */
+  --background-color-of-body: #0e1317;
+  --background-color-of-sections: #090d10;
+  --special-text-color: #c39c6e;
+  --special-button-color: #deac80;
+  --main-color: #222b3d;
+  /* Last Change */
 }
 
-.submit
-{
+ngb-datepicker {
+  background-color: var(--special-button-color);
+
+  color: var(--background-color-of-sections);
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 2px;
+}
+
+.ngb-dp-week {
+  color: var(--special-text-color);
+}
+/* .submit {
   background-color: #ceb086;
   color: white;
   padding: 10px 10px;
   border: 1px solid #ceb086;
   border-radius: 10px;
 }
-.submit:not([disabled]):hover
-{
+.submit:not([disabled]):hover {
   background-color: white;
-  color:  #ceb086;
+  color: #ceb086;
   padding: 10px 10px;
   border: 1px solid #ceb086;
+} */
+
+ngb-timepicker {
+  justify-content: center;
 }
 
+fieldset {
+  justify-content: center;
+}
+
+.time_picker {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.time_title {
+  color: var(--special-text-color);
+  font-size: 30px;
+  font-family: "Rokkitt", serif;
+  padding: 20px 0;
+}
+
+.main__btn {
+  color: white;
+  background-color: var(--main-color);
+  outline: 1px solid var(--special-text-color);
+  outline-offset: 3px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: "Rokkitt", serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.5s;
+  font-weight: 300;
+}
+
+.main__btn:hover {
+  background-color: var(--special-button-color);
+  color: var(--background-color-of-sections);
+  font-weight: 600;
+}

@@ -14,28 +14,31 @@
     </div>
   </div> -->
 
-  <div class="container-fluid mx-auto">
-    <h1 class="title_table">Tables You Can Book On IT</h1>
-    <div class="row tables_waiter">
-      <div class="col tables_waiter_available_container">
-        <div class="row">
-          <div
-            class="col-lg-3 p-3"
-            *ngFor="let item of alltables; let i = index"
-          >
-            <div class="table_container" (click)="ShowAvailableTime(item.id)">
-              <h2>Table</h2>
-              <p>{{ item.number }}</p>
-            </div>
+<div class="container-fluid mx-auto">
+  <h1 class="title_table">Tables You Can Book On IT</h1>
+  <div class="row tables_waiter">
+    <div class="col tables_waiter_available_container">
+      <div class="row">
+        <div class="col-lg-3 p-3" *ngFor="let item of alltables; let i = index">
+          <div class="table_container" (click)="ShowAvailableTime(item.id)">
+            <h2>
+              Table
+              {{ item.number }}
+            </h2>
+            <h5>
+              Number Of Chairs
+              {{ item.guest_numbers }}
+            </h5>
           </div>
         </div>
       </div>
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [pageSize]="pageSize"
-        [(page)]="pageNumber"
-        (pageChange)="onPageChange($event)"
-      ></ngb-pagination>
     </div>
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [pageSize]="pageSize"
+      [(page)]="pageNumber"
+      (pageChange)="onPageChange($event)"
+    ></ngb-pagination>
   </div>
+</div>
 <!-- </div> -->
