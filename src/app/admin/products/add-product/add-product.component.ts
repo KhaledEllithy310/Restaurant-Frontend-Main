@@ -52,7 +52,7 @@ export class AddProductComponent {
 
   ngOnInit() {
     // // call the all Ingredients
-    // this.getAllIngredients();
+    this.getAllIngredients();
     // call the all categories
     this.getAllCategory();
     // this.checkStatusAvailable();
@@ -405,7 +405,6 @@ export class AddProductComponent {
     //disappear the form after submit
     this.showIngredientsForm = false;
   }
-
   closeExtraForm() {
     //clear the data in form
     this.ExtraForm.reset();

@@ -30,7 +30,7 @@ export class TablesService {
   }
 
   getOldTable(id: any) {
-    return this.http.get(`${this.URL}/status/` + id);
+    return this.http.get('http://127.0.0.1:8000/api/tables/' + id);
   }
 
   //Get Available Table For Waiter

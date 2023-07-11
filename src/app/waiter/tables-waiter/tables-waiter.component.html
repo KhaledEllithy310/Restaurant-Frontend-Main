@@ -1,7 +1,9 @@
 <div class="container-fluid mx-auto">
-  <h1 class="title_table">Available Tables</h1>
   <div class="row tables_waiter">
+
     <div class="col tables_waiter_available_container">
+      <h1 class="title_table">Available Tables</h1>
+
       <div class="row">
         <div class="col-lg-3 p-3" *ngFor="let table of tables">
           <div class="table_container" (click)="showOrderTable(table)">
@@ -47,14 +49,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="message" *ngIf="ordersTable.length == 0">
+                <div class="message" *ngIf="ordersTable.length == 0 ">
                   <h1>No orders available</h1>
                 </div>
-                <div class="sideBar__footer" *ngIf="ordersTable.length > 0">
+                <div class="sideBar__footer" *ngIf="ordersTable.length > 0  ">
                   <div class="sideBar__footer__totalPrice">
                     <div class="sideBar__footer__totalPrice__number"></div>
                   </div>
-                  <div class="sideBar__footer__submit" (click)="changeStatus()">
+                  <div class="sideBar__footer__submit"  (click)="changeStatus()">
                     Server Order
                   </div>
                 </div>

@@ -93,15 +93,15 @@ export class DisplayProductsComponent {
     console.log('closed before:', product.closed);
     console.log(this.categories);
 
-    let selectedCategory = this.categories.filter((category) => {
-      category.id == product.id;
-    });
-    console.log('selectedCategory', selectedCategory);
+    // let selectedCategory = this.categories.filter((category) => {
+    //   category.id == product.id;
+    // });
+    // console.log('selectedCategory', selectedCategory);
 
-    this.getAllProducts();
-    console.log('selectedCategory.status', selectedCategory[0].status);
 
-    if (selectedCategory[0].status) {
+    // console.log('selectedCategory.status', selectedCategory[0].status);
+
+    // if (selectedCategory[0].status) {
       this.productsService.change_status(product.id).subscribe(
         (Response) => {
           console.log('status after:', product.status);
@@ -110,17 +110,26 @@ export class DisplayProductsComponent {
         },
         (err) => {
           console.log(err);
-        }
-      );
-    } else {
-      Swal.fire({
+           Swal.fire({
         icon: 'error',
         title: "You Can't Open This Product",
         showConfirmButton: false,
         timer: 800,
       });
+        }
+
+      );
+      this.getAllProducts();
+
+    // } else {
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: "You Can't Open This Product",
+      //   showConfirmButton: false,
+      //   timer: 800,
+      // });
     }
-  }
+
 
   onSearch() {
     // this.productsService.onSearch(this.searchTerm).subscribe(

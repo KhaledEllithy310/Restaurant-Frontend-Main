@@ -199,10 +199,13 @@ export class CartComponent {
       const newCartObject = {
         id: this.CartProducts[i].product.id,
         // name: this.CartProducts[i].product.name,
+        
         total_price: this.CartProducts[i].product.total_price,
         image: this.CartProducts[i].product.image,
         quantity: this.CartProducts[i].quantity,
       };
+      localStorage.removeItem("Reservation_Info");
+      this.navigateRoute.navigate(["customer/tablesForbook"])
       console.log(this.CartProducts);
 
       newProductCart.push(newCartObject);
@@ -264,6 +267,7 @@ export class CartComponent {
         if (Response.data.length === 0) {
           console.log('The array is empty');
           this.totalPrice = 0;
+        
           return;
         }
         console.log(Response.data[0]);

@@ -1,40 +1,47 @@
 .mynav {
-    background-color: #090d10;
-    color: #eee;
+  background-color: #090d10;
+  color: #eee;
+  height:10vh;
 }
 .mynav .navbar-brand {
-    color: #eee;
-    font-size: 25px;
+  color: #eee;
+  font-size: 25px;
 }
 .mynav .nav-link.active {
-    color: #deac80 !important;
+  color: #deac80 !important;
 }
 .mynav .nav-link {
-    color: #eee !important;
-    font-weight: 300;
-    font-size: 20px;
+  color: #eee !important;
+  font-weight: 300;
+  font-size:17px;
 }
 .mynav .nav-link:hover {
-    color: #deac80 !important;
+  color: #deac80 !important;
 }
 .mynav .logo-image {
-    width: 20px;
-    position: relative;
-    top: -17px;
-    right: -9px;
+  width: 20px;
+  position: relative;
+  top: -17px;
+  right: -9px;
 }
 
 .expandright:focus {
-    padding: 0 0 0 16px;
+  padding: 0 0 0 16px;
 }
 
 .book-btn {
-    background-color: #ceb086;
-    color: #eee;
-    border-color: #ceb086;
-    border-radius: 0;
+  background-color: #ceb086;
+  color: #eee;
+  border-color: #ceb086;
+  border-radius: 0;
 }
 .book-btn:hover {
-    background-color: #eee; 
-    color: #ceb086;
+  background-color: #eee;
+  color: #ceb086;
+}
+.fa-user-plus,.fa-kitchen-set,.fa-arrow-right-to-bracket {
+  font-size: 13px; /* adjust the size as needed */
+}
+.navbar {
+  border-bottom: 1px solid #deac80;
 }

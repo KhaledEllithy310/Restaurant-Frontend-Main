@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementRef, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import Swal from 'sweetalert2';
 
 import {
   FormGroup,
@@ -54,13 +55,13 @@ export class TablesComponent {
     this.tableForm = this.fb.group({
       TableNo: ['', [Validators.required]],
       guest_numbers: ['', [Validators.required]],
-      status: [true],
+      // status: [true],
     });
 
     this.updatetableForm = this.fb.group({
       TableNo_updated: ['', [Validators.required]],
       guest_numbers_updated: ['', [Validators.required]],
-      status_updated: ['', [Validators.required]],
+      // status_updated: ['', [Validators.required]],
     });
     
   
@@ -107,9 +108,22 @@ export class TablesComponent {
             this.tableService.getTable().subscribe({
               next: (res: any) => {
                 (this.Tables = res.data), console.log(res);
+                Swal.fire({
+                  icon: 'success',
+                  title: res.message,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.getAllTable()
               },
               error: (err: any) => {
                 console.log(err);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'The number has already been taken',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
               },
              
             });
@@ -146,6 +160,8 @@ export class TablesComponent {
   getIdtable(idtable: any) {
     //Call The Old Category
     console.log(idtable);
+    console.log('idtable',idtable);
+    
     this.tableService.getOldTable(idtable).subscribe((Response: any) => {
       this.selectedtable = Response.data;
       console.log(this.selectedtable.number);
@@ -158,10 +174,13 @@ export class TablesComponent {
     let TableNo_updated = document.getElementById(
       'TableNo_updated'
     ) as HTMLInputElement;
+    console.log(TableNo_updated);
+    
     let guest_numbers_updated = document.getElementById(
       'guest_numbers_updated'
-    ) as HTMLInputElement;
-
+      ) as HTMLInputElement;
+      console.log(guest_numbers_updated);
+      
     console.log(TableNo_updated.value);
   }
 
@@ -185,9 +204,23 @@ export class TablesComponent {
     this.tableService.UpdateTable(updatetable2, idtable).subscribe(
       (response) => {
         console.log(response);
+        this.getAllTable();
+        Swal.fire({
+          icon: 'success',
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
       },
       (error) => {
         console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: error.error.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     );
   }

@@ -9,7 +9,7 @@
     <form id="search_form" [formGroup]="searchForm">
       <input
         type="text"
-        [(ngModel)]="searchTerm"
+        
         name="searchTerm"
         placeholder="Search.."
         formControlName="searchTerm"
@@ -55,7 +55,7 @@
               type="checkbox"
               [checked]="product.status > 0 && product.closed == 0"
               (click)="change_status(product)"
-             
+
             />
             <span class="slider round"></span>
           </label>

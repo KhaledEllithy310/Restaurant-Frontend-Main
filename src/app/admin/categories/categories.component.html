@@ -7,7 +7,6 @@
     <form id="search_form" [formGroup]="searchForm">
       <input
         type="text"
-        [(ngModel)]="searchTerm"
         name="searchTerm"
         placeholder="Search.."
         formControlName="searchTerm"
@@ -30,7 +29,7 @@
         <th scope="col" class="">NAME</th>
         <th scope="col" class="">Image</th>
         <th scope="col" class="">status</th>
-        <th scope="col" class="">status Number</th>
+        <!-- <th scope="col" class="">status Number</th> -->
         <th scope="col" class="">ACTION</th>
       </tr>
     </thead>
@@ -52,15 +51,15 @@
           <label class="switch">
             <input
               type="checkbox"
-              [checked]="category.status > 0"
+              [checked]="category.status"
               (click)="change_status(category.id, category.status)"
             />
             <span class="slider round"></span>
           </label>
         </td>
-        <td>
+        <!-- <td>
           <p>{{ category.status }}</p>
-        </td>
+        </td> -->
         <td class="">
           <div
             class="btn btn-danger m-2 delete-btn"
@@ -218,7 +217,6 @@
                 type="file"
                 class="input__form"
                 formControlName="image_updated"
-                ngModel
                 (change)="onImageChange($event)"
                 name="image_updated"
                 value=""
