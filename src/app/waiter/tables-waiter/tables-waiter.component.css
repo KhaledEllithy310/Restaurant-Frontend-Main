@@ -230,3 +230,8 @@
   background-color: var(--special-button-color);
 }
 /* End Cart */
+
+.title_table{
+  color: var(--special-text-color);
+  padding: 20px 0;
+}

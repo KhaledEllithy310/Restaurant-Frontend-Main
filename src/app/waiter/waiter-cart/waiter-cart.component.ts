@@ -253,7 +253,7 @@ export class WaiterCartComponent {
     this.orderService.createOrder(order).subscribe(
       (res: any) => {
         console.log(res);
-
+        this.getAllTable()
         //Send Request and Delete All Cart Objects from server
         this.cartservice.DeleteCart(deletedCartObject).subscribe(
           (res) => {

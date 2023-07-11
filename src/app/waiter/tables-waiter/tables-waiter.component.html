@@ -1,7 +1,9 @@
 <div class="container-fluid mx-auto">
-  <h1 class="title_table">Available Tables</h1>
   <div class="row tables_waiter">
+
     <div class="col tables_waiter_available_container">
+      <h1 class="title_table">Available Tables</h1>
+
       <div class="row">
         <div class="col-lg-3 p-3" *ngFor="let table of tables">
           <div class="table_container" (click)="showOrderTable(table)">

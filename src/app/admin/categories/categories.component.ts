@@ -94,6 +94,7 @@ export class CategoriesComponent {
         // Handle error response
       }
     );
+    this.categoryForm.reset()
     // window.location.reload();
   }
 
@@ -288,13 +289,13 @@ export class CategoriesComponent {
 
 
     this.categoryService.openStatusCategory(category_id, newStatus).subscribe(
-      (response) => {
+      (response:any) => {
         console.log(response);
         console.log('category_status', category_status);
         this.getAllCategory();
         Swal.fire({
           icon: 'success',
-          title: 'category is available now',
+          title: response.message,
           showConfirmButton: false,
           timer: 1500,
         });
