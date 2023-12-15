@@ -4,6 +4,8 @@
 
 Welcome to our project! This the App made in TypeScript and Angular framework. it is a comprehensive restaurant management system that helps restaurants of all sizes to improve their operations, increase their revenue, and improve customer satisfaction.
 
+![Product Builder Home](./src/assets/images/sectionhomerest.png)
+
 ## Technologies
 
 - HTML
